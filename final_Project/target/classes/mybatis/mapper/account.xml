@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="accountMapper">
+	
+	<select id="checkLogin" parameterType="account" resultType="account">
+		SELECT * FROM account WHERE email = #{email} AND password = #{password} AND expiredate IS NULL
+	</select>
+	
+	
+	<insert id="insertAccount" parameterType="account">
+		INSERT INTO account(id, email, password, name, phone) VALUES(account_seq.NEXTVAL, #{email}, #{password}, #{name}, #{phone})
+	</insert>
+	
+	<update id="loginDate" >
+		UPDATE account SET logindate = SYSDATE WHERE id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="productMapper">
+  <select id="productSearch" parameterType="productsearch" resultType="product">
+    SELECT p.id
+         , p.ptype
+         , t.name AS ptype
+         , p.aid
+         , p.price
+         , p.cdate
+         , p.title
+         , p.vcnt
+      FROM product p
+      JOIN product_type t
+        ON p.ptype = t.id
+      JOIN account a
+        ON p.aid = a.id
+     WHERE p.active = 'y'
+     <if test="ptype != 0">
+       AND p.ptype = #{ptype}
+     </if>
+     <if test='searchtype == "c" and search != null'>
+       AND p.contents like '%' || #{search} || '%'
+     </if>
+     <if test='searchtype == "t" and search != null'>
+       AND p.title like '%' || #{search} || '%'
+     </if>
+     ORDER BY p.id DESC
+  </select> 
+  <!--  
+  <update id="productUpdate" parameterType="product">
+    UPDATE product
+       SET title = #{title}
+         , ptype = #{ptype}
+         , contents = #{contents}
+         , nodel = #{nodel}
+         , udate = SYSDATE
+     WHERE id = #{id}
+  </update>
+  
+  <update id="productCLOB" parameterType="product">
+    UPDATE board SET contents = #{contents} WHERE id = #{id}
+  </update>
+
+  <select id="seq" resultType="_int">
+    SELECT board_seq.NEXTVAL AS seq FROM dual
+  </select>
+
+  <insert id="productInsert" parameterType="product">
+  	INSERT INTO board(id, btype, aid, title, contents, nodel)
+  	     VALUES(#{id}, #{btype}, #{aid}, #{title}, EMPTY_CLOB(), #{nodel})
+  </insert> -->
+  
+  <select id="producttypes" resultType="producttype">
+  	SELECT * FROM product_type
+  </select>
+  
+  <!-- <select id="selectone" parameterType="product" resultType="product">
+    SELECT a.id
+         , a.btype
+         , b.name AS bname
+         , a.aid
+         , c.nickname AS aname
+         , a.title
+         , a.contents
+         , a.cdate
+         , a.udate
+         , a.vcnt
+         , a.gcnt
+         , a.bcnt
+         , a.nodel
+      FROM board a
+      JOIN board_type b
+        ON a.btype = b.id
+      JOIN account c
+        ON a.aid = c.id
+     WHERE a.deleted = 'n'
+       AND a.id = #{id}
+     ORDER BY a.id DESC
+  </select>
+   -->
+  <select id="all" resultType="product">
+    SELECT p.id
+         , p.ptype
+         , t.name AS ptype
+         , p.aid
+         , p.price
+         , p.cdate
+         , p.title
+         , p.vcnt
+      FROM product p
+      JOIN product_type t
+        ON p.ptype = t.id
+      JOIN account a
+        ON p.aid = a.id
+     WHERE p.active = 'y'
+     ORDER BY p.id DESC
+  </select>
+
+ <!--  <select id="goodcount" resultType="product">
+  	SELECT gcnt FROM board
+  	 WHERE id = #{id}
+  </select>
+  
+  <select id="badcount" resultType="product">
+  	SELECT bcnt FROM board
+  	 WHERE id = #{id}
+  </select>
+
+  <update id="incview">
+  	UPDATE board
+  	   SET vcnt = vcnt + 1
+  	 WHERE id = #{id}
+  </update>
+  
+  <update id="incgood">
+  	UPDATE board
+  	   SET gcnt = gcnt + 1
+  	 WHERE id = #{id}
+  </update>
+  
+  <update id="incbad">
+  	UPDATE board
+  	   SET bcnt = bcnt + 1
+  	 WHERE id = #{id}
+  </update> --> 
+</mapper>
