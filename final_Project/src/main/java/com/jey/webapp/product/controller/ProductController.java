@@ -29,7 +29,7 @@ public class ProductController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView main(@ModelAttribute ProductSearchDTO search) throws Exception {
 		
-		System.out.println("Productdtype : " + search.getPtype());
+		System.out.println("Ptype : " + search.getPtype());
 		System.out.println("Search : " + search.getSearch());
 		
 		ModelAndView mv = new ModelAndView();
