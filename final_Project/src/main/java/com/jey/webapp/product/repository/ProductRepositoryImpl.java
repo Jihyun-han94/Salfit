@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
+import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
 
@@ -19,8 +20,10 @@ public class ProductRepositoryImpl implements ProductRepository {
 	
 	@Override
 	public ProductDTO select(ProductDTO dto) throws Exception {
-		ProductDTO data = sqlSession.selectOne("productMapper.selectone", dto);
-		return data;
+		System.out.println("id2-->" +  dto.getId());
+		dto = sqlSession.selectOne("productMapper.selectone", dto);
+		System.out.println("id3-->" +  dto.getId());
+		return dto;
 	}
 	
 	@Override
@@ -30,8 +33,8 @@ public class ProductRepositoryImpl implements ProductRepository {
 	}
 	
 	@Override
-	public List<ProductDTO> selectAll() throws Exception {
-		List<ProductDTO> data = sqlSession.selectList("productMapper.all");
+	public List<ProductDTO> selectAll(ProductSearchDTO search) throws Exception {
+		List<ProductDTO> data = sqlSession.selectList("productMapper.all", search);
 		return data;
 	}
 
@@ -50,12 +53,20 @@ public class ProductRepositoryImpl implements ProductRepository {
 		int seq = sqlSession.selectOne("productMapper.seq");
 		if(seq > 0) {
 			dto.setId(seq);
-			rs = sqlSession.insert("productMapper.productInsert", dto);
+			rs = sqlSession.insert("productMapper.insertProduct", dto);
 			if(rs == 1) {
 				rs = sqlSession.update("productMapper.productCLOB", dto);
 				if(rs == 1) {
 					System.out.println("CLOB 저장 완료!");
-					result = true;
+					int seq_img = sqlSession.selectOne("productMapper.seq_img");
+					if(seq_img > 0) {
+						dto.setImgid(seq_img);
+						rs = sqlSession.insert("productMapper.fileInsert", dto);
+						if(rs == 1) {
+							System.out.println("이미지 저장 완료");
+							result = true;
+						}
+					}
 				}
 			}
 		}
@@ -65,16 +76,25 @@ public class ProductRepositoryImpl implements ProductRepository {
 	@Override
 	public boolean update(ProductDTO dto) throws Exception {
 		boolean result = false;
-		int rs = sqlSession.update("productMapper.productUpdate", dto);		
+		int rs = sqlSession.update("productMapper.updateProduct", dto);		
 		if(rs == 1) {
-			result = true;
+			System.out.println("dududu");
+			rs = sqlSession.update("productMapper.updateImage", dto);
+			if(rs == 1) {
+				result = true;
+			}
 		}
 		return result;
 	}
 
 	@Override
 	public boolean delete(ProductDTO dto) throws Exception {
-		return false;
+		boolean res = false;
+		int rs = sqlSession.delete("productMapper.deleteProduct", dto);	
+		if(rs == 1) {
+			res = true;
+		}
+		return res;
 	}
 
 	@Override

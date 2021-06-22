@@ -1,22 +1,32 @@
 package com.jey.webapp.admin.controller;
 
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jey.webapp.product.dto.ProductDTO;
+import com.jey.webapp.product.dto.ProductFileDTO;
+import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.service.ProductService;
 
 @Controller
@@ -29,30 +39,45 @@ public class AdminProductController {
 	/* 상품 조회(조회수, 수정, 삭제, 리뷰에 대댓글 버튼 ) */
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String list() throws Exception {
-		return "admin/product/main";
-	}
-	
-	
-	
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public ModelAndView detail(@RequestParam int id) throws Exception {
-		ModelAndView mv = new ModelAndView("product/detail");
-		mv.addObject("item", product.findId(id));
+	public ModelAndView list(@ModelAttribute ProductSearchDTO search) throws Exception {
+		System.out.println("Ptype : " + search.getPtype());
+		System.out.println("Search : " + search.getSearch());
+		
+		ModelAndView mv = new ModelAndView();
+		
+		List<ProductDTO> productlist = null;
+		
+		// 세션 + 필터로 관리자만 해당 컨트롤에 접속 가능 
+		search.setAid(1);
+		
+		if(search.getPtype() == 0 && search.getSearchtype() == null) {
+			productlist = product.findAll(search);
+		} else if (search.getSearch() == "") {
+			productlist = product.findAll(search);
+		} else {
+			productlist = product.findList(search);
+		}
+		
+		mv.setViewName("admin/product/main");
+		mv.addObject("productlist", productlist);
+		mv.addObject("producttypes", product.getProductTypes());
+		
 		return mv;
 	}
 	
-	@RequestMapping(value = "/detail", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detail(HttpServletRequest request, @ModelAttribute ProductDTO item) throws Exception {
 		ModelAndView mv = new ModelAndView("product/detail");
 		
 		HttpSession session = request.getSession();
 		
+		
 		item = product.findId(item.getId());
 		
-		if(item.getId() != -1 || item.getActive().equals("y")) {
+		if(item.getId() != -1 ) {
 			
-			mv.addObject("newline", "\n");
+			mv.addObject("newline", "\n\r");
 			mv.addObject("item", item);
 		
 			mv.setViewName("admin/product/detail");
@@ -68,21 +93,77 @@ public class AdminProductController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView write() throws Exception {
 		ModelAndView mv = new ModelAndView("admin/product/add");
-		mv.addObject("boardtypes", product.getProductTypes());
+		mv.addObject("producttypes", product.getProductTypes());
 		return mv;
 	}
 	
+	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String write(Model m, @ModelAttribute ProductDTO dto) throws Exception {
-		String forward = "";
+	public String write(Model m, @ModelAttribute ProductDTO dto,
+			@RequestParam MultipartFile file,
+			HttpServletRequest req) throws Exception {
 		
+		String forward = "admin/product/add";
+		String origin_name = "";
+		String change_name = "";
+		String file_ext = "";
+		
+		ArrayList<String> permit_ext = new ArrayList<String>();
+		permit_ext.add("jpg");	permit_ext.add("png"); permit_ext.add("gif");	permit_ext.add("tif");
+		
+		if(!file.isEmpty()) {
+			if(file.getSize() <= 10 * 1024 * 1024) {
+				UUID uuid = UUID.randomUUID();
+				
+//				origin_name = file.getOriginalFilename();
+				origin_name = StringUtils.cleanPath(new String(file.getOriginalFilename().getBytes("ISO-8859-1"), StandardCharsets.UTF_8));
+				change_name = uuid.toString() + "_" + origin_name;
+				file_ext = FilenameUtils.getExtension(file.getOriginalFilename());
+				
+				System.out.println("원본 파일명 : " + origin_name);
+				System.out.println("변경된 파일명 : " + change_name);
+				System.out.println("확장자 : " + file_ext);
+				System.out.println("파일 크기(바이트) : " + file.getSize());
+
+				if(permit_ext.contains(file_ext)) {
+//					String root_path = req.getServletContext().getRealPath("/");
+					File save_path = new File(req.getServletContext().getRealPath("/") + "/resources/upload/product/");
+					System.out.println(save_path);
+					if(!save_path.exists()) {
+						Files.createDirectories(save_path.toPath());
+					}
+//							file.transferTo(new File(save_path + "/" + origin_name));
+					File path = new File(save_path + "/" + change_name);
+					file.transferTo(path);
+					dto.setImg(origin_name);
+					dto.setImgname(change_name);
+					dto.setUrl("/resources/upload/product/" + change_name);
+					System.out.println(path);
+				} else {
+					System.out.println("해당 확장자는 업로드 할 수 없습니다.");
+					forward = "error/default";
+				}
+			} else {
+				System.out.println("업로드 파일의 크기가 큽니다.");
+				forward = "error/default";
+			}
+		} else {
+			//default 이미지 
+			dto.setImg("default.png");
+			dto.setImgname("default.png");
+			dto.setUrl("/resources/upload/product/default.png");
+		}
+		
+		if(dto.getActive() == null) {
+			dto.setActive(dto.getActive());
+		}
 		boolean res = product.add(dto);
 		
 		if(res) {
-			forward = "redirect:/admin/product/detail?id=" + dto.getId();
+			forward = "redirect:/admin/product";
 		} else {
 			m.addAttribute("data", dto);
-			forward = "admin/product/add";
+			forward = "redirect:/admin/product/add";
 		}
 		
 		return forward;
@@ -90,48 +171,100 @@ public class AdminProductController {
 	
 	/* 상품 수정 */
 	
-	@RequestMapping(value = "/product/edit", method = RequestMethod.GET)
-	public String edit() throws Exception {
-		return "admin/product/edit";
-	}
-	
-	@RequestMapping(value = "/product/edit", method = RequestMethod.POST)
-	public String edit(Model m, @ModelAttribute ProductDTO dto) throws Exception {
-		return "redirect:main";
-	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public ModelAndView modify(int id) throws Exception {
-		ModelAndView mv = new ModelAndView("product/update");
+		ModelAndView mv = new ModelAndView("admin/product/update");
 		mv.addObject("ptypes", product.getProductTypes());
 		mv.addObject("item", product.findId(id));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String modify(Model m, @ModelAttribute ProductDTO dto) throws Exception {
-		String forward = "";
+	public ModelAndView modify(Model m, @ModelAttribute ProductDTO dto,
+			@RequestParam MultipartFile file,
+			HttpServletRequest req) throws Exception {
+		ModelAndView mv = new ModelAndView("admin/product/update");
 		
+		String origin_name = "";
+		String change_name = "";
+		String file_ext = "";
 		
+		ArrayList<String> permit_ext = new ArrayList<String>();
+		permit_ext.add("jpg");	permit_ext.add("png"); permit_ext.add("gif");	permit_ext.add("tif");
+		
+		if(!file.isEmpty()) {
+			if(file.getSize() <= 10 * 1024 * 1024) {
+				UUID uuid = UUID.randomUUID();
+				
+//				origin_name = file.getOriginalFilename();
+				origin_name = StringUtils.cleanPath(new String(file.getOriginalFilename().getBytes("ISO-8859-1"), StandardCharsets.UTF_8));
+				change_name = uuid.toString() + "_" + origin_name;
+				file_ext = FilenameUtils.getExtension(file.getOriginalFilename());
+				
+				System.out.println("원본 파일명 : " + origin_name);
+				System.out.println("변경된 파일명 : " + change_name);
+				System.out.println("확장자 : " + file_ext);
+				System.out.println("파일 크기(바이트) : " + file.getSize());
+
+				if(permit_ext.contains(file_ext)) {
+//					String root_path = req.getServletContext().getRealPath("/");
+					File save_path = new File(req.getServletContext().getRealPath("/") + "/resources/upload/product/");
+					System.out.println(save_path);
+					if(!save_path.exists()) {
+						Files.createDirectories(save_path.toPath());
+					}
+//							file.transferTo(new File(save_path + "/" + origin_name));
+					File path = new File(save_path + "/" + change_name);
+					file.transferTo(path);
+					dto.setImg(origin_name);
+					dto.setImgname(change_name);
+					dto.setUrl("/resources/upload/product/" + change_name);
+					System.out.println(path);
+				} else {
+					System.out.println("해당 확장자는 업로드 할 수 없습니다.");
+					mv.setViewName("error/default"); 
+				}
+			} else {
+				System.out.println("업로드 파일의 크기가 큽니다.");
+				mv.setViewName("error/default"); 
+			}
+		} 
+		
+		if(dto.getActive() == null) {
+			dto.setActive(dto.getActive());
+		}
+
 		boolean res = product.update(dto);
 		
 		if(res) {
-			forward = "redirect:/admin/product/detail?id=" + dto.getId();
+			mv.addObject("newline", "\n\r");
+			mv.addObject("ptypes", product.getProductTypes());
+			mv.addObject("item", dto);
+			mv.setViewName("redirect:/admin/product/detail?id=" + dto.getId());
 		} else {
 			m.addAttribute("ptypes", product.getProductTypes());
 			m.addAttribute("item", dto);
-			forward = "admin/product/edit";
+			mv.setViewName("redirect:/admin/product/update?id=" + dto.getId());
 		}
 		
-		return forward;
+		return mv;
 	}
 	
 	/* 상품 삭제 */
 	
 	
-	@RequestMapping(value = "/product/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String userJoin(Model m, @ModelAttribute ProductDTO dto) throws Exception {
-		return "redirect:main";
+		String forward = ""
+;		boolean res = product.remove(dto);
+		if(res) {
+			forward = "redirect:/admin/product";
+		} else {
+			forward = "error/default";
+		}
+		
+		return forward;
 	}
 	
 }

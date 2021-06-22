@@ -5,20 +5,30 @@
 
 <mapper namespace="productMapper">
   <select id="productSearch" parameterType="productsearch" resultType="product">
-    SELECT p.id
+ SELECT p.id
          , p.ptype
-         , t.name AS ptype
+         , t.name AS tname
          , p.aid
          , p.price
          , p.cdate
          , p.title
+         , p.contents
+         , i.url AS url 
+         , i.path AS img
          , p.vcnt
+         , p.gcnt
+         , p.active
       FROM product p
       JOIN product_type t
         ON p.ptype = t.id
+      JOIN product_img i
+        ON p.id = i.pid
       JOIN account a
         ON p.aid = a.id
-     WHERE p.active = 'y'
+      WHERE 1=1 
+     <if test="aid != 1">
+       AND p.active = 'y' 
+     </if>
      <if test="ptype != 0">
        AND p.ptype = #{ptype}
      </if>
@@ -30,75 +40,110 @@
      </if>
      ORDER BY p.id DESC
   </select> 
-  <!--  
-  <update id="productUpdate" parameterType="product">
-    UPDATE product
-       SET title = #{title}
-         , ptype = #{ptype}
-         , contents = #{contents}
-         , nodel = #{nodel}
-         , udate = SYSDATE
-     WHERE id = #{id}
-  </update>
   
   <update id="productCLOB" parameterType="product">
-    UPDATE board SET contents = #{contents} WHERE id = #{id}
+    UPDATE product SET contents = #{contents} WHERE id = #{id}
   </update>
 
   <select id="seq" resultType="_int">
-    SELECT board_seq.NEXTVAL AS seq FROM dual
+    SELECT product_seq.NEXTVAL AS seq FROM dual
+  </select>
+  
+   <select id="seq_img" resultType="_int">
+    SELECT product_img_seq.NEXTVAL AS seq_img FROM dual
   </select>
 
-  <insert id="productInsert" parameterType="product">
-  	INSERT INTO board(id, btype, aid, title, contents, nodel)
-  	     VALUES(#{id}, #{btype}, #{aid}, #{title}, EMPTY_CLOB(), #{nodel})
-  </insert> -->
+  <insert id="insertProduct" parameterType="product">
+  	INSERT INTO product(id, ptype, aid, title, price, contents, active)
+  	     VALUES(#{id}, #{ptype}, #{aid}, #{title}, #{price}, EMPTY_CLOB(), #{active})
+  </insert> 
+  <insert id="fileInsert" parameterType="product">
+  	INSERT INTO product_img(id, pid, name, path, url)
+  	     VALUES(#{imgid}, #{id}, #{imgname}, #{img}, #{url})
+  </insert> 
   
   <select id="producttypes" resultType="producttype">
   	SELECT * FROM product_type
   </select>
   
-  <!-- <select id="selectone" parameterType="product" resultType="product">
-    SELECT a.id
-         , a.btype
-         , b.name AS bname
-         , a.aid
-         , c.nickname AS aname
-         , a.title
-         , a.contents
-         , a.cdate
-         , a.udate
-         , a.vcnt
-         , a.gcnt
-         , a.bcnt
-         , a.nodel
-      FROM board a
-      JOIN board_type b
-        ON a.btype = b.id
-      JOIN account c
-        ON a.aid = c.id
-     WHERE a.deleted = 'n'
-       AND a.id = #{id}
-     ORDER BY a.id DESC
-  </select>
-   -->
-  <select id="all" resultType="product">
-    SELECT p.id
+  <select id="selectone" parameterType="product" resultType="product">
+   	SELECT p.id
          , p.ptype
-         , t.name AS ptype
+         , t.name AS tname
          , p.aid
          , p.price
          , p.cdate
          , p.title
+         , p.contents
+         , i.url AS url 
+         , i.path AS img
          , p.vcnt
+         , p.gcnt
+         , p.active
       FROM product p
       JOIN product_type t
         ON p.ptype = t.id
+      JOIN product_img i
+        ON p.id = i.pid
       JOIN account a
         ON p.aid = a.id
-     WHERE p.active = 'y'
+      WHERE p.id = #{id} 
+  </select>
+  
+  <select id="one" parameterType="product" resultType="product">
+  	SELECT id FROM product WHERE id= #{id}
+  </select>
+  
+  <select id="all" parameterType="productsearch" resultType="product">
+  SELECT p.id
+         , p.ptype
+         , t.name AS tname
+         , p.aid
+         , p.price
+         , p.cdate
+         , p.title
+         , p.contents
+         , i.url AS url 
+         , i.path AS img
+         , p.vcnt
+         , p.gcnt
+         , p.active
+      FROM product p
+      JOIN product_type t
+        ON p.ptype = t.id
+      JOIN product_img i
+        ON p.id = i.pid
+      JOIN account a
+        ON p.aid = a.id
+      WHERE 1=1 
+     <if test="aid != 1">
+       AND p.active = 'y' 
+     </if>
      ORDER BY p.id DESC
   </select>
+  
+  <update id="updateProduct" parameterType="product">
+    UPDATE product
+       SET title = #{title}
+         , ptype = #{ptype}
+         , price = #{price}
+         , contents = #{contents}
+         , active = #{active}
+         , udate = SYSDATE
+     WHERE id = #{id}
+  </update>
+  
+  <update id="updateImage" parameterType="product">
+  	UPDATE product_img
+       SET name = #{imgname}
+         , path = #{img}
+         , url = #{url}
+     WHERE pid = #{id}
+  </update>
+
+  <delete id="deleteProduct" parameterType="product">
+		DELETE FROM product WHERE id = #{id}
+	</delete>
 
  <!--  <select id="goodcount" resultType="product">
   	SELECT gcnt FROM board

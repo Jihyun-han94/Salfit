@@ -36,8 +36,13 @@ public class ProductController {
 		
 		List<ProductDTO> productlist = null;
 		
+		// 세션 + 필터로 관리자만 active 'n'인 상품 보기 가능 
+		search.setAid(0); // 추후 개인 아이디로 바꿀예정 
+
 		if(search.getPtype() == 0 && search.getSearchtype() == null) {
-			productlist = product.findAll();
+			productlist = product.findAll(search);
+		} else if (search.getSearch() == "") {
+			productlist = product.findAll(search);
 		} else {
 			productlist = product.findList(search);
 		}
@@ -51,12 +56,12 @@ public class ProductController {
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detail(HttpServletRequest request, @RequestParam int id) throws Exception {
+		System.out.println("id-->" +  id);
 		ModelAndView mv = new ModelAndView();
-		
 		HttpSession session = request.getSession();
 		
 		ProductDTO item = product.findId(id);
-		if(item.getId() != -1 || item.getActive().equals("y")) {
+		if(item.getId() != -1 && item.getActive().equals("y")) {
 			
 			mv.addObject("newline", "\n");
 			mv.addObject("item", item);

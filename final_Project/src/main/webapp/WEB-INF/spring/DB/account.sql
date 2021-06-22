@@ -46,3 +46,5 @@ SELECT * FROM account;
 
 ALTER TABLE account RENAME COLUMN type TO atype;
 
+INSERT INTO account VALUES(1, 'admin@admin.com', 'admin', '관리자', 01012345678, 'a', SYSDATE, SYSDATE, NULL);
+

@@ -10,12 +10,16 @@ public class ProductDTO {
 	private String title;
 	private int price;
 	private String contents;
+	private int imgid;
+	private String img;
+	private String imgname;
+	private String url;
 	private int vcnt;
 	private int gcnt;
 	private int bcnt;
 	private Date cdate;
 	private Date udate;
-	private String active = "y";
+	private String active;
 	public int getId() {
 		return id;
 	}
@@ -58,6 +62,32 @@ public class ProductDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
+	
+	public int getImgid() {
+		return imgid;
+	}
+	public void setImgid(int imgid) {
+		this.imgid = imgid;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	
+	public String getImgname() {
+		return imgname;
+	}
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public int getVcnt() {
 		return vcnt;
 	}
@@ -93,11 +123,13 @@ public class ProductDTO {
 	}
 	public void setActive(String active) {
 		if(active == null) {
-			this.active = "y";
+			this.active = "n";
 		} else if(active.equals("on") || active.equals("y")) {
 			this.active = "y";
 		} else {
 			this.active = "n";
 		}
 	}
+	
+	
 }

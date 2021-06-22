@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
+import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
 import com.jey.webapp.product.repository.ProductRepository;
@@ -34,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public boolean remove(ProductDTO dto) throws Exception {
-		return false;
+		return dao.delete(dto);
 	}
 	
 	@Override
@@ -46,8 +47,8 @@ public class ProductServiceImpl implements ProductService {
 	
 	
 	@Override
-	public List<ProductDTO> findAll() throws Exception {
-		List<ProductDTO> data = dao.selectAll();
+	public List<ProductDTO> findAll(ProductSearchDTO search) throws Exception {
+		List<ProductDTO> data = dao.selectAll(search);
 		return data;
 	}
 
