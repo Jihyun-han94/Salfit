@@ -14,8 +14,6 @@ public class CartDTO {
 	
 	
 	
-	
-	
 	public String getTitle() {
 		return title;
 	}

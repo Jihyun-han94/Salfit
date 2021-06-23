@@ -91,7 +91,6 @@ public class CartController {
 			return "redirect:/account/login";
 		}
 			dto.setAid(aid);
-		
 			cart.add(dto); //cart 테이블에 저장됨
 		
 			return "redirect:/cart";
