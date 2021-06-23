@@ -73,3 +73,12 @@ COMMENT ON COLUMN review.aid IS '리뷰 작성자 식별 번호';
 COMMENT ON COLUMN review.contents IS '리뷰 내용';
 COMMENT ON COLUMN review.rating IS '상품 별점';
 COMMENT ON COLUMN review.cdate IS '리뷰 작성일';
+
+
+
+--------------------------------------------------------------------------------------------------------
+
+INSERT INTO review VALUES(1, 21, 1, '너무너무맛있는 샐러드~~~~~', 5, SYSDATE);
+INSERT INTO review VALUES(2, 21, 1, '맛있는 샐러드~~dddddddd~~~', 4, SYSDATE);
+INSERT INTO review VALUES(3, 21, 1, ' 샐러드~~dddddddd~~~', 3, SYSDATE);
+INSERT INTO review VALUES(4, 21, 1, ' ~~dddddddd~~~', 2, SYSDATE);

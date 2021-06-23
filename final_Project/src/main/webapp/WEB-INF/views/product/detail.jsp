@@ -153,11 +153,13 @@
 	<div id="bodyContainer2">
 		<jsp:include page="/WEB-INF/views/product/recommend.jsp" flush="false" >
 			<jsp:param name="item" value="${item}" />
+			<jsp:param name="recommend" value="${recommend}" />
 		</jsp:include>
 	</div>
     <div id="bodyContainer3">
 		<jsp:include page="/WEB-INF/views/product/reviews.jsp" flush="false" >
 			<jsp:param name="item" value="${item}" />
+			<jsp:param name="reviews" value="${reviews}" />
 		</jsp:include>
 	</div>
    	

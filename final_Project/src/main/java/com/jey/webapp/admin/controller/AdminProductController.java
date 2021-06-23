@@ -136,7 +136,7 @@ public class AdminProductController {
 					File path = new File(save_path + "/" + change_name);
 					file.transferTo(path);
 					dto.setImg(origin_name);
-					dto.setImgname(change_name);
+					dto.setImguuid(change_name);
 					dto.setUrl("/resources/upload/product/" + change_name);
 					System.out.println(path);
 				} else {
@@ -150,7 +150,7 @@ public class AdminProductController {
 		} else {
 			//default 이미지 
 			dto.setImg("default.png");
-			dto.setImgname("default.png");
+			dto.setImguuid("default.png");
 			dto.setUrl("/resources/upload/product/default.png");
 		}
 		
@@ -218,7 +218,7 @@ public class AdminProductController {
 					File path = new File(save_path + "/" + change_name);
 					file.transferTo(path);
 					dto.setImg(origin_name);
-					dto.setImgname(change_name);
+					dto.setImguuid(change_name);
 					dto.setUrl("/resources/upload/product/" + change_name);
 					System.out.println(path);
 				} else {
@@ -229,7 +229,11 @@ public class AdminProductController {
 				System.out.println("업로드 파일의 크기가 큽니다.");
 				mv.setViewName("error/default"); 
 			}
-		} 
+		} else {
+			dto.setImg(product.findId(dto.getId()).getImg());
+			dto.setImguuid(product.findId(dto.getId()).getImguuid());
+			dto.setUrl(product.findId(dto.getId()).getUrl());
+		}
 		
 		if(dto.getActive() == null) {
 			dto.setActive(dto.getActive());

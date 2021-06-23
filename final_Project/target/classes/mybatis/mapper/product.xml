@@ -14,7 +14,8 @@
          , p.title
          , p.contents
          , i.url AS url 
-         , i.path AS img
+         , i.name AS img
+         , i.path AS imguuid
          , p.vcnt
          , p.gcnt
          , p.active
@@ -59,7 +60,7 @@
   </insert> 
   <insert id="fileInsert" parameterType="product">
   	INSERT INTO product_img(id, pid, name, path, url)
-  	     VALUES(#{imgid}, #{id}, #{imgname}, #{img}, #{url})
+  	     VALUES(#{imgid}, #{id}, #{img}, #{imguuid}, #{url})
   </insert> 
   
   <select id="producttypes" resultType="producttype">
@@ -75,8 +76,9 @@
          , p.cdate
          , p.title
          , p.contents
-         , i.url AS url 
-         , i.path AS img
+         , i.url AS url
+         , i.name AS img 
+         , i.path AS imguuid
          , p.vcnt
          , p.gcnt
          , p.active
@@ -104,7 +106,8 @@
          , p.title
          , p.contents
          , i.url AS url 
-         , i.path AS img
+         , i.name AS img 
+         , i.path AS imguuid
          , p.vcnt
          , p.gcnt
          , p.active
@@ -128,7 +131,8 @@
          , p.title
          , p.price
          , i.url AS url 
-         , i.path AS img
+         , i.name AS img 
+         , i.path AS imguuid
          , p.active
       FROM product p
       JOIN product_type t
@@ -139,6 +143,22 @@
        AND p.active = 'y' 
        AND p.id != #{id}
      ORDER BY p.gcnt DESC
+  </select>
+  
+    <select id="productReviews" parameterType="product" resultType="review">
+  	SELECT r.id
+         , r.aid
+         , a.name AS aname
+         , r.contents
+         , r.rating
+         , r.cdate 
+      FROM review r 
+      JOIN account a
+        ON r.aid = a.id
+      <!-- JOIN account_img i
+        ON r.aid = i.aid -->
+      WHERE r.pid = #{id}  
+     ORDER BY r.cdate DESC
   </select>
   
   <update id="updateProduct" parameterType="product">
@@ -154,8 +174,8 @@
   
   <update id="updateImage" parameterType="product">
   	UPDATE product_img
-       SET name = #{imgname}
-         , path = #{img}
+       SET name = #{img}
+         , path = #{imguuid}
          , url = #{url}
      WHERE pid = #{id}
   </update>

@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ReviewDTO> findReviewList(ProductDTO dto) throws Exception {
-		return null;
+		return dao.selectReviewList(dto);
 	}
 
 	@Override

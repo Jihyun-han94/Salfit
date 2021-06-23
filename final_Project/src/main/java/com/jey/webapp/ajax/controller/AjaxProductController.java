@@ -25,6 +25,9 @@ public class AjaxProductController {
 	/* 상품 카테고리 선택 후 포커스 이동 */
 	
 	/* 상품 좋아요 */
+	
+	
+	/* 리뷰 더보기 */
 
 	
 	

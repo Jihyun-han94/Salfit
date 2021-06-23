@@ -6,6 +6,7 @@ public class ReviewDTO {
 	private int id;
 	private int pid;
 	private int aid;
+	private String aname;
 	private String contents;
 	private int rating;
 	private Date cdate;
@@ -24,6 +25,12 @@ public class ReviewDTO {
 	}
 	public int getAid() {
 		return aid;
+	}
+	public String getAname() {
+		return aname;
+	}
+	public void setAname(String aname) {
+		this.aname = aname;
 	}
 	public void setAid(int aid) {
 		this.aid = aid;

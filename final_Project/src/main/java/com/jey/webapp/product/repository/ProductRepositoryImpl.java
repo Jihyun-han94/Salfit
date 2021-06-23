@@ -98,7 +98,8 @@ public class ProductRepositoryImpl implements ProductRepository {
 
 	@Override
 	public List<ReviewDTO> selectReviewList(ProductDTO dto) throws Exception {
-		return null;
+		List<ReviewDTO> data = sqlSession.selectList("productMapper.productReviews", dto);
+		return data;
 	}
 
 	@Override

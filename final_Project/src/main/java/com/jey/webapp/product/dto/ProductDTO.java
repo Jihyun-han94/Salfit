@@ -12,7 +12,7 @@ public class ProductDTO {
 	private String contents;
 	private int imgid;
 	private String img;
-	private String imgname;
+	private String imguuid;
 	private String url;
 	private int vcnt;
 	private int gcnt;
@@ -76,11 +76,11 @@ public class ProductDTO {
 		this.img = img;
 	}
 	
-	public String getImgname() {
-		return imgname;
+	public String getImguuid() {
+		return imguuid;
 	}
-	public void setImgname(String imgname) {
-		this.imgname = imgname;
+	public void setImguuid(String imguuid) {
+		this.imguuid = imguuid;
 	}
 	public String getUrl() {
 		return url;
