@@ -8,10 +8,26 @@ public class CartDTO {
 	
 	private int price; 
 	private String email;
+	private String title;
+	
+	private int money;
 	
 	
 	
 	
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public int getMoney() {
+		return money;
+	}
+	public void setMoney(int money) {
+		this.money = money;
+	}
 	public String getEmail() {
 		return email;
 	}

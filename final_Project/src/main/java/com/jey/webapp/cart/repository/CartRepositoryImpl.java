@@ -21,9 +21,11 @@ public class CartRepositoryImpl implements CartRepository {
 	}
 
 
-	@Override
+	@Override //cart.aid를 통해 장바구니 조회 
 	public List<CartDTO> selectList(CartDTO dto) throws Exception {
-		return null;
+		
+		 List<CartDTO> cartlist= sqlSession.selectList("cartMapper.selectAll", dto);
+		return cartlist;
 	}
 
 	@Override
@@ -53,6 +55,14 @@ public class CartRepositoryImpl implements CartRepository {
 	public boolean deleteall(CartDTO dto) throws Exception {
 	
 		return false;
+	}
+
+
+	@Override
+	public int sumMoney(CartDTO dto) throws Exception {
+		
+		int sumMoney = sqlSession.selectOne("cartMapper.sumMoney", dto);
+		return sumMoney;
 	}
 
 

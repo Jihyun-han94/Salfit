@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.cart.dto.CartDTO;
 import com.jey.webapp.cart.service.CartService;
 
@@ -24,6 +25,7 @@ public class CartController {
 	
 	@Autowired
 	private CartService cart;
+	
 
 	
 	/* 장바구니 조회 */
@@ -31,21 +33,48 @@ public class CartController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String cartList(Model m, @ModelAttribute CartDTO dto,HttpSession session) throws Exception {
 		
-		String userid = (String)session.getAttribute("userid");
+		String forward = "";
 		
+		//AccountDTO accountDTO = (AccountDTO) session.getAttribute("account");
+		//int userid = accountDTO.getId();
+		//System.out.println("userid 확인 :" + userid);
 		
-		String forward = "cart/mycart";
+		int userid = 1;
+//		if(accountDTO == null) {
+//			forward = "redirect:/account/login";
+//		}else {
+//			forward = "cart/mycart";
+//			dto.setAid(userid);
+//			List<CartDTO> cartlist = cart.findAll(dto);
+//			m.addAttribute("cartlist",cartlist);			
+//		}
+//	
+		dto.setAid(userid);
+		List<CartDTO> cartlist = cart.findAll(dto);
 		
+		int sumMoney = cart.sumMoney(dto);
+		int totalMoney = 0;
+		int delfee = 0; //배송비
 		
-		List<CartDTO> cartlist = cart.findAll();
+		if(sumMoney>=30000) {
+			delfee = 0;
+			totalMoney = sumMoney;
+			m.addAttribute("totalMoney",totalMoney);
+			m.addAttribute("delfee",delfee);
+			
+		}else {
+			delfee = 3000;
+			totalMoney = sumMoney + delfee;
+			m.addAttribute("totalMoney",totalMoney);
+			m.addAttribute("delfee",delfee);
+		}
 		
+		System.out.println("sumMoney :" +sumMoney);
 		m.addAttribute("cartlist",cartlist);
+		m.addAttribute("sumMoney",sumMoney);
+		m.addAttribute("totalMoney", totalMoney);
 		
-		
-		
-		
-		
-		return forward;
+		return "cart/mycart";
 	}	
 	
 	
