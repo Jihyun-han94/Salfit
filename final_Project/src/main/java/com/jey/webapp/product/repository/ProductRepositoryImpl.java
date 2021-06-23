@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductFileDTO;
+import com.jey.webapp.product.dto.ProductRecommendDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
 
@@ -40,8 +41,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 
 	@Override
 	public List<ProductDTO> selectList(ProductSearchDTO search) throws Exception {
-//		System.out.println("getptype : " + search.getPtype());
-//		System.out.println("getSearch : " + search.getSearch());
 		List<ProductDTO> data = sqlSession.selectList("productMapper.productSearch", search);
 		return data;
 	}
@@ -100,6 +99,12 @@ public class ProductRepositoryImpl implements ProductRepository {
 	@Override
 	public List<ReviewDTO> selectReviewList(ProductDTO dto) throws Exception {
 		return null;
+	}
+
+	@Override
+	public List<ProductRecommendDTO> selectSimilarList(ProductDTO dto) {
+		List<ProductRecommendDTO> data = sqlSession.selectList("productMapper.similarProduct", dto);
+		return data;
 	}
 
 }

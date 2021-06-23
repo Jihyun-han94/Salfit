@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductFileDTO;
+import com.jey.webapp.product.dto.ProductRecommendDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
 import com.jey.webapp.product.repository.ProductRepository;
@@ -68,6 +69,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ReviewDTO> findReviewList(ProductDTO dto) throws Exception {
 		return null;
+	}
+
+	@Override
+	public List<ProductRecommendDTO> findSimilarList(ProductDTO dto) {
+		return dao.selectSimilarList(dto);
 	}
 
 

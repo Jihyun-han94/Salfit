@@ -5,6 +5,7 @@ import java.util.*;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductFileDTO;
+import com.jey.webapp.product.dto.ProductRecommendDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
 
@@ -19,4 +20,5 @@ public interface ProductRepository {
 	public boolean insert(ProductDTO dto)  throws Exception;
 	public boolean update(ProductDTO dto)  throws Exception;
 	public boolean delete(ProductDTO dto)  throws Exception;
+	public List<ProductRecommendDTO> selectSimilarList(ProductDTO dto);
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jey.webapp.product.dto.ProductDTO;
+import com.jey.webapp.product.dto.ProductRecommendDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.service.ProductService;
 
@@ -62,9 +63,10 @@ public class ProductController {
 		
 		ProductDTO item = product.findId(id);
 		if(item.getId() != -1 && item.getActive().equals("y")) {
-			
+			List<ProductRecommendDTO> recommend = product.findSimilarList(item);
 			mv.addObject("newline", "\n");
 			mv.addObject("item", item);
+			mv.addObject("recommend", recommend);
 		
 			mv.setViewName("product/detail");
 		} else {

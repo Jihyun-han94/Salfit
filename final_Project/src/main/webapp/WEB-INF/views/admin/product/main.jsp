@@ -132,9 +132,9 @@
 									</p>
 									<div class="productBtnContainer">
 										<div class="productBtnIndividual">
-											<form
-												action="${pageContext.request.contextPath}/admin/product/update?id=${item.getId()}"
-												method="GET">
+											<c:url var="update" value="/admin/product/update" />
+								            <form
+												action="${update}?id=${item.getId()}" method="GET">
 												<input type="hidden" name="id" value="${item.getId()}" readonly>
 												<button class="btn btn-outline-dark text-muted border-0" type="submit">
 													<i class="bi bi-pencil"></i> 수정</button>
@@ -162,8 +162,8 @@
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary"
 																data-dismiss="modal">취소</button>
-															<form action="${pageContext.request.contextPath}/admin/product/delete" method="POST">
-																<input type="hidden" name="id" value="${item.getId()}" readonly>
+															<c:url var="delete" value="/admin/product/delete" />
+															<form action="${delete}?id=${item.getId()}" method="POST">
 																<button type="submit" class="btn btn-primary">상품 삭제</button>
 															</form>
 														</div>
