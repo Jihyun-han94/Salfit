@@ -250,6 +250,7 @@ a {
 
 .cd-secondary-nav {
   background-color: white;
+  box-shadow: 0px 3px 5px #E0E0E0;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -300,8 +301,6 @@ a {
   height: 100%;
   width: 35px;
   background: transparent;
-  background: -webkit-linear-gradient(right, #25283D, rgba(37, 40, 61, 0));
-  background: linear-gradient(to left, #25283D, rgba(37, 40, 61, 0));
   pointer-events: none;
   -webkit-transition: opacity .2s;
   transition: opacity .2s;
@@ -473,8 +472,8 @@ Intro Section
   width: 100%;
   margin-top: 60px;
   height: 300px;
-  background: url(/webapp/resources/img/main2.jpg) no-repeat center center;
-  background-size: cover;
+  background: url(/webapp/resources/img/main.png) no-repeat center center;
+  background-size: 105% 100%;
 }
 .cd-hero .cd-hero-content {
   /* vertically align inside parent element */
