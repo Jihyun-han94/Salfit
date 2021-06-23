@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="cartMapper">
-
+	<!-- 장바구니 담기 버튼 클릭하면 실행되는 쿼리문 -->
+	<insert id="insert">
+		INSERT INTO cart(id,aid,pid,qty)
+		VALUES (cart_seq.NEXTVAL, #{aid}, #{pid},{qty})
+	</insert>
 
 </mapper>

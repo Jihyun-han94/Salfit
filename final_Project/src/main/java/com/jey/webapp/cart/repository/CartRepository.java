@@ -11,4 +11,5 @@ public interface CartRepository {
 	public boolean insert(CartDTO dto)  throws Exception;
 	public boolean update(CartDTO dto)  throws Exception;
 	public boolean delete(CartDTO dto)  throws Exception;
+	public boolean deleteall(CartDTO dto)  throws Exception;
 }
