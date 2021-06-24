@@ -70,7 +70,8 @@ public class ProductController {
 			mv.addObject("item", item);
 			mv.addObject("recommend", recommend);
 			mv.addObject("reviews", reviews);
-		
+			mv.addObject("oldListCnt", reviews.size());
+			System.out.println("oldListCnt" + reviews.size());
 			mv.setViewName("product/detail");
 		} else {
 			mv.setViewName("error/noitem");

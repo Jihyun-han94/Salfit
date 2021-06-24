@@ -82,3 +82,4 @@ INSERT INTO review VALUES(1, 21, 1, '너무너무맛있는 샐러드~~~~~', 5, S
 INSERT INTO review VALUES(2, 21, 1, '맛있는 샐러드~~dddddddd~~~', 4, SYSDATE);
 INSERT INTO review VALUES(3, 21, 1, ' 샐러드~~dddddddd~~~', 3, SYSDATE);
 INSERT INTO review VALUES(4, 21, 1, ' ~~dddddddd~~~', 2, SYSDATE);
+INSERT INTO review VALUES(10, 21, 1, ' dddddddd~~~', 2, SYSDATE);

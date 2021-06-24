@@ -10,6 +10,7 @@ public class ReviewDTO {
 	private String contents;
 	private int rating;
 	private Date cdate;
+	private String cdate2;
 
 	public int getId() {
 		return id;
@@ -53,5 +54,12 @@ public class ReviewDTO {
 	public void setCdate(Date cdate) {
 		this.cdate = cdate;
 	}
+	public String getCdate2() {
+		return cdate2;
+	}
+	public void setCdate2(String cdate2) {
+		this.cdate2 = cdate2;
+	}
+	
 	
 }

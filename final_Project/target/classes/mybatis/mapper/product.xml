@@ -161,6 +161,33 @@
      ORDER BY r.cdate DESC
   </select>
   
+  <select id="oldReviews" parameterType="reviewsearch" resultType="review">
+  	SELECT * FROM ( 
+  	SELECT ROWNUM RNUM
+  		, r.id
+         , r.aid
+         , a.name AS aname
+         , r.contents
+         , r.rating
+         , r.cdate 
+      FROM review r 
+      JOIN account a
+        ON r.aid = a.id
+      <!-- JOIN account_img i
+        ON r.aid = i.aid -->
+      WHERE r.pid = #{pid}  
+     ORDER BY r.cdate DESC
+     ) WHERE 1=1 
+      <if test="endIndex lte oldListCnt">
+       <!-- AND RNUM <![CDATA[>]]> ${startIndex} AND RNUM <![CDATA[<]]> ${endIndex} -->
+       AND RNUM BETWEEN ${startIndex} AND ${endIndex}
+     </if>
+     <if test="endIndex gt oldListCnt">
+       <!-- AND RNUM <![CDATA[>]]> ${startIndex} AND RNUM <![CDATA[<]]>= ${startIndex + endIndex - oldListCnt} -->  
+       AND RNUM BETWEEN ${startIndex} AND ${startIndex + endIndex - 1 - oldListCnt}
+     </if> 
+  </select>
+  
   <update id="updateProduct" parameterType="product">
     UPDATE product
        SET title = #{title}

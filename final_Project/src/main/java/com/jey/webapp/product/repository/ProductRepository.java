@@ -8,6 +8,7 @@ import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductRecommendDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
+import com.jey.webapp.product.dto.ReviewSearchDTO;
 
 
 public interface ProductRepository {
@@ -21,4 +22,5 @@ public interface ProductRepository {
 	public boolean update(ProductDTO dto)  throws Exception;
 	public boolean delete(ProductDTO dto)  throws Exception;
 	public List<ProductRecommendDTO> selectSimilarList(ProductDTO dto);
+	public List<ReviewDTO> findOldReviewList(ReviewSearchDTO search);
 }

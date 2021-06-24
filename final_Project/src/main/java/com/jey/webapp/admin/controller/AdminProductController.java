@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
@@ -76,9 +77,12 @@ public class AdminProductController {
 		item = product.findId(item.getId());
 		
 		if(item.getId() != -1 ) {
+			// 리뷰갯수 추가 
+			List<ReviewDTO> reviews = product.findReviewList(item);
 			
 			mv.addObject("newline", "\n\r");
 			mv.addObject("item", item);
+			mv.addObject("oldListCnt", reviews.size());
 		
 			mv.setViewName("admin/product/detail");
 		} else {

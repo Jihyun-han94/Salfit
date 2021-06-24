@@ -11,7 +11,7 @@
 <%@ include file="/WEB-INF/views/module/css_js.jsp" %>
 <style>
 
-#bodyContainer1 {
+/* #bodyContainer1 {
 	height: 50rem;
 	background-color: red; 
 	color: #fff;
@@ -24,7 +24,7 @@
 	height: 40rem;
 	background-color: green; 
 }
-
+ */
 
 .btn-default {
   font-family: Raleway-SemiBold;
@@ -70,6 +70,56 @@
 .carousel-control-next { right: -7rem; }
 
 </style>
+
+<c:url var="moreReviews" value="/ajax/product/moreReviews" />
+<script type="text/javascript">
+	var oldListCnt = "${oldListCnt}";
+
+	var startIndex = 1;	// 인덱스 초기값
+	var searchStep = 3;	// 3개씩 로딩
+		
+	readOldNotify(startIndex);
+	
+	function pressSearchMoreBtn() {
+		startIndex += searchStep;
+		readOldNotify(startIndex);
+	}
+	
+	function readOldNotify(index){
+		let _endIndex = index+searchStep-1;
+		$.ajax({
+			url: "${moreReviews}",
+			type: "post",
+			async: "true",
+			dataType: "json",
+			data: {
+				pid: "${item.getId()}",
+				startIndex: index,
+				endIndex: _endIndex,
+				oldListCnt : oldListCnt
+			},
+			success: function (data) {
+				let NodeList = "";
+				for(i = 0; i < data.length; i++){
+					let newNode = "<div style='display: none;' class='card form-group col-sm-10 mx-auto p-0' onClick='window.open('"+data[i].id+"')>";
+					newNode += "<div class='card-body pt-3'><div class='row px-3 mb-2'>";
+					newNode += "<strong class='d-block text-gray-dark'>"+data[i].aname+"</strong>";
+					newNode += "<span class='text-muted ml-auto'>"+data[i].cdate2+"</span>";
+					newNode += "</div><span>"+data[i].contents+"</span></div></div>";
+					NodeList += newNode;
+				}
+				$(NodeList).appendTo($("#oldList")).slideDown();
+				
+				// 더보기 버튼 삭제
+				if(_endIndex >= oldListCnt){
+					$('#searchMoreNotify').remove();
+				}				
+			}
+		});
+	}
+
+
+</script>
 </head>
 <body>
 	<header>
@@ -165,4 +215,5 @@
    	
 	<%@ include file="/WEB-INF/views/module/footer.jsp" %>
 </body>
+
 </html>

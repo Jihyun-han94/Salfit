@@ -12,6 +12,7 @@ import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductRecommendDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
+import com.jey.webapp.product.dto.ReviewSearchDTO;
 
 
 @Repository
@@ -105,6 +106,12 @@ public class ProductRepositoryImpl implements ProductRepository {
 	@Override
 	public List<ProductRecommendDTO> selectSimilarList(ProductDTO dto) {
 		List<ProductRecommendDTO> data = sqlSession.selectList("productMapper.similarProduct", dto);
+		return data;
+	}
+
+	@Override
+	public List<ReviewDTO> findOldReviewList(ReviewSearchDTO search) {
+		List<ReviewDTO> data = sqlSession.selectList("productMapper.oldReviews", search);
 		return data;
 	}
 

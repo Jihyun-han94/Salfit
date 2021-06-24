@@ -8,6 +8,7 @@ import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductRecommendDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
+import com.jey.webapp.product.dto.ReviewSearchDTO;
 
 
 public interface ProductService {
@@ -21,5 +22,6 @@ public interface ProductService {
 	public List<ProductDTO> findList(ProductSearchDTO search) throws Exception;
 	public List<ReviewDTO> findReviewList(ProductDTO dto) throws Exception;
 	public List<ProductRecommendDTO> findSimilarList(ProductDTO dto);
+	public List<ReviewDTO> searchOldReviewList(ReviewSearchDTO search);
 
 }

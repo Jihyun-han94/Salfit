@@ -11,6 +11,7 @@ import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductRecommendDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
+import com.jey.webapp.product.dto.ReviewSearchDTO;
 import com.jey.webapp.product.repository.ProductRepository;
 
 
@@ -74,6 +75,28 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductRecommendDTO> findSimilarList(ProductDTO dto) {
 		return dao.selectSimilarList(dto);
+	}
+
+	@Override
+	public List<ReviewDTO> searchOldReviewList(ReviewSearchDTO search) {
+//		int startIndex = search.getStartIndex();
+//		int endIndex = search.getEndIndex();
+//		int oldListCnt = search.getOldListCnt();
+//		
+//		List<ReviewDTO> reviewlist = dao.findOldReviewList(search);
+//		List<ReviewDTO> data = new ArrayList<ReviewDTO>() ;
+//		
+//		System.out.println(startIndex);
+//		System.out.println(endIndex);
+//		if(oldListCnt > endIndex) {
+//			for(int i = search.getStartIndex(); i <= search.getEndIndex(); i++) {
+//				data.add(reviewlist.get(i));
+//			}
+//		} else {
+//			
+//		}
+//		return data;
+		return dao.findOldReviewList(search);
 	}
 
 
