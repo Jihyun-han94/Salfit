@@ -6,12 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<link rel="stylesheet" href="/webapp/resources/static/css/total.css">
  <%@ include file="/WEB-INF/views/module/css_js.jsp" %>
 <c:url var="email_check" value="/ajax/account/email" />
 <script type="text/javascript">
 </script>
 </head>
 <body>
+<nav>
+	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
+</nav>
+<section class="body_class">
+<h1 class="first_class">Join</h1>
 	<c:url var="join" value="/account/join" />
 	<form name="account_form" action="${join}" method="POST">
 		<div>
@@ -36,6 +42,10 @@
 			<button type="button" onclick="history.back();">취소</button>
 		</div>
 	</form>
+	
+</section>
+<footer>
   <%@ include file="/WEB-INF/views/module/footer.jsp" %>
+</footer>
 </body>
 </html>
