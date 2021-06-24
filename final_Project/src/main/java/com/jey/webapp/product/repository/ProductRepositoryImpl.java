@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jey.webapp.order.dto.ReviewDTO;
+import com.jey.webapp.product.dto.LikeDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductRecommendDTO;
@@ -22,9 +23,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 	
 	@Override
 	public ProductDTO select(ProductDTO dto) throws Exception {
-		System.out.println("id2-->" +  dto.getId());
 		dto = sqlSession.selectOne("productMapper.selectone", dto);
-		System.out.println("id3-->" +  dto.getId());
 		return dto;
 	}
 	
@@ -78,7 +77,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 		boolean result = false;
 		int rs = sqlSession.update("productMapper.updateProduct", dto);		
 		if(rs == 1) {
-			System.out.println("dududu");
 			rs = sqlSession.update("productMapper.updateImage", dto);
 			if(rs == 1) {
 				result = true;
@@ -113,6 +111,30 @@ public class ProductRepositoryImpl implements ProductRepository {
 	public List<ReviewDTO> findOldReviewList(ReviewSearchDTO search) {
 		List<ReviewDTO> data = sqlSession.selectList("productMapper.oldReviews", search);
 		return data;
+	}
+
+	@Override
+	public List<ProductDTO> selectAllLike(int id) {
+		List<ProductDTO> data = sqlSession.selectList("productMapper.likedProduct", id);
+		return data;
+	}
+
+
+	@Override
+	public void removeLike(LikeDTO like) {
+		sqlSession.delete("productMapper.degradeLike", like);		
+		sqlSession.update("productMapper.minusGcnt", like);
+	}
+
+
+	@Override
+	public void addLike(LikeDTO like) {
+		int likedseq = sqlSession.selectOne("productMapper.likedseq");
+		if(likedseq > 0) {
+			like.setId(likedseq);
+			sqlSession.insert("productMapper.upgradeLike", like);		
+			sqlSession.update("productMapper.plusGcnt", like);
+		}
 	}
 
 }

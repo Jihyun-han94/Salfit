@@ -30,10 +30,6 @@ public class ProductController {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView main(@ModelAttribute ProductSearchDTO search) throws Exception {
-		
-		System.out.println("Ptype : " + search.getPtype());
-		System.out.println("Search : " + search.getSearch());
-		
 		ModelAndView mv = new ModelAndView();
 		
 		List<ProductDTO> productlist = null;
@@ -49,16 +45,23 @@ public class ProductController {
 			productlist = product.findList(search);
 		}
 		
+		List<Integer> liked = new ArrayList<Integer>();
+		List<ProductDTO> likedProduct = product.getAllLikePid(1); // session user Id 값 
+		System.out.println(likedProduct);
+		for(ProductDTO lk : likedProduct) {
+			System.out.println(lk.getId());
+			liked.add(lk.getId());
+		}
+		
 		mv.setViewName("product/main");
 		mv.addObject("productlist", productlist);
 		mv.addObject("producttypes", product.getProductTypes());
-		
+		mv.addObject("liked", liked);
 		return mv;
 	}
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detail(HttpServletRequest request, @RequestParam int id) throws Exception {
-		System.out.println("id-->" +  id);
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		
@@ -71,7 +74,6 @@ public class ProductController {
 			mv.addObject("recommend", recommend);
 			mv.addObject("reviews", reviews);
 			mv.addObject("oldListCnt", reviews.size());
-			System.out.println("oldListCnt" + reviews.size());
 			mv.setViewName("product/detail");
 		} else {
 			mv.setViewName("error/noitem");

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jey.webapp.order.dto.ReviewDTO;
+import com.jey.webapp.product.dto.LikeDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductRecommendDTO;
@@ -79,24 +80,22 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ReviewDTO> searchOldReviewList(ReviewSearchDTO search) {
-//		int startIndex = search.getStartIndex();
-//		int endIndex = search.getEndIndex();
-//		int oldListCnt = search.getOldListCnt();
-//		
-//		List<ReviewDTO> reviewlist = dao.findOldReviewList(search);
-//		List<ReviewDTO> data = new ArrayList<ReviewDTO>() ;
-//		
-//		System.out.println(startIndex);
-//		System.out.println(endIndex);
-//		if(oldListCnt > endIndex) {
-//			for(int i = search.getStartIndex(); i <= search.getEndIndex(); i++) {
-//				data.add(reviewlist.get(i));
-//			}
-//		} else {
-//			
-//		}
-//		return data;
 		return dao.findOldReviewList(search);
+	}
+
+	@Override
+	public List<ProductDTO> getAllLikePid(int id) {
+		return dao.selectAllLike(id);
+	}
+
+	@Override
+	public void dislike(LikeDTO like) {
+		dao.removeLike(like);
+	}
+
+	@Override
+	public void like(LikeDTO like) {
+		dao.addLike(like);
 	}
 
 

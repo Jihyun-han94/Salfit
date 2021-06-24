@@ -6,5 +6,5 @@
 	<h3>구매자 리뷰</h3>
 	<div id="oldList" class="row my-5">
 	</div>
-	<button id="searchMoreNotify" onclick="pressSearchMoreBtn();" class="btn btn-outline-primary btn-block col-sm-10 mx-auto"> <i class="bi bi-chevron-double-down" style="font-size: 2rem;"></i></button>
+	<button id="searchMoreNotify" onclick="pressSearchMoreBtn();" class="btn btn-outline-primary btn-block col-sm-12 mx-auto"> <i class="bi bi-chevron-double-down" style="font-size: 2rem;"></i></button>
 </div>

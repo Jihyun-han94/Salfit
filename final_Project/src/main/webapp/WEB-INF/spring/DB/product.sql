@@ -74,6 +74,20 @@ COMMENT ON COLUMN product_img.path IS '상품 이미지 실제 저장 경로(위
 COMMENT ON COLUMN product_img.url IS '상품 이미지 접근 URL 주소';
 
 
+CREATE SEQUENCE liked_seq START WITH 1 INCREMENT BY 1 NOCACHE;
+CREATE TABLE liked ( 
+         id NUMBER,
+         pid NUMBER, 
+         aid NUMBER
+);
+
+ALTER TABLE liked ADD CONSTRAINT liked_id_PK PRIMARY KEY(id);
+ALTER TABLE liked ADD CONSTRAINT liked_pid_FK FOREIGN KEY(pid) REFERENCES product(id) ON DELETE CASCADE;
+ALTER TABLE liked ADD CONSTRAINT liked_aid_FK FOREIGN KEY(aid) REFERENCES account(id) ON DELETE CASCADE;
+
+COMMENT ON COLUMN liked.id IS '리뷰 식별 번호';
+COMMENT ON COLUMN liked.pid IS '리뷰 단 게시글 식별 번호';
+COMMENT ON COLUMN liked.aid IS '리뷰 작성자 식별 번호';
 ---------------------------------------------------------------------------------------------------------
 
 INSERT INTO product_type VALUES(1, '채식주의자');

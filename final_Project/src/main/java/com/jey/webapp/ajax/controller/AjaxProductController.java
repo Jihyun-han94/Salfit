@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jey.webapp.order.dto.ReviewDTO;
+import com.jey.webapp.product.dto.LikeDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ReviewSearchDTO;
 import com.jey.webapp.product.service.ProductService;
@@ -34,7 +35,30 @@ public class AjaxProductController {
 	/* 상품 카테고리 선택 후 포커스 이동 */
 	
 	/* 상품 좋아요 */
-	
+	@RequestMapping(value = "/like", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
+	@ResponseBody
+	public String like(@ModelAttribute LikeDTO like) throws Exception {
+		System.out.println("aid: "+like.getCancel());
+		if(like.getCancel().equals("true") ) {
+			 product.dislike(like);
+			 like.setCancel("false");
+		} else {
+			 product.like(like);
+			 like.setCancel("true");
+		}
+		ProductDTO dto = product.findId(like.getPid());
+		int gcnt = dto.getGcnt();
+		System.out.println("gcnt" + gcnt);
+//		ObjectMapper mapper = new ObjectMapper();
+//		String jsonStr = mapper.writeValueAsString(gcnt);
+//		return jsonStr;
+		JSONObject json = new JSONObject();			
+		json.put("gcnt", gcnt);
+		json.put("cancel", like.getCancel());
+		
+		return json.toJSONString();
+		
+	}
 	
 	/* 리뷰 더보기 */
 	

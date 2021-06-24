@@ -164,7 +164,7 @@
   <select id="oldReviews" parameterType="reviewsearch" resultType="review">
   	SELECT * FROM ( 
   	SELECT ROWNUM RNUM
-  		, r.id
+  		 , r.id
          , r.aid
          , a.name AS aname
          , r.contents
@@ -186,6 +186,15 @@
        <!-- AND RNUM <![CDATA[>]]> ${startIndex} AND RNUM <![CDATA[<]]>= ${startIndex + endIndex - oldListCnt} -->  
        AND RNUM BETWEEN ${startIndex} AND ${startIndex + endIndex - 1 - oldListCnt}
      </if> 
+  </select>
+  
+  
+  <select id="likedProduct" parameterType="_int" resultType="product">
+  	SELECT p.id
+  	FROM liked l
+  	JOIN product p
+  	  ON l.pid = p.id
+   WHERE l.aid = #{id}
   </select>
   
   <update id="updateProduct" parameterType="product">
@@ -210,10 +219,12 @@
   <delete id="deleteProduct" parameterType="product">
 		DELETE FROM product WHERE id = #{id}
 	</delete>
+	
+	
 
- <!--  <select id="goodcount" resultType="product">
-  	SELECT gcnt FROM board
-  	 WHERE id = #{id}
+ <!--  <select id="plusGcnt" resultType="like">
+  	SELECT gcnt FROM product
+  	 WHERE id = #{pid}
   </select>
   
   <select id="badcount" resultType="product">
@@ -225,14 +236,35 @@
   	UPDATE board
   	   SET vcnt = vcnt + 1
   	 WHERE id = #{id}
-  </update>
+  </update> -->
+
+	<select id="likedseq" resultType="_int">
+    SELECT liked_seq.NEXTVAL AS likedseq FROM dual
+  </select>
+
+   <insert id="upgradeLike" parameterType="like">
+  	INSERT INTO liked(id, pid, aid)
+  	     VALUES(#{id}, #{pid}, #{aid})
+  </insert> 
   
-  <update id="incgood">
-  	UPDATE board
+  <delete id="degradeLike" parameterType="like">
+		DELETE FROM liked WHERE pid = #{pid} AND aid = #{aid}
+  </delete>
+  
+  <update id="plusGcnt" parameterType="like">
+  	UPDATE product
   	   SET gcnt = gcnt + 1
-  	 WHERE id = #{id}
+  	 WHERE id = #{pid} 
   </update>
   
+  <update id="minusGcnt" parameterType="like">
+  	UPDATE product
+  	   SET gcnt = gcnt - 1
+  	 WHERE id = #{pid} 
+  </update>
+  
+  
+  <!-- 
   <update id="incbad">
   	UPDATE board
   	   SET bcnt = bcnt + 1

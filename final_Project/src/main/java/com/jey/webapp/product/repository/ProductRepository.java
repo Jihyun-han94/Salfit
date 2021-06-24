@@ -3,6 +3,7 @@ package com.jey.webapp.product.repository;
 import java.util.*;
 
 import com.jey.webapp.order.dto.ReviewDTO;
+import com.jey.webapp.product.dto.LikeDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductRecommendDTO;
@@ -23,4 +24,7 @@ public interface ProductRepository {
 	public boolean delete(ProductDTO dto)  throws Exception;
 	public List<ProductRecommendDTO> selectSimilarList(ProductDTO dto);
 	public List<ReviewDTO> findOldReviewList(ReviewSearchDTO search);
+	public List<ProductDTO> selectAllLike(int id);
+	public void removeLike(LikeDTO like);
+	public void addLike(LikeDTO like);
 }

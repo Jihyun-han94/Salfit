@@ -100,8 +100,12 @@
 			},
 			success: function (data) {
 				let NodeList = "";
+				if(data.length == 0) {
+					let node = "<div class='col-12 text-center'><p>댓글이 존재하지 않습니다.</p></div>";
+					NodeList += node; 
+				}
 				for(i = 0; i < data.length; i++){
-					let newNode = "<div style='display: none;' class='card form-group col-sm-10 mx-auto p-0' onClick='window.open('"+data[i].id+"')>";
+					let newNode = "<div style='display: none;' class='card form-group col-sm-12 mx-auto p-0' onClick='window.open('"+data[i].id+"')>";
 					newNode += "<div class='card-body pt-3'><div class='row px-3 mb-2'>";
 					newNode += "<strong class='d-block text-gray-dark'>"+data[i].aname+"</strong>";
 					newNode += "<span class='text-muted ml-auto'>"+data[i].cdate2+"</span>";
