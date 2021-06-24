@@ -14,6 +14,7 @@
 	<c:url var="main" value="/" />
 	<c:url var="join" value="/account/join" />
 	<c:url var="login" value="/account/login" />
+	<c:url var="logout" value="/account/logout" />
 </head>
 <body>
 <header class="cd-auto-hide-header">
@@ -26,12 +27,20 @@
 				Menu
 			</span>
 		</a> <!-- .nav-trigger -->
-
 		<ul id="cd-navigation">
-			<li><a data-toggle="modal" href="#myModal">LogIn</a></li>
-			<li><a href="${join }">Join</a></li>
-			<li><a href="#0">Cart</a></li>
-			<li><a href="#0">Contact Us</a></li>
+		<c:choose>
+			<c:when test="${sessionScope.logined }">
+				<li><a href="#0">MyPage</a></li>
+				<li><a href="#0">Cart</a></li>
+				<li><a href="${logout }">Logout</a></li>
+				<li><a href="#0">Contact Us</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a data-toggle="modal" href="#myModal">Login</a></li>
+				<li><a href="${join }">Join</a></li>
+				<li><a href="#0">Contact Us</a></li>
+			</c:otherwise>
+		</c:choose>
 		</ul>
 	</nav> <!-- .cd-primary-nav -->
 </header> <!-- .cd-auto-hide-header -->
@@ -91,39 +100,43 @@
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
       </div>
       <div class="modal-body">
-		<p style="color:red;">${param.error}</p>
+      <div class="form-title text-center">
+          <h4>Login</h4>
+        </div>
+		<%-- <p style="color:red;">${param.error}</p> --%>
+		<div class="d-flex flex-column text-center">
 		<form action="${login}" method="POST">
-			<div>
+			<%-- <div>
 				<label style="color:red;">${error != null ? error : ""}</label>
-			</div>
-			<div>
+			</div> --%>
+			<div class="form-group">
 				<label for="id_email">이메일</label>
-				<input id="id_email" type="email" name="email" required>
+				<input id="id_email" type="email" name="email" placeholder="email" required>
 			</div>
-			<div>
+			<div class="form-group">
 				<label for="id_password">비밀번호</label>
-				<input id="id_password" type="password" name="password" required>
+				<input id="id_password" type="password" name="password" placeholder="password" required>
 			</div>
 			<div>
-				<button type="submit">로그인</button>
+				<button type="submit" class="btn btn-info btn-block btn-round">로그인</button>
 				<c:url var="main" value="/product/main" />
-				<button type="button" onclick="location.href='${main}'">취소</button>
+				<%-- <button type="button" class="btn btn-info btn-block btn-round" onclick="location.href='${main}'">취소</button> --%>
 			</div>
 		</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 </body>

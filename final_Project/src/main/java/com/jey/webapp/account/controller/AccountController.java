@@ -56,7 +56,7 @@ public class AccountController {
 		dto = account.login(dto);
 		if(dto != null && dto.getId() > 0) {
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(60*60);
+			// session.setMaxInactiveInterval(60*60);
 			session.setAttribute("account", dto);
 			session.setAttribute("logined", true);
 			m.addAttribute("dto",dto);
@@ -73,7 +73,8 @@ public class AccountController {
 	public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "redirect:/product";
+		System.out.println("로그아웃 되었습니다.");
+		return "redirect:/";
 	}
 	
 	/* 회원정보 수정 */
