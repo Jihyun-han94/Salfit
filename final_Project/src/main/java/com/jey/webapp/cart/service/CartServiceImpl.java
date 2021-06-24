@@ -30,7 +30,8 @@ public class CartServiceImpl implements CartService {
 
 	@Override //장바구니 비우기 
 	public boolean remove(CartDTO dto) throws Exception {
-		return false;
+		boolean res = dao.delete(dto);
+		return res;
 	}
 
 	@Override //장바구니 목록

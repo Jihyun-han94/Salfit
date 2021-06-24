@@ -39,4 +39,9 @@
 		ORDER BY c.id DESC  
 	
 	</select>
+	<delete id="deleteCart">
+     DELETE cart
+     where id = #{id}
+     </delete>
+
 </mapper>

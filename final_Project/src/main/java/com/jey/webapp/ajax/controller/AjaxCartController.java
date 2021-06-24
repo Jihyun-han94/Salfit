@@ -1,6 +1,8 @@
 package com.jey.webapp.ajax.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
@@ -41,14 +43,22 @@ public class AjaxCartController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
 	@ResponseBody	
-	public String deleteVisit(@RequestParam int id, @ModelAttribute CartDTO dto, HttpServletRequest request) throws Exception {
+	public String deleteVisit(@RequestParam(value = "chbox[]") List<String> chArr, @ModelAttribute CartDTO dto, HttpServletRequest request) throws Exception {
+		
+		
 		JSONObject json = new JSONObject();		
+		int cartNum =0;
 		boolean res;
-		if(res = cart.remove(dto)) {
-			json.put("result", res);
-			json.put("redirect", request.getContextPath() + "/cart/mycart");
-		} else {
-			json.put("result", "fail");
+		
+		for(String i : chArr) {   
+			   cartNum = Integer.parseInt(i);
+			   dto.setId(cartNum);
+			   if(res =cart.remove(dto)) {
+				   json.put("result", res);
+				   json.put("redirect", request.getContextPath() + "/cart");   
+			   }else {
+				   json.put("result", "fail");
+			   }
 		}
 		return json.toJSONString();
 	}
