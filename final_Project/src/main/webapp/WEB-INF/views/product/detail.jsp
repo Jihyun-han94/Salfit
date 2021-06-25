@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 상세 정보</title>
-<%-- <c:url value="/WEB-INF/views/module/css_js.js" var="maincssjs" />
-<link href="${maincssjs}"  /> --%>
+<c:url value="/WEB-INF/views/module/css_js.js" var="maincssjs" />
+<link href="${maincssjs}"  />
 <link rel="stylesheet" href="/salfit/resources/static/css/product.css">
 <%-- <%@ include file="/WEB-INF/views/module/css_js.jsp" %> --%>
 <!-- <style>
