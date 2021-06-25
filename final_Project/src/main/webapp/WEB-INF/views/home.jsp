@@ -9,8 +9,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=David+Libre|Hind:400,700" rel="stylesheet">
 
-	<link rel="stylesheet" href="./resources/static/css/main.css"> <!-- Resource style -->
-	<%@ include file="/WEB-INF/views/module/css_js.jsp" %>
+	<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 	<c:url var="main" value="/" />
 	<c:url var="join" value="/account/join" />
 	<c:url var="login" value="/account/login" />

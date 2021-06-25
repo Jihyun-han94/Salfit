@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<%@ include file="/WEB-INF/views/module/css_js.jsp" %>
+<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <c:url var ="delete" value="/ajax/cart/delete" />
 <script type="text/javascript">
@@ -15,7 +14,7 @@
 
 </script>
 <body>
-<%@ include file="/WEB-INF/views/module/footer.jsp" %>
+<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 
 <h1>
 장바구니
@@ -111,5 +110,6 @@
 	<button type="button">전체 상품주문</button>
 	<button type="button">선택 상품주문</button>
 </form>
+<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 </html>

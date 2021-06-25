@@ -6,12 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 정보 수정</title>
-<%@ include file="/WEB-INF/views/module/css_js.jsp" %>
+<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 
 <body>
 	<header>
-		<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
+		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
 	<c:url var="add" value="/admin/product/update" />
 	<form action="${add}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
@@ -54,7 +54,7 @@
 			<button type="button" onclick="history.back();">취소</button>
 		</div>
 	</form>
-	<%@ include file="/WEB-INF/views/module/footer.jsp" %>
+	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
 	function PreviewImage() {

@@ -8,72 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 상세 정보</title>
-<c:url value="/WEB-INF/views/module/css_js.js" var="maincssjs" />
-<link href="${maincssjs}"  />
-<link rel="stylesheet" href="/salfit/resources/static/css/product.css">
-<%-- <%@ include file="/WEB-INF/views/module/css_js.jsp" %> --%>
-<!-- <style>
-
-#bodyContainer1 {
-	height: 50rem;
-	background-color: red; 
-	color: #fff;
-}
-#bodyContainer2 {
-	height: 20rem;
-	background-color: yellow; 
-}
-#bodyContainer3 {
-	height: 40rem;
-	background-color: green; 
-}
-
-
-.btn-default {
-  font-family: Raleway-SemiBold;
-  font-size: 13px;
-  color: rgba(108, 88, 179, 0.75);
-  letter-spacing: 1px;
-  line-height: 15px;
-  border: 2px solid #FFF;
-  border-radius: 40px;
-  background: transparent;
-  transition: all 0.3s ease 0s;
-}
-
-.btn-default:hover {
-  color: #FFF;
-  background: rgba(108, 88, 179, 0.75);
-  border: 2px solid rgba(108, 89, 179, 0.75);
-}
-.btn-success {
-  font-family: Raleway-SemiBold;
-  font-size: 13px;
-  letter-spacing: 1px;
-  border-radius: 40px;
-  transition: all 0.3s ease 0s;
-  color: #FFF;
-  background: rgb(103, 192, 103, 0.75);
-  border: 2px solid rgb(103, 192, 103, 0.75);
-}
-
-.btn-success:hover {
-  color: rgba(103, 192, 103, 0.75);
-  background: transparent;
-  border: 2px solid rgba(103, 192, 103, 0.75);
-}
-
-.recommend-image {
-  width: 50%;
-  border-radius: 100%;
-  
-}
-
-.carousel-control-prev { left: -7rem; }
-.carousel-control-next { right: -7rem; }
-
-</style>
- -->
+<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="moreReviews" value="/ajax/product/moreReviews" />
 <script type="text/javascript">
 	var oldListCnt = "${oldListCnt}";
@@ -220,7 +155,7 @@
 		</jsp:include>
 	</div>
    	
-	<%@ include file="/WEB-INF/views/module/footer.jsp" %>
+	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 
 </html>

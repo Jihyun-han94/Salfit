@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="/salfit/resources/static/css/cart.css">
 <link rel="stylesheet" href="/salfit/resources/static/css/order.css">
 <link rel="stylesheet" href="/salfit/resources/static/css/product.css">
-<link rel="stylesheet" href="./resources/static/css/main.css"> <!-- Resource style -->
+<link rel="stylesheet" href="/salfit/resources/static/css/main.css"> <!-- Resource style -->
 
 <!-- JS -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/static/jquery/js/jquery-3.6.0.min.js"></script>

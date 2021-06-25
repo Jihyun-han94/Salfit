@@ -8,11 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 상세 정보</title>
-<%@ include file="/WEB-INF/views/module/css_js.jsp" %>
+<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <body>
 	<header>
-		<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
+		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
  	<div class="">
       <div class="row my-5"> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
@@ -56,6 +56,6 @@
 		</div>
       </div>   
    </div>
-	<%@ include file="/WEB-INF/views/module/footer.jsp" %>
+	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -8,44 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 메인</title>
-<%@ include file="/WEB-INF/views/module/css_js.jsp" %>
-<style type="text/css" rel="stylesheet">
-.productContainer {
-	 width: 75%;
-     margin: 0 auto;
-}
-
-.productIndividual {
-	margin-top : 70px;
-}
-.productIndiv {
-	padding : 0px 5px 80px;
-}
-
-.productBtnContainer {
-     margin: 0 auto;
-}
-
-.productBtnIndividual {
-	display : inline-block;
-}
-
-.productImg {
- 	width: 100%; 
-	height: 150px; 
-} 
-
-.btncustom {
-   background-color: white;
-   border-color : #3235A5;
-   color: #3235A5;
-}
-.btn:hover {
-   background-color: navy;
-   color: white;
-}
-</style>
-
+<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="like" value="/ajax/product/like" />
 <script type="text/javascript">
 	function liked(gcnt, pid, e) {
@@ -84,7 +47,8 @@
 </head>
 <body>
 	<header>
-		<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
+	
+<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
 	<div>
 		<div>
@@ -164,6 +128,6 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="/WEB-INF/views/module/footer.jsp" %>
+	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 </html>

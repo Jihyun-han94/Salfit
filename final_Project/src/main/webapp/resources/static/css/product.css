@@ -1,11 +1,10 @@
 @charset "UTF-8";
 
-
+/* main.jsp */
 .productContainer {
 	 width: 75%;
      margin: 0 auto;
 }
-
 
 .productIndividual {
 	margin-top : 70px;
@@ -20,16 +19,14 @@
 
 .productBtnIndividual {
 	display : inline-block;
-	
 }
 
 .productImg {
  	width: 100%; 
 	height: 150px; 
 } 
-
-
-/* .btncustom {
+/* 
+.btncustom {
    background-color: white;
    border-color : #3235A5;
    color: #3235A5;
@@ -37,36 +34,14 @@
 .btn:hover {
    background-color: navy;
    color: white;
-}
- */
+} */
 
 
 /* detail.jsp */
 
-.btn-success {
-  font-family: Raleway-SemiBold;
-  font-size: 13px;
-  color: rgba(103, 192, 103, 0.75);
-  letter-spacing: 1px;
-  line-height: 15px;
-  border: 2px solid rgba(103, 192, 103, 0.75);
-  border-radius: 40px;
-  background: transparent;
-  transition: all 0.3s ease 0s;
-}
-
-.btn-success:hover {
-  color: #FFF;
-  background: rgb(103, 192, 103, 0.75);
-  border: 2px solid rgb(103, 192, 103, 0.75);
-}
-
-
-
-
 #bodyContainer1 {
 	height: 50rem;
-	background-color: red; 
+	background-color: red;
 	color: #fff;
 }
 #bodyContainer2 {
@@ -77,3 +52,47 @@
 	height: 40rem;
 	background-color: green; 
 }
+
+
+.btn-default {
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  color: rgba(108, 88, 179, 0.75);
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 2px solid #FFF;
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+}
+
+.btn-default:hover {
+  color: #FFF;
+  background: rgba(108, 88, 179, 0.75);
+  border: 2px solid rgba(108, 89, 179, 0.75);
+}
+.btn-success {
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  letter-spacing: 1px;
+  border-radius: 40px;
+  transition: all 0.3s ease 0s;
+  color: #FFF;
+  background: rgb(103, 192, 103, 0.75);
+  border: 2px solid rgb(103, 192, 103, 0.75);
+}
+
+.btn-success:hover {
+  color: rgba(103, 192, 103, 0.75);
+  background: transparent;
+  border: 2px solid rgba(103, 192, 103, 0.75);
+}
+
+.recommend-image {
+  width: 50%;
+  border-radius: 100%;
+  
+}
+
+.carousel-control-prev { left: -7rem; }
+.carousel-control-next { right: -7rem; }
