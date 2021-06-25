@@ -60,3 +60,20 @@
   background: rgb(103, 192, 103, 0.75);
   border: 2px solid rgb(103, 192, 103, 0.75);
 }
+
+
+
+
+#bodyContainer1 {
+	height: 50rem;
+	background-color: red; 
+	color: #fff;
+}
+#bodyContainer2 {
+	height: 20rem;
+	background-color: yellow; 
+}
+#bodyContainer3 {
+	height: 40rem;
+	background-color: green; 
+}

@@ -9,9 +9,9 @@
 <meta charset="UTF-8">
 <title>상품 상세 정보</title>
 <%@ include file="/WEB-INF/views/module/css_js.jsp" %>
-<style>
+<!-- <style>
 
-/* #bodyContainer1 {
+#bodyContainer1 {
 	height: 50rem;
 	background-color: red; 
 	color: #fff;
@@ -24,7 +24,7 @@
 	height: 40rem;
 	background-color: green; 
 }
- */
+
 
 .btn-default {
   font-family: Raleway-SemiBold;
@@ -70,7 +70,7 @@
 .carousel-control-next { right: -7rem; }
 
 </style>
-
+ -->
 <c:url var="moreReviews" value="/ajax/product/moreReviews" />
 <script type="text/javascript">
 	var oldListCnt = "${oldListCnt}";
