@@ -5,6 +5,10 @@
   
 <mapper namespace="accountMapper">
 	
+	<select id="selectAccount" parameterType="account" resultType="account">
+		SELECT * FROM account WHERE id = #{id}
+	</select>
+	
 	<select id="checkLogin" parameterType="account" resultType="account">
 		SELECT * FROM account WHERE email = #{email} AND password = #{password} AND expiredate IS NULL
 	</select>
@@ -16,5 +20,19 @@
 	
 	<update id="loginDate" >
 		UPDATE account SET logindate = SYSDATE WHERE id = #{id}
+	</update>
+	
+	<update id="updateAccount" parameterType="account">
+		UPDATE account
+			SET name = #{name}
+			  , password = #{password}
+			  , phone = #{phone}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="expireAccount" parameterType="_int">
+		UPDATE account
+			SET expiredate = SYSDATE
+		WHERE id = #{id}
 	</update>
 </mapper>

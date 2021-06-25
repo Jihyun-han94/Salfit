@@ -12,6 +12,11 @@
 </script>
 </head>
 <body>
+<nav>
+	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
+</nav>
+<section class="body_class">
+<h1 class="first_class">Join</h1>
 	<c:url var="join" value="/account/join" />
 	<form name="account_form" action="${join}" method="POST">
 		<div>
@@ -28,7 +33,7 @@
 			<input id="id_username" type="text" name="name" required>
 		</div>
 		<div>
-			<label for="id_password">* 전화번호</label>
+			<label for="id_phnumber">* 전화번호</label>
 			<input id="id_phnumber" type="text" name="phone" required>
 		</div>
 		<div>
@@ -36,6 +41,10 @@
 			<button type="button" onclick="history.back();">취소</button>
 		</div>
 	</form>
+	
+</section>
+<footer>
   <%@ include file="/WEB-INF/views/module/footer.jsp" %>
+</footer>
 </body>
 </html>
