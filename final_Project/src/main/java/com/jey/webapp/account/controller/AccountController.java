@@ -81,7 +81,9 @@ public class AccountController {
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String update(HttpServletRequest request, Model m, @ModelAttribute AccountDTO dto) throws Exception {
 		HttpSession session = request.getSession();
-		session.invalidate();
+		dto = (AccountDTO)session.getAttribute("account");
+		// 25일 구
+
 		return "account/update";
 	}
 	

@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="/webapp/resources/static/css/total.css">
  <%@ include file="/WEB-INF/views/module/css_js.jsp" %>
 <c:url var="email_check" value="/ajax/account/email" />
 <script type="text/javascript">
@@ -34,7 +33,7 @@
 			<input id="id_username" type="text" name="name" required>
 		</div>
 		<div>
-			<label for="id_password">* 전화번호</label>
+			<label for="id_phnumber">* 전화번호</label>
 			<input id="id_phnumber" type="text" name="phone" required>
 		</div>
 		<div>

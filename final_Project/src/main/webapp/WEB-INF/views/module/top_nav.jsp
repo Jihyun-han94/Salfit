@@ -14,6 +14,7 @@
 	<c:url var="main" value="/" />
 	<c:url var="join" value="/account/join" />
 	<c:url var="login" value="/account/login" />
+	<c:url var="update" value="/account/update" />
 </head>
 <body>
 	<header class="cd-auto-hide-header">
@@ -29,7 +30,7 @@
 		<ul id="cd-navigation">
 		<c:choose>
 			<c:when test="${sessionScope.logined }">
-				<li><a href="#0">MyPage</a></li>
+				<li><a href="${update }">MyPage</a></li>
 				<li><a href="#0">Cart</a></li>
 				<li><a href="${logout }">Logout</a></li>
 				<li><a href="#0">Contact Us</a></li>
