@@ -16,6 +16,8 @@ function updateInfo() {
 	var password = document.getElementById("id_password").value;
 	var phone = document.getElementById("id_phnumber").value;
 	
+	document.update_form.submit();
+	
 	if(name == "") {
 		alert("이름을 입력하세요.");
 		return;
@@ -58,6 +60,22 @@ function expire() {
 <section class="body_class">
 	<form action="${update }" name="update_form" method="post">
 		<h1 class="first_class">회원 정보 수정</h1>
+		<c:url var="img" value="/resources/img/icon.png" />
+		<c:url var="img_user" value="/resources/img" />
+			<c:if test="${sessionScope.account.profile_img == null }">
+				<img src="${img }">
+			</c:if>
+			<c:if test="${sessionScope.account.profile_img != null }">
+				<img src="${img_user }/${sessionScope.account.profile_img }">
+			</c:if>
+		<c:url var="add" value="/account/profile_update"	/>
+		<form action="${add }" method="post" enctype="multipart/form-data">
+		<div>
+			<label for="id_file">파일업로드</label>
+			<input type="file" id="id_file" name="file">
+			<button type="submit">사진 저장</button>
+		</div>
+		</form>
 		<input type="hidden" name="id" id="id" value="${requestScope.account.getId() }">
 		<div>
 			<label for="email">이메일 : </label>
@@ -73,10 +91,10 @@ function expire() {
 		</div>
 		<div>
 			<label for="phone">전화번호 : </label>
-			<input id="id_phnumber" type="number" name="phone" min="1" value="${requestScope.account.getPhone() }" required>
+			<input id="id_phnumber" type="text" name="phone" value="${requestScope.account.getPhone() }" required>
 		</div>
 		<div>
-			<button type="button" onclick="updateInfo();">수정</button>
+			<button type="submit">수정</button>
 			<button type="button" onclick="expire();">탈퇴</button>
 		</div>
 	</form>

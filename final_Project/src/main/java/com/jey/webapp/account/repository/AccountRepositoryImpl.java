@@ -55,7 +55,12 @@ public class AccountRepositoryImpl implements AccountRepository {
 
 	@Override
 	public boolean update(AccountDTO dto) throws Exception {
-		return false;
+		boolean res = false;
+		int rs = sqlSession.update("accountMapper.updateAccount", dto);
+		if(rs == 1) {
+			res = true;
+		}
+		return res;
 	}
 
 	@Override

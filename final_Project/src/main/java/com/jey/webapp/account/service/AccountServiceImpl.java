@@ -57,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public boolean updateProfile(AccountDTO dto) throws Exception {
-		return false;
+		return dao.update(dto);
 	}
 
 	@Override
