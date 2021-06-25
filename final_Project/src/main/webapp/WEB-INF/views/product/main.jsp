@@ -50,7 +50,6 @@
 <script type="text/javascript">
 	function liked(gcnt, pid, e) {
 		let userid = 1;	// 추후에 유저 세션아이디로 변경 
-		alert(userid + "," + pid + "," + gcnt + "," + e.dataset.value);
 		$.ajax({
 			url: "${like}",
 			type: "post",
