@@ -9,7 +9,6 @@
 
 	<link href="https://fonts.googleapis.com/css?family=David+Libre|Hind:400,700" rel="stylesheet">
 
-	<link rel="stylesheet" href="/webapp/resources/static/css/main.css"> <!-- Resource style -->
 	<%@ include file="/WEB-INF/views/module/css_js.jsp" %>
 	<c:url var="main" value="/" />
 	<c:url var="join" value="/account/join" />
@@ -18,7 +17,7 @@
 </head>
 <body>
 	<header class="cd-auto-hide-header">
-		<div class="logo"><a href="${main }"><img src="/webapp/resources/img/log.png" alt="Logo" height="80px"></a></div>
+		<div class="logo"><a href="${main }"><img src="/salfit/resources/img/log.png" alt="Logo" height="80px"></a></div>
 	
 		<nav class="cd-primary-nav">
 			<a href="#cd-navigation" class="nav-trigger">

@@ -16,7 +16,7 @@
 	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
 </nav>
 <section class="body_class">
-<h1 class="first_class">Join</h1>
+<h1 class="first_class">Join 회원가입</h1>
 	<c:url var="join" value="/account/join" />
 	<form name="account_form" action="${join}" method="POST">
 		<div>

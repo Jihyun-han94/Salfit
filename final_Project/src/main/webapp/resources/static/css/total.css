@@ -12,7 +12,8 @@
 }
 .first_class {
 	margin-top: 200px;
-	font-family: 'Kakao', 'sans-serif', 'normal';
+	/* font-family: 'Kakao', 'sans-serif', 'normal'; */
+	font-family: 'Arita-dotum-Medium';
 }
 .body_class{
 	font-family: 'Arita-dotum-Medium';
