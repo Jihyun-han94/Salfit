@@ -137,4 +137,12 @@ public class ProductRepositoryImpl implements ProductRepository {
 		}
 	}
 
+	@Override
+	public boolean findLike(LikeDTO like) {
+		if(sqlSession.selectOne("productMapper.findlike", like) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

@@ -11,40 +11,7 @@
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="like" value="/ajax/product/like" />
 <c:url var="login" value="/account/login" />
-<script type="text/javascript">
-	function liked(gcnt, pid, e) {
-		if(${(empty logined) ? false : logined }) {
-			let userid = ${account.getId()};	 
-			$.ajax({
-				url: "${like}",
-				type: "post",
-				async: "false",
-				dataType: "json",
-				data: {
-					aid: userid,		 
-					pid: pid,
-					cancel : e.dataset.value,
-					gcnt: gcnt
-				},
-				success: function (data) {
-						e.innerText = " " +data.gcnt;
-						e.dataset.value = data.cancel;
-						if(data.cancel == "true") {
-							e.setAttribute("class", "bi-heart-fill");
-						} else {
-							e.setAttribute("class", "bi-heart");
-						} 
-				}				
-			});
-		} else {
-			alert("로그인이 필요한 서비스입니다.");
-		}
-	}
-	function myFunction(e) {
-		   var element = document.getElementById("myDIV");
-		   e.classList.toggle("bi-heart-fill", "bi-heart");
-		}
-</script>
+
 </head>
 <body>
 	<header>
@@ -131,4 +98,38 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
+<script type="text/javascript">
+	function liked(gcnt, pid, e) {
+		if(${(empty logined) ? false : logined }) {
+			let userid = ${account.getId()};	 
+			$.ajax({
+				url: "${like}",
+				type: "post",
+				async: "false",
+				dataType: "json",
+				data: {
+					aid: userid,		 
+					pid: pid,
+					cancel : e.dataset.value,
+					gcnt: gcnt
+				},
+				success: function (data) {
+						e.innerText = " " +data.gcnt;
+						e.dataset.value = data.cancel;
+						if(data.cancel == "true") {
+							e.setAttribute("class", "bi-heart-fill");
+						} else {
+							e.setAttribute("class", "bi-heart");
+						} 
+				}				
+			});
+		} else {
+			alert("로그인이 필요한 서비스입니다.");
+		}
+	}
+	function myFunction(e) {
+		   var element = document.getElementById("myDIV");
+		   e.classList.toggle("bi-heart-fill", "bi-heart");
+		}
+</script>
 </html>

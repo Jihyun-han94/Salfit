@@ -10,58 +10,7 @@
 <title>상품 상세 정보</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="moreReviews" value="/ajax/product/moreReviews" />
-<script type="text/javascript">
-	var oldListCnt = "${oldListCnt}";
 
-	var startIndex = 1;	// 인덱스 초기값
-	var searchStep = 3;	// 3개씩 로딩
-		
-	readOldNotify(startIndex);
-	
-	function pressSearchMoreBtn() {
-		startIndex += searchStep;
-		readOldNotify(startIndex);
-	}
-	
-	function readOldNotify(index){
-		let _endIndex = index+searchStep-1;
-		$.ajax({
-			url: "${moreReviews}",
-			type: "post",
-			async: "true",
-			dataType: "json",
-			data: {
-				pid: "${item.getId()}",
-				startIndex: index,
-				endIndex: _endIndex,
-				oldListCnt : oldListCnt
-			},
-			success: function (data) {
-				let NodeList = "";
-				if(data.length == 0) {
-					let node = "<div class='col-12 text-center'><p>댓글이 존재하지 않습니다.</p></div>";
-					NodeList += node; 
-				}
-				for(i = 0; i < data.length; i++){
-					let newNode = "<div style='display: none;' class='card form-group col-sm-12 mx-auto p-0' onClick='window.open('"+data[i].id+"')>";
-					newNode += "<div class='card-body pt-3'><div class='row px-3 mb-2'>";
-					newNode += "<strong class='d-block text-gray-dark'>"+data[i].aname+"</strong>";
-					newNode += "<span class='text-muted ml-auto'>"+data[i].cdate2+"</span>";
-					newNode += "</div><span>"+data[i].contents+"</span></div></div>";
-					NodeList += newNode;
-				}
-				$(NodeList).appendTo($("#oldList")).slideDown();
-				
-				// 더보기 버튼 삭제
-				if(_endIndex >= oldListCnt){
-					$('#searchMoreNotify').remove();
-				}				
-			}
-		});
-	}
-
-
-</script>
 </head>
 <body>
 	<header>
@@ -104,9 +53,9 @@
             <div class="row g-3 align-items-center">
 			  <div class="col-sm-3 col-auto">
                  <div class="input-group input-group-sm mb-3 btn-default">
-				  	<button class="btn btn-sm border-0" type="button" id="button-addon1">-</button>
-				  	<input type="text" class="form-control border-0 text-center" placeholder="" value="1" aria-label="Example text with button addon" aria-describedby="button-addon1">
-				  	<button class="btn btn-sm border-0" type="button" id="button-addon">+</button>
+				  	<button id="minus" onclick="minus();" class="btn btn-sm border-0" type="button" id="button-addon1">-</button>
+				  	<input id="quantity" type="text" class="form-control border-0 text-center" placeholder="" value="1" aria-label="Example text with button addon" aria-describedby="button-addon1">
+				  	<button id="plus" onclick="plus();" class="btn btn-sm border-0" type="button" id="button-addon">+</button>
                	</div>
 			  </div>
 			  <div class="col-sm-9">
@@ -157,5 +106,64 @@
    	
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
+<script type="text/javascript">
+	var oldListCnt = "${oldListCnt}";
 
+	var startIndex = 1;	// 인덱스 초기값
+	var searchStep = 3;	// 3개씩 로딩
+		
+	readOldNotify(startIndex);
+	
+	function pressSearchMoreBtn() {
+		startIndex += searchStep;
+		readOldNotify(startIndex);
+	}
+	
+	function readOldNotify(index){
+		let _endIndex = index+searchStep-1;
+		$.ajax({
+			url: "${moreReviews}",
+			type: "post",
+			async: "true",
+			dataType: "json",
+			data: {
+				pid: "${item.getId()}",
+				startIndex: index,
+				endIndex: _endIndex,
+				oldListCnt : oldListCnt
+			},
+			success: function (data) {
+				let NodeList = "";
+				if(data.length == 0) {
+					let node = "<div class='col-12 text-center'><p>댓글이 존재하지 않습니다.</p></div>";
+					NodeList += node; 
+				}
+				for(i = 0; i < data.length; i++){
+					let newNode = "<div style='display: none;' class='card form-group col-sm-12 mx-auto p-0' onClick='window.open('"+data[i].id+"')>";
+					newNode += "<div class='card-body pt-3'><div class='row px-3 mb-2'>";
+					newNode += "<strong class='d-block text-gray-dark'>"+data[i].aname+"</strong>";
+					newNode += "<span class='text-muted ml-auto'>"+data[i].cdate2+"</span>";
+					newNode += "</div><span>"+data[i].contents+"</span></div></div>";
+					NodeList += newNode;
+				}
+				$(NodeList).appendTo($("#oldList")).slideDown();
+				
+				// 더보기 버튼 삭제
+				if(_endIndex >= oldListCnt){
+					$('#searchMoreNotify').remove();
+				}				
+			}
+		});
+	}
+	
+	// 장바구니 수량 조정 
+    var qty = document.getElementById('quantity');
+
+    function minus() {
+    	qty.value = parseInt(qty.value) - 1;
+    }
+    function plus() {
+    	qty.value = parseInt(qty.value) + 1;
+    }
+</script>
 </html>
