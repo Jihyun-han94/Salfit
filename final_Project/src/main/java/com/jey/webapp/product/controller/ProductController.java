@@ -34,12 +34,25 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<ProductDTO> productlist = null;
+		List<Integer> liked = new ArrayList<Integer>();
+		List<ProductDTO> likedProduct = null;
 		
 		session = request.getSession();
-		AccountDTO account = (AccountDTO) session.getAttribute("account");
-		// 세션 + 필터로 관리자만 active 'n'인 상품 보기 가능 
-		search.setAid(account.getId());  
-
+		AccountDTO account = null;
+		// 로그인 사용자의 경우 -> 하트 표시 
+		if(session.getAttribute("logined") != null && (boolean)session.getAttribute("logined")) {
+			if(session.getAttribute("account") != null) {
+				account = (AccountDTO) session.getAttribute("account");
+				// 세션 + 필터로 관리자만 active 'n'인 상품 보기 가능 
+				search.setAid(account.getId());  
+				liked = new ArrayList<Integer>();
+				likedProduct = product.getAllLikePid(account.getId());  
+				for(ProductDTO lk : likedProduct) {
+					liked.add(lk.getId());
+				}
+			}
+		}
+		System.out.println("dmd? "+session.getAttribute("logined"));
 		if(search.getPtype() == 0 && search.getSearchtype() == null) {
 			productlist = product.findAll(search);
 		} else if (search.getSearch() == "") {
@@ -48,16 +61,12 @@ public class ProductController {
 			productlist = product.findList(search);
 		}
 
-		List<Integer> liked = new ArrayList<Integer>();
-		List<ProductDTO> likedProduct = product.getAllLikePid(account.getId());  
-		for(ProductDTO lk : likedProduct) {
-			liked.add(lk.getId());
-		}
 		
 		mv.setViewName("product/main");
 		mv.addObject("productlist", productlist);
 		mv.addObject("producttypes", product.getProductTypes());
 		mv.addObject("liked", liked);
+		System.out.println(liked);
 		return mv;
 	}
 	
