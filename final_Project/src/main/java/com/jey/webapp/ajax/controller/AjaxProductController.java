@@ -38,7 +38,6 @@ public class AjaxProductController {
 	@RequestMapping(value = "/like", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	@ResponseBody
 	public String like(@ModelAttribute LikeDTO like) throws Exception {
-		System.out.println("aid: "+like.getCancel());
 		if(like.getCancel().equals("true") ) {
 			 product.dislike(like);
 			 like.setCancel("false");
@@ -48,10 +47,7 @@ public class AjaxProductController {
 		}
 		ProductDTO dto = product.findId(like.getPid());
 		int gcnt = dto.getGcnt();
-		System.out.println("gcnt" + gcnt);
-//		ObjectMapper mapper = new ObjectMapper();
-//		String jsonStr = mapper.writeValueAsString(gcnt);
-//		return jsonStr;
+
 		JSONObject json = new JSONObject();			
 		json.put("gcnt", gcnt);
 		json.put("cancel", like.getCancel());

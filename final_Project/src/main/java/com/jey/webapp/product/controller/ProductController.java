@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductRecommendDTO;
@@ -29,13 +30,15 @@ public class ProductController {
 
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView main(@ModelAttribute ProductSearchDTO search) throws Exception {
+	public ModelAndView main(@ModelAttribute ProductSearchDTO search, HttpServletRequest request, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		List<ProductDTO> productlist = null;
 		
+		session = request.getSession();
+		AccountDTO account = (AccountDTO) session.getAttribute("account");
 		// 세션 + 필터로 관리자만 active 'n'인 상품 보기 가능 
-		search.setAid(0); // 추후 개인 아이디로 바꿀예정 
+		search.setAid(account.getId());  
 
 		if(search.getPtype() == 0 && search.getSearchtype() == null) {
 			productlist = product.findAll(search);
@@ -44,12 +47,10 @@ public class ProductController {
 		} else {
 			productlist = product.findList(search);
 		}
-		
+
 		List<Integer> liked = new ArrayList<Integer>();
-		List<ProductDTO> likedProduct = product.getAllLikePid(1); // session user Id 값 
-		System.out.println(likedProduct);
+		List<ProductDTO> likedProduct = product.getAllLikePid(account.getId());  
 		for(ProductDTO lk : likedProduct) {
-			System.out.println(lk.getId());
 			liked.add(lk.getId());
 		}
 		

@@ -54,7 +54,7 @@ public class AccountDTO {
 	public String getAtype() {
 		return atype;
 	}
-	public void setType(String atype) {
+	public void setAtype(String atype) {
 		this.atype = atype;
 	}
 	public Date getJoindate() {

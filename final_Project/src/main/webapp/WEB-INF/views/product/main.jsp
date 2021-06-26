@@ -12,7 +12,7 @@
 <c:url var="like" value="/ajax/product/like" />
 <script type="text/javascript">
 	function liked(gcnt, pid, e) {
-		let userid = 1;	// 추후에 유저 세션아이디로 변경 
+		let userid = ${account.getId()};	// 추후에 유저 세션아이디로 변경 
 		$.ajax({
 			url: "${like}",
 			type: "post",

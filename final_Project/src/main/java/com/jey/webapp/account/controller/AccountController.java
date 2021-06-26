@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,7 +131,7 @@ public class AccountController {
 		
 		// 2. 추출한 이미지를 특정 경로(설정)에 이미지파일로 저장한다.
 		String root = req.getServletContext().getRealPath("/");
-		FileUpload fileupload = new FileUpload(root, "/resources/file/");
+//		FileUpload fileupload = new FileUpload(root, "/resources/file/");
 		// 3. 저장된 이미지를 불러온다.
 		// 4. 불러온 이미지의 크기를 조정한다.
 		// 5. 조정된 이미지를 저장한다.
