@@ -18,7 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.order.dto.AdminOrderDTO;
+import com.jey.webapp.order.dto.AdminOrderDetailDTO;
 import com.jey.webapp.order.dto.OrderDTO;
+import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.order.service.OrderService;
 
 @Controller
@@ -30,7 +32,7 @@ public class AdminOrderController {
 
 	/* 주문번호 생성 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String createOrder(Model m, @ModelAttribute OrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
+	public String createOrder(Model m, @ModelAttribute OrderDTO dto, @ModelAttribute OrderDetailDTO detail, HttpServletRequest request, HttpSession session) throws Exception {
 		
 		
 		// 주문 임의 설정 
@@ -41,8 +43,13 @@ public class AdminOrderController {
 		dto.setTotal(10380);
 		dto.setStatus("delived");
 		
+		// 디테일
+		detail.setPid(19);
+		detail.setOid(1);
+		detail.setQty(2);
+		detail.setPrice(4000);
 		
-		boolean res = order.add(dto);
+		boolean res = order.add(dto, detail);
 		
 		if(res == true) {
 			return "admin/order/manage";
@@ -61,10 +68,13 @@ public class AdminOrderController {
 //		System.out.println(account.getId());
 //		m.addAttribute("account", account);
 		
-		List<OrderDTO> orderlist = order.findList(dto);
-//		System.out.println(orderlist.get(0).getReciever());
+		List<AdminOrderDTO> orderlist = order.findList(dto);
+		List<AdminOrderDetailDTO> orderdetaillist = order.findDetailList(dto);
 //		System.out.println(orderlist.get(0).getDdate().toString());
+		
+		System.out.println(orderdetaillist.get(10).getOid());
 		m.addAttribute("orderlist",orderlist);
+		m.addAttribute("orderdetaillist",orderdetaillist);
 		m.addAttribute("dto",dto);
 		return "admin/order/manage";
 	}

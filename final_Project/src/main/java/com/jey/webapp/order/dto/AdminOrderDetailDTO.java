@@ -1,7 +1,7 @@
 package com.jey.webapp.order.dto;
 
 
-public class OrderDetailDTO {
+public class AdminOrderDetailDTO {
 	private int id;
 	private int oid;
 	private int pid;
@@ -51,5 +51,6 @@ public class OrderDetailDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 	
 }

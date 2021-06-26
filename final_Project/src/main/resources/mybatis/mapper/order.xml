@@ -4,10 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orderMapper">
-	<select id="orderlist" parameterType="order" resultType="order">
+	<select id="orderlist" parameterType="order" resultType="adminorder">
 	SELECT o.id,
 			o.aid,
 			o.reciever,
+			a.phone,
 			o.address,
 			o.paytype,
 			o.total,
@@ -15,18 +16,41 @@
 			o.ddate,
 			o.status
 		FROM ordered o
+		JOIN account a
+		  ON a.id = o.aid
 		ORDER BY o.id DESC
-			
-			
+	</select>
+	
+	<select id="orderdetaillist" parameterType="order" resultType="adminorderdetail">
+	SELECT d.id,
+			d.oid,
+			d.pid,
+			p.title AS pname,
+			d.qty,
+			p.price,
+			d.status
+		FROM order_detail d
+		JOIN product p
+		  ON p.id = d.pid
+		ORDER BY d.id
 	</select>
 
 	 <select id="seq_order" resultType="_int">
 	    SELECT ordered_seq.NEXTVAL AS seq_order FROM dual
 	 </select>
-  
-	<insert id="insertOrder" parameterType="order">
+	 
+	 <select id="seq_order_detail" resultType="_int">
+	    SELECT order_detail_seq.NEXTVAL AS seq_order_detail FROM dual
+	 </select>
+	 
+	 <insert id="insertOrder" parameterType="order">
 	  	INSERT INTO ordered(id, aid, reciever, address, paytype, total)
 	  	     VALUES(#{id}, #{aid}, #{reciever}, #{address}, #{paytype}, #{total})
+	 </insert> 
+
+   	 <insert id="insertOrderDetail" parameterType="orderdetail">
+	  	INSERT INTO order_detail(id, oid, pid, qty, price)
+	  	     VALUES(#{id}, #{oid}, #{pid}, #{qty}, #{price})
 	 </insert> 
 	 
 	 <update id="updateOrder" parameterType="order">

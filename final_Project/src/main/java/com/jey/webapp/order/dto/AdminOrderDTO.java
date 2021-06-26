@@ -6,6 +6,7 @@ public class AdminOrderDTO {
 	private int id;
 	private int aid;
 	private String reciever;
+	private int phone;
 	private String address;
 	private String paytype;
 	private int total;
@@ -29,6 +30,12 @@ public class AdminOrderDTO {
 	}
 	public void setReciever(String reciever) {
 		this.reciever = reciever;
+	}
+	public int getPhone() {
+		return phone;
+	}
+	public void setPhone(int phone) {
+		this.phone = phone;
 	}
 	public String getAddress() {
 		return address;

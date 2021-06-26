@@ -51,11 +51,50 @@
 					<c:otherwise>
 						<c:forEach var="order" items="${orderlist}" >
 						<tr scope="row">
-						<th>
-							<a href="${order}/detail?id=${order.getId()}">
-								${order.getId()}
-								<i class="bi bi-zoom-in" style="font-size: 1.5rem; color: cornflowerblue;"></i>
+						<th> ${order.getId()}
+							<a type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop">
+								<i data-toggle="modal" data-target="#staticBackdrop" class="bi bi-zoom-in" style="font-size: 1.5rem; color: cornflowerblue;" ></i>
 							</a>
+
+							<!-- Modal -->
+							<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="staticBackdropLabel">주문번호 : ${oreder.getId()}</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+								    <c:forEach var="orderdetail" items="${orderdetaillist}" >
+								      	<c:if test="${orderdetail.getOid() == order.getId()}">
+								      	 <div class="row">
+									      <div class="col-sm-12">
+									        ${orderdetail.getId()}
+									        <div class="row">
+									          <div class="col-4 col-sm-6">
+									            <a href="#" class="tooltip-test" title="Tooltip">상품명 : ${orderdetail.getPname()}</a>
+									          </div>
+									          <div class="col-4 col-sm-3">
+									            주문 수량 : ${orderdetail.getQty()}
+									          </div>
+									          <div class="col-4 col-sm-3">
+									            가격 : ${orderdetail.getPrice()}
+									          </div>
+									        </div>
+									      </div>
+									    </div>
+								      	</c:if>
+									  <hr>
+									  </c:forEach>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+							      </div>
+							    </div>
+							  </div>
+							</div>
 						</th>
 						<td>${order.getAid()}</td>
 						<td>${order.getReciever()}</td>
@@ -68,16 +107,16 @@
 	                		pattern="yyyy년 MM월 dd일 a hh시 mm분 ss초" />
 						<td>${pdate}</td>
 						<td>${ddate}</td>
-						<td> <i class="bi bi-telephone-outbound" style="font-size: 1.5rem; color: cornflowerblue;"></i>
-							<%-- <a href="tel:${order.getPhone()}>${order.getPhone()}
+						<td> 
+							<a href="tel:${order.getPhone()}"> 
 								<i class="bi bi-telephone-outbound" style="font-size: 1.5rem; color: cornflowerblue;"></i>
-							</a> --%>
+							</a>
 						</td>
 						<td>
 							<c:choose>
 								<c:when test="${order.getStatus().equals('paid')}" >
 									<%-- <a onclick="checked(this, ${order.getId()});">  --%>
-										<i class="bi bi-check text-danger" onclick="checked(this, ${order.getId()});"  style="font-size: 2rem;"></i>
+										<i class="bi bi-check text-danger" onclick="checked(this, ${order.getId()}, document.getElementById('status${order.getId()}'));"  style="font-size: 2rem;"></i>
 									<!-- </a> -->
 								</c:when>
 								<c:when test="${order.getStatus().equals('shipping')}" >
@@ -88,7 +127,7 @@
 								</c:otherwise>
 							</c:choose>
 						</td>
-						<td>
+						<td id="status${order.getId()}">
 							<c:choose>
 								<c:when test="${order.getStatus().equals('paid')}" >
 									<p>paid</p>
@@ -271,7 +310,7 @@
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
-	function checked(e, id) {
+	function checked(e, id, status) {
 		$.ajax({
 			url: "${ajax_order}/checked",
 			type: "post",
@@ -285,6 +324,7 @@
 					if(data.res == "true") {
 						e.setAttribute("class", "bi bi-truck text-warning");
 						e.setAttribute("style", "font-size: 2rem; padding-left:4rem;");
+						status.innerText = "shipping";
 					} 
 			}				
 		});

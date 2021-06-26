@@ -5,6 +5,8 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jey.webapp.order.dto.AdminOrderDTO;
+import com.jey.webapp.order.dto.AdminOrderDetailDTO;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.order.repository.OrderRepository;
@@ -19,8 +21,8 @@ public class OrderServiceImpl implements OrderService {
 	private OrderRepository dao;
 
 	@Override
-	public boolean add(OrderDTO dto) throws Exception {
-		return dao.insert(dto);
+	public boolean add(OrderDTO dto, OrderDetailDTO detail) throws Exception {
+		return dao.insert(dto, detail);
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderDTO> findList(OrderDTO dto) throws Exception {
+	public List<AdminOrderDTO> findList(OrderDTO dto) throws Exception {
 		return dao.selectList(dto);
 	}
 
@@ -51,6 +53,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public boolean updateState(OrderDTO dto) {
 		return dao.updateStatus(dto);
+	}
+
+	@Override
+	public List<AdminOrderDetailDTO> findDetailList(OrderDTO dto) {
+		return dao.selectDetailList(dto);
 	}
 
 
