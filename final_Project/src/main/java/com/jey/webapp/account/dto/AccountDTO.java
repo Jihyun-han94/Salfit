@@ -8,7 +8,7 @@ public class AccountDTO {
 	private String password;
 	private String name;
 	private String phone;
-	private String type = "i";
+	private String atype;
 	private Date joindate;
 	private Date logindate;
 	private Date expiredate;
@@ -42,11 +42,11 @@ public class AccountDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getType() {
-		return type;
+	public String getAtype() {
+		return atype;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setType(String atype) {
+		this.atype = atype;
 	}
 	public Date getJoindate() {
 		return joindate;

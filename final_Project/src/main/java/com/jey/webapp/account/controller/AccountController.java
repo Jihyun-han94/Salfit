@@ -60,7 +60,12 @@ public class AccountController {
 			session.setAttribute("account", dto);
 			session.setAttribute("logined", true);
 			m.addAttribute("dto",dto);
-			forward = "redirect:/";
+
+			if(dto.getAtype().equals("a")) {
+				forward = "redirect:/admin/product";
+			} else {
+				forward = "redirect:/";
+			}
 		} else {
 			m.addAttribute("error", "아이디 또는 비밀번호를 다시 입력하세요.");
 			forward = "redirect:/account/login";
