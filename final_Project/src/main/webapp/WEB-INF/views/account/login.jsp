@@ -7,28 +7,92 @@
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
  <%@ include file="/WEB-INF/views/module/css_js.jsp" %>
+ <style>
+ * {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #f8f8f8;
+  }
+h1 {
+  font-family: 'Arita-dotum-Medium';
+}
+ </style>
 </head>
 <body>
 <c:url var="login" value="/account/login" />
-	<p style="color:red;">${param.error}</p>
-	<form action="${login}" method="POST">
-		<div>
-			<label style="color:red;">${error != null ? error : ""}</label>
-		</div>
-		<div>
-			<label for="id_email">이메일</label>
-			<input id="id_email" type="email" name="email" required>
-		</div>
-		<div>
-			<label for="id_password">비밀번호</label>
-			<input id="id_password" type="password" name="password" required>
-		</div>
-		<div>
-			<button type="submit">로그인</button>
-			<c:url var="main" value="/product/main" />
-			<button type="button" onclick="location.href='${main}'">취소</button>
-		</div>
-	</form>
+<c:url var="join" value="/account/join" />
+<nav>
+	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
+</nav>
+<p style="color:red;">${param.error}</p>
+
+<section class="signcontainer">
+	<article class="signhalf">
+	     <h1>Please Login<br>to Continue</h1>
+	     <div class="signtabs">
+	          <span class="tab signin active"><a href="#signin">Sign in</a></span>
+	          <span class="tab signup"><a href="#signup">Sign up</a></span>
+	     </div>
+	     <div class="signcontent">
+	          <div class="signin-cont cont">
+	               <form action="${login}" method="post">
+	                    <input type="email" name="email" id="id_email" class="inpt" required="required" placeholder="Your email">
+	                    <label for="id_email">email</label>
+	                    <input type="password" name="password" id="id_password" class="inpt" required="required" placeholder="Your password">
+	          			<label for="id_password">password</label>
+	                    <!-- <input type="checkbox" id="remember" class="checkbox" checked>
+	                    <label for="remember">Remember me</label> -->
+	                    <div class="submit-wrap">
+	                        <input type="submit" value="Sign in" class="submit">
+	                        <a href="#" class="more">Forgot your password?</a>
+	                    </div>
+	  				</form>
+			  	</div>
+			  	<div class="signup-cont cont">
+	          		<form action="${join }" method="post">
+	              		<input type="email" name="email" id="id_email" class="inpt" required="required" placeholder="Your email">
+	                    <label for="id_email">email</label>
+	                    <input type="text" name="name" id="id_username" class="inpt" required="required" placeholder="Your name">
+	                    <label for="id_username">name</label>
+	                    <input type="password" name="password" id="password" class="inpt" required="required" placeholder="Your password">
+	          			<label for="password">password</label>
+	          			<input type="number" name="phone" id="id_phnumber" class="inpt" required="required" placeholder="Your phone">
+	                    <label for="id_phnumber">Phone</label>
+	                    <div class="submit-wrap">
+	                        <input type="submit" value="Sign up" class="submit">
+	                        <a></a>
+	                    </div>
+	  				</form>
+	      		</div>
+	     </div>
+	</article>
+	<div class="signhalf bg"></div>
+</section>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  -->
+<script type="text/javascript">
+$('.signtabs .tab').click(function(){
+    if ($(this).hasClass('signin')) {
+        $('.signtabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.signin-cont').show();
+    } 
+    if ($(this).hasClass('signup')) {
+        $('.signtabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.signup-cont').show();
+    }
+});
+
+</script>
 	 <%@ include file="/WEB-INF/views/module/footer.jsp" %>
 </body>
 </html>

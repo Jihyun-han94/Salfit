@@ -12,11 +12,20 @@ public class AccountDTO {
 	private Date joindate;
 	private Date logindate;
 	private Date expiredate;
+	private String profile_img;
+	public String getProfile_img() {
+		return profile_img;
+	}
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}public void setId(String id) {
+		this.id = Integer.parseInt(id);
 	}
 	public String getEmail() {
 		return email;

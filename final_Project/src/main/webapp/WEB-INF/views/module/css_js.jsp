@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/salfit/resources/static/css/product.css">
 <link rel="stylesheet" href="/salfit/resources/static/css/main.css"> <!-- Resource style -->
 <link rel="stylesheet" href="/salfit/resources/static/css/total.css">
+<link rel="stylesheet" href="/salfit/resources/static/css/account.css">
 
 
 <!-- JS -->
