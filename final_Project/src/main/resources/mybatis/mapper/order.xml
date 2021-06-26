@@ -4,6 +4,35 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orderMapper">
+	<select id="orderlist" parameterType="order" resultType="order">
+	SELECT o.id,
+			o.aid,
+			o.reciever,
+			o.address,
+			o.paytype,
+			o.total,
+			o.pdate,
+			o.ddate,
+			o.status
+		FROM ordered o
+		ORDER BY o.id DESC
+			
+			
+	</select>
 
+	 <select id="seq_order" resultType="_int">
+	    SELECT ordered_seq.NEXTVAL AS seq_order FROM dual
+	 </select>
+  
+	<insert id="insertOrder" parameterType="order">
+	  	INSERT INTO ordered(id, aid, reciever, address, paytype, total)
+	  	     VALUES(#{id}, #{aid}, #{reciever}, #{address}, #{paytype}, #{total})
+	 </insert> 
+	 
+	 <update id="updateOrder" parameterType="order">
+		UPDATE ordered
+		   SET status = #{status}
+		 WHERE id = #{id}
+	 </update>
 	
 </mapper>

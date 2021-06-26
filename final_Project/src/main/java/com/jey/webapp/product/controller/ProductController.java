@@ -52,7 +52,6 @@ public class ProductController {
 				}
 			}
 		}
-		System.out.println("dmd? "+session.getAttribute("logined"));
 		if(search.getPtype() == 0 && search.getSearchtype() == null) {
 			productlist = product.findAll(search);
 		} else if (search.getSearch() == "") {
@@ -66,7 +65,6 @@ public class ProductController {
 		mv.addObject("productlist", productlist);
 		mv.addObject("producttypes", product.getProductTypes());
 		mv.addObject("liked", liked);
-		System.out.println(liked);
 		return mv;
 	}
 	

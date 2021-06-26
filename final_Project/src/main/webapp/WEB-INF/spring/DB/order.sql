@@ -1,12 +1,19 @@
+DROP TABLE order_detail;
+DROP SEQUENCE ordered_seq;
+DROP TABLE ordered;
+DROP SEQUENCE order_detail_seq;
+
 CREATE SEQUENCE ordered_seq START WITH 1 INCREMENT BY 1 NOCACHE;
 CREATE TABLE ordered(
         id NUMBER,
         aid NUMBER,
         reciever NVARCHAR2(64),
-        address DATE DEFAULT SYSDATE,
+        address NVARCHAR2(256),
         paytype NVARCHAR2(64),
         total NUMBER,
-        pdate DATE DEFAULT SYSDATE
+        pdate DATE DEFAULT SYSDATE,
+        ddate DATE DEFAULT SYSDATE+1,
+        status NVARCHAR2(32) DEFAULT 'paid'
 );
 
 
@@ -16,6 +23,7 @@ ALTER TABLE ordered MODIFY reciever CONSTRAINT ordered_reciever_NN NOT NULL;
 ALTER TABLE ordered MODIFY address CONSTRAINT ordered_address_NN NOT NULL;
 ALTER TABLE ordered MODIFY paytype CONSTRAINT ordered_paytype_NN NOT NULL;
 ALTER TABLE ordered MODIFY total CONSTRAINT ordered_total_NN NOT NULL;
+ALTER TABLE ordered ADD CONSTRAINT ordered_status_CK CHECK(status IN('paid', 'shipping', 'delivered'));
 
 COMMENT ON COLUMN ordered.id IS '주문번호  번호';
 COMMENT ON COLUMN ordered.aid IS '주문자 식별 번호';
@@ -24,6 +32,7 @@ COMMENT ON COLUMN ordered.address IS '배송지';
 COMMENT ON COLUMN ordered.paytype IS '결제 방법';
 COMMENT ON COLUMN ordered.total IS '총 결제 금액';
 COMMENT ON COLUMN ordered.pdate IS '결제 일시';
+COMMENT ON COLUMN ordered.status IS '주문 상태 (결제완료, 배송중, 배송완료)';
 
 CREATE SEQUENCE order_detail_seq START WITH 1 INCREMENT BY 1 NOCACHE;
 CREATE TABLE order_detail(
@@ -77,6 +86,14 @@ COMMENT ON COLUMN review.cdate IS '리뷰 작성일';
 
 
 --------------------------------------------------------------------------------------------------------
+SELECT * FROM ordered;
+
+DELETE FROM ordered WHERE id = 2;
+
+INSERT INTO ordered VALUES(1, 2, '최예림', '광교호수로 152번길', '카드', 13000, SYSDATE, SYSDATE+1, 'paid');
+INSERT INTO ordered VALUES(2, 1, '김은순', '광교호수로 153번길', '카카오페이', 119000, SYSDATE, SYSDATE+1, 'paid');
+INSERT INTO ordered(id, aid, reciever, address, paytype, total) VALUES(1, 1, '김은순', '광교호수로 153번길', '카카오페이', 119000);
+INSERT INTO ordered(id, aid, reciever, address, paytype, total) VALUES(2, 2, '최예림', '광교호수로 152번길', '카드', 13000);
 
 INSERT INTO review VALUES(1, 21, 1, '너무너무맛있는 샐러드~~~~~', 5, SYSDATE);
 INSERT INTO review VALUES(2, 21, 1, '맛있는 샐러드~~dddddddd~~~', 4, SYSDATE);

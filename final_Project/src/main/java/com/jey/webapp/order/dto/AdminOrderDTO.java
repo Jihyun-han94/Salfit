@@ -2,7 +2,7 @@ package com.jey.webapp.order.dto;
 
 import oracle.sql.DATE;
 
-public class OrderDTO {
+public class AdminOrderDTO {
 	private int id;
 	private int aid;
 	private String reciever;

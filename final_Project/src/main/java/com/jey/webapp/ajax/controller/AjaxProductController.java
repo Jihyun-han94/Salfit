@@ -38,21 +38,17 @@ public class AjaxProductController {
 	@RequestMapping(value = "/like", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	@ResponseBody
 	public String like(@ModelAttribute LikeDTO like) throws Exception {
-		System.out.println("존재 : "+ product.checkLikeExist(like));
+
 		if(like.getCancel().equals("true") ) {
 			if(product.checkLikeExist(like)) {
 				product.dislike(like);
-				like.setCancel("false");
-			} else {
-				like.setCancel("false");
 			}
+			like.setCancel("false");
 		} else {
 			if(!product.checkLikeExist(like)) {
 				product.like(like);
-				like.setCancel("true");
-			} else {
-				like.setCancel("true");
 			}
+			like.setCancel("true");
 		}
 		ProductDTO dto = product.findId(like.getPid());
 		int gcnt = dto.getGcnt();

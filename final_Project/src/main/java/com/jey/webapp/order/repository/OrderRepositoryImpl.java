@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
+import com.jey.webapp.product.dto.ProductTypeDTO;
 
 
 
@@ -23,11 +24,22 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public List<OrderDTO> selectList(OrderDTO dto) throws Exception {
-		return null;
+		List<OrderDTO> data = sqlSession.selectList("orderMapper.orderlist");
+		return data;
 	}
 
 	@Override
 	public boolean insert(OrderDTO dto) throws Exception {
+		int seq_order = sqlSession.selectOne("orderMapper.seq_order");
+		if(seq_order > 0) {
+			dto.setId(seq_order);
+			int rs = sqlSession.insert("orderMapper.insertOrder", dto);
+			if(rs == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} 
 		return false;
 	}
 
@@ -44,6 +56,17 @@ public class OrderRepositoryImpl implements OrderRepository {
 	@Override
 	public boolean insert(int id) throws Exception {
 		return false;
+	}
+
+	@Override
+	public boolean updateStatus(OrderDTO dto) {
+		boolean result = false;
+		int rs = sqlSession.update("orderMapper.updateOrder", dto);		
+		if(rs == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	

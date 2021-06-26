@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public boolean add(OrderDTO dto) throws Exception {
-		return false;
+		return dao.insert(dto);
 	}
 
 	@Override
@@ -40,12 +40,17 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<OrderDTO> findList(OrderDTO dto) throws Exception {
-		return null;
+		return dao.selectList(dto);
 	}
 
 	@Override
 	public boolean add(int id) throws Exception {
 		return false;
+	}
+
+	@Override
+	public boolean updateState(OrderDTO dto) {
+		return dao.updateStatus(dto);
 	}
 
 

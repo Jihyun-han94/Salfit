@@ -48,9 +48,6 @@ public class AdminProductController {
 		HttpSession session = request.getSession();
 		session.getAttribute("account");
 		
-		System.out.println("session : " + (AccountDTO)session.getAttribute("account"));
-		System.out.println("Search : " + search.getSearch());
-		
 		ModelAndView mv = new ModelAndView();
 		
 		List<ProductDTO> productlist = null;
@@ -151,7 +148,6 @@ public class AdminProductController {
 					dto.setImg(origin_name);
 					dto.setImguuid(change_name);
 					dto.setUrl("/resources/upload/product/" + change_name);
-					System.out.println(path);
 				} else {
 					System.out.println("해당 확장자는 업로드 할 수 없습니다.");
 					forward = "error/default";

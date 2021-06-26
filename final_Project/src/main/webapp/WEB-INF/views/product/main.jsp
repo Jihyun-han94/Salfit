@@ -15,8 +15,7 @@
 </head>
 <body>
 	<header>
-	
-<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
 	<div>
 		<div>
