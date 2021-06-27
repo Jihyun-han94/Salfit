@@ -18,9 +18,12 @@
 	<header>
 <%-- 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
 	</header>
-	
-	
-	
+	<div class="container-fluid">
+  <a href="#" data-toggle="popover" title="Popover Header" data-content="You must branch to this flow first, before you can return to the original flow">
+    <span ng-show="flow.branched_from.length==0" class="glyphicon glyphicon-question-sign padding-a" aria-hidden="true">
+     </span>
+  </a>
+</div>
 	<div class="bodyContainer">
 		<h1 class="corpBoardTitle">주문 관리</h1>
 
@@ -88,8 +91,8 @@
 								      	</c:if>
 									  <hr>
 									  </c:forEach>
-							      </div>
-							      <div class="modal-footer">
+								      </div>
+								      <div class="modal-footer">
 							        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 							      </div>
 							    </div>
@@ -98,7 +101,9 @@
 						</th>
 						<td>${order.getAid()}</td>
 						<td>${order.getReciever()}</td>
-						<td class="text-truncate" style="max-width: 150px;">${order.getAddress()}</td>
+						<td class="text-truncate" style="max-width: 100px;">
+							<a tabindex="0" role="button" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" title="상세 주소" data-content="${order.getAddress()}">${order.getAddress()}</a>
+						</td>
 						<td class="text-truncate" style="max-width: 150px;">
 							${order.getPaytype()} / ${order.getTotal()}</td>
 						<fmt:formatDate var="pdate" value="${order.getPdate() }"
@@ -305,11 +310,37 @@
 			</table>
 		</section> --%>
 	</div>
-	
-	
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
+$(document).ready(function() {
+	$(function() {
+		  $('[data-toggle="popover"]').popover({
+		    html: true,
+		sanitize: false,
+		  })
+	})
+	
+	/* $(function() {
+		  $('#qoo').popover({
+		    html: true,
+		    placement : 'right',
+		sanitize: false
+		  })
+	})
+	
+	
+	$('#qoo').on('shown.bs.popover', function() {
+	    setTimeout(function() {
+	        $('#qoo').popover('hide');
+	    }, 2000);
+	});
+		 */
+
+});
+
+	
+	
 	function checked(e, id, status) {
 		$.ajax({
 			url: "${ajax_order}/checked",
@@ -325,9 +356,31 @@
 						e.setAttribute("class", "bi bi-truck text-warning");
 						e.setAttribute("style", "font-size: 2rem; padding-left:4rem;");
 						status.innerText = "shipping";
+						
+						// 알림창 
+						
+						let NodeList = "";
+						let newNode = "<a id='qoo' data-toggle='popover' data-trigger='hover' data-content='배송중~'></a>";
+						/* let newNode = "<div class='alert alert-warning alert-dismissible fade show' role='alert'>";
+						newNode += "<strong>배송중!</strong>";
+						newNode += "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+						newNode += "<span aria-hidden='true'>&times;</span>";
+						newNode += "</button></div>"; */
+						NodeList += newNode;
+						$(NodeList).appendTo(e);
+						
+						$('#qoo').popover('show');
+						$('#qoo').on('shown.bs.popover', function() {
+						    setTimeout(function() {
+						        $('#qoo').popover('hide');
+						    }, 3000);
+						});
 					} 
 			}				
 		});
 	}
+	
+	
+	
 </script>
 </html>
