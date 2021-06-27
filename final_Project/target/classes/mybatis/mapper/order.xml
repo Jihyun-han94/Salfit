@@ -5,5 +5,10 @@
 
 <mapper namespace="orderMapper">
 
+	<insert id="insertordered" parameterType="order">
+		INSERT INTO ordered(id,aid,receiver,address,total,ddate)
+		VALUES (ordered_seq.NEXTVAL, #{aid}, #{receiver},#{address},#{total},SYSDATE+1)
+	</insert>
+	
 	
 </mapper>

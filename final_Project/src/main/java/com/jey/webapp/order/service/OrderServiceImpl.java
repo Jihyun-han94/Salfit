@@ -20,7 +20,8 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public boolean add(OrderDTO dto) throws Exception {
-		return false;
+		System.out.println("serviceimpl까지 왓음");
+		return dao.insert(dto);
 	}
 
 	@Override

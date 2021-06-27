@@ -31,10 +31,10 @@ public class CartController {
 	/* 장바구니 조회 */
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String cartList(Model m, @ModelAttribute CartDTO dto,HttpSession session) throws Exception {
+	public String cartList(Model m, @ModelAttribute CartDTO dto,HttpServletRequest request) throws Exception {
 		
 		String forward = "";
-		
+		//HttpSession session = request.getSession();
 		//AccountDTO accountDTO = (AccountDTO) session.getAttribute("account");
 		//int userid = accountDTO.getId();
 		//System.out.println("userid 확인 :" + userid);
@@ -72,7 +72,7 @@ public class CartController {
 		System.out.println("sumMoney :" +sumMoney);
 		m.addAttribute("cartlist",cartlist);
 		m.addAttribute("sumMoney",sumMoney);
-		m.addAttribute("totalMoney", totalMoney);
+		//m.addAttribute("totalMoney", totalMoney);
 		
 		return "cart/mycart";
 	}	

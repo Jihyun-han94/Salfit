@@ -28,7 +28,14 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public boolean insert(OrderDTO dto) throws Exception {
-		return false;
+		boolean result = false;
+		System.out.println("여기까지 오니?");
+		int res = sqlSession.insert("orderMapper.insertordered", dto);
+		if(res == 1) {
+			result = true;
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -43,6 +50,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public boolean insert(int id) throws Exception {
+		
 		return false;
 	}
 
