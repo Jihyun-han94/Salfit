@@ -43,7 +43,7 @@ public class AjaxAdminController {
 	public String checkOrder(@ModelAttribute OrderDTO dto) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		boolean res = order.updateState(dto);
+		boolean res = order.updateStatus(dto);
 		
 		JSONObject json = new JSONObject();			
 		if(res) {

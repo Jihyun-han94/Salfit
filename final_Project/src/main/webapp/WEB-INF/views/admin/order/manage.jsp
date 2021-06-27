@@ -41,7 +41,17 @@
 						<th scope="col">배송일자</th>
 						<th scope="col">연락하기</th>
 						<th scope="col">상태 체크</th>
-						<th scope="col">확인 상태</th>
+						<th scope="col">주문 처리 상태
+						<form id="select_status_form" action="${order}/list" method="get">
+							<select id="selectOrderStatus" onchange="submit();" name="status" >
+						        <option value="" ${dto.getStatus() == null ? "selected" : "" }>전체</option>
+						        <option value="paid" ${dto.getStatus() == "paid" ? "selected" : "" }>미확인</option>
+						        <option value="checked" ${dto.getStatus() == "checked" ? "selected" : "" }>배송전</option>
+						        <option value="shipping" ${dto.getStatus() == "shipping" ? "selected" : "" }>배송중</option>
+						        <option value="delivered" ${dto.getStatus() == "delivered" ? "selected" : "" }>배송완료</option>
+						    </select>
+						</form>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -146,8 +156,8 @@
 						</td>
 						<td id="status${order.getId()}">
 							<c:choose>
-								<c:when test="${order.getStatus().equals('paid')}" >
-									<p>paid</p>
+								<c:when test="${order.getStatus().equals('checked')}" >
+									<p>checked</p>
 								</c:when>
 								<c:when test="${order.getStatus().equals('shipping')}" >
 									<p>shipping</p>
@@ -156,7 +166,7 @@
 									<p>delivered</p>
 								</c:when>
 								<c:otherwise>
-									<p>delivered</p>
+									<p>paid</p>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -169,158 +179,6 @@
 
 		</section>
 
-	<%-- 	<section class="applicantTableSection">
-
-			<h4>채용 완료</h4>
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">지원공고</th>
-						<th scope="col">지원자 이름</th>
-						<th scope="col">경력 사항</th>
-						<th scope="col">채용 일자</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						int numOfHired = 0;
-						for(ApplicantVO applicant : applicants) {
-							if(applicant.getStatus().equals("hired")) {
-								numOfHired++;
-							}
-						}
-						if(numOfHired == 0) {
-					%>
-					<tr>
-						<td colspan="9">조회 결과가 없습니다.</td>
-					</tr>
-					<% 
-						} else {
-					
-			    		int j = 1;
-						for(ApplicantVO applicant : applicants) {
-						if(applicant.getStatus().equals("hired")) {
-					%>
-					<tr scope="row">
-						<th><%=j++ %></th>
-						<td class="text-truncate" style="max-width: 150px;"><%=applicant.getJobTitle() %></td>
-						<td><%=applicant.getUserName()%></td>
-						<td class="text-truncate" style="max-width: 150px;"><%=applicant.getUserCareer()%></td>
-						<td><%=applicant.getHireDate()%></td>
-
-						<% 	
-						}}}
-					%>
-				</tbody>
-			</table>
-
-		</section>
-
-		<section class="applicantTableSection">
-
-			<h4>보류</h4>
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">지원공고</th>
-						<th scope="col">지원자 이름</th>
-						<th scope="col">경력 사항</th>
-						<th scope="col">지원 일자</th>
-						<th scope="col">이력서</th>
-						<th scope="col">연락하기</th>
-						<th scope="col">채용</th>
-						<th scope="col">삭제</th>
-
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						int numOfRefused = 0;
-						for(ApplicantVO applicant : applicants) {
-							if(applicant.getStatus().equals("refused")) {
-								numOfRefused++;
-							}
-						}
-						if(numOfRefused == 0) {
-					%>
-					<tr>
-						<td colspan="9">조회 결과가 없습니다.</td>
-					</tr>
-					<% 
-						} else {
-					
-						int l = 1;
-						for(ApplicantVO applicant : applicants) {
-							if(applicant.getStatus().equals("refused")) {
-					%>
-					<tr scope="row">
-
-						<th scope="row"><%= l++ %></th>
-						<td class="text-truncate" style="max-width: 150px;"><%=applicant.getJobTitle() %></td>
-						<td><%=applicant.getUserName()%></td>
-						<td class="text-truncate" style="max-width: 150px;"><%=applicant.getUserCareer()%></td>
-						<td><%=applicant.getApplyDate()%></td>
-						<td><a href="<%=request.getContextPath()%>/corp/applicant/view?id=<%=applicant.getId()%>">
-								<i class="bi bi-zoom-in" style="font-size: 1.5rem; color: cornflowerblue;"></i>
-							</a>
-						</td>
-						<td><a href="mailto:<%=applicant.getUserEmail()%>?Subject=지원해주셔서 감사합니다.&body=채용 프로세스 안내문 첨부">
-								<i class="bi bi-envelope-fill" style="font-size: 1.5rem; color: cornflowerblue;"></i>
-							</a>
-						</td>
-						<td>
-							<a href="../corp/applicant/hire?id=<%=applicant.getId()%>">
-								<i class="bi bi-person-check text-secondary" style="font-size: 1.5rem;"></i>
-							</a>
-						</td>
-						<td>
-							<button type="button" class="btn btn-link btn-outline" data-toggle="modal"
-								data-target="#exampleModalca<%=applicant.getId()%>">
-								<i class="bi bi-trash text-danger"></i>
-							</button>
-
-							<div class="modal fade" id="exampleModalca<%=applicant.getId()%>" tabindex="-1"
-								aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabelca<%=applicant.getId()%>">정말
-												지원자 정보를 삭제하시겠습니까?</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											삭제된 지원자는 다시 찾기가 불가능 합니다.
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-dismiss="modal">취소</button>
-
-											<form action="<%=request.getContextPath() %>/corp/applicant/refuse"
-												method="POST">
-												<input type="hidden" name="id" value="<%= applicant.getId()%>" readonly>
-												<button type="submit" class="btn btn-danger">삭제</button>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-						</td>
-					</tr>
-					<%	
-							}
-						}
-						}
-					%>
-
-				</tbody>
-			</table>
-		</section> --%>
 	</div>
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
@@ -332,27 +190,21 @@ $(document).ready(function() {
 		sanitize: false,
 		  })
 	})
-	
-	/* $(function() {
-		  $('#qoo').popover({
-		    html: true,
-		    placement : 'right',
-		sanitize: false
-		  })
-	})
-	
-	
-	$('#qoo').on('shown.bs.popover', function() {
-	    setTimeout(function() {
-	        $('#qoo').popover('hide');
-	    }, 2000);
-	});
-		 */
-
 });
+
+	function selectOrderStatus() {
+
+		let selectForm = document.getElementById("select_status_form");
+		let selectBox = document.getElementById("selectOrderStatus");
+		let selectedValue = selectBox.options[selectBox.selectedIndex].value;
+		alert(selectedValue);
+		
+		selectForm.submit();
+	}
 
 	
 	function zoomin(e, id, icon, status) {
+		if(status.innerText == "paid") {
 		$.ajax({
 			url: "${ajax_order}/checked",
 			type: "post",
@@ -387,9 +239,11 @@ $(document).ready(function() {
 					} 
 			}				
 		});
+		}
 	}
 	
 	function checked(e, id, status) {
+		if(status.innerText == "checked") {
 		$.ajax({
 			url: "${ajax_order}/checked",
 			type: "post",
@@ -426,6 +280,7 @@ $(document).ready(function() {
 					} 
 			}				
 		});
+		}
 	}
 	
 	

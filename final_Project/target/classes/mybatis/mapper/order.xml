@@ -32,6 +32,42 @@
 		FROM order_detail d
 		JOIN product p
 		  ON p.id = d.pid
+		   WHERE 1=1
+		  	
+		ORDER BY d.id
+	</select>
+	
+	<select id="orderlistsel" parameterType="order" resultType="adminorder">
+	SELECT o.id,
+			o.aid,
+			o.reciever,
+			a.phone,
+			o.address,
+			o.paytype,
+			o.total,
+			o.pdate,
+			o.ddate,
+			o.status
+		FROM ordered o
+		JOIN account a
+		  ON a.id = o.aid
+		 WHERE  o.status = #{status}
+		ORDER BY o.id DESC
+	</select>
+	
+	<select id="orderdetaillistsel" parameterType="order" resultType="adminorderdetail">
+	SELECT d.id,
+			d.oid,
+			d.pid,
+			p.title AS pname,
+			d.qty,
+			p.price,
+			d.status
+		FROM order_detail d
+		JOIN product p
+		  ON p.id = d.pid
+		   WHERE 1=1
+		  	
 		ORDER BY d.id
 	</select>
 

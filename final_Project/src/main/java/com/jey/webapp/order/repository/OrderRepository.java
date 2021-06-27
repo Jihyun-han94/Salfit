@@ -18,4 +18,6 @@ public interface OrderRepository {
 	public boolean update(OrderDetailDTO dto)  throws Exception;
 	public boolean insert(int id)  throws Exception;	// 리뷰추가용
 	public boolean updateStatus(OrderDTO dto);	// 관리자 주문관리용 
+	public List<AdminOrderDTO> selectListSelected(OrderDTO dto);
+	public List<AdminOrderDetailDTO> selectDetailListSelected(OrderDTO dto);
 }

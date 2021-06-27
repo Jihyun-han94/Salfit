@@ -41,23 +41,33 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<AdminOrderDTO> findList(OrderDTO dto) throws Exception {
-		return dao.selectList(dto);
-	}
-
-	@Override
 	public boolean add(int id) throws Exception {
 		return false;
 	}
 
 	@Override
-	public boolean updateState(OrderDTO dto) {
+	public boolean updateStatus(OrderDTO dto) {
 		return dao.updateStatus(dto);
+	}
+	
+	@Override
+	public List<AdminOrderDTO> findList(OrderDTO dto) throws Exception {
+		return dao.selectList(dto);
 	}
 
 	@Override
 	public List<AdminOrderDetailDTO> findDetailList(OrderDTO dto) {
 		return dao.selectDetailList(dto);
+	}
+
+	@Override
+	public List<AdminOrderDTO> findListSelected(OrderDTO dto) {
+		return dao.selectListSelected(dto);
+	}
+
+	@Override
+	public List<AdminOrderDetailDTO> findDetailListSelected(OrderDTO dto) {
+		return dao.selectDetailListSelected(dto);
 	}
 
 

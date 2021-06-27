@@ -68,11 +68,19 @@ public class AdminOrderController {
 //		System.out.println(account.getId());
 //		m.addAttribute("account", account);
 		
-		List<AdminOrderDTO> orderlist = order.findList(dto);
-		List<AdminOrderDetailDTO> orderdetaillist = order.findDetailList(dto);
+		List<AdminOrderDTO> orderlist = null;
+		List<AdminOrderDetailDTO> orderdetaillist = null;
 //		System.out.println(orderlist.get(0).getDdate().toString());
+		System.out.println("status: " +dto.getStatus());
 		
-		System.out.println(orderdetaillist.get(10).getOid());
+		if (dto.getStatus() == null || dto.getStatus() == "") {
+			orderlist = order.findList(dto);
+			orderdetaillist = order.findDetailList(dto);
+		} else {
+			orderlist = order.findListSelected(dto);
+			orderdetaillist = order.findDetailListSelected(dto);
+		}
+		
 		m.addAttribute("orderlist",orderlist);
 		m.addAttribute("orderdetaillist",orderdetaillist);
 		m.addAttribute("dto",dto);
@@ -80,8 +88,21 @@ public class AdminOrderController {
 	}
 	
 	
-	/* 주문확인, 배송중, 배송완료, 취소요청, 취소완료 */
-	
+	/* 주문 상태 별  */
+	@RequestMapping(value = "/selectStatus", method = RequestMethod.GET)
+	public String selectOrderStatus(Model m, @ModelAttribute OrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
+		
+		List<AdminOrderDTO> orderlist = order.findList(dto);
+		List<AdminOrderDetailDTO> orderdetaillist = order.findDetailList(dto);
+
+		
+		
+		
+		m.addAttribute("orderlist",orderlist);
+		m.addAttribute("orderdetaillist",orderdetaillist);
+		m.addAttribute("dto",dto);
+		return "admin/order/manage";
+	}
 	
 	
 }

@@ -26,6 +26,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public List<AdminOrderDTO> selectList(OrderDTO dto) throws Exception {
+		System.out.println("status  : " +dto.getStatus());
 		List<AdminOrderDTO> data = sqlSession.selectList("orderMapper.orderlist");
 		return data;
 	}
@@ -33,6 +34,23 @@ public class OrderRepositoryImpl implements OrderRepository {
 	@Override
 	public List<AdminOrderDetailDTO> selectDetailList(OrderDTO dto) {
 		List<AdminOrderDetailDTO> data = sqlSession.selectList("orderMapper.orderdetaillist");
+		return data;
+	}
+	
+	@Override
+	public List<AdminOrderDTO> selectListSelected(OrderDTO dto) {
+		System.out.println("status  : " +dto.getStatus());
+		List<AdminOrderDTO> data = sqlSession.selectList("orderMapper.orderlistsel", dto);
+		for(AdminOrderDTO d : data) {
+			System.out.println(d.getStatus());
+			
+		}
+		return data;
+	}
+
+	@Override
+	public List<AdminOrderDetailDTO> selectDetailListSelected(OrderDTO dto) {
+		List<AdminOrderDetailDTO> data = sqlSession.selectList("orderMapper.orderdetaillistsel", dto);
 		return data;
 	}
 	
@@ -71,14 +89,14 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public boolean updateStatus(OrderDTO dto) {
-		boolean result = false;
-		int rs = sqlSession.update("orderMapper.updateOrder", dto);		
+		int rs = sqlSession.update("orderMapper.updateOrder", dto);	
 		if(rs == 1) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+
 
 
 	
