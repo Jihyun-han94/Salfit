@@ -55,9 +55,18 @@
 						<c:forEach var="order" items="${orderlist}" >
 						<tr scope="row">
 						<th> ${order.getId()}
-							<a type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop">
-								<i data-toggle="modal" data-target="#staticBackdrop" class="bi bi-zoom-in" style="font-size: 1.5rem; color: cornflowerblue;" ></i>
-							</a>
+							<c:choose>
+								<c:when test="${order.getStatus().equals('paid')}">
+									<a type="button" data-toggle="modal" data-target="#staticBackdrop"  class="btn" onclick="zoomin(this, ${order.getId()},document.getElementById('statusicon${order.getId()}') , document.getElementById('status${order.getId()}'));" >
+									<i class="bi bi-zoom-in" style="font-size: 1.5rem; color: cornflowerblue;" ></i>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a type="button" data-toggle="modal" data-target="#staticBackdrop"  class="btn" >
+										<i class="bi bi-zoom-in" style="font-size: 1.5rem; color: cornflowerblue;" ></i>
+									</a>
+								</c:otherwise>
+							</c:choose>
 
 							<!-- Modal -->
 							<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -93,7 +102,7 @@
 									  </c:forEach>
 								      </div>
 								      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+							        <button type="button"  class="btn btn-secondary"  data-dismiss="modal">주문확인 완료</button>
 							      </div>
 							    </div>
 							  </div>
@@ -117,9 +126,12 @@
 								<i class="bi bi-telephone-outbound" style="font-size: 1.5rem; color: cornflowerblue;"></i>
 							</a>
 						</td>
-						<td>
+						<td id="statusicon${order.getId()}">
 							<c:choose>
 								<c:when test="${order.getStatus().equals('paid')}" >
+									<i></i>
+								</c:when>
+								<c:when test="${order.getStatus().equals('checked')}" >
 									<%-- <a onclick="checked(this, ${order.getId()});">  --%>
 										<i class="bi bi-check text-danger" onclick="checked(this, ${order.getId()}, document.getElementById('status${order.getId()}'));"  style="font-size: 2rem;"></i>
 									<!-- </a> -->
@@ -340,6 +352,42 @@ $(document).ready(function() {
 });
 
 	
+	function zoomin(e, id, icon, status) {
+		$.ajax({
+			url: "${ajax_order}/checked",
+			type: "post",
+			async: "false",
+			dataType: "json",
+			data: {
+				id: id,		 
+				status: "checked"
+			},
+			success: function (data) {
+					if(data.res == "true") {
+						icon.setAttribute("class", "bi bi-check text-danger");
+						icon.setAttribute("style", "font-size: 2rem;");
+						icon.setAttribute("onclick", "checked(this, "+id+", "+status+");")
+						icon.onclick = function() {checked(this, id, status);};
+						status.innerText = "checked";
+						
+						
+						// 알림창 
+						
+						let NodeList = "";
+						let newNode = "<a id='qo"+id+"' data-toggle='popover' data-trigger='hover' data-content='주문확인'></a>";
+						NodeList += newNode;
+						$(NodeList).appendTo(icon);
+						
+						$('#qo'+id).popover('show');
+						$('#qo'+id).on('shown.bs.popover', function() {
+						    setTimeout(function() {
+						        $('#qo'+id).popover('hide');
+						    }, 3000);
+						});
+					} 
+			}				
+		});
+	}
 	
 	function checked(e, id, status) {
 		$.ajax({
@@ -360,7 +408,7 @@ $(document).ready(function() {
 						// 알림창 
 						
 						let NodeList = "";
-						let newNode = "<a id='qoo' data-toggle='popover' data-trigger='hover' data-content='배송중~'></a>";
+						let newNode = "<a id='qoo"+id+"' data-toggle='popover' data-trigger='hover' data-content='배송중~'></a>";
 						/* let newNode = "<div class='alert alert-warning alert-dismissible fade show' role='alert'>";
 						newNode += "<strong>배송중!</strong>";
 						newNode += "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
@@ -369,10 +417,10 @@ $(document).ready(function() {
 						NodeList += newNode;
 						$(NodeList).appendTo(e);
 						
-						$('#qoo').popover('show');
-						$('#qoo').on('shown.bs.popover', function() {
+						$('#qoo'+id).popover('show');
+						$('#qoo'+id).on('shown.bs.popover', function() {
 						    setTimeout(function() {
-						        $('#qoo').popover('hide');
+						        $('#qoo'+id).popover('hide');
 						    }, 3000);
 						});
 					} 
