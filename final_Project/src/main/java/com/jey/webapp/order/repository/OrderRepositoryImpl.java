@@ -26,7 +26,6 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public List<AdminOrderDTO> selectList(OrderDTO dto) throws Exception {
-		System.out.println("status  : " +dto.getStatus());
 		List<AdminOrderDTO> data = sqlSession.selectList("orderMapper.orderlist");
 		return data;
 	}
@@ -39,7 +38,6 @@ public class OrderRepositoryImpl implements OrderRepository {
 	
 	@Override
 	public List<AdminOrderDTO> selectListSelected(OrderDTO dto) {
-		System.out.println("status  : " +dto.getStatus());
 		List<AdminOrderDTO> data = sqlSession.selectList("orderMapper.orderlistsel", dto);
 		for(AdminOrderDTO d : data) {
 			System.out.println(d.getStatus());

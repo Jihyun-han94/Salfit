@@ -36,17 +36,19 @@ public class AdminOrderController {
 		
 		
 		// 주문 임의 설정 
-		dto.setAid(2);
-		dto.setReceiver("최예림");
+		dto.setAid(1);
+		dto.setReceiver("김은순");
 		dto.setAddress("수원시 영통구 하동 광교호수로 152번길 23 2302동 1903호");
-		dto.setPaytype("신용카드");
-		dto.setTotal(10380);
-		dto.setStatus("delived");
+		dto.setPaytype("카카오페이");
+		dto.setTotal(59600);
+		dto.setStatus("paid");
+		dto.setPdate("2021-06-25");
+		dto.setDdate("2021-06-25");
 		
 		// 디테일
 		detail.setPid(19);
-		detail.setOid(1);
-		detail.setQty(2);
+		detail.setOid(2);
+		detail.setQty(5);
 		detail.setPrice(4000);
 		
 		boolean res = order.add(dto, detail);
@@ -104,5 +106,19 @@ public class AdminOrderController {
 		return "admin/order/manage";
 	}
 	
+	
+	/* 캘린더로 주문관리 */
+	@RequestMapping(value = "/calendar", method = RequestMethod.GET)
+	public String calendar(Model m, @ModelAttribute OrderDTO dto, @ModelAttribute OrderDetailDTO detail, HttpServletRequest request, HttpSession session) throws Exception {
+		List<AdminOrderDTO> orderlist = order.findList(dto);
+		List<AdminOrderDetailDTO> orderdetaillist = order.findDetailList(dto);
+
+		
+		
+		
+		m.addAttribute("orderlist",orderlist);
+		m.addAttribute("orderdetaillist",orderdetaillist);
+		return "admin/order/calendar";
+	}
 	
 }

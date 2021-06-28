@@ -34,7 +34,6 @@
 		<th>이미지</th>
 		<th>item</th>
 		<th>수량</th>
-		<th>배송수단</th>
 		<th>판매가</th>
 		<th>합계</th>
 		
@@ -59,7 +58,6 @@
 		</a></td>
 		<td>${data.title }</td>
 		<td>${data.qty }</td>
-		<td>택배</td>
 		<td>${data.price }</td>
 		<td>${data.money }</td>
 		</tr>

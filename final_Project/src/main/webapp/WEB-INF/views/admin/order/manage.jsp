@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 주문 관리</title>
+<title>관리자 배송 관리</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="order" value="/admin/order" />
 <c:url var="ajax_order" value="/ajax/admin/order" />
@@ -125,12 +125,12 @@
 						</td>
 						<td class="text-truncate" style="max-width: 150px;">
 							${order.getPaytype()} / ${order.getTotal()}</td>
-						<fmt:formatDate var="pdate" value="${order.getPdate() }"
+						<%-- <fmt:formatDate var="pdate" value="${order.getPdate() }"
 	                		pattern="yyyy년 MM월 dd일 a hh시 mm분 ss초" />
 						<fmt:formatDate var="ddate" value="${order.getDdate() }"
-	                		pattern="yyyy년 MM월 dd일 a hh시 mm분 ss초" />
-						<td>${pdate}</td>
-						<td>${ddate}</td>
+	                		pattern="yyyy년 MM월 dd일 a hh시 mm분 ss초" /> --%>
+						<td>${order.getPdate() }</td>
+						<td>${order.getDdate() }</td>
 						<td> 
 							<a href="tel:${order.getPhone()}"> 
 								<i class="bi bi-telephone-outbound" style="font-size: 1.5rem; color: cornflowerblue;"></i>
@@ -216,6 +216,7 @@ $(document).ready(function() {
 			},
 			success: function (data) {
 					if(data.res == "true") {
+						alert(${fn:length(orderlist) });
 						icon.setAttribute("class", "bi bi-check text-danger");
 						icon.setAttribute("style", "font-size: 2rem;");
 						icon.setAttribute("onclick", "checked(this, "+id+", "+status+");")

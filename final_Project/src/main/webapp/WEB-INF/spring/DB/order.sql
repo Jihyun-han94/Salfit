@@ -7,19 +7,21 @@ CREATE SEQUENCE ordered_seq START WITH 1 INCREMENT BY 1 NOCACHE;
 CREATE TABLE ordered(
         id NUMBER,
         aid NUMBER,
-        reciever NVARCHAR2(64),
+        receiver NVARCHAR2(64),
         address NVARCHAR2(256),
         paytype NVARCHAR2(64),
         total NUMBER,
-        pdate DATE DEFAULT SYSDATE,
-        ddate DATE DEFAULT SYSDATE+1,
+        pdate NVARCHAR2(256),
+        ddate NVARCHAR2(256),
+--        pdate DATE DEFAULT SYSDATE,
+--        ddate DATE DEFAULT SYSDATE,
         status NVARCHAR2(32) DEFAULT 'paid'
 );
 
 
 ALTER TABLE ordered ADD CONSTRAINT ordered_id_PK PRIMARY KEY(id);
 ALTER TABLE ordered ADD CONSTRAINT ordered_aid_FK FOREIGN KEY(aid) REFERENCES account(id) ON DELETE CASCADE;
-ALTER TABLE ordered MODIFY reciever CONSTRAINT ordered_reciever_NN NOT NULL;
+ALTER TABLE ordered MODIFY receiver CONSTRAINT ordered_receiver_NN NOT NULL;
 ALTER TABLE ordered MODIFY address CONSTRAINT ordered_address_NN NOT NULL;
 ALTER TABLE ordered MODIFY paytype CONSTRAINT ordered_paytype_NN NOT NULL;
 ALTER TABLE ordered MODIFY total CONSTRAINT ordered_total_NN NOT NULL;
@@ -27,7 +29,7 @@ ALTER TABLE ordered ADD CONSTRAINT ordered_status_CK CHECK(status IN('paid', 'ch
 
 COMMENT ON COLUMN ordered.id IS '주문번호  번호';
 COMMENT ON COLUMN ordered.aid IS '주문자 식별 번호';
-COMMENT ON COLUMN ordered.reciever IS '수령인';
+COMMENT ON COLUMN ordered.receiver IS '수령인';
 COMMENT ON COLUMN ordered.address IS '배송지';
 COMMENT ON COLUMN ordered.paytype IS '결제 방법';
 COMMENT ON COLUMN ordered.total IS '총 결제 금액';

@@ -7,7 +7,7 @@
 	<select id="orderlist" parameterType="order" resultType="adminorder">
 	SELECT o.id,
 			o.aid,
-			o.reciever,
+			o.receiver,
 			a.phone,
 			o.address,
 			o.paytype,
@@ -40,7 +40,7 @@
 	<select id="orderlistsel" parameterType="order" resultType="adminorder">
 	SELECT o.id,
 			o.aid,
-			o.reciever,
+			o.receiver,
 			a.phone,
 			o.address,
 			o.paytype,
@@ -80,8 +80,8 @@
 	 </select>
 	 
 	 <insert id="insertOrder" parameterType="order">
-	  	INSERT INTO ordered(id, aid, reciever, address, paytype, total)
-	  	     VALUES(#{id}, #{aid}, #{reciever}, #{address}, #{paytype}, #{total})
+	  	INSERT INTO ordered(id, aid, receiver, address, paytype, total, pdate, ddate)
+	  	     VALUES(#{id}, #{aid}, #{receiver}, #{address}, #{paytype}, #{total}, #{pdate}, #{ddate})
 	 </insert> 
 
    	 <insert id="insertOrderDetail" parameterType="orderdetail">

@@ -10,8 +10,8 @@ public class AdminOrderDTO {
 	private String address;
 	private String paytype;
 	private int total;
-	private DATE pdate;
-	private DATE ddate;
+	private String pdate;
+	private String ddate;
 	private String status;
 	public int getId() {
 		return id;
@@ -55,16 +55,16 @@ public class AdminOrderDTO {
 	public void setTotal(int total) {
 		this.total = total;
 	}
-	public DATE getPdate() {
+	public String getPdate() {
 		return pdate;
 	}
-	public void setPdate(DATE pdate) {
+	public void setPdate(String pdate) {
 		this.pdate = pdate;
 	}
-	public DATE getDdate() {
+	public String getDdate() {
 		return ddate;
 	}
-	public void setDdate(DATE ddate) {
+	public void setDdate(String ddate) {
 		this.ddate = ddate;
 	}
 	public String getStatus() {
