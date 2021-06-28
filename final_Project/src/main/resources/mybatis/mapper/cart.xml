@@ -6,8 +6,8 @@
 <mapper namespace="cartMapper">
 	<!-- 장바구니 담기 버튼 클릭하면 실행되는 쿼리문 -->
 	<insert id="insert">
-		INSERT INTO cart(id,aid,pid,qty)
-		VALUES (cart_seq.NEXTVAL, #{aid}, #{pid},#{qty})
+		INSERT INTO cart(id,aid,pid,qty,startdate,enddate,days)
+		VALUES (cart_seq.NEXTVAL, #{aid}, #{pid},#{qty},#{startdate},#{enddate},#{days})
 	</insert>
 	
 	<!-- cart.aid로 장바구니 조회 -->
@@ -23,7 +23,9 @@
 			,i.name
 			,i.path
 			,i.url
-			
+			,c.startdate
+			,c.enddate
+			,c.days
 		FROM cart c
 		JOIN account a
 		  ON c.aid = a.id

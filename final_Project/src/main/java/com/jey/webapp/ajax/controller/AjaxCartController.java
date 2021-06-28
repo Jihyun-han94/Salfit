@@ -34,6 +34,7 @@ public class AjaxCartController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
 	@ResponseBody	
 	public String addToCart(Model m, @ModelAttribute CartDTO dto) throws Exception {
+		
 		boolean res = cart.add(dto);
 		
 		JSONObject json = new JSONObject();			

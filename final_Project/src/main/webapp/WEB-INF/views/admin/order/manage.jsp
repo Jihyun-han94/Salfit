@@ -38,7 +38,8 @@
 						<th scope="col">주소</th>
 						<th scope="col">결제수단 / 총금액</th>
 						<th scope="col">결제일자</th>
-						<th scope="col">배송일자</th>
+						<th scope="col">배송시작일</th>
+						<th scope="col">배송완료일</th>
 						<th scope="col">연락하기</th>
 						<th scope="col">상태 체크</th>
 						<th scope="col">주문 처리 상태
@@ -131,6 +132,7 @@
 	                		pattern="yyyy년 MM월 dd일 a hh시 mm분 ss초" /> --%>
 						<td>${order.getPdate() }</td>
 						<td>${order.getDdate() }</td>
+						<td>${order.getEdate() }</td>
 						<td> 
 							<a href="tel:${order.getPhone()}"> 
 								<i class="bi bi-telephone-outbound" style="font-size: 1.5rem; color: cornflowerblue;"></i>

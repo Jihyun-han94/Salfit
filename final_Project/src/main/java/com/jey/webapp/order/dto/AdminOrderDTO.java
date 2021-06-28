@@ -12,6 +12,7 @@ public class AdminOrderDTO {
 	private int total;
 	private String pdate;
 	private String ddate;
+	private String edate;
 	private String status;
 	public int getId() {
 		return id;
@@ -66,6 +67,12 @@ public class AdminOrderDTO {
 	}
 	public void setDdate(String ddate) {
 		this.ddate = ddate;
+	}
+	public String getEdate() {
+		return edate;
+	}
+	public void setEdate(String edate) {
+		this.edate = edate;
 	}
 	public String getStatus() {
 		return status;

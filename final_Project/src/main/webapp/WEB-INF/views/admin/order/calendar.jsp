@@ -23,8 +23,8 @@
    
    document.addEventListener('DOMContentLoaded', function() {
        var groupMap = [
-     		    <c:forEach items="${orderlist}" var="order" varStatus="loop">
-     		        {"title": "${order.getId()}", "start": "${order.getPdate()}", "end":"${order.getDdate()}", "color": '#ff9f89', "url": '${orderurl}/list'}
+     		    <c:forEach items="${orderdetaillist}" var="order" varStatus="loop">
+     		        {"title": "${order.getPname()} / ${order.getQty()}", "start": "${order.getStartdate()}", "end":"${order.getEnddate()}", "color": '#ff9f89', "url": '${orderurl}/list'}
      		        ${!loop.last ? ',' : ''}
      		    </c:forEach>
      		];  
@@ -41,16 +41,20 @@
        initialView: 'dayGridMonth',
        selectable: true,
        selectHelper: true,
-       select: function(start, end, jsEvent, view){
-         //wrtie your redirection code here
+       select: function(start, end, startStr, jsEvent, view){
+       },
+       dateClick: function(info) {
+    	    alert('Clicked on: ' + info.dateStr);
+    	    // change the day's background color just for fun
+    	    info.dayEl.style.backgroundColor = 'red';
          var root_url="${orderurl}/list";
          window.location = root_url;
-       },
+    	  },
        events: groupMap
      });
      calendar.render();
    });
-
+   
  </script>
  <style>
 

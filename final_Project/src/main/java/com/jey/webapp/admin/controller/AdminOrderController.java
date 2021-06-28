@@ -36,20 +36,24 @@ public class AdminOrderController {
 		
 		
 		// 주문 임의 설정 
-		dto.setAid(1);
+		dto.setAid(2);
 		dto.setReceiver("김은순");
-		dto.setAddress("수원시 영통구 하동 광교호수로 152번길 23 2302동 1903호");
+		dto.setAddress("수원시 영통구 하동 광교호수로 152번길 23");
 		dto.setPaytype("카카오페이");
 		dto.setTotal(59600);
 		dto.setStatus("paid");
 		dto.setPdate("2021-06-25");
-		dto.setDdate("2021-06-25");
+		dto.setDdate("2021-06-26");
+		dto.setEdate("2021-06-27");
 		
 		// 디테일
 		detail.setPid(19);
-		detail.setOid(2);
+		detail.setOid(6);
 		detail.setQty(5);
-		detail.setPrice(4000);
+//		detail.setPrice(4000);
+		detail.setStartdate("2021-06-30");
+		detail.setEnddate("2021-07-02");
+		detail.setDays(2);
 		
 		boolean res = order.add(dto, detail);
 		
@@ -112,9 +116,6 @@ public class AdminOrderController {
 	public String calendar(Model m, @ModelAttribute OrderDTO dto, @ModelAttribute OrderDetailDTO detail, HttpServletRequest request, HttpSession session) throws Exception {
 		List<AdminOrderDTO> orderlist = order.findList(dto);
 		List<AdminOrderDetailDTO> orderdetaillist = order.findDetailList(dto);
-
-		
-		
 		
 		m.addAttribute("orderlist",orderlist);
 		m.addAttribute("orderdetaillist",orderdetaillist);

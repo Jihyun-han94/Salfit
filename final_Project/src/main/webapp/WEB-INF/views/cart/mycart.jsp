@@ -32,10 +32,11 @@
    		<input type="checkbox" name="allCheck" id="allCheck" /><label for="allCheck">모두 선택</label> 
   		</div></th>
 		<th>이미지</th>
-		<th>item</th>
-		<th>수량</th>
-		<th>판매가</th>
-		<th>합계</th>
+		<th>상품 명</th>
+		<th>가격</th>
+		<th>구독일 (기간)</th>
+		<th>총 주문 수량</th>
+		<th>총 금액</th>
 		
 		<c:forEach var="data" items="${requestScope.cartlist }">
 		<tr>
@@ -57,8 +58,9 @@
 				>
 		</a></td>
 		<td>${data.title }</td>
-		<td>${data.qty }</td>
 		<td>${data.price }</td>
+		<td>${data.startdate } ~ ${data.enddate } (${data.days }일간)</td>
+		<td>${data.qty } * ${data.days} = ${data.qty * data.days}</td>
 		<td>${data.money }</td>
 		</tr>
 		

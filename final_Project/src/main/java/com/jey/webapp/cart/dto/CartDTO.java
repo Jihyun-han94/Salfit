@@ -13,6 +13,9 @@ public class CartDTO {
 	private String name;
 	private String path;
 	private String url;
+	private String startdate; 
+	private String enddate; 
+	private int days; 
 	
 	
 	public String getOrderstate() {
@@ -87,5 +90,23 @@ public class CartDTO {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+	public int getDays() {
+		return days;
+	}
+	public void setDays(int days) {
+		this.days = days;
 	}
 }
