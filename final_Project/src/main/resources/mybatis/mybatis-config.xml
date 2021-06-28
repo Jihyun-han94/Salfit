@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="account" type="com.jey.webapp.account.dto.AccountDTO"  />
+		<typeAlias alias="account" type="com.jey.webapp.account.dto.AccountDTO"	/>
 		<typeAlias alias="product" type="com.jey.webapp.product.dto.ProductDTO"  />
 		<typeAlias alias="productfile" type="com.jey.webapp.product.dto.ProductFileDTO"  />
 		<typeAlias alias="producttype" type="com.jey.webapp.product.dto.ProductTypeDTO"  />

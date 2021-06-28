@@ -51,31 +51,34 @@ function expire() {
 		}
 	});
 }
+
 </script>
 <c:url var="update" value="/account/update"	/>
+<c:url var="add" value="/account/profile_update" />
+<c:url var="delete" value="/account/signout" />
 <body>
 <nav>
 	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
 </nav>
 <section class="body_class">
-	<form action="${update }" name="update_form" method="post">
+	<form action="${add }" method="post" enctype="multipart/form-data">
 		<h1 class="first_class">회원 정보 수정</h1>
 		<c:url var="img" value="/resources/img/icon.png" />
-		<c:url var="img_user" value="/resources/img" />
+		<c:url var="img_user" value="/resources" />
 			<c:if test="${sessionScope.account.profile_img == null }">
 				<img src="${img }">
 			</c:if>
 			<c:if test="${sessionScope.account.profile_img != null }">
 				<img src="${img_user }/${sessionScope.account.profile_img }">
 			</c:if>
-		<c:url var="add" value="/account/profile_update"	/>
-		<form action="${add }" method="post" enctype="multipart/form-data">
 		<div>
 			<label for="id_file">파일업로드</label>
 			<input type="file" id="id_file" name="file">
 			<button type="submit">사진 저장</button>
 		</div>
-		</form>
+	</form>
+
+	<form action="${update }" name="update_form" method="post">
 		<input type="hidden" name="id" id="id" value="${requestScope.account.getId() }">
 		<div>
 			<label for="email">이메일 : </label>
@@ -95,10 +98,44 @@ function expire() {
 		</div>
 		<div>
 			<button type="submit">수정</button>
-			<button type="button" onclick="expire();">탈퇴</button>
 		</div>
 	</form>
+	<a data-toggle="modal" href="#ModalExpire">탈퇴</a>
 </section>
+
+<div class="modal fade" id="ModalExpire" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="form-title text-center">
+        </div>
+		<%-- <p style="color:red;">${param.error}</p> --%>
+		<div class="d-flex flex-column text-center">
+		<form action="${delete}" method="POST">
+			<div class="form-group">
+			<input type="hidden" name="id" id="id" value="${requestScope.account.getId() }">
+				<label for="id_email">이메일</label>
+				<input id="id_email" type="email" name="email" value="${requestScope.account.getEmail() }" disabled>
+			</div>
+			<div class="form-group">
+				<label for="id_password">비밀번호</label>
+				<input id="id_password" type="password" name="password" placeholder="password" required>
+				<button type="submit" class="btn btn-info btn-block btn-round">탈퇴</button>
+			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
 <%@ include file="/WEB-INF/views/module/footer.jsp" %>
 </body>
 </html>

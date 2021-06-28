@@ -5,10 +5,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -25,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.account.service.AccountService;
@@ -36,6 +43,10 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService account;
+	@Autowired
+	private GoogleConnectionFactory googleConnectionFactory;
+	@Autowired
+	private OAuth2Parameters googleOAuth2Parameters;
 
 	/* 회원가입 */
 	
@@ -58,10 +69,10 @@ public class AccountController {
 	
 	/* 로그인 */
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() throws Exception {
-		return "account/login";
-	}
+//	@RequestMapping(value = "/login", method = RequestMethod.GET)
+//	public String login() throws Exception {
+//		return "account/login";
+//	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String userLogin(Model m, @ModelAttribute AccountDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -81,6 +92,34 @@ public class AccountController {
 		}
 		return forward;
 	}
+	
+	/* 구글로 로그인 */
+
+		// 로그인 첫 화면 요청 메소드
+		@RequestMapping(value = "/login", method = RequestMethod.GET)
+		public String googleLogin(Model m, HttpSession session) {
+
+			/* 구글code 발행 */
+			OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+			String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
+
+			System.out.println("구글:" + url);
+
+			m.addAttribute("google_url", url);
+
+			/* 생성한 인증 URL을 View로 전달 */
+			return "account/login";
+		}
+
+		// 구글 Callback호출 메소드
+		  @RequestMapping(value = "/oauth2callback", method = { RequestMethod.GET, RequestMethod.POST })
+		  public String googleCallback(Model m, @RequestParam String code) throws Exception {
+
+		    System.out.println("Google login success");
+
+		    // 메인페이지로 리다이렉트
+		    return "account/google_success";
+		  }
 	
 	/* 로그아웃 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -120,27 +159,55 @@ public class AccountController {
 	/* 프로필 사진 추가 */
 	@RequestMapping(value = "/profile_update", method = RequestMethod.POST)
 	public String profile_modify(@RequestParam MultipartFile file,
-			HttpServletRequest req) {
+			HttpServletRequest req, Model m, HttpSession session) throws Exception {
+		System.out.println("메소드 시작!");
 		// 1. 사용자가 업로드한 이미지를 추출한다. --> file 자체로 추출 함 (하나기 때문)
 		
 		// 2. 추출한 이미지를 특정 경로(설정)에 이미지파일로 저장한다.
+		String origin_name = file.getOriginalFilename();
 		String root = req.getServletContext().getRealPath("/");
-		FileUpload fileupload = new FileUpload(root, "/resources/file/");
+		System.out.println("root : " + root);
+		File save_path = new File(root, "/resources/file/");
+		System.out.println("save_path" + save_path.toPath());
+		if(!save_path.exists()) {
+			Files.createDirectories(save_path.toPath());
+		} file.transferTo(new File(save_path + "/" + origin_name));
 		// 3. 저장된 이미지를 불러온다.
+		File f = new File(root = (save_path + "/" + origin_name));
+		System.out.println("불러오는 이미지의 경로 : " + f.toPath());
+		BufferedImage src_img = ImageIO.read(f);
 		// 4. 불러온 이미지의 크기를 조정한다.
+		BufferedImage thumbnail = Scalr.resize(src_img, Scalr.Mode.FIT_EXACT, 200, 200);
+		System.out.println(thumbnail);
 		// 5. 조정된 이미지를 저장한다.
+		String thumbnail_name = "thumb_" + f.getName();
+		File tf = new File(save_path + "/" + thumbnail_name);
+		ImageIO.write(thumbnail, "png", tf);
+		String thumbnail_path = "/file/" + thumbnail_name;
 		// 6. 이미지 저장된 경로를 DB에 저장한다.
-//		String srcImg = "";
-//		BufferedImage destImg = Scalr.resize(srcImg, Scalr.Method.AUTOMATIC, 150, 150, 150);
-		return "redirect:/update";
+		AccountDTO dto = (AccountDTO) session.getAttribute("account");
+		dto.setProfile_img(thumbnail_path);
+		m.addAttribute("account", account.saveImage(dto));
+		return "account/update";
 	}
 	
 	/* 회원탈퇴 */
-	@RequestMapping(value = "/signout", method = RequestMethod.GET)
-	public String signout(HttpServletRequest request, Model m, @ModelAttribute AccountDTO dto) throws Exception {
-		HttpSession session = request.getSession();
+	@RequestMapping(value = "/signout", method = RequestMethod.POST)
+	public String signout(Model m, AccountDTO dto, HttpSession session, HttpServletRequest req) throws Exception {
+		AccountDTO accountDTO = (AccountDTO) session.getAttribute("account");
+		// String sessionPass = accountDTO.getPassword();
+		String dtoPass = dto.getPassword();
+		String pass = req.getParameter("password");
+		System.out.println(dtoPass);
+		if(!(dtoPass.equals(pass))) {
+			m.addAttribute("error", "회원탈퇴 실패");
+			System.out.println("회원탈퇴 실패");
+			return "redirect:/account/update";
+		}
+		account.signout(dto);
+		m.addAttribute("dto",dto);
 		session.invalidate();
-		return "redirect:/product";
+		return "redirect:/";
 	}
 	
 }

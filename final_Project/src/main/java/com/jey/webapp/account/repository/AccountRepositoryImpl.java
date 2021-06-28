@@ -65,7 +65,22 @@ public class AccountRepositoryImpl implements AccountRepository {
 
 	@Override
 	public boolean delete(AccountDTO dto) throws Exception {
-		return false;
+		boolean res = false;
+		int rs = sqlSession.delete("accountMapper.expireAccount", dto);
+		if(rs == 1) {
+			res = true;
+		}
+		return res;
+	}
+
+	@Override
+	public boolean updateImage(AccountDTO dto) throws Exception {
+		boolean res = false;
+		int rs = sqlSession.update("accountMapper.saveImageAccount", dto);
+		if(rs == 1) {
+			res = true;
+		}
+		return res;
 	}
 
 }

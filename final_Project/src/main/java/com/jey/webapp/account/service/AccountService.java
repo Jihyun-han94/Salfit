@@ -13,4 +13,5 @@ public interface AccountService {
 	public AccountDTO login(AccountDTO dto) throws Exception;
 	public boolean updateProfile(AccountDTO dto) throws Exception;
 	public boolean signout(AccountDTO dto) throws Exception;
+	public boolean saveImage(AccountDTO dto) throws Exception;
 }

@@ -13,4 +13,5 @@ public interface AccountRepository {
 	public AccountDTO login(AccountDTO dto) throws Exception;
 	public boolean update(AccountDTO dto) throws Exception;
 	public boolean delete(AccountDTO dto) throws Exception;
+	public boolean updateImage(AccountDTO dto) throws Exception;
 }

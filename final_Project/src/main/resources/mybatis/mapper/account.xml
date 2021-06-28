@@ -30,9 +30,15 @@
 		WHERE id = #{id}
 	</update>
 	
-	<update id="expireAccount" parameterType="_int">
+	<update id="saveImageAccount" parameterType="account">
 		UPDATE account
-			SET expiredate = SYSDATE
+			SET profile_img = #{profile_img}
 		WHERE id = #{id}
 	</update>
+	
+	<delete id="expireAccount">
+		DELETE FROM account
+		WHERE id = #{id}
+		  AND password = #{password}
+	</delete>
 </mapper>

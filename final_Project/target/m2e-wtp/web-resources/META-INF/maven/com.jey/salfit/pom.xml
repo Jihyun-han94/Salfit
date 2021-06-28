@@ -178,6 +178,13 @@
 		    <version>2.0.6</version>
 		</dependency>
 		
+		<!-- google -->
+		<dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-google</artifactId>
+	            <version>1.0.0.RELEASE</version>
+	    </dependency>
+		
 		<!-- json 자바 객체를 손쉽게 json 형태로 변환 (반대도 작업도 가능) -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

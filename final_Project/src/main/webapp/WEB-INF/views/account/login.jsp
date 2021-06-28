@@ -19,7 +19,7 @@ body {
   }
 h1 {
   font-family: 'Arita-dotum-Medium';
-}
+} 
  </style>
 </head>
 <body>
@@ -29,7 +29,6 @@ h1 {
 	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
 </nav>
 <p style="color:red;">${param.error}</p>
-
 <section class="signcontainer">
 	<article class="signhalf">
 	     <h1>Please Login<br>to Continue</h1>
@@ -48,6 +47,7 @@ h1 {
 	                    <label for="remember">Remember me</label> -->
 	                    <div class="submit-wrap">
 	                        <input type="submit" value="Sign in" class="submit">
+	                       	<div class="g-signin2" data-onsuccess="onSignIn"><a href="${google_url}"></a></div>
 	                        <a href="#" class="more">Forgot your password?</a>
 	                    </div>
 	  				</form>
@@ -93,6 +93,9 @@ $('.signtabs .tab').click(function(){
 });
 
 </script>
-	 <%@ include file="/WEB-INF/views/module/footer.jsp" %>
+<!-- 구글 api 사용을 위한 스크립트 -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<%@ include file="/WEB-INF/views/module/footer.jsp" %>
 </body>
 </html>

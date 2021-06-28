@@ -62,7 +62,12 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public boolean signout(AccountDTO dto) throws Exception {
-		return false;
+		return dao.delete(dto);
+	}
+
+	@Override
+	public boolean saveImage(AccountDTO dto) throws Exception {
+		return dao.updateImage(dto);
 	}
 
 
