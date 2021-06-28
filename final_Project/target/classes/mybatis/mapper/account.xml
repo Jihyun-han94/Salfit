@@ -10,7 +10,7 @@
 	</select>
 	
 	<select id="checkLogin" parameterType="account" resultType="account">
-		SELECT * FROM account WHERE email = #{email} AND password = #{password} AND expiredate IS NULL
+		SELECT * FROM account WHERE email = #{email} AND password = #{password}
 	</select>
 	
 	

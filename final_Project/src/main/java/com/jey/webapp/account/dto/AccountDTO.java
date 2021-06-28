@@ -13,6 +13,7 @@ public class AccountDTO {
 	private Date logindate;
 	private Date expiredate;
 	private String profile_img;
+	
 	public String getProfile_img() {
 		return profile_img;
 	}
