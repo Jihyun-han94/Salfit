@@ -6,12 +6,13 @@ public class CartDTO {
 	private int pid;
 	private int qty; // 수량
 	private String orderstate;
-	
 	private int price; 
 	private String email;
 	private String title;
-	
 	private int money;
+	private String name;
+	private String path;
+	private String url;
 	
 	
 	public String getOrderstate() {
@@ -68,5 +69,23 @@ public class CartDTO {
 	}
 	public void setQty(int qty) {
 		this.qty = qty;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }

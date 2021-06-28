@@ -20,12 +20,17 @@
 			,p.price AS price
 			,p.title AS title
 			,(price*c.qty) money
+			,i.name
+			,i.path
+			,i.url
 			
 		FROM cart c
 		JOIN account a
 		  ON c.aid = a.id
 		JOIN product p
 		  ON c.pid = p.id
+	  	JOIN product_img i
+		  ON p.id = i.pid
 		WHERE c.aid = #{aid} 
 		ORDER BY c.id DESC
 	

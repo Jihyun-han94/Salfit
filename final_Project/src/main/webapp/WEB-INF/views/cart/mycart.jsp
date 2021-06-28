@@ -11,6 +11,7 @@
 </head>
 <c:url var ="delete" value="/ajax/cart/delete" />
 <c:url var ="buy" value="/ajax/cart/buy" />
+<c:url var ="detail" value="/product/detail" />
 <body>
 <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 <br>
@@ -34,7 +35,6 @@
 		<th>item</th>
 		<th>수량</th>
 		<th>배송수단</th>
-		<th>배송비</th>
 		<th>판매가</th>
 		<th>합계</th>
 		
@@ -50,11 +50,16 @@
   		
   		</td>
 		
-		<td>-</td>
+		<td><a href="${detail}?id=${data.getPid()}">
+			<img class="rounded card-img-top productImg" style="object-fit:contain;
+            width:100px;
+            height:100px;"
+				src="${pageContext.request.contextPath}${data.getUrl()}" 
+				>
+		</a></td>
 		<td>${data.title }</td>
 		<td>${data.qty }</td>
 		<td>택배</td>
-		<td>3,000원</td>
 		<td>${data.price }</td>
 		<td>${data.money }</td>
 		</tr>
@@ -69,6 +74,7 @@
     </div>
 	
 	<br>
+	<p> * 배송비 : 30000원 이상 주문 시 무료</p>
 	<table border="1" id="id_price" name="id_price">
 		<th>총 상품금액</th>
 		<th>총 배송비</th>
