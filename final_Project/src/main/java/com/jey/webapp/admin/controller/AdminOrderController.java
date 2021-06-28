@@ -37,7 +37,7 @@ public class AdminOrderController {
 		
 		// 주문 임의 설정 
 		dto.setAid(2);
-		dto.setReciever("최예림");
+		dto.setReceiver("최예림");
 		dto.setAddress("수원시 영통구 하동 광교호수로 152번길 23 2302동 1903호");
 		dto.setPaytype("신용카드");
 		dto.setTotal(10380);

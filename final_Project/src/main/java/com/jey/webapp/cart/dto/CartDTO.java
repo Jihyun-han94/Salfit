@@ -5,6 +5,7 @@ public class CartDTO {
 	private int aid;
 	private int pid;
 	private int qty; // 수량
+	private String orderstate;
 	
 	private int price; 
 	private String email;
@@ -13,6 +14,12 @@ public class CartDTO {
 	private int money;
 	
 	
+	public String getOrderstate() {
+		return orderstate;
+	}
+	public void setOrderstate(String orderstate) {
+		this.orderstate = orderstate;
+	}
 	
 	public String getTitle() {
 		return title;

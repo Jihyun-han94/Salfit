@@ -10,7 +10,8 @@
 <title>상품 상세 정보</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="moreReviews" value="/ajax/product/moreReviews" />
-
+<c:url var="cart" value="/cart" />
+<c:url var="ajax_cart" value="/ajax/cart" />
 </head>
 <body>
 	<header>
@@ -61,7 +62,7 @@
 			  <div class="col-sm-9">
 			  	<div class="input-group input-group-sm mb-3 btn-success">
 					<button type="button" class="btn btn-block badge-pill" 
-					    data-toggle="modal" data-target="#staticBackdrop" ><b>장바구니에 담기</b></button>
+					    data-toggle="modal" data-target="#staticBackdrop" onclick="addToCart(this, ${item.getId()}, document.getElementById('quantity'));" ><b>장바구니에 담기</b></button>
 					<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 					      <div class="modal-content">
@@ -77,10 +78,7 @@
 					      </div>
 					      <div class="modal-footer">
 					         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">계속 쇼핑하기</button>
-					         <form action="${pageContext.request.contextPath}/cart" method="POST">
-					            <%-- <input type="hidden" name="" value="${pageContext.request.session }"> --%>
-					            <button type="submit" class="btn btn-outline-dark">내 장바구니로 가기</button>
-					         </form>
+					            <button type="button" onclick="location.href='${cart}'" class="btn btn-outline-dark">내 장바구니로 가기</button>
 					      </div>
 			      		</div>
 			   		</div>
@@ -107,6 +105,36 @@
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
+	/* 장바구니 */
+	function addToCart(e, pid, quantity) {
+		alert(${account.getId()});
+		if(${(empty account.getId()) ? false : logined }) {
+			let aid = ${account.getId()};
+			let qty =  quantity.value;
+			$.ajax({
+				url: "${ajax_cart}/add",
+				type: "post",
+				async: "false",
+				dataType: "json",
+				data: {
+					aid: aid,	
+					pid: pid,
+					qty: qty
+				},
+				success: function (data) {
+					if(data.result == true) {
+						// 알림창 
+					} 
+				}				
+			});
+		} else {
+			alert("로그인을 해야 합니다.");
+		} 
+	}
+
+
+	/* 리뷰 */
+	
 	var oldListCnt = "${oldListCnt}";
 
 	var startIndex = 1;	// 인덱스 초기값

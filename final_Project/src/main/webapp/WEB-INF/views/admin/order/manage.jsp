@@ -119,7 +119,7 @@
 							</div>
 						</th>
 						<td>${order.getAid()}</td>
-						<td>${order.getReciever()}</td>
+						<td>${order.getReceiver()}</td>
 						<td class="text-truncate" style="max-width: 100px;">
 							<a tabindex="0" role="button" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" title="상세 주소" data-content="${order.getAddress()}">${order.getAddress()}</a>
 						</td>

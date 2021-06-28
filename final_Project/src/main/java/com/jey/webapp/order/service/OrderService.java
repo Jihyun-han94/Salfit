@@ -12,6 +12,7 @@ import com.jey.webapp.product.dto.ProductDTO;
 public interface OrderService {
 
 	public boolean add(OrderDTO dto, OrderDetailDTO detail) throws Exception;
+	public boolean add(OrderDTO dto) throws Exception;
 	public boolean addDetail(OrderDetailDTO dto) throws Exception;
 	public boolean update(OrderDetailDTO dto) throws Exception;
 	public OrderDetailDTO findId(int id) throws Exception;

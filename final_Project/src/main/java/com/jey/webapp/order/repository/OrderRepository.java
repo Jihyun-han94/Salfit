@@ -14,6 +14,7 @@ public interface OrderRepository {
 	public List<AdminOrderDTO> selectList(OrderDTO dto)  throws Exception;
 	public List<AdminOrderDetailDTO> selectDetailList(OrderDTO dto);
 	public boolean insert(OrderDTO dto, OrderDetailDTO detail)  throws Exception;
+	public boolean insert(OrderDTO dto)  throws Exception;
 	public boolean insert(OrderDetailDTO dto)  throws Exception;
 	public boolean update(OrderDetailDTO dto)  throws Exception;
 	public boolean insert(int id)  throws Exception;	// 리뷰추가용

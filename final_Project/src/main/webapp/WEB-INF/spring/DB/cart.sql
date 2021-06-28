@@ -18,3 +18,8 @@ COMMENT ON COLUMN cart.id IS '장바구니 고유 번호';
 COMMENT ON COLUMN cart.aid IS '장바구니 소유주 식별 번호';
 COMMENT ON COLUMN cart.pid IS '상품 식별 번호';
 COMMENT ON COLUMN cart.qty IS '상품 주문 갯수';
+
+
+
+------------------------------------------------------------------------------------------------------
+SELECT * FROM cart;

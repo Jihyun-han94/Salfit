@@ -24,7 +24,13 @@ public class OrderServiceImpl implements OrderService {
 	public boolean add(OrderDTO dto, OrderDetailDTO detail) throws Exception {
 		return dao.insert(dto, detail);
 	}
-
+	
+	@Override
+	public boolean add(OrderDTO dto) throws Exception {
+		System.out.println("serviceimpl까지 왓음");
+		return dao.insert(dto);
+	}
+	
 	@Override
 	public boolean addDetail(OrderDetailDTO dto) throws Exception {
 		return false;

@@ -5,7 +5,7 @@ import oracle.sql.DATE;
 public class OrderDTO {
 	private int id;
 	private int aid;
-	private String reciever;
+	private String receiver;
 	private String address;
 	private String paytype;
 	private int total;
@@ -24,11 +24,11 @@ public class OrderDTO {
 	public void setAid(int aid) {
 		this.aid = aid;
 	}
-	public String getReciever() {
-		return reciever;
+	public String getReceiver() {
+		return receiver;
 	}
-	public void setReciever(String reciever) {
-		this.reciever = reciever;
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
 	}
 	public String getAddress() {
 		return address;

@@ -71,6 +71,18 @@ public class OrderRepositoryImpl implements OrderRepository {
 		} 
 		return false;
 	}
+	
+	@Override
+	public boolean insert(OrderDTO dto) throws Exception {
+		boolean result = false;
+		System.out.println("여기까지 오니?");
+		int res = sqlSession.insert("orderMapper.insertordered", dto);
+		if(res == 1) {
+			result = true;
+		}
+		
+		return result;
+	}
 
 	@Override
 	public boolean insert(OrderDetailDTO dto) throws Exception {
