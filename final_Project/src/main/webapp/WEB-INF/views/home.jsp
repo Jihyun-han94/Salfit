@@ -75,7 +75,7 @@
       <img src="./resources/img/real_main.png" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="./resources/img/summer_main.png" class="d-block w-100" alt="...">
+      <img src="./resources/img/poke_main.png" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
       <img src="./resources/img/clean_main.png" class="d-block w-100" alt="...">
@@ -100,78 +100,83 @@
 		<li><a href="#0">Review</a></li>
 	</ul>
 </nav> <!-- .cd-secondary-nav -->
+<br><br><br>
+<h1 style="text-align: center; font-size: 45px; color: #5f7115; font-weight: bold;">Best Menu</h1>
 <br><br>
 <main class="cd-main-content sub-nav-hero">
 <div class="container-menu">
-	<div class="row">
-		<div class="col-3">
+	<div class="row d-flex justify-content-center align-items-center h-100 m-4">
+		<div class="col-2">
 			<div class="card" style="border-style: none;">
 				<img src="./resources/img/menu/Caesar.png">
 					<div class="card-body">
-					<h5 class="card-title" style="text-align: center;"><a href="#">title</a></h5>
+					<h5 class="card-title" style="text-align: center;"><a href="#">시저 샐러드</a></h5>
 				</div>
 			</div>
 		</div>
-		<div class="col-3">
+		<div class="col-2">
 			<div class="card" style="border-style: none;">
 				<img src="./resources/img/menu/Cajun.png">
 					<div class="card-body">
-					<h5 class="card-title" style="text-align: center;"><a href="#">title</a></h5>
+					<h5 class="card-title" style="text-align: center;"><a href="#">케이준 샐러드</a></h5>
 				</div>
 			</div>
 		</div>
-		<div class="col-3">
+		<div class="col-2">
 			<div class="card" style="border-style: none;">
 				<img src="./resources/img/menu/Chicken.png">
 					<div class="card-body">
-					<h5 class="card-title" style="text-align: center;"><a href="#">title</a></h5>
+					<h5 class="card-title" style="text-align: center;"><a href="#">닭가슴살 샐러드</a></h5>
 				</div>
 			</div>
 		</div>
-		<div class="col-3">
+		<div class="col-2">
 			<div class="card" style="border-style: none;">
 				<img src="./resources/img/menu/Ricotta.png">
 					<div class="card-body">
-					<h5 class="card-title" style="text-align: center;"><a href="#">title</a></h5>
+					<h5 class="card-title" style="text-align: center;"><a href="#">리코타치즈 샐러드</a></h5>
 				</div>
 			</div>
 		</div>
 	</div>
 	<br>
-	<div class="row">
-		<div class="col-3">
+	<div class="row d-flex justify-content-center align-items-center h-100 m-4">
+		<div class="col-2">
 			<div class="card" style="border-style: none;">
 				<img src="./resources/img/menu/Salmon.png">
 					<div class="card-body">
-					<h5 class="card-title" style="text-align: center;"><a href="#">title</a></h5>
+					<h5 class="card-title" style="text-align: center;"><a href="#">연어 샐러드</a></h5>
 				</div>
 			</div>
 		</div>
-		<div class="col-3">
+		<div class="col-2">
 			<div class="card" style="border-style: none;">
 				<img src="./resources/img/menu/Shrimp.png">
 					<div class="card-body">
-					<h5 class="card-title" style="text-align: center;"><a href="#">title</a></h5>
+					<h5 class="card-title" style="text-align: center;"><a href="#">새우 샐러드</a></h5>
 				</div>
 			</div>
 		</div>
-		<div class="col-3">
+		<div class="col-2">
 			<div class="card" style="border-style: none;">
 				<img src="./resources/img/menu/Tuna.png">
 					<div class="card-body">
-					<h5 class="card-title" style="text-align: center;"><a href="#">title</a></h5>
+					<h5 class="card-title" style="text-align: center;"><a href="#">참치 샐러드</a></h5>
 				</div>
 			</div>
 		</div>
-		<div class="col-3">
+		<div class="col-2">
 			<div class="card" style="border-style: none;">
-				<img src="./resources/img/menu/Ricotta.png">
+				<img src="./resources/img/menu/Poke.png">
 					<div class="card-body">
-					<h5 class="card-title" style="text-align: center;"><a href="#">title</a></h5>
+					<h5 class="card-title" style="text-align: center;"><span style="color: #df576e;">new </span><a href="#">하와이안 포케</a></h5>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+<div class="row d-flex justify-content-center align-items-center h-50 w-20 m-4">
+<img src="./resources/img/delivery.png">
 </div>
 
 </main> <!-- .cd-main-content -->
