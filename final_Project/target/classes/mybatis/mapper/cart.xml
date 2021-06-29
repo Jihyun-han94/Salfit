@@ -4,51 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="cartMapper">
-	
-		
-	<select id="yselectAll" parameterType="cart" resultType="cart">
-		SELECT c.id
-			,c.aid
-			,c.pid
-			,c.qty
-			,a.email AS email
-			,p.price AS price
-			,p.title AS title
-			,(price*c.qty) money
-			
-		FROM cart c
-		JOIN account a
-		  ON c.aid = a.id
-		JOIN product p
-		  ON c.pid = p.id
-		WHERE c.aid = #{aid} AND c.orderstate ='y'
-		ORDER BY c.id DESC
-	
-	</select>
-	
-	<update id="update" parameterType="cart" >
-	UPDATE cart
-	SET orderstate = 'y'
-	WHERE id =#{id}
-	</update>
-	<select id="select" parameterType="cart" resultType="cart">
-	SELECT c.id
-		,c.aid
-		,c.pid
-		,c.qty
-		,c.orderstate 
-		,p.price AS price
-		,p.title AS title
-		,(price*c.qty) money
-	FROM cart c
-	JOIN product p 
-	on c.pid = p.id
-	WHERE c.id=#{id}
-	
-	</select>
-
-
 	<!-- 장바구니 담기 버튼 클릭하면 실행되는 쿼리문 -->
+	
+	
 	<insert id="insert">
 		INSERT INTO cart(id,aid,pid,qty)
 		VALUES (cart_seq.NEXTVAL, #{aid}, #{pid},#{qty})
@@ -70,7 +28,7 @@
 		  ON c.aid = a.id
 		JOIN product p
 		  ON c.pid = p.id
-		WHERE c.aid = #{aid} AND c.orderstate ='n'
+		WHERE c.aid = #{aid} 
 		ORDER BY c.id DESC
 	
 	</select>

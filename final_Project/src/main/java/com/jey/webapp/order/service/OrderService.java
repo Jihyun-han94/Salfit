@@ -15,5 +15,6 @@ public interface OrderService {
 	public OrderDetailDTO findId(int id) throws Exception;
 	public List<OrderDTO> findList(OrderDTO dto) throws Exception;
 	public boolean add(int id) throws Exception;	// 리뷰추가 : id 는 product 
+	public OrderDTO selectone(OrderDTO dto) throws Exception;
 
 }

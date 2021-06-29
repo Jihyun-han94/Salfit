@@ -6,11 +6,9 @@ public class CartDTO {
 	private int pid;
 	private int qty; // 수량
 	private String orderstate;
-	
 	private int price; 
 	private String email;
 	private String title;
-	
 	private int money;
 	
 	

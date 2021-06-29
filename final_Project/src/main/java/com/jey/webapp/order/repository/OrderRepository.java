@@ -9,6 +9,7 @@ import com.jey.webapp.order.dto.OrderDetailDTO;
 public interface OrderRepository {
 	
 	public OrderDetailDTO select(OrderDTO dto) throws Exception;
+	public OrderDTO selectone(OrderDTO dto) throws Exception;
 	public List<OrderDTO> selectList(OrderDTO dto)  throws Exception;
 	public boolean insert(OrderDTO dto)  throws Exception;
 	public boolean insert(OrderDetailDTO dto)  throws Exception;

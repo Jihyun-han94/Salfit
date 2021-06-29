@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jey.webapp.cart.dto.CartDTO;
 import com.jey.webapp.cart.service.CartService;
 import com.jey.webapp.order.dto.OrderDTO;
+import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.order.service.OrderService;
 
 @Controller
@@ -29,6 +30,8 @@ public class KakaoPayController {
 	private CartService cart;
 	@Autowired	
 	private OrderService order;
+
+	
 	
 	@RequestMapping(value="", method = RequestMethod.GET)
 	public String payment(Model m, HttpServletRequest request,@ModelAttribute CartDTO dto) throws Exception {
@@ -111,9 +114,27 @@ public class KakaoPayController {
 		
 		List<CartDTO>cartlist = cart.yfindAll(dto); //장바구니에 담은 제품만 조회
 		
-		boolean result = order.add(order_dto);
+		boolean result = order.add(order_dto); //ordered table에 insert
+		
+		//ordered table 조회
+		order_dto = order.selectone(order_dto);
 		
 		System.out.println(result);
+		
+		OrderDetailDTO orderdetail_dto = new OrderDetailDTO();
+			
+			
+			orderdetail_dto.setOid(order_dto.getId());
+		
+			for(CartDTO data:cartlist) {
+			orderdetail_dto.setPid(data.getPid());
+			orderdetail_dto.setPrice(data.getPrice());
+			orderdetail_dto.setQty(data.getQty());
+			
+			System.out.println("productid 디버깅중"+data.getPid());
+			result = order.addDetail(orderdetail_dto);
+			System.out.println("order_detail insert"+result);
+		}
 		
 		
 		return forward;

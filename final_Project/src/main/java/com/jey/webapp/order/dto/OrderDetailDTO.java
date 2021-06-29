@@ -10,8 +10,8 @@ public class OrderDetailDTO {
 	private int oid; // = ordered.id
 	private int pid; // = product.id
 	private int qty; // 제품 수량
-	private int price; //제품 가격
 	private String status; // 주문상태 (paid,shipping,delivered, holding)
+	private int price; //제품 가격
 	
 	
 	
