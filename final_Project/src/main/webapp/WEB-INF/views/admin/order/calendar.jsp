@@ -8,15 +8,7 @@
 <head>
 <meta charset='utf-8' />
 <title>관리자 주문 관리</title>
-<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
-<link href='/salfit/resources/static/fullcalendar/main.css' rel='stylesheet' />
-<!-- Fullcalendar Starts -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<script src="https://momentjs.com/downloads/moment.min.js"></script>
-
-<script src='/salfit/resources/static/fullcalendar/main.js'></script>
+<jsp:include page="/WEB-INF/views/module/fullcalendar.jsp"></jsp:include>
 
 <c:url var="orderurl" value="/admin/order" />
 <script>
@@ -56,35 +48,13 @@
    });
    
  </script>
- <style>
-
-body {
-  margin: 40px 10px;
-  padding: 0;
-  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  font-size: 14px;
-}
-
-#calendar {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-</style>
   </head>
-  <body>
+  <body id="calendarBody">
+  <header>
+<%-- 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
+	</header>
+	<div class="bodyContainer">
+		<h1 class="corpBoardTitle">배송 관리</h1>
     <div id='calendar'></div>
-    <!-- <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-	<div class="modal-content">
-	<div class="modal-body">
-	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	<span aria-hidden="true">&times;</span>
-	</button>
-	<p></p>
-	</div>
-	</div>
-	</div>
-	</div> -->
   </body>
 </html>

@@ -47,12 +47,12 @@ public class AdminOrderController {
 		dto.setEdate("2021-06-27");
 		
 		// 디테일
-		detail.setPid(19);
+		detail.setPid(22);
 		detail.setOid(6);
-		detail.setQty(5);
+		detail.setQty(2);
 //		detail.setPrice(4000);
-		detail.setStartdate("2021-06-30");
-		detail.setEnddate("2021-07-02");
+		detail.setStartdate("2021-06-29");
+		detail.setEnddate("2021-06-29");
 		detail.setDays(2);
 		
 		boolean res = order.add(dto, detail);

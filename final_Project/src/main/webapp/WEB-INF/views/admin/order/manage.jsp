@@ -18,12 +18,6 @@
 	<header>
 <%-- 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
 	</header>
-	<div class="container-fluid">
-  <a href="#" data-toggle="popover" title="Popover Header" data-content="You must branch to this flow first, before you can return to the original flow">
-    <span ng-show="flow.branched_from.length==0" class="glyphicon glyphicon-question-sign padding-a" aria-hidden="true">
-     </span>
-  </a>
-</div>
 	<div class="bodyContainer">
 		<h1 class="corpBoardTitle">주문 관리</h1>
 
