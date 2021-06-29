@@ -98,7 +98,7 @@ public class KakaoPayController {
 	}
 	@RequestMapping(value="", method = RequestMethod.POST )
 	
-	public String getpayment( @ModelAttribute CartDTO dto,@ModelAttribute OrderDTO order_dto) throws Exception {
+	public String getpayment( @ModelAttribute CartDTO dto,@ModelAttribute OrderDTO order_dto,Model m) throws Exception {
 		String forward="kakaopay/paystep1";
 		
 		int aid = dto.getAid();
@@ -134,7 +134,10 @@ public class KakaoPayController {
 			System.out.println("productid 디버깅중"+data.getPid());
 			result = order.addDetail(orderdetail_dto);
 			System.out.println("order_detail insert"+result);
+			
+			
 		}
+			m.addAttribute("ordered", order_dto);
 		
 		
 		return forward;
