@@ -15,6 +15,7 @@
 	<c:url var="login" value="/account/login" />
 	<c:url var="logout" value="/account/logout" />
 	<c:url var="update" value="/account/update" />
+	<c:url var="updateView" value="/account/update_view" />
 </head>
 <body>
 <header class="cd-auto-hide-header">
@@ -30,13 +31,13 @@
 		<ul id="cd-navigation">
 		<c:choose>
 			<c:when test="${sessionScope.logined }">
-				<li><a href="${update }">MyPage</a></li>
+				<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>
 				<li><a href="#0">Cart</a></li>
 				<li><a href="${logout }">Logout</a></li>
 				<li><a href="#0">Contact Us</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a data-toggle="modal" href="#myModal">Login</a></li>
+				<li><a href="${login }">Login</a></li>
 				<li><a href="${join }">Join</a></li>
 				<li><a href="#0">Contact Us</a></li>
 			</c:otherwise>
@@ -97,7 +98,7 @@
 	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
 </script>
 <script src="./resources/js/main.js"></script> <!-- Resource jQuery -->
-
+<%-- 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -111,12 +112,12 @@
       <div class="form-title text-center">
           <h4>Login</h4>
         </div>
-		<%-- <p style="color:red;">${param.error}</p> --%>
+		<p style="color:red;">${param.error}</p>
 		<div class="d-flex flex-column text-center">
 		<form action="${login}" method="POST">
-			<%-- <div>
+			<div>
 				<label style="color:red;">${error != null ? error : ""}</label>
-			</div> --%>
+			</div>
 			<div class="form-group">
 				<label for="id_email">이메일</label>
 				<input id="id_email" type="email" name="email" placeholder="email" required>
@@ -128,7 +129,41 @@
 			<div>
 				<button type="submit" class="btn btn-info btn-block btn-round">로그인</button>
 				<c:url var="main" value="/product/main" />
-				<%-- <button type="button" class="btn btn-info btn-block btn-round" onclick="location.href='${main}'">취소</button> --%>
+				<button type="button" class="btn btn-info btn-block btn-round" onclick="location.href='${main}'">취소</button>
+			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+</div> --%>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="form-title text-center">
+        </div>
+		<%-- <p style="color:red;">${param.error}</p> --%>
+		<div class="d-flex flex-column text-center">
+		<form action="${updateView}" method="POST">
+			<div class="form-group">
+			<%-- <input type="hidden" name="id" id="id" value="${requestScope.account.getId() }"> --%>
+				<%-- <label for="id_email">이메일</label>
+				<input id="id_email" type="email" name="email" value="${requestScope.account.getEmail() }" disabled> --%>
+			</div>
+			<div class="form-group">
+				<label for="id_password">비밀번호 확인</label>
+				<input id="id_password" type="password" name="password" placeholder="password" required>
+				<button type="submit" class="btn btn-info btn-block btn-round">확인</button>
 			</div>
 		</form>
       </div>
@@ -138,6 +173,6 @@
   </div>
 </div>
 </div>
-
+<%@ include file="/WEB-INF/views/module/footer.jsp" %>
 </body>
 </html>

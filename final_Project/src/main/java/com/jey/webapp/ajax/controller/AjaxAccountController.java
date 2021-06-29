@@ -24,9 +24,12 @@ public class AjaxAccountController {
 	public String checkEmail(@RequestParam String email) throws Exception {
 		boolean res = account.checkEmail(email);
 		
-		JSONObject json = new JSONObject();			
-		json.put("result", res);
-		
+		JSONObject json = new JSONObject();
+		if(res) {
+			json.put("result", true);
+		} else {
+			json.put("result", false);
+		}
 		return json.toJSONString();
 	}
 }

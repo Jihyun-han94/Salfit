@@ -78,7 +78,7 @@ function expire() {
 		</div>
 	</form>
 
-	<form action="${update }" name="update_form" method="post">
+	<form action="${update }" name="update_form" method="POST">
 		<input type="hidden" name="id" id="id" value="${requestScope.account.getId() }">
 		<div>
 			<label for="email">이메일 : </label>
@@ -98,9 +98,9 @@ function expire() {
 		</div>
 		<div>
 			<button type="submit">수정</button>
+	<button data-toggle="modal" id="btn_exp" data-target="#ModalExpire">탈퇴</button>
 		</div>
 	</form>
-	<a data-toggle="modal" href="#ModalExpire">탈퇴</a>
 </section>
 
 <div class="modal fade" id="ModalExpire" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

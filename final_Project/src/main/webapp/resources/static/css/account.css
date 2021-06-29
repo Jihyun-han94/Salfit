@@ -143,14 +143,14 @@ body .signcontainer .signcontent input.submit {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #263238;
-  border: 1px solid green;
+  border: 1px solid #bac600;
   background: transparent;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
 }
 body .signcontainer .signcontent input.submit:hover {
-  background-color: green;
+  background-color: #bac600;
   color: #ffffff;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;

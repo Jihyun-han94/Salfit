@@ -20,7 +20,34 @@ body {
 h1 {
   font-family: 'Arita-dotum-Medium';
 } 
- </style>
+</style>
+<script>
+function emailCheck() {
+	/* var email = document.getElementById("id_email").value;
+	if(email == "" || email == undefined){
+		alert("이메일 주소를 입력하세요.");
+		document.getElementById("id_email").focus();
+		return;
+	} */
+	$.ajax({
+		url: "${email_check }",
+		type: "get",
+		datatype: "json",
+		data: {
+			email: document.getElementById("id_email").value
+		},
+		success: function(data){
+			if(data.result == false){
+				document.getElementById("email_check_res").innerText = "사용 가능한 이메일 주소입니다."
+				document.getElementById("email_check_res").style.color = "blue";
+			} else {
+				document.getElementById("email_check_res").innerText = "이미 사용중인 이메일 주소 입니다."
+					document.getElementById("email_check_res").style.color = "red";
+			}
+		}
+	});
+}
+</script>
 </head>
 <body>
 <c:url var="login" value="/account/login" />
@@ -47,15 +74,17 @@ h1 {
 	                    <label for="remember">Remember me</label> -->
 	                    <div class="submit-wrap">
 	                        <input type="submit" value="Sign in" class="submit">
-	                       	<div class="g-signin2" data-onsuccess="onSignIn"><a href="${google_url}"></a></div>
+	                       	<%-- <div class="g-signin2" data-onsuccess="onSignIn"><a href="${google_url}"></a></div> --%>
 	                        <a href="#" class="more">Forgot your password?</a>
 	                    </div>
 	  				</form>
 			  	</div>
 			  	<div class="signup-cont cont">
 	          		<form action="${join }" method="post">
-	              		<input type="email" name="email" id="id_email" class="inpt" required="required" placeholder="Your email">
+	              		<input type="text" name="email" id="id_email" class="inpt" required="required" placeholder="Your email">
 	                    <label for="id_email">email</label>
+	                    <button type="button" onclick="emailCheck();">중복확인</button>
+						<label id="email_check_res"></label>
 	                    <input type="text" name="name" id="id_username" class="inpt" required="required" placeholder="Your name">
 	                    <label for="id_username">name</label>
 	                    <input type="password" name="password" id="password" class="inpt" required="required" placeholder="Your password">
@@ -73,7 +102,7 @@ h1 {
 	<div class="signhalf bg"></div>
 </section>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  -->
 <script type="text/javascript">

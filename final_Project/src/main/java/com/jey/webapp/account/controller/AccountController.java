@@ -132,13 +132,23 @@ public class AccountController {
 	
 	/* 회원정보 수정 */
 	
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public ModelAndView modify(HttpServletRequest request, HttpSession session) throws Exception {
+	@RequestMapping(value = "/update_view", method = RequestMethod.POST)
+	public ModelAndView modify(HttpServletRequest req, HttpSession session, Model m, AccountDTO accountDTO) throws Exception {
 		ModelAndView mv = new ModelAndView("account/update");
-		session = request.getSession();
+		session = req.getSession();
 		AccountDTO dto = (AccountDTO) session.getAttribute("account");
-		System.out.println(dto.getId());
+		System.out.println(dto.getId() + dto.getEmail());
+		
+		String dtoPass = accountDTO.getPassword();
+		String pass = req.getParameter("password");
+		System.out.println(dtoPass);
+		
+		if(!(dtoPass.equals(pass))) {
+			System.out.println("잘못된 접근입니다.");
+//			return "redirect:/";
+		}
 		mv.addObject("account", dto);
+		System.out.println(((AccountDTO) session.getAttribute("account")).getEmail());
 		return mv;
 	}
 	
