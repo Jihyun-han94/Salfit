@@ -5,5 +5,25 @@
 
 <mapper namespace="orderMapper">
 
+<insert id="insertordered" parameterType="order">
+INSERT INTO ordered (id,aid,receiver,address,total,pdate,ddate)
+VALUES(ordered_seq.NEXTVAL,#{aid},#{receiver},#{address},#{total},SYSDATE,SYSDATE+1)
+
+</insert>
+	
+<select id="selectone" parameterType="order" resultType="order">
+select * 
+from ordered 
+where aid = #{aid} AND to_char(pdate, 'yyyymmdd' ) = to_char(sysdate, 'yyyymmdd')
+</select>	
+
+<insert id="insertorderdetail" parameterType="orderdetail">
+
+INSERT into ORDER_DETAIL (id,oid,pid,qty,price)
+VALUES (ORDER_DETAIL_SEQ.NEXTVAL, #{oid},#{pid},#{qty},#{price})
+
+
+</insert>
+
 	
 </mapper>
