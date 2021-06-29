@@ -99,7 +99,7 @@ public class KakaoPayController {
 	@RequestMapping(value="", method = RequestMethod.POST )
 	
 	public String getpayment( @ModelAttribute CartDTO dto,@ModelAttribute OrderDTO order_dto) throws Exception {
-		String forward="";
+		String forward="kakaopay/paystep1";
 		
 		int aid = dto.getAid();
 		String receiver = order_dto.getReceiver();
