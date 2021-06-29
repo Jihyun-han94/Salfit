@@ -214,6 +214,12 @@
          , url = #{url}
      WHERE pid = #{id}
   </update>
+  
+  <update id="updateView" parameterType="_int">
+  	UPDATE product
+       SET vcnt = vcnt+1
+     WHERE id = #{id}
+  </update>
 
   <delete id="deleteProduct" parameterType="product">
 		DELETE FROM product WHERE id = #{id}

@@ -145,4 +145,9 @@ public class ProductRepositoryImpl implements ProductRepository {
 			return false;
 		}
 	}
+
+	@Override
+	public void updateView(int id) {
+		sqlSession.update("productMapper.updateView", id);	
+	}
 }

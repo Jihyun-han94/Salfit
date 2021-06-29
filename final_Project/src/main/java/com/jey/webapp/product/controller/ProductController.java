@@ -69,9 +69,23 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public ModelAndView detail(HttpServletRequest request, @RequestParam int id) throws Exception {
+	public ModelAndView detail(HttpServletRequest request, @RequestParam int id, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		HttpSession session = request.getSession();
+		session = request.getSession();
+		
+		// --조회수(중복 제거)--
+		HashMap<String, String> hashmap = (HashMap) session.getAttribute("viewCnt");
+		
+		if(hashmap == null) {
+			hashmap = new HashMap<String, String>();
+		}
+		
+		if(hashmap.get(Integer.toString(id)) == null) {
+			hashmap.put(Integer.toString(id), "true");
+			session.setAttribute("viewCnt", hashmap);
+			
+			product.incview(id);
+		}
 		
 		ProductDTO item = product.findId(id);
 		if(item.getId() != -1 && item.getActive().equals("y")) {

@@ -7,32 +7,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 상세 정보</title>
+<title>관리자 상품 상세 정보</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
+
+<c:url var="moreReviews" value="/ajax/product/moreReviews" />
 </head>
 <body>
 	<header>
-		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
+		<%-- <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
 	</header>
- 	<div class="">
-      <div class="row my-5"> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
-         <div class="col-5">
-        	 <h1 style="padding-bottom: 50px;">
-	             ${fn:replace(item.getTitle(), newline, "<br>") }
-            </h1>
+ 	<div id="bodyContainer1">
+      <div class="row my-10 mx-5 "> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
+         <div class="col-4">
+        	<%--  <h1 style="padding-bottom: 50px;">
+	            ${fn:replace(item.getTitle(), newline, "<br>") }
+            </h1> --%>
             <div>
                <h3 style="font-weight: bolder; padding-bottom: 15px;">내용</h3>
                <p class="font-weight-light" style="padding-bottom: 15px;">
-                ${fn:replace(item.getContents(), newline, "<br>") }
+               ${fn:replace(item.getContents(), newline, "<br>") }
                </p>
             </div>
          </div>
-         <div class="col-2">
+         <div class="col-4">
  			<img class="w-100 rounded card-img-top productImg" width="500px" height="400px"
-				src="${pageContext.request.contextPath}${item.getUrl()}" >       
+					src="${pageContext.request.contextPath}${item.getUrl()}">       
          </div>
-         <div class="col-5">
-            <div>
+         <!-- 오른쪽 : 수정  -->
+         <div class="col-4">
+        	<div class="row g-3 align-items-center">
+        		<div class="col-lg col-auto">
+        			<h1 class="text-center">${item.getTitle() }</h1>
+        		</div>
+        	</div>
+        	<div class="row row-cols-lg-auto g-3 align-items-center">
+        		<div>
             	<c:url var="update" value="/admin/product/update" />
 	            <form action="${update}?id=${item.getId()}" method="GET">
 					<input type="hidden" name="id" value="${item.getId()}" readonly>
@@ -41,21 +50,72 @@
 				</form>
 				<br>
             </div>
-         </div>
-		<div class="container">
-	      <div class="row my-5">
-	         <div class="col-12">
-	            
-	         </div>
-	      </div>
+        	</div>
+            <div class="row g-3 align-items-center">
+			</div>
+       	</div>
 		</div>
-		<div class="container">
-			<jsp:include page="/WEB-INF/views/product/reviews.jsp" flush="false" >
-				<jsp:param name="item" value="${item}" />
-			</jsp:include>
-		</div>
-      </div>   
-   </div>
+   	</div>
+    <div id="bodyContainer3">
+		<jsp:include page="/WEB-INF/views/admin/product/reviews.jsp" flush="false" >
+			<jsp:param name="item" value="${item}" />
+			<jsp:param name="reviews" value="${reviews}" />
+		</jsp:include>
+	</div>
+   	
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
+<script type="text/javascript">
+	/* 리뷰 */
+	
+	var oldListCnt = "${oldListCnt}";
+
+	var startIndex = 1;	// 인덱스 초기값
+	var searchStep = 3;	// 3개씩 로딩
+		
+	readOldNotify(startIndex);
+	
+	function pressSearchMoreBtn() {
+		startIndex += searchStep;
+		readOldNotify(startIndex);
+	}
+	
+	function readOldNotify(index){
+		let _endIndex = index+searchStep-1;
+		$.ajax({
+			url: "${moreReviews}",
+			type: "post",
+			async: "true",
+			dataType: "json",
+			data: {
+				pid: "${item.getId()}",
+				startIndex: index,
+				endIndex: _endIndex,
+				oldListCnt : oldListCnt
+			},
+			success: function (data) {
+				let NodeList = "";
+				if(data.length == 0) {
+					let node = "<div class='col-12 text-center'><p>댓글이 존재하지 않습니다.</p></div>";
+					NodeList += node; 
+				}
+				for(i = 0; i < data.length; i++){
+					let newNode = "<div style='display: none;' class='card form-group col-sm-12 mx-auto p-0' onClick='window.open('"+data[i].id+"')>";
+					newNode += "<div class='card-body pt-3'><div class='row px-3 mb-2'>";
+					newNode += "<strong class='d-block text-gray-dark'>"+data[i].aname+"</strong>";
+					newNode += "<span class='text-muted ml-auto'>"+data[i].cdate2+"</span>";
+					newNode += "</div><span>"+data[i].contents+"</span></div></div>";
+					NodeList += newNode;
+				}
+				$(NodeList).appendTo($("#oldList")).slideDown();
+				
+				// 더보기 버튼 삭제
+				if(_endIndex >= oldListCnt){
+					$('#searchMoreNotify').remove();
+				}				
+			}
+		});
+	}
+	
+</script>
 </html>

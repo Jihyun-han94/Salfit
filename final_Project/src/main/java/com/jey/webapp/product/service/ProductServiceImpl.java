@@ -103,5 +103,10 @@ public class ProductServiceImpl implements ProductService {
 		return dao.findLike(like);
 	}
 
+	@Override
+	public void incview(int id) {
+		dao.updateView(id);
+	}
+
 
 }

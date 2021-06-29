@@ -28,5 +28,6 @@ public interface ProductService {
 	public void dislike(LikeDTO like);
 	public void like(LikeDTO like);
 	public boolean checkLikeExist(LikeDTO like);
+	public void incview(int id);
 
 }
