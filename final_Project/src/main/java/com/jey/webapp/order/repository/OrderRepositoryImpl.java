@@ -23,7 +23,8 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public List<OrderDTO> selectList(OrderDTO dto) throws Exception {
-		return null;
+		List<OrderDTO> orderlist = sqlSession.selectList("orderMapper.selectList", dto);
+		return orderlist;
 	}
 
 	@Override
@@ -63,6 +64,12 @@ public class OrderRepositoryImpl implements OrderRepository {
 	public OrderDTO selectone(OrderDTO dto) throws Exception {
 		dto = sqlSession.selectOne("orderMapper.selectone",dto);
 		return dto;
+	}
+
+	@Override
+	public List<OrderDetailDTO> selectall(OrderDetailDTO dto) throws Exception {
+		List<OrderDetailDTO> list = sqlSession.selectList("orderMapper.selectall", dto);
+		return list;
 	}
 
 	

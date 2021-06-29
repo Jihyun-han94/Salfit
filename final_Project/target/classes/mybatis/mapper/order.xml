@@ -5,6 +5,28 @@
 
 <mapper namespace="orderMapper">
 
+<select id="selectall" parameterType="orderdetail" resultType="orderdetail">
+	SELECT  d.id
+			d.oid
+			d.pid
+			d.qty
+			d.price
+			d.status			 
+	FROM order_detail d
+	JOIN ordered o
+	ON d.oid = o.id
+	WHERE d.oid = #{oid}
+</select>
+
+<select id="selectList" parameterType="order" resultType="order">
+SELECT * 
+FROM ordered  
+WHERE aid = #{aid}
+
+
+</select>
+
+
 <insert id="insertordered" parameterType="order">
 INSERT INTO ordered (id,aid,receiver,address,total,pdate,ddate)
 VALUES(ordered_seq.NEXTVAL,#{aid},#{receiver},#{address},#{total},SYSDATE,SYSDATE+1)
@@ -19,7 +41,7 @@ where aid = #{aid} AND to_char(pdate, 'yyyymmdd' ) = to_char(sysdate, 'yyyymmdd'
 
 <insert id="insertorderdetail" parameterType="orderdetail">
 
-INSERT into ORDER_DETAIL (id,oid,pid,qty,price)
+INSERT INTO ORDER_DETAIL (id,oid,pid,qty,price)
 VALUES (ORDER_DETAIL_SEQ.NEXTVAL, #{oid},#{pid},#{qty},#{price})
 
 

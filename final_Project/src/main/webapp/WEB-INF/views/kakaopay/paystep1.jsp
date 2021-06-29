@@ -15,6 +15,7 @@
 
 function iamport(){
 	//가맹점 식별코드
+	
 	IMP.init('imp02440277');
 	IMP.request_pay({
 	    pg : 'html5_inicis',
@@ -35,6 +36,8 @@ function iamport(){
 	        msg += '상점 거래ID : ' + rsp.merchant_uid;
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	        
+	        
 	    } else {
 	    	 var msg = '결제에 실패하였습니다.';
 	         msg += '에러내용 : ' + rsp.error_msg;
@@ -44,14 +47,13 @@ function iamport(){
 }
 </script>
 <body>
+<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
-
-
 <h1>주문서 확인</h1>
 		
 			<table border="1" id="id_cart" name="id_ordered">
@@ -68,6 +70,6 @@ function iamport(){
 		<br>
 <button type="button" onclick="iamport();">결제하기</button>
 
-
+<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -10,12 +10,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <title>Insert title here</title>
+<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
 <body>
 <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 <br>

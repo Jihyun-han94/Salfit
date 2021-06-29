@@ -15,4 +15,6 @@ public interface OrderRepository {
 	public boolean insert(OrderDetailDTO dto)  throws Exception;
 	public boolean update(OrderDetailDTO dto)  throws Exception;
 	public boolean insert(int id)  throws Exception;	// 리뷰추가용
+	public List<OrderDetailDTO> selectall(OrderDetailDTO dto) throws Exception;
+	
 }

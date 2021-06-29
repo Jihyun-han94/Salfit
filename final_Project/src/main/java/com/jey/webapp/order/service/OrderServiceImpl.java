@@ -42,7 +42,8 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<OrderDTO> findList(OrderDTO dto) throws Exception {
-		return null;
+		List<OrderDTO> orderlist = dao.selectList(dto);
+		return orderlist;
 	}
 
 	@Override
@@ -55,6 +56,13 @@ public class OrderServiceImpl implements OrderService {
 		dto = dao.selectone(dto);
 		return dto;
 	}
+
+	@Override
+	public List<OrderDetailDTO> selectall(OrderDetailDTO dto) throws Exception {
+		List<OrderDetailDTO> list = dao.selectall(dto);
+		return list;
+	}
+
 
 
 

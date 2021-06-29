@@ -50,9 +50,7 @@
 		
 		<c:forEach var="data" items="${requestScope.cartlist }">
 		<tr>
-		
 		<td>
-		
 		<div class="checkBox">
    		<input type="checkbox" name="chBox" class="chBox" data-cartNum="${data.id}" />
   		

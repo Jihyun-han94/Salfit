@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.order.service.OrderService;
@@ -27,8 +28,35 @@ public class OrderController {
 
 	/* 주문 내역 전체 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView list(@ModelAttribute OrderDTO dto) throws Exception {
+	public ModelAndView list(@ModelAttribute OrderDTO dto,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
+		//계정 정보 확인
+		AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
+		session.setMaxInactiveInterval(60*60); //세션 한시간 만료
+		int userid = accountdto.getId();
+		System.out.println("userid 확인 : "+userid);
+		
+		if(accountdto ==null ) {
+			mv.setViewName("account/join");
+			
+		}else {
+			//account.id로 ordered table 조회 (주문내역 전체)
+			dto.setAid(userid);
+			List<OrderDTO> orderlist = order.findList(dto);
+			mv.addObject("orderlist", orderlist);
+			
+			OrderDetailDTO orderdetail_dto = new OrderDetailDTO();
+			
+			//제품이름 때문에 orderdetail 조회해야함 (ordered.id로) 
+			for(OrderDTO data : orderlist) {
+				orderdetail_dto.setOid(data.getId());
+				List<OrderDetailDTO> orderdetail_arr = order.selectall(orderdetail_dto);
+			}
+			
+			
+			
+		}
 		
 		mv.setViewName("order/list");
 		
