@@ -27,4 +27,6 @@ public interface ProductRepository {
 	public List<ProductDTO> selectAllLike(int id);
 	public void removeLike(LikeDTO like);
 	public void addLike(LikeDTO like);
+	public boolean findLike(LikeDTO like);
+	public void updateView(int id);
 }

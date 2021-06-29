@@ -188,7 +188,6 @@
      </if> 
   </select>
   
-  
   <select id="likedProduct" parameterType="_int" resultType="product">
   	SELECT p.id
   	FROM liked l
@@ -215,6 +214,12 @@
          , url = #{url}
      WHERE pid = #{id}
   </update>
+  
+  <update id="updateView" parameterType="_int">
+  	UPDATE product
+       SET vcnt = vcnt+1
+     WHERE id = #{id}
+  </update>
 
   <delete id="deleteProduct" parameterType="product">
 		DELETE FROM product WHERE id = #{id}
@@ -231,18 +236,24 @@
   	SELECT bcnt FROM board
   	 WHERE id = #{id}
   </select>
-
   <update id="incview">
   	UPDATE board
   	   SET vcnt = vcnt + 1
   	 WHERE id = #{id}
   </update> -->
 
-	<select id="likedseq" resultType="_int">
+  <select id="findlike" parameterType="like" resultType="like">
+  	SELECT ROWNUM RNUM
+  	FROM liked
+   WHERE aid = #{aid}
+     AND pid = #{pid}
+  </select>
+
+  <select id="likedseq" resultType="_int">
     SELECT liked_seq.NEXTVAL AS likedseq FROM dual
   </select>
 
-   <insert id="upgradeLike" parameterType="like">
+  <insert id="upgradeLike" parameterType="like">
   	INSERT INTO liked(id, pid, aid)
   	     VALUES(#{id}, #{pid}, #{aid})
   </insert> 

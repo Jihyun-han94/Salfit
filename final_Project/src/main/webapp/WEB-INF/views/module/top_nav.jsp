@@ -14,7 +14,11 @@
 	<c:url var="main" value="/" />
 	<c:url var="join" value="/account/join" />
 	<c:url var="login" value="/account/login" />
+	<c:url var="logout" value="/account/logout" />
 	<c:url var="update" value="/account/update" />
+	<c:url var="updateView" value="/account/update_view" />
+	<c:url var="product" value="/product" />
+	<c:url var="cart" value="/cart" />
 </head>
 <body>
 	<header class="cd-auto-hide-header">
@@ -31,7 +35,7 @@
 		<c:choose>
 			<c:when test="${sessionScope.logined }">
 				<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>
-				<li><a href="#0">Cart</a></li>
+				<li><a href="${cart }">Cart</a></li>
 				<li><a href="${logout }">Logout</a></li>
 				<li><a href="#0">Contact Us</a></li>
 			</c:when>
@@ -47,7 +51,7 @@
 	<nav class="cd-secondary-nav">
 		<ul>
 			<li><a href="#0">Notice</a></li>
-			<li><a href="#0">Menu</a></li>
+			<li><a href="${product }">Menu</a></li>
 			<li><a href="#0">Buy</a></li>
 			<li><a href="#0">Review</a></li>
 		</ul>
@@ -96,6 +100,7 @@
 </div>
 </div> --%>
 
+<!-- Modal -->
 <div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -109,14 +114,14 @@
         </div>
 		<%-- <p style="color:red;">${param.error}</p> --%>
 		<div class="d-flex flex-column text-center">
-		<form action="${update}" method="GET">
+		<form action="${updateView}" method="POST">
 			<div class="form-group">
-			<input type="hidden" name="id" id="id" value="${requestScope.account.getId() }">
-				<label for="id_email">이메일</label>
-				<input id="id_email" type="email" name="email" value="${requestScope.account.getEmail() }" disabled>
+			<%-- <input type="hidden" name="id" id="id" value="${requestScope.account.getId() }"> --%>
+				<%-- <label for="id_email">이메일</label>
+				<input id="id_email" type="email" name="email" value="${requestScope.account.getEmail() }" disabled> --%>
 			</div>
 			<div class="form-group">
-				<label for="id_password">비밀번호</label>
+				<label for="id_password">비밀번호 확인</label>
 				<input id="id_password" type="password" name="password" placeholder="password" required>
 				<button type="submit" class="btn btn-info btn-block btn-round">확인</button>
 			</div>

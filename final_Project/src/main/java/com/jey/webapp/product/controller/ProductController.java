@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductRecommendDTO;
@@ -29,14 +30,28 @@ public class ProductController {
 
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView main(@ModelAttribute ProductSearchDTO search) throws Exception {
+	public ModelAndView main(@ModelAttribute ProductSearchDTO search, HttpServletRequest request, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		List<ProductDTO> productlist = null;
+		List<Integer> liked = new ArrayList<Integer>();
+		List<ProductDTO> likedProduct = null;
 		
-		// 세션 + 필터로 관리자만 active 'n'인 상품 보기 가능 
-		search.setAid(0); // 추후 개인 아이디로 바꿀예정 
-
+		session = request.getSession();
+		AccountDTO account = null;
+		// 로그인 사용자의 경우 -> 하트 표시 
+		if(session.getAttribute("logined") != null && (boolean)session.getAttribute("logined")) {
+			if(session.getAttribute("account") != null) {
+				account = (AccountDTO) session.getAttribute("account");
+				// 세션 + 필터로 관리자만 active 'n'인 상품 보기 가능 
+				search.setAid(account.getId());  
+				liked = new ArrayList<Integer>();
+				likedProduct = product.getAllLikePid(account.getId());  
+				for(ProductDTO lk : likedProduct) {
+					liked.add(lk.getId());
+				}
+			}
+		}
 		if(search.getPtype() == 0 && search.getSearchtype() == null) {
 			productlist = product.findAll(search);
 		} else if (search.getSearch() == "") {
@@ -44,14 +59,7 @@ public class ProductController {
 		} else {
 			productlist = product.findList(search);
 		}
-		
-		List<Integer> liked = new ArrayList<Integer>();
-		List<ProductDTO> likedProduct = product.getAllLikePid(1); // session user Id 값 
-		System.out.println(likedProduct);
-		for(ProductDTO lk : likedProduct) {
-			System.out.println(lk.getId());
-			liked.add(lk.getId());
-		}
+
 		
 		mv.setViewName("product/main");
 		mv.addObject("productlist", productlist);
@@ -61,9 +69,23 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public ModelAndView detail(HttpServletRequest request, @RequestParam int id) throws Exception {
+	public ModelAndView detail(HttpServletRequest request, @RequestParam int id, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		HttpSession session = request.getSession();
+		session = request.getSession();
+		
+		// --조회수(중복 제거)--
+		HashMap<String, String> hashmap = (HashMap) session.getAttribute("viewCnt");
+		
+		if(hashmap == null) {
+			hashmap = new HashMap<String, String>();
+		}
+		
+		if(hashmap.get(Integer.toString(id)) == null) {
+			hashmap.put(Integer.toString(id), "true");
+			session.setAttribute("viewCnt", hashmap);
+			
+			product.incview(id);
+		}
 		
 		ProductDTO item = product.findId(id);
 		if(item.getId() != -1 && item.getActive().equals("y")) {

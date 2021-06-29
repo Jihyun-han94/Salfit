@@ -42,10 +42,7 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	
-	@Override
-	public CartDTO find(CartDTO dto) throws Exception {
-		return dao.select(dto);
-	}
+
 
 	@Override
 	public boolean removeall(CartDTO dto) throws Exception {
@@ -57,6 +54,31 @@ public class CartServiceImpl implements CartService {
 	public int sumMoney(CartDTO dto) throws Exception {
 	
 		return dao.sumMoney(dto);
+	}
+
+	@Override
+	public int findPrice(CartDTO dto) throws Exception {
+		int price = dao.findPrice(dto);
+		System.out.println("디버깅"+price);
+		return price;
+	}
+
+	@Override
+	public boolean updateOrderState(CartDTO dto) throws Exception {
+		boolean res = dao.update(dto);
+		return res;
+	}
+
+	@Override
+	public CartDTO find(CartDTO dto) throws Exception {
+		CartDTO cartlist = dao.select(dto);
+		return cartlist;
+	}
+
+	@Override
+	public List<CartDTO> yfindAll(CartDTO dto) {
+		List<CartDTO> cartlist = dao.yselectList(dto);
+		return cartlist;
 	}
 	
 	

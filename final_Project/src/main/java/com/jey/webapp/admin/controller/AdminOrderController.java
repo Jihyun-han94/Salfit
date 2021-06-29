@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jey.webapp.account.dto.AccountDTO;
+import com.jey.webapp.order.dto.AdminOrderDTO;
+import com.jey.webapp.order.dto.AdminOrderDetailDTO;
 import com.jey.webapp.order.dto.OrderDTO;
+import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.order.service.OrderService;
 
 @Controller
@@ -26,29 +30,96 @@ public class AdminOrderController {
 	@Autowired
 	private OrderService order;
 
+	/* 주문번호 생성 */
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String createOrder(Model m, @ModelAttribute OrderDTO dto, @ModelAttribute OrderDetailDTO detail, HttpServletRequest request, HttpSession session) throws Exception {
+		
+		
+		// 주문 임의 설정 
+		dto.setAid(2);
+		dto.setReceiver("김은순");
+		dto.setAddress("수원시 영통구 하동 광교호수로 152번길 23");
+		dto.setPaytype("카카오페이");
+		dto.setTotal(59600);
+		dto.setStatus("paid");
+		dto.setPdate("2021-06-25");
+		dto.setDdate("2021-06-26");
+		dto.setEdate("2021-06-27");
+		
+		// 디테일
+		detail.setPid(22);
+		detail.setOid(6);
+		detail.setQty(2);
+//		detail.setPrice(4000);
+		detail.setStartdate("2021-06-29");
+		detail.setEnddate("2021-06-29");
+		detail.setDays(2);
+		
+		boolean res = order.add(dto, detail);
+		
+		if(res == true) {
+			return "admin/order/manage";
+		}
+		
+		return "error/default";
+	}
 	
-	/* 주문확인 후 상태표시 */
+	
+	/* 주문확인 */
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String login() throws Exception {
-		return "admin/order/list";
+	public String manageOrder(Model m, @ModelAttribute OrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
+//		session = request.getSession();
+//		AccountDTO account = (AccountDTO) session.getAttribute("account");
+//		System.out.println(account.getId());
+//		m.addAttribute("account", account);
+		
+		List<AdminOrderDTO> orderlist = null;
+		List<AdminOrderDetailDTO> orderdetaillist = null;
+//		System.out.println(orderlist.get(0).getDdate().toString());
+		System.out.println("status: " +dto.getStatus());
+		
+		if (dto.getStatus() == null || dto.getStatus() == "") {
+			orderlist = order.findList(dto);
+			orderdetaillist = order.findDetailList(dto);
+		} else {
+			orderlist = order.findListSelected(dto);
+			orderdetaillist = order.findDetailListSelected(dto);
+		}
+		
+		m.addAttribute("orderlist",orderlist);
+		m.addAttribute("orderdetaillist",orderdetaillist);
+		m.addAttribute("dto",dto);
+		return "admin/order/manage";
 	}
 	
-	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	public String userLogin(Model m, @ModelAttribute OrderDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String forward = "";
-		return forward;
+	
+	/* 주문 상태 별  */
+	@RequestMapping(value = "/selectStatus", method = RequestMethod.GET)
+	public String selectOrderStatus(Model m, @ModelAttribute OrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
+		
+		List<AdminOrderDTO> orderlist = order.findList(dto);
+		List<AdminOrderDetailDTO> orderdetaillist = order.findDetailList(dto);
+
+		
+		
+		
+		m.addAttribute("orderlist",orderlist);
+		m.addAttribute("orderdetaillist",orderdetaillist);
+		m.addAttribute("dto",dto);
+		return "admin/order/manage";
 	}
 	
-	/* 주문확인, 배송중, 배송완료, 취소요청, 취소완료 */
 	
-	@RequestMapping(value = "/checked", method = RequestMethod.GET)
-	public ModelAndView checked(@ModelAttribute OrderDTO dto) throws Exception {
-		ModelAndView mv = new ModelAndView();
+	/* 캘린더로 주문관리 */
+	@RequestMapping(value = "/calendar", method = RequestMethod.GET)
+	public String calendar(Model m, @ModelAttribute OrderDTO dto, @ModelAttribute OrderDetailDTO detail, HttpServletRequest request, HttpSession session) throws Exception {
+		List<AdminOrderDTO> orderlist = order.findList(dto);
+		List<AdminOrderDetailDTO> orderdetaillist = order.findDetailList(dto);
 		
-		mv.setViewName("redirect:/order");
-		
-		return mv;
+		m.addAttribute("orderlist",orderlist);
+		m.addAttribute("orderdetaillist",orderdetaillist);
+		return "admin/order/calendar";
 	}
 	
 }

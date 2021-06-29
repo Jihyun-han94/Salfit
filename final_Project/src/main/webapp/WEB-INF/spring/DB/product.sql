@@ -1,3 +1,6 @@
+DROP TABLE liked;
+DROP SEQUENCE liked_seq;
+
 CREATE TABLE product_type(
         id NUMBER,
         name NVARCHAR2(256)
@@ -81,13 +84,13 @@ CREATE TABLE liked (
          aid NUMBER
 );
 
-ALTER TABLE liked ADD CONSTRAINT liked_id_PK PRIMARY KEY(id);
+ALTER TABLE liked ADD CONSTRAINT liked_id_PK PRIMARY KEY(pid, aid);
 ALTER TABLE liked ADD CONSTRAINT liked_pid_FK FOREIGN KEY(pid) REFERENCES product(id) ON DELETE CASCADE;
 ALTER TABLE liked ADD CONSTRAINT liked_aid_FK FOREIGN KEY(aid) REFERENCES account(id) ON DELETE CASCADE;
 
-COMMENT ON COLUMN liked.id IS '리뷰 식별 번호';
-COMMENT ON COLUMN liked.pid IS '리뷰 단 게시글 식별 번호';
-COMMENT ON COLUMN liked.aid IS '리뷰 작성자 식별 번호';
+COMMENT ON COLUMN liked.id IS '좋아요 식별 번호';
+COMMENT ON COLUMN liked.pid IS '좋아요 한 게시글 식별 번호';
+COMMENT ON COLUMN liked.aid IS '좋아요 한 작성자 식별 번호';
 ---------------------------------------------------------------------------------------------------------
 
 INSERT INTO product_type VALUES(1, '채식주의자');
@@ -108,3 +111,11 @@ INSERT INTO product(id, ptype, aid, title, price, contents) VALUES(6, 3, 1, '드
 DELETE FROM product where id = 3;
 
 ALTER TABLE product_img DROP CONSTRAINT product_img_pid_FK;
+
+SELECT ROWNUM RNUM
+  	FROM liked l
+   WHERE l.aid = 2
+     AND l.pid = 30;
+     
+SELECT * FROM liked;
+DELETE FROM liked WHERE pid = 20 AND aid = 2;

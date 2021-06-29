@@ -62,6 +62,7 @@
 								<a href="${detail}?id=${item.getId()}">
 									<img class="rounded card-img-top productImg"
 										src="${pageContext.request.contextPath}${item.getUrl()}"
+										
 										>
 								</a>
 								<div class="card-body bg-transparent border-0">

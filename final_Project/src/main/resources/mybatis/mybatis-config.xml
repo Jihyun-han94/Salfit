@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="account" type="com.jey.webapp.account.dto.AccountDTO"	/>
+		<typeAlias alias="account" type="com.jey.webapp.account.dto.AccountDTO"  />
 		<typeAlias alias="product" type="com.jey.webapp.product.dto.ProductDTO"  />
 		<typeAlias alias="productfile" type="com.jey.webapp.product.dto.ProductFileDTO"  />
 		<typeAlias alias="producttype" type="com.jey.webapp.product.dto.ProductTypeDTO"  />
@@ -13,6 +13,8 @@
 		<typeAlias alias="cart" type="com.jey.webapp.cart.dto.CartDTO"  />
 		<typeAlias alias="orderdetail" type="com.jey.webapp.order.dto.OrderDetailDTO"  />
 		<typeAlias alias="order" type="com.jey.webapp.order.dto.OrderDTO"  />
+		<typeAlias alias="adminorder" type="com.jey.webapp.order.dto.AdminOrderDTO"  />
+		<typeAlias alias="adminorderdetail" type="com.jey.webapp.order.dto.AdminOrderDetailDTO"  />
 		<typeAlias alias="review" type="com.jey.webapp.order.dto.ReviewDTO"  />
 		<typeAlias alias="reviewsearch" type="com.jey.webapp.product.dto.ReviewSearchDTO"  />
 		<typeAlias alias="like" type="com.jey.webapp.product.dto.LikeDTO"  />

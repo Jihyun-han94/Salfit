@@ -2,6 +2,8 @@ package com.jey.webapp.admin.controller;
 
 
 import java.io.File;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductFileDTO;
@@ -40,9 +44,9 @@ public class AdminProductController {
 	/* 상품 조회(조회수, 수정, 삭제, 리뷰에 대댓글 버튼 ) */
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView list(@ModelAttribute ProductSearchDTO search) throws Exception {
-		System.out.println("Ptype : " + search.getPtype());
-		System.out.println("Search : " + search.getSearch());
+	public ModelAndView list(@ModelAttribute ProductSearchDTO search, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		session.getAttribute("account");
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -119,10 +123,12 @@ public class AdminProductController {
 			if(file.getSize() <= 10 * 1024 * 1024) {
 				UUID uuid = UUID.randomUUID();
 				
-//				origin_name = file.getOriginalFilename();
-				origin_name = StringUtils.cleanPath(new String(file.getOriginalFilename().getBytes("ISO-8859-1"), StandardCharsets.UTF_8));
+				origin_name = file.getOriginalFilename();
+//				origin_name = StringUtils.cleanPath(new String(file.getOriginalFilename().getBytes("ISO-8859-1"), StandardCharsets.UTF_8));
+//				origin_name = URLEncoder.encode(file.getOriginalFilename(), "euc-kr");
 				change_name = uuid.toString() + "_" + origin_name;
 				file_ext = FilenameUtils.getExtension(file.getOriginalFilename());
+				
 				
 				System.out.println("원본 파일명 : " + origin_name);
 				System.out.println("변경된 파일명 : " + change_name);
@@ -142,7 +148,6 @@ public class AdminProductController {
 					dto.setImg(origin_name);
 					dto.setImguuid(change_name);
 					dto.setUrl("/resources/upload/product/" + change_name);
-					System.out.println(path);
 				} else {
 					System.out.println("해당 확장자는 업로드 할 수 없습니다.");
 					forward = "error/default";
@@ -189,7 +194,6 @@ public class AdminProductController {
 			@RequestParam MultipartFile file,
 			HttpServletRequest req) throws Exception {
 		ModelAndView mv = new ModelAndView("admin/product/update");
-		
 		String origin_name = "";
 		String change_name = "";
 		String file_ext = "";
@@ -201,8 +205,11 @@ public class AdminProductController {
 			if(file.getSize() <= 10 * 1024 * 1024) {
 				UUID uuid = UUID.randomUUID();
 				
-//				origin_name = file.getOriginalFilename();
-				origin_name = StringUtils.cleanPath(new String(file.getOriginalFilename().getBytes("ISO-8859-1"), StandardCharsets.UTF_8));
+				origin_name = file.getOriginalFilename();
+//				origin_name = StringUtils.cleanPath(new String(file.getOriginalFilename().getBytes("ISO-8859-1"), StandardCharsets.UTF_8));
+//				origin_name = new String(file.getOriginalFilename().getBytes("8859_1"),"utf-8");
+
+				System.out.println("origin name : " + origin_name);
 				change_name = uuid.toString() + "_" + origin_name;
 				file_ext = FilenameUtils.getExtension(file.getOriginalFilename());
 				

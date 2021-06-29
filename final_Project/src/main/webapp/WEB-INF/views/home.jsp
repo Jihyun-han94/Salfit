@@ -16,6 +16,8 @@
 	<c:url var="logout" value="/account/logout" />
 	<c:url var="update" value="/account/update" />
 	<c:url var="updateView" value="/account/update_view" />
+	<c:url var="product" value="/product" />
+	<c:url var="cart" value="/cart" />
 </head>
 <body>
 <header class="cd-auto-hide-header">
@@ -32,7 +34,7 @@
 		<c:choose>
 			<c:when test="${sessionScope.logined }">
 				<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>
-				<li><a href="#0">Cart</a></li>
+				<li><a href="${cart }">Cart</a></li>
 				<li><a href="${logout }">Logout</a></li>
 				<li><a href="#0">Contact Us</a></li>
 			</c:when>
@@ -55,7 +57,7 @@
 <nav class="cd-secondary-nav">
 	<ul>
 		<li><a href="#0">Notice</a></li>
-		<li><a href="#0">Menu</a></li>
+		<li><a href="${product }">Menu</a></li>
 		<li><a href="#0">Buy</a></li>
 		<li><a href="#0">Review</a></li>
 	</ul>

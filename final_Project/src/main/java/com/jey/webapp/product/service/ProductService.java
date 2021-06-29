@@ -27,5 +27,7 @@ public interface ProductService {
 	public List<ProductDTO> getAllLikePid(int id);
 	public void dislike(LikeDTO like);
 	public void like(LikeDTO like);
+	public boolean checkLikeExist(LikeDTO like);
+	public void incview(int id);
 
 }

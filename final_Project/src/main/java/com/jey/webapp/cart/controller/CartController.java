@@ -31,15 +31,14 @@ public class CartController {
 	/* 장바구니 조회 */
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String cartList(Model m, @ModelAttribute CartDTO dto,HttpSession session) throws Exception {
+	public String cartList(Model m, @ModelAttribute CartDTO dto,HttpServletRequest request) throws Exception {
 		
 		String forward = "";
+		HttpSession session = request.getSession();
+		AccountDTO accountDTO = (AccountDTO) session.getAttribute("account");
+		int userid = accountDTO.getId();
+		System.out.println("userid 확인 :" + userid);
 		
-		//AccountDTO accountDTO = (AccountDTO) session.getAttribute("account");
-		//int userid = accountDTO.getId();
-		//System.out.println("userid 확인 :" + userid);
-		
-		int userid = 1;
 //		if(accountDTO == null) {
 //			forward = "redirect:/account/login";
 //		}else {
@@ -72,30 +71,30 @@ public class CartController {
 		System.out.println("sumMoney :" +sumMoney);
 		m.addAttribute("cartlist",cartlist);
 		m.addAttribute("sumMoney",sumMoney);
-		m.addAttribute("totalMoney", totalMoney);
+		//m.addAttribute("totalMoney", totalMoney);
 		
 		return "cart/mycart";
 	}	
 	
-	
-	/* 장바구니에 상품 담기 */
-	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addToCart(Model m, @ModelAttribute CartDTO dto, HttpSession session) throws Exception {
-		
-		//로그인 여부 체크하기 위해 세션에 저장된 아이디 확인
-		String id = (String)session.getAttribute("id");
-		int aid = Integer.parseInt(id);
-		
-		if(id == null) {
-			return "redirect:/account/login";
-		}
-			dto.setAid(aid);
-			cart.add(dto); //cart 테이블에 저장됨
-		
-			return "redirect:/cart";
-	}
-	
+//	
+//	/* 장바구니에 상품 담기 */
+//	
+//	@RequestMapping(value = "/add", method = RequestMethod.POST)
+//	public String addToCart(Model m, @ModelAttribute CartDTO dto, HttpSession session) throws Exception {
+//		
+//		//로그인 여부 체크하기 위해 세션에 저장된 아이디 확인
+//		String id = (String)session.getAttribute("id");
+//		int aid = Integer.parseInt(id);
+//		
+//		if(id == null) {
+//			return "redirect:/account/login";
+//		}
+//			dto.setAid(aid);
+//			cart.add(dto); //cart 테이블에 저장됨
+//		
+//			return "redirect:/cart";
+//	}
+//	
 	/* 장바구니에서 상품 제거 -> Ajax 로도 가능함.*/
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

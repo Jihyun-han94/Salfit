@@ -2,6 +2,7 @@ package com.jey.webapp.product.dto;
 
 public class LikeDTO {
 	private int id;
+	private int rnum;
 	private int pid;
 	private int aid;
 	private String cancel;
@@ -11,6 +12,12 @@ public class LikeDTO {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getPid() {
 		return pid;

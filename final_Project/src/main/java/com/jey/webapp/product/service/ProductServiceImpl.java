@@ -98,5 +98,15 @@ public class ProductServiceImpl implements ProductService {
 		dao.addLike(like);
 	}
 
+	@Override
+	public boolean checkLikeExist(LikeDTO like) {
+		return dao.findLike(like);
+	}
+
+	@Override
+	public void incview(int id) {
+		dao.updateView(id);
+	}
+
 
 }

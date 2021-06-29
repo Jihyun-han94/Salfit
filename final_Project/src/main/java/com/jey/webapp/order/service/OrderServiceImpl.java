@@ -5,6 +5,8 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jey.webapp.order.dto.AdminOrderDTO;
+import com.jey.webapp.order.dto.AdminOrderDetailDTO;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.order.repository.OrderRepository;
@@ -19,10 +21,16 @@ public class OrderServiceImpl implements OrderService {
 	private OrderRepository dao;
 
 	@Override
-	public boolean add(OrderDTO dto) throws Exception {
-		return false;
+	public boolean add(OrderDTO dto, OrderDetailDTO detail) throws Exception {
+		return dao.insert(dto, detail);
 	}
-
+	
+	@Override
+	public boolean add(OrderDTO dto) throws Exception {
+		System.out.println("serviceimpl까지 왓음");
+		return dao.insert(dto);
+	}
+	
 	@Override
 	public boolean addDetail(OrderDetailDTO dto) throws Exception {
 		return false;
@@ -39,13 +47,33 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderDTO> findList(OrderDTO dto) throws Exception {
-		return null;
+	public boolean add(int id) throws Exception {
+		return false;
 	}
 
 	@Override
-	public boolean add(int id) throws Exception {
-		return false;
+	public boolean updateStatus(OrderDTO dto) {
+		return dao.updateStatus(dto);
+	}
+	
+	@Override
+	public List<AdminOrderDTO> findList(OrderDTO dto) throws Exception {
+		return dao.selectList(dto);
+	}
+
+	@Override
+	public List<AdminOrderDetailDTO> findDetailList(OrderDTO dto) {
+		return dao.selectDetailList(dto);
+	}
+
+	@Override
+	public List<AdminOrderDTO> findListSelected(OrderDTO dto) {
+		return dao.selectListSelected(dto);
+	}
+
+	@Override
+	public List<AdminOrderDetailDTO> findDetailListSelected(OrderDTO dto) {
+		return dao.selectDetailListSelected(dto);
 	}
 
 

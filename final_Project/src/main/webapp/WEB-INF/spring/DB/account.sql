@@ -41,10 +41,13 @@ ALTER TABLE deliver_address ADD CONSTRAINT deliver_address_aid_PK PRIMARY KEY(ai
 ALTER TABLE deliver_address ADD CONSTRAINT deliver_address_aid_FK FOREIGN KEY(aid) REFERENCES account(id) ON DELETE CASCADE;
 
 COMMENT ON COLUMN deliver_address.address IS '배송지';
+
+ALTER TABLE account ADD (profile_img VARCHAR2(1024));
+COMMENT ON COLUMN account.profile_img IS '사용자 프로필 이미지';
 ------------------------------------------------------TEST--------------------------------------
 SELECT * FROM account;
 
 ALTER TABLE account RENAME COLUMN type TO atype;
 
-INSERT INTO account VALUES(1, 'admin@admin.com', 'admin', '관리자', 01012345678, 'a', SYSDATE, SYSDATE, NULL);
+INSERT INTO account VALUES(1, 'admin@admin.com', 'admin', '관리자', 01012345678, 'a', SYSDATE, SYSDATE, NULL, NULL);
 
