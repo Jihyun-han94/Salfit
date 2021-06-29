@@ -472,7 +472,7 @@ Intro Section
   width: 100%;
   margin-top: 60px;
   height: 300px;
-  background: url(/salfit/resources/img/real_main.png) no-repeat center center;
+  /* background: url(/salfit/resources/img/real_main.png) no-repeat center center; */
   background-size: 105% 100%;
 }
 .cd-hero .cd-hero-content {

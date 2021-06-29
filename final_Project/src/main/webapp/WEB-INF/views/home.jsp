@@ -4,6 +4,7 @@
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
+	<title>Salfit | main</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,6 +19,22 @@
 	<c:url var="updateView" value="/account/update_view" />
 	<c:url var="product" value="/product" />
 	<c:url var="cart" value="/cart" />
+	
+<style>
+.btn_confirm {
+ padding: 5px 25px;
+ border: 1px solid #bac600;
+ color: #263238;
+ background: transparent;
+ -moz-border-radius: 2px;
+ -webkit-border-radius: 2px;
+ border-radius: 2px;
+}
+.btn_confirm:hover {
+  background-color: #bac600;
+  color: #ffffff;
+}
+</style>
 </head>
 <body>
 <header class="cd-auto-hide-header">
@@ -49,9 +66,27 @@
 </header> <!-- .cd-auto-hide-header -->
 
 <section class="cd-hero">
-	<div class="cd-hero-content">
-		<!-- your content here -->
-	</div>
+	<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="./resources/img/real_main.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="./resources/img/summer_main.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="./resources/img/main5.jpeg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 </section> <!-- .cd-hero -->
 
 <nav class="cd-secondary-nav">
@@ -100,51 +135,10 @@
 	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
 </script>
 <script src="./resources/js/main.js"></script> <!-- Resource jQuery -->
-<%-- 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="form-title text-center">
-          <h4>Login</h4>
-        </div>
-		<p style="color:red;">${param.error}</p>
-		<div class="d-flex flex-column text-center">
-		<form action="${login}" method="POST">
-			<div>
-				<label style="color:red;">${error != null ? error : ""}</label>
-			</div>
-			<div class="form-group">
-				<label for="id_email">이메일</label>
-				<input id="id_email" type="email" name="email" placeholder="email" required>
-			</div>
-			<div class="form-group">
-				<label for="id_password">비밀번호</label>
-				<input id="id_password" type="password" name="password" placeholder="password" required>
-			</div>
-			<div>
-				<button type="submit" class="btn btn-info btn-block btn-round">로그인</button>
-				<c:url var="main" value="/product/main" />
-				<button type="button" class="btn btn-info btn-block btn-round" onclick="location.href='${main}'">취소</button>
-			</div>
-		</form>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
-</div> --%>
 
 <!-- Modal -->
 <div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-40size" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -154,18 +148,18 @@
       <div class="modal-body">
       <div class="form-title text-center">
         </div>
-		<%-- <p style="color:red;">${param.error}</p> --%>
 		<div class="d-flex flex-column text-center">
+		<h2 style="margin-bottom: 10px; color: #475c01;">회원 비밀번호 확인</h2>
+		<h5>외부로부터 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.</h5>
+		<h5>항상 비밀번호는 타인에게 노출되지 않도록 주의해 주세요.</h5>
+		<br>
 		<form action="${updateView}" method="POST">
 			<div class="form-group">
-			<%-- <input type="hidden" name="id" id="id" value="${requestScope.account.getId() }"> --%>
-				<%-- <label for="id_email">이메일</label>
-				<input id="id_email" type="email" name="email" value="${requestScope.account.getEmail() }" disabled> --%>
-			</div>
-			<div class="form-group">
-				<label for="id_password">비밀번호 확인</label>
-				<input id="id_password" type="password" name="password" placeholder="password" required>
-				<button type="submit" class="btn btn-info btn-block btn-round">확인</button>
+				<!-- <label for="id_password">비밀번호 확인</label> -->
+				<input style="margin-bottom: 20px;" id="id_password" type="password" name="password" placeholder="password" required>
+				<div>
+					<button type="submit" class="btn_confirm">확인</button>
+				</div>
 			</div>
 		</form>
       </div>
