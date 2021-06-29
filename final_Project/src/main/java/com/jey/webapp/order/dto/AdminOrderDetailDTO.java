@@ -11,6 +11,9 @@ public class AdminOrderDetailDTO {
 	private String startdate; 
 	private String enddate; 
 	private int days; 
+	private String receiver;
+	private int phone;
+	private String address;
 	private String status;
 	public int getId() {
 		return id;
@@ -65,6 +68,24 @@ public class AdminOrderDetailDTO {
 	}
 	public void setDays(int days) {
 		this.days = days;
+	}
+	public String getReceiver() {
+		return receiver;
+	}
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+	public int getPhone() {
+		return phone;
+	}
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getStatus() {
 		return status;

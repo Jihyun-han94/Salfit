@@ -9,14 +9,13 @@
 <meta charset='utf-8' />
 <title>관리자 주문 관리</title>
 <jsp:include page="/WEB-INF/views/module/fullcalendar.jsp"></jsp:include>
-
+<c:url var="producturl" value="/admin/product/detail" />
 <c:url var="orderurl" value="/admin/order" />
 <script>
-   
    document.addEventListener('DOMContentLoaded', function() {
        var groupMap = [
      		    <c:forEach items="${orderdetaillist}" var="order" varStatus="loop">
-     		        {"title": "${order.getPname()} / ${order.getQty()}", "start": "${order.getStartdate()}", "end":"${order.getEnddate()}", "color": '#ff9f89', "url": '${orderurl}/list'}
+     		        {"title": "상품명 : ${order.getPname()} / 수량 : ${order.getQty()} 개 / 주소: ${order.getAddress()} ", "start": "${order.getStartdate()}", "end":"${order.getEnddate()}", "color": '#ff9f89', "url": '${producturl}?id=${order.getPid()}'}
      		        ${!loop.last ? ',' : ''}
      		    </c:forEach>
      		];  
@@ -31,16 +30,14 @@
        navLinks: true,
        dayMaxEvents: true, 
        initialView: 'dayGridMonth',
-       selectable: true,
+       selectable: false,
        selectHelper: true,
        select: function(start, end, startStr, jsEvent, view){
        },
        dateClick: function(info) {
-    	    alert('Clicked on: ' + info.dateStr);
-    	    // change the day's background color just for fun
     	    info.dayEl.style.backgroundColor = 'red';
-         var root_url="${orderurl}/list";
-         window.location = root_url;
+         var root_url="${orderurl}/list?ddate=";
+         window.location = root_url + info.dateStr;
     	  },
        events: groupMap
      });
@@ -55,6 +52,13 @@
 	</header>
 	<div class="bodyContainer">
 		<h1 class="corpBoardTitle">배송 관리</h1>
+		<div class="row">
+		    <div class="col-xs-12">
+		        <div class="text-right">
+					<a href="${orderurl}/list" class="btn btn-default float-right">주문 관리</a>
+		        </div>
+		    </div>
+		</div>
     <div id='calendar'></div>
   </body>
 </html>

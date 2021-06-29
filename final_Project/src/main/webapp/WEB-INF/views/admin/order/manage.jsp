@@ -20,7 +20,7 @@
 	</header>
 	<div class="bodyContainer">
 		<h1 class="corpBoardTitle">주문 관리</h1>
-
+		<a href="${order}/calendar" class="btn btn-outline-secondary pull-right">배송 관리</a>
 		<section class="applicantTableSection">
 			<h3>전체 주문</h3>
 			<table class="table text-center">
@@ -38,7 +38,7 @@
 						<th scope="col">상태 체크</th>
 						<th scope="col">주문 처리 상태
 						<form id="select_status_form" action="${order}/list" method="get">
-							<select id="selectOrderStatus" onchange="submit();" name="status" >
+							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" >
 						        <option value="" ${dto.getStatus() == null ? "selected" : "" }>전체</option>
 						        <option value="paid" ${dto.getStatus() == "paid" ? "selected" : "" }>미확인</option>
 						        <option value="checked" ${dto.getStatus() == "checked" ? "selected" : "" }>배송전</option>
@@ -57,17 +57,17 @@
 					</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="order" items="${orderlist}" >
+						<c:forEach var="order" items="${orderlist}" varStatus="status">
 						<tr scope="row">
 						<th> ${order.getId()}
 							<c:choose>
 								<c:when test="${order.getStatus().equals('paid')}">
-									<a type="button" data-toggle="modal" data-target="#staticBackdrop"  class="btn" onclick="zoomin(this, ${order.getId()},document.getElementById('statusicon${order.getId()}') , document.getElementById('status${order.getId()}'));" >
+									<a id="${order.getId()} " type="button" data-toggle="modal" data-target="#staticBackdrop" class="ordermodal btn" onclick="zoomin(this, ${order.getId()},document.getElementById('statusicon${order.getId()}') , document.getElementById('status${order.getId()}'));" >
 									<i class="bi bi-zoom-in" style="font-size: 1.5rem; color: cornflowerblue;" ></i>
 									</a>
 								</c:when>
 								<c:otherwise>
-									<a type="button" data-toggle="modal" data-target="#staticBackdrop"  class="btn" >
+									<a id="${order.getId()} " type="button" data-toggle="modal" data-target="#staticBackdrop" class="ordermodal btn" >
 										<i class="bi bi-zoom-in" style="font-size: 1.5rem; color: cornflowerblue;" ></i>
 									</a>
 								</c:otherwise>
@@ -78,32 +78,44 @@
 							  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
 							    <div class="modal-content">
 							      <div class="modal-header">
-							        <h5 class="modal-title" id="staticBackdropLabel">주문번호 : ${oreder.getId()}</h5>
+							        <h5 class="modal-title" id="staticBackdropLabel">주문번호 :  <span id="oidinmodal">${oreder.getId()}</span></h5>
 							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							          <span aria-hidden="true">&times;</span>
 							        </button>
 							      </div>
 							      <div class="modal-body">
-								    <c:forEach var="orderdetail" items="${orderdetaillist}" >
-								      	<c:if test="${orderdetail.getOid() == order.getId()}">
-								      	 <div class="row">
-									      <div class="col-sm-12">
-									        ${orderdetail.getId()}
-									        <div class="row">
-									          <div class="col-4 col-sm-6">
-									            <a href="#" class="tooltip-test" title="Tooltip">상품명 : ${orderdetail.getPname()}</a>
-									          </div>
-									          <div class="col-4 col-sm-3">
-									            주문 수량 : ${orderdetail.getQty()}
-									          </div>
-									          <div class="col-4 col-sm-3">
-									            가격 : ${orderdetail.getPrice()}
-									          </div>
-									        </div>
+							      	 <div class="row">
+							      	 	  <div class="col-1 col-sm-1">
+									        상품명
 									      </div>
-									    </div>
-								      	</c:if>
-									  <hr>
+									      <div class="col-4 col-sm-5">
+									        상품명
+									      </div>
+									      <div class="col-3 col-sm-3">
+									      	주문 수량 / 가격 
+									      </div>
+									      <div class="col-4 col-sm-3">
+									      	구독 기간(일수)
+									      </div>
+									 </div><hr>
+								    <c:forEach var="orderdetail" items="${orderdetaillist}" varStatus="loop">
+								      <%-- 	<c:if test="${orderdetail.getOid() == order.getId()}"> --%>
+							      	 <div class="row">
+								      	  <div class="col-1 col-sm-1">
+								        	${orderdetail.getOid()}
+								          </div>
+								          <div class="col-4 col-sm-5">
+								            <a href="#" class="tooltip-test" title="Tooltip">${orderdetail.getPname()}</a>
+								          </div>
+								          <div class="col-3 col-sm-3">
+								             ${orderdetail.getQty()} 개 / ${orderdetail.getPrice()} 원 
+								          </div>
+								          <div class="col-4 col-sm-3">
+								          	${orderdetail.getStartdate()} ~ ${orderdetail.getEnddate()} (${orderdetail.getDays()} 일간)
+								          </div>
+								    </div>
+								      	<%-- </c:if> --%>
+									  	${!loop.last ? '<hr>' : ''}	
 									  </c:forEach>
 								      </div>
 								      <div class="modal-footer">
@@ -186,20 +198,48 @@ $(document).ready(function() {
 		sanitize: false,
 		  })
 	})
+	
+	/* 모달에 장바구니 아이디 넘겨주기 */
+	$(".ordermodal").click(function(){
+		var orderId = $(this).attr('id'); 
+	  	var modalheader = $(".modal-header");
+	  	var modaloid = $("#oidinmodal");
+		let node = "<input type='hidden' data-id='"+orderId+"' value='"+orderId+"'>";
+		$(node).appendTo(modalheader);
+		modaloid.text(orderId);
+	});
+	
+		
 });
 
-	function selectOrderStatus() {
-
-		let selectForm = document.getElementById("select_status_form");
-		let selectBox = document.getElementById("selectOrderStatus");
-		let selectedValue = selectBox.options[selectBox.selectedIndex].value;
-		alert(selectedValue);
-		
-		selectForm.submit();
+	function searchStatus(e) {
+		const url = new URL(window.location.href);
+		const urlParams = url.searchParams;
+		if(urlParams.has('ddate')) {
+			var ddateParam = urlParams.get('ddate'); // null or not 
+		}
+		if(urlParams.has('status')) {
+			urlParams.set('status', e.value);
+		} else {
+			urlParams.append('status', e.value);
+		}
+		window.location.href = "list?" + urlParams;
 	}
 
+
+	function orderid(id) {
+		/* var key = id;
+		alert(key);
+		eval("var orderId" + key + "=" + key); */
+		
+	     /* var orderId = $(this).data('id'); */
+	     /* $(".modal-header #orderId").val( id ); */
+	     document.getElementById("orderId").value = id;
+	}
 	
 	function zoomin(e, id, icon, status) {
+		orderid(id);
+		
 		if(status.innerText == "paid") {
 		$.ajax({
 			url: "${ajax_order}/checked",
@@ -212,7 +252,7 @@ $(document).ready(function() {
 			},
 			success: function (data) {
 					if(data.res == "true") {
-						alert(${fn:length(orderlist) });
+						alert(id);
 						icon.setAttribute("class", "bi bi-check text-danger");
 						icon.setAttribute("style", "font-size: 2rem;");
 						icon.setAttribute("onclick", "checked(this, "+id+", "+status+");")

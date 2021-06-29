@@ -68,7 +68,7 @@ public class AdminOrderController {
 	/* 주문확인 */
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String manageOrder(Model m, @ModelAttribute OrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
+	public String manageOrder(Model m, @ModelAttribute AdminOrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
 //		session = request.getSession();
 //		AccountDTO account = (AccountDTO) session.getAttribute("account");
 //		System.out.println(account.getId());
@@ -76,16 +76,22 @@ public class AdminOrderController {
 		
 		List<AdminOrderDTO> orderlist = null;
 		List<AdminOrderDetailDTO> orderdetaillist = null;
-//		System.out.println(orderlist.get(0).getDdate().toString());
-		System.out.println("status: " +dto.getStatus());
+		System.out.println("ddate : "+dto.getDdate());
+		System.out.println("status : "+dto.getStatus());
 		
-		if (dto.getStatus() == null || dto.getStatus() == "") {
-			orderlist = order.findList(dto);
-			orderdetaillist = order.findDetailList(dto);
+		if (dto.getDdate() == null || dto.getDdate() == "") {
+			if (dto.getStatus() == null || dto.getStatus() == "") {
+				orderlist = order.findList(dto);
+				orderdetaillist = order.findDetailList(dto);
+			} else {
+				orderlist = order.findListSelected(dto);
+				orderdetaillist = order.findDetailListSelected(dto);
+			}
 		} else {
 			orderlist = order.findListSelected(dto);
 			orderdetaillist = order.findDetailListSelected(dto);
 		}
+		
 		
 		m.addAttribute("orderlist",orderlist);
 		m.addAttribute("orderdetaillist",orderdetaillist);
@@ -96,7 +102,7 @@ public class AdminOrderController {
 	
 	/* 주문 상태 별  */
 	@RequestMapping(value = "/selectStatus", method = RequestMethod.GET)
-	public String selectOrderStatus(Model m, @ModelAttribute OrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
+	public String selectOrderStatus(Model m, @ModelAttribute AdminOrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
 		
 		List<AdminOrderDTO> orderlist = order.findList(dto);
 		List<AdminOrderDetailDTO> orderdetaillist = order.findDetailList(dto);
@@ -113,7 +119,7 @@ public class AdminOrderController {
 	
 	/* 캘린더로 주문관리 */
 	@RequestMapping(value = "/calendar", method = RequestMethod.GET)
-	public String calendar(Model m, @ModelAttribute OrderDTO dto, @ModelAttribute OrderDetailDTO detail, HttpServletRequest request, HttpSession session) throws Exception {
+	public String calendar(Model m, @ModelAttribute AdminOrderDTO dto, @ModelAttribute AdminOrderDetailDTO detail, HttpServletRequest request, HttpSession session) throws Exception {
 		List<AdminOrderDTO> orderlist = order.findList(dto);
 		List<AdminOrderDetailDTO> orderdetaillist = order.findDetailList(dto);
 		

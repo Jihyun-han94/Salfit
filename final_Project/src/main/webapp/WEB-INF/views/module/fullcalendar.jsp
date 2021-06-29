@@ -5,6 +5,7 @@
 
 <!-- Fullcalendar -->
 
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/bootstrap-4.6.0/css/bootstrap.min.css">
 <link href='/salfit/resources/static/fullcalendar/main.css' rel='stylesheet' />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="/salfit/resources/static/css/admin.css">

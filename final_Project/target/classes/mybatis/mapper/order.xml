@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orderMapper">
-	<select id="orderlist" parameterType="order" resultType="adminorder">
+	<select id="orderlist" parameterType="adminorder" resultType="adminorder">
 	SELECT o.id,
 			o.aid,
 			o.receiver,
@@ -22,7 +22,7 @@
 		ORDER BY o.id DESC
 	</select>
 	
-	<select id="orderdetaillist" parameterType="order" resultType="adminorderdetail">
+	<select id="orderdetaillist" parameterType="adminorder" resultType="adminorderdetail">
 	SELECT d.id,
 			d.oid,
 			d.pid,
@@ -32,16 +32,20 @@
 			d.startdate,
 			d.enddate,
 			d.days,
+			o.receiver,
+			o.address,
 			d.status
 		FROM order_detail d
 		JOIN product p
 		  ON p.id = d.pid
+		JOIN ordered o
+		  ON o.id = d.oid
 		   WHERE 1=1
 		  	
 		ORDER BY d.id
 	</select>
 	
-	<select id="orderlistsel" parameterType="order" resultType="adminorder">
+	<select id="orderlistsel" parameterType="adminorder" resultType="adminorder">
 	SELECT o.id,
 			o.aid,
 			o.receiver,
@@ -56,11 +60,17 @@
 		FROM ordered o
 		JOIN account a
 		  ON a.id = o.aid
-		 WHERE  o.status = #{status}
+		 WHERE 1=1
+	 <if test='status != "" and status != null'>
+		 AND o.status = #{status}
+	 </if>
+	 <if test="ddate != null">
+		 AND TO_DATE(#{ddate}, 'YYYY-MM-DD') BETWEEN TO_DATE(o.ddate, 'YYYY-MM-DD') AND (TO_DATE(o.edate, 'YYYY-MM-DD') + 1)
+	 </if>
 		ORDER BY o.id DESC
 	</select>
 	
-	<select id="orderdetaillistsel" parameterType="order" resultType="adminorderdetail">
+	<select id="orderdetaillistsel" parameterType="adminorder" resultType="adminorderdetail">
 	SELECT d.id,
 			d.oid,
 			d.pid,
@@ -70,10 +80,14 @@
 			d.startdate,
 			d.enddate,
 			d.days,
+			o.receiver,
+			o.address,
 			d.status
 		FROM order_detail d
 		JOIN product p
 		  ON p.id = d.pid
+		JOIN ordered o
+		  ON o.id = d.oid
 		   WHERE 1=1
 		  	
 		ORDER BY d.id
@@ -97,7 +111,7 @@
 	  	     VALUES(#{id}, #{oid}, #{pid}, #{qty}, #{price}, #{startdate}, #{enddate}, #{days})
 	 </insert> 
 	 
-	 <update id="updateOrder" parameterType="order">
+	 <update id="updateOrder" parameterType="adminorder">
 		UPDATE ordered
 		   SET status = #{status}
 		 WHERE id = #{id}

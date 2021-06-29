@@ -17,10 +17,10 @@ public interface OrderService {
 	public boolean update(OrderDetailDTO dto) throws Exception;
 	public OrderDetailDTO findId(int id) throws Exception;
 	public boolean add(int id) throws Exception;	// 리뷰추가 : id 는 product 
-	public boolean updateStatus(OrderDTO dto);		// 관리자 주문관리용 
-	public List<AdminOrderDTO> findList(OrderDTO dto) throws Exception;
-	public List<AdminOrderDetailDTO> findDetailList(OrderDTO dto);
-	public List<AdminOrderDTO> findListSelected(OrderDTO dto);
-	public List<AdminOrderDetailDTO> findDetailListSelected(OrderDTO dto);
+	public boolean updateStatus(AdminOrderDTO dto);		// 관리자 주문관리용 
+	public List<AdminOrderDTO> findList(AdminOrderDTO dto) throws Exception;
+	public List<AdminOrderDetailDTO> findDetailList(AdminOrderDTO dto);
+	public List<AdminOrderDTO> findListSelected(AdminOrderDTO dto);
+	public List<AdminOrderDetailDTO> findDetailListSelected(AdminOrderDTO dto);
 
 }

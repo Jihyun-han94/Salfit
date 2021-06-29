@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jey.webapp.order.dto.AdminOrderDTO;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.order.service.OrderService;
@@ -40,7 +41,7 @@ public class AjaxAdminController {
 	
 	@RequestMapping(value = "/checked", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	@ResponseBody
-	public String checkOrder(@ModelAttribute OrderDTO dto) throws Exception {
+	public String checkOrder(@ModelAttribute AdminOrderDTO dto) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		boolean res = order.updateStatus(dto);
