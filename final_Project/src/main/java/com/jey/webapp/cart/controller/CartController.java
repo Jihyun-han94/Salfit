@@ -76,30 +76,4 @@ public class CartController {
 		return "cart/mycart";
 	}	
 	
-//	
-//	/* 장바구니에 상품 담기 */
-//	
-//	@RequestMapping(value = "/add", method = RequestMethod.POST)
-//	public String addToCart(Model m, @ModelAttribute CartDTO dto, HttpSession session) throws Exception {
-//		
-//		//로그인 여부 체크하기 위해 세션에 저장된 아이디 확인
-//		String id = (String)session.getAttribute("id");
-//		int aid = Integer.parseInt(id);
-//		
-//		if(id == null) {
-//			return "redirect:/account/login";
-//		}
-//			dto.setAid(aid);
-//			cart.add(dto); //cart 테이블에 저장됨
-//		
-//			return "redirect:/cart";
-//	}
-//	
-	/* 장바구니에서 상품 제거 -> Ajax 로도 가능함.*/
-	
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String rmFromCart(Model m, @ModelAttribute CartDTO dto) throws Exception {
-		return "redirect:/cart";
-	}
-	
 }

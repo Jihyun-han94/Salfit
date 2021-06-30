@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jey.webapp.account.dto.AccountDTO;
@@ -30,14 +32,14 @@ public class ProductController {
 
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView main(@ModelAttribute ProductSearchDTO search, HttpServletRequest request, HttpSession session) throws Exception {
+	public ModelAndView main( @ModelAttribute ProductSearchDTO search, HttpServletRequest request, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+		session = request.getSession();
+
 		List<ProductDTO> productlist = null;
 		List<Integer> liked = new ArrayList<Integer>();
 		List<ProductDTO> likedProduct = null;
 		
-		session = request.getSession();
 		AccountDTO account = null;
 		// 로그인 사용자의 경우 -> 하트 표시 
 		if(session.getAttribute("logined") != null && (boolean)session.getAttribute("logined")) {
@@ -62,6 +64,7 @@ public class ProductController {
 
 		
 		mv.setViewName("product/main");
+//		mv.addObject("account", account);
 		mv.addObject("productlist", productlist);
 		mv.addObject("producttypes", product.getProductTypes());
 		mv.addObject("liked", liked);
@@ -72,6 +75,9 @@ public class ProductController {
 	public ModelAndView detail(HttpServletRequest request, @RequestParam int id, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		session = request.getSession();
+		AccountDTO account = null;
+		account = (AccountDTO) session.getAttribute("account");
+		System.out.println("detail session" + account);
 		
 		// --조회수(중복 제거)--
 		HashMap<String, String> hashmap = (HashMap) session.getAttribute("viewCnt");
@@ -91,6 +97,11 @@ public class ProductController {
 		if(item.getId() != -1 && item.getActive().equals("y")) {
 			List<ProductRecommendDTO> recommend = product.findSimilarList(item);
 			List<ReviewDTO> reviews = product.findReviewList(item);
+			if(account == null) {
+				mv.addObject("logined", false);	
+			} else {
+				mv.addObject("account", account);
+			}
 			mv.addObject("newline", "\n");
 			mv.addObject("item", item);
 			mv.addObject("recommend", recommend);

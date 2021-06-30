@@ -89,13 +89,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void dislike(LikeDTO like) {
-		dao.removeLike(like);
+	public boolean dislike(LikeDTO like) {
+		return dao.removeLike(like);
 	}
 
 	@Override
-	public void like(LikeDTO like) {
-		dao.addLike(like);
+	public boolean like(LikeDTO like) {
+		return dao.addLike(like);
 	}
 
 	@Override

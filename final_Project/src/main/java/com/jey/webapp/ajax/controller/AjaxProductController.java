@@ -1,12 +1,14 @@
 package com.jey.webapp.ajax.controller;
 
 
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,37 +37,39 @@ public class AjaxProductController {
 	/* 상품 카테고리 선택 후 포커스 이동 */
 	
 	/* 상품 좋아요 */
+	
 	@RequestMapping(value = "/like", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	@ResponseBody
-	public String like(@ModelAttribute LikeDTO like) throws Exception {
-
+	public void like(@ModelAttribute LikeDTO like, HttpServletResponse resp) throws Exception {
+		PrintWriter out = resp.getWriter();
+		boolean res = false;
+		System.out.println(like.getCancel());
 		if(like.getCancel().equals("true") ) {
 			if(product.checkLikeExist(like)) {
-				product.dislike(like);
+				res = product.dislike(like);
 			}
 			like.setCancel("false");
 		} else {
 			if(!product.checkLikeExist(like)) {
-				product.like(like);
+				res = product.like(like);
 			}
 			like.setCancel("true");
 		}
 		ProductDTO dto = product.findId(like.getPid());
 		int gcnt = dto.getGcnt();
-
-		JSONObject json = new JSONObject();			
+		JSONObject json = new JSONObject();	
+		System.out.println(res);
+		json.put("res", res);
 		json.put("gcnt", gcnt);
 		json.put("cancel", like.getCancel());
-		
-		return json.toJSONString();
+		out.print(json.toJSONString());
 		
 	}
-	
 	/* 리뷰 더보기 */
 	
 	@RequestMapping(value = "/moreReviews", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	@ResponseBody
-	public String searchMoreNotify(@ModelAttribute ReviewSearchDTO search) throws Exception {
+	public String searchMoreNotify(@ModelAttribute ReviewSearchDTO search, HttpServletResponse resp) throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd, a hh:mm:ss");
 		// startIndex ~ endIndex 범위에 해당하는 list 조회 
 		List<ReviewDTO> addList = product.searchOldReviewList(search);

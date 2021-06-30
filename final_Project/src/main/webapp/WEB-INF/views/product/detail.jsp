@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>상품 상세 정보</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
-
+<c:url var="login" value="/account/login" />
 <c:url var="moreReviews" value="/ajax/product/moreReviews" />
 <c:url var="cart" value="/cart" />
 <c:url var="ajax_cart" value="/ajax/cart" />
@@ -66,8 +66,12 @@
 			  <div class="col-sm-9">
 			  	<div class="input-group input-group-sm mb-3 btn-success">
 					<button type="button" class="btn btn-block badge-pill" 
-					    data-toggle="modal" data-target="#staticBackdrop" 
-					    onclick="addToCart(this, ${item.getId()}, document.getElementById('quantity'), document.getElementById('datepickerS'), document.getElementById('datepickerE'));" ><b>장바구니에 담기</b></button>
+					    onclick="addToCart(this, ${item.getId()}
+					    , document.getElementById('quantity')
+					    , document.getElementById('datepickerS')
+					    , document.getElementById('datepickerE')
+					    , ${account.getId()}
+					    );" ><b>장바구니에 담기</b></button>
 					<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 					      <div class="modal-content">
@@ -106,7 +110,11 @@
 			<jsp:param name="reviews" value="${reviews}" />
 		</jsp:include>
 	</div>
-   	
+   	<div id="loginModal">
+		<jsp:include page="/WEB-INF/views/module/login_modal.jsp" flush="false" >
+			<jsp:param name="item" value="${item}" />
+		</jsp:include>
+	</div>
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script >
@@ -148,39 +156,35 @@
 </script>
 <script type="text/javascript">
 	/* 장바구니 */
-	function addToCart(e, pid, quantity, sd, ed) {
-		/* alert(${account.getId()}); */
-	    
+	function addToCart(e, pid, quantity, sd, ed, aid) {
 	    var start = $('#datepickerS').datepicker('getDate');
 	    var end   = $('#datepickerE').datepicker('getDate');
 	    var days   = (end - start)/1000/60/60/24 + 1;
-	   alert(days);
 		
-		if(${(empty account.getId()) ? false : logined }) {
-			let aid = ${account.getId()};
-			let qty =  quantity.value;
-			$.ajax({
-				url: "${ajax_cart}/add",
-				type: "post",
-				async: "false",
-				dataType: "json",
-				data: {
-					aid: aid,	
-					pid: pid,
-					qty: qty,
-					startdate: sd.value,
-					enddate: ed.value,
-					days: days
-				},
-				success: function (data) {
-					if(data.result == true) {
-						// 알림창 
-					} 
-				}				
-			});
-		} else {
-			alert("로그인을 해야 합니다.");
-		} 
+		let qty =  quantity.value;
+		$.ajax({
+			url: "${ajax_cart}/add",
+			type: "post",
+			async: "false",
+			dataType: "json",
+			data: {
+				aid: aid,	
+				pid: pid,
+				qty: qty,
+				startdate: sd.value,
+				enddate: ed.value,
+				days: days
+			},
+			success: function (data) {
+				if(data.result == true) {
+					// 알림창 
+					 $('#staticBackdrop').modal('show');
+				} else if(data.res == "no_login") {
+					$('#loginModal').modal('show');
+					location.href = data.redirect; 
+				}
+			}				
+		});
 	}
 
 

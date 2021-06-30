@@ -1,97 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="4.0" xmlns="http://java.sun.com/xml/ns/javaee"
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
-	</context-param>
-	
-	<!-- Creates the Spring Container shared by all Servlets and Filters -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	
-	<!-- filter -->
-	<filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param> 
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
-	<!-- <filter>
-		<filter-name>LoginCheckFilter</filter-name>
-		<filter-class>com.jey.webapp.filter.LoginCheckFilter</filter-class>
-		 <init-param>
-        <param-name>excludedUrls</param-name>
-        <param-value>/,/account/login,/account/join,/product/main,/product/detail</param-value>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/spring/root-context.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
     </init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>LoginCheckFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
-	
-	<!--  <filter>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>appServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>appServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/views/error/404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>400</error-code>
+    <location>/WEB-INF/views/error/default.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/WEB-INF/views/error/500.jsp</location>
+  </error-page>
+  <filter>
+    <display-name>AjaxLoginCheckFilter</display-name>
+    <filter-name>AjaxLoginCheckFilter</filter-name>
+    <filter-class>com.jey.webapp.filter.AjaxLoginCheckFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AjaxLoginCheckFilter</filter-name>
+    <url-pattern>/AjaxLoginCheckFilter</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>LoginCheckFilter</display-name>
     <filter-name>LoginCheckFilter</filter-name>
     <filter-class>com.jey.webapp.filter.LoginCheckFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>/account/info, /account/update, /product/update, /product/delete, /cart, /order, /ajax/*</url-pattern>
-  </filter-mapping> -->
-  <!-- <filter>
-    <display-name>AdminCheckFilter</display-name>
-    <filter-name>AdminCheckFilter</filter-name>
-    <filter-class>com.jey.webapp.filter.AdminCheckFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>AdminCheckFilter</filter-name>
-    <url-pattern>/admin/*</url-pattern>
-  </filter-mapping> -->
-	
-	
-	<!-- Processes application requests -->
-	<servlet>
-		<servlet-name>appServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-		
-	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-	
-	<!-- 에러페이지 -->
-	<error-page>
- 	 	<error-code>404</error-code>
-  		<location>/WEB-INF/views/error/404.jsp</location>
-  	</error-page>
-  	<error-page>
- 	 	<error-code>400</error-code>
-  		<location>/WEB-INF/views/error/default.jsp</location>
-  	</error-page>
-  	<error-page>
- 	 	<error-code>500</error-code>
-  		<location>/WEB-INF/views/error/500.jsp</location>
-  	</error-page>
-
+    <url-pattern>/LoginCheckFilter</url-pattern>
+  </filter-mapping>
 </web-app>

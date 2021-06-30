@@ -25,8 +25,8 @@ public interface ProductService {
 	public List<ProductRecommendDTO> findSimilarList(ProductDTO dto);
 	public List<ReviewDTO> searchOldReviewList(ReviewSearchDTO search);
 	public List<ProductDTO> getAllLikePid(int id);
-	public void dislike(LikeDTO like);
-	public void like(LikeDTO like);
+	public boolean dislike(LikeDTO like);
+	public boolean like(LikeDTO like);
 	public boolean checkLikeExist(LikeDTO like);
 	public void incview(int id);
 

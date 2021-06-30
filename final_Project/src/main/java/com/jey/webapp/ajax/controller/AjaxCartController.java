@@ -1,9 +1,11 @@
 package com.jey.webapp.ajax.controller;
 
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -33,14 +35,14 @@ public class AjaxCartController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
 	@ResponseBody	
-	public String addToCart(Model m, @ModelAttribute CartDTO dto) throws Exception {
-		
+	public void addToCart(Model m, @ModelAttribute CartDTO dto, HttpServletResponse resp) throws Exception {
+		PrintWriter out = resp.getWriter();
 		boolean res = cart.add(dto);
 		
 		JSONObject json = new JSONObject();			
 		json.put("result", res);
 			
-		return json.toJSONString();
+		out.print(json.toJSONString());
 	}
 	
 	

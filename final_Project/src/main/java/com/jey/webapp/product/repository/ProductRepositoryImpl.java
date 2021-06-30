@@ -121,20 +121,34 @@ public class ProductRepositoryImpl implements ProductRepository {
 
 
 	@Override
-	public void removeLike(LikeDTO like) {
-		sqlSession.delete("productMapper.degradeLike", like);		
-		sqlSession.update("productMapper.minusGcnt", like);
+	public boolean removeLike(LikeDTO like) {
+		boolean res = false;
+		int rs = sqlSession.delete("productMapper.degradeLike", like);	
+		if(rs == 1) {
+			rs = sqlSession.update("productMapper.minusGcnt", like);
+			if(rs == 1) {
+				res = true;
+			}
+		}
+		return res;
 	}
 
 
 	@Override
-	public void addLike(LikeDTO like) {
+	public boolean addLike(LikeDTO like) {
+		boolean res = false;
 		int likedseq = sqlSession.selectOne("productMapper.likedseq");
 		if(likedseq > 0) {
 			like.setId(likedseq);
-			sqlSession.insert("productMapper.upgradeLike", like);		
-			sqlSession.update("productMapper.plusGcnt", like);
+			int rs = sqlSession.insert("productMapper.upgradeLike", like);		
+			if(rs == 1) {
+				rs = sqlSession.update("productMapper.plusGcnt", like);
+				if(rs == 1) {
+					res = true;
+				}
+			}
 		}
+		return res;
 	}
 
 	@Override

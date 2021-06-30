@@ -70,12 +70,12 @@
 											<small class="text-muted">
 											<c:choose>
 												<c:when test="${fn:contains(liked,item.getId())}">
-													<a id="heart${item.getId()}" class="bi bi-heart-fill" onclick="liked(${item.getGcnt()}, ${item.getId()}, this);"  
+													<a id="heart${item.getId()}" class="bi bi-heart-fill" onclick="liked(${item.getGcnt()}, ${item.getId()}, this, ${account.getId()});"  
 														 style="color:#ff75a0;" data-value="${fn:contains(liked,item.getId())}">
 														${item.getGcnt()}</a>
 												</c:when>
 												<c:otherwise>
-													<a id="heart${item.getId()}" class="bi bi-heart" onclick="liked(${item.getGcnt()}, ${item.getId()}, this);"   
+													<a id="heart${item.getId()}" class="bi bi-heart" onclick="liked(${item.getGcnt()}, ${item.getId()}, this, ${account.getId()});"   
 														 style="color:#ff75a0;" data-value="${fn:contains(liked,item.getId())}">
 														${item.getGcnt()}</a>
 												</c:otherwise>
@@ -98,34 +98,37 @@
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
-	function liked(gcnt, pid, e) {
-		if(${(empty logined) ? false : logined }) {
-			let userid = ${account.getId()};	 
-			$.ajax({
-				url: "${like}",
-				type: "post",
-				async: "false",
-				dataType: "json",
-				data: {
-					aid: userid,		 
-					pid: pid,
-					cancel : e.dataset.value,
-					gcnt: gcnt
-				},
-				success: function (data) {
-						e.innerText = " " +data.gcnt;
-						e.dataset.value = data.cancel;
-						if(data.cancel == "true") {
-							e.setAttribute("class", "bi-heart-fill");
-						} else {
-							e.setAttribute("class", "bi-heart");
-						} 
-				}				
-			});
-		} else {
-			alert("로그인이 필요한 서비스입니다.");
-		}
-	}
+
+	function liked(gcnt, pid, e, aid) {
+		let cancel = e.dataset.value;
+		$.ajax({
+			url: "${like}",
+			type: "post",
+			async: "false",
+			dataType: "json",
+			data: {
+				aid: aid,		 
+				pid: pid,
+				cancel : e.dataset.value,
+				gcnt: gcnt
+			},
+			success: function (data) {
+				if(data.res == true) {
+					e.innerText = " " +data.gcnt;
+					e.dataset.value = data.cancel;
+					if(data.cancel == "true") {
+						e.setAttribute("class", "bi-heart-fill");
+					} else {
+						e.setAttribute("class", "bi-heart");
+					} 
+				} else if(data.res == "no_login") {
+					$('#loginModal').modal('show');
+					location.href = data.redirect; 
+				}
+			}		
+		});
+	} 
+	
 	function myFunction(e) {
 		   var element = document.getElementById("myDIV");
 		   e.classList.toggle("bi-heart-fill", "bi-heart");
