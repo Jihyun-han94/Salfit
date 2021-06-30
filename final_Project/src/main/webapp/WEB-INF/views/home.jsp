@@ -191,7 +191,7 @@
 	</div>
 </div>
 <div class="row d-flex justify-content-center align-items-center h-50 w-20 m-4">
-<img src="./resources/img/delivery.png">
+<img src="./resources/img/healthy.png">
 </div>
 
 </main> <!-- .cd-main-content -->

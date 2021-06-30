@@ -34,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jey.webapp.account.dto.AccountAddressDTO;
 import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.account.service.AccountService;
 import com.jey.webapp.product.dto.ProductDTO;
@@ -140,7 +141,7 @@ public class AccountController {
 	/* 회원정보 수정 */
 	
 	@RequestMapping(value = "/update_view", method = RequestMethod.POST)
-	public ModelAndView modify(HttpServletRequest req, HttpSession session, Model m, AccountDTO accountDTO) throws Exception {
+	public ModelAndView modify(HttpServletRequest req, HttpSession session, Model m, AccountDTO accountDTO, AccountAddressDTO address) throws Exception {
 		ModelAndView mv = new ModelAndView("account/update");
 		session = req.getSession();
 		AccountDTO dto = (AccountDTO) session.getAttribute("account");
@@ -155,6 +156,10 @@ public class AccountController {
 //			return "redirect:/";
 		}
 		mv.addObject("account", dto);
+		
+		List<AccountAddressDTO> addressList = account.getList(address.getAid());
+		m.addAttribute("addressList", addressList);
+		
 		System.out.println(((AccountDTO) session.getAttribute("account")).getEmail());
 		return mv;
 	}

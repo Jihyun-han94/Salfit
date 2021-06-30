@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.jey.webapp.account.dto.AccountAddressDTO;
 import com.jey.webapp.account.dto.AccountDTO;
 
 @Repository
@@ -81,6 +82,31 @@ public class AccountRepositoryImpl implements AccountRepository {
 			res = true;
 		}
 		return res;
+	}
+
+	@Override
+	public boolean insertAddress(AccountAddressDTO ad_dto) throws Exception {
+		boolean res = false;
+		int rs = sqlSession.insert("accountMapper.insertAddress", ad_dto);
+		if(rs == 1) {
+			res = true;
+		}
+		return res;
+	}
+
+	@Override
+	public boolean deleteAddress(AccountAddressDTO ad_dto) throws Exception {
+		boolean res = false;
+		int rs = sqlSession.insert("accountMapper.deleteAddress", ad_dto);
+		if(rs == 1) {
+			res = true;
+		}
+		return res;
+	}
+
+	@Override
+	public List<AccountAddressDTO> getListAddress(int aid) throws Exception {
+		return sqlSession.selectList("accountMapper.selectAddress", aid);
 	}
 
 }

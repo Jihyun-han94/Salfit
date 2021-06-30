@@ -11,6 +11,19 @@
 </head>
 <c:url var="expire" value="/ajax/account/expire"	/>
 <script type="text/javascript">
+var checkRePass = function(){
+    let oPwd = document.getElementById("id_password").value;
+    let cPwd = document.getElementById("id_password_check").value;
+    if (cPwd != oPwd){
+        document.getElementById("pass_check_res").innerHTML = "비밀번호가 일치하지 않습니다.";
+        document.getElementById("pass_check_res").style.display = "inline-block";
+      	return false;
+    } else {
+        document.getElementById("pass_check_res").style.display = "none";
+        return true;
+    }
+}
+
 function updateInfo() {
 	var name = document.getElementById("id_name").value;
 	var password = document.getElementById("id_password").value;
@@ -33,6 +46,7 @@ function updateInfo() {
 		return;
 	}
 }
+
 function expire() {
 	$.ajax({
 		url: "${expire }",
@@ -129,30 +143,49 @@ function expire() {
 	<form action="${update }" name="update_form" method="POST">
 		<input type="hidden" name="id" id="id" value="${requestScope.account.getId() }">
 		<div style="margin-bottom: 20px;">
-			<label for="email">이메일     |     </label>
+			<label for="email">이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 28px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<input id="id_email" name="email" type="text" value="${requestScope.account.getEmail() }" disabled>
 		</div>
 		<div style="margin-bottom: 20px;">
-			<label for="name">이름		|		</label>
+			<label for="name">이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 28px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<input id="id_name" name="name" type="text" value="${requestScope.account.getName() }" required>
 		</div>
 		<div style="margin-bottom: 20px;">
-			<label for="password">비밀번호 : </label>
-			<input id="id_password" name="password" type="text" value="${requestScope.account.getPassword() }" required>
+			<label for="password">비밀번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 28px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<input id="id_password" name="password" type="password" required>
 		</div>
 		<div style="margin-bottom: 20px;">
-			<label for="address">주소지 : </label>
-			<input style="height: 20px; width: 300px;" id="id_address" type="text" name="address" value="" required>  <button class="input-file-button" type="button" onclick="${add_address}">추가</button>
+			<label for="password">비밀번호 확인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 28px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<input oninput="checkRePass()" id="id_password_check" name="repassword" type="password" required>&nbsp;&nbsp;&nbsp;&nbsp;
+			<span id="pass_check_res" style="display : none; color : red;" aria-live="assertive"></span>
 		</div>
-		<div style="margin-bottom: 50px;">
-			<label for="phone">전화번호 : </label>
+		<div style="margin-bottom: 20px;">
+			<label for="phone">휴대전화&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 28px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<input id="id_phnumber" type="text" name="phone" value="${requestScope.account.getPhone() }" required>
 		</div>
+	</form>
+		<form id="address_form" style="margin-bottom: 50px;">
+			<label for="address">주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 28px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<textarea style="resize: none;" id="id_address" rows="2" cols="30"></textarea>  <button class="input-file-button" type="button" onclick="addressSend();">추가</button>
+		</form>
+		<div id="address">
+			<ol class="address_list">
+				<c:forEach var="addressList" items="${addressList }">
+					<li>
+						<p>${addressList.getAddress() }</p>
+						<c:if test="${addressList.getAid() == account.getId() }">
+							<button type="button" onclick="delComment(this, ${addressList.getId() })">삭제</button>
+						</c:if>
+					</li>
+				</c:forEach>
+			</ol>
+		</div>
+	
+		
 		<div style="margin-bottom: 100px;">
-			<button type="submit" class="btn_confirm">수정</button>
+			<button type="button" onclick="updateInfo();" class="btn_confirm">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;
 			<button class="btn_confirm" data-toggle="modal" id="btn_exp" data-target="#ModalExpire">탈퇴</button>
 		</div>
-	</form>
 	</div>
 </div>
 

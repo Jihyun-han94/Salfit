@@ -9,22 +9,27 @@
 		SELECT * FROM account WHERE id = #{id}
 	</select>
 	
+	<!-- 계정 로그인 확인 -->
 	<select id="checkLogin" parameterType="account" resultType="account">
 		SELECT * FROM account WHERE email = #{email} AND password = #{password}
 	</select>
 	
+	<!-- 이메일 중복 확인 -->
 	<select id="checkEmail" parameterType="String" resultType="_int">
 		SELECT count(*) as cnt FROM account WHERE email = #{email}
 	</select>
 	
+	<!-- 회원가입(계정 추가) -->
 	<insert id="insertAccount" parameterType="account">
 		INSERT INTO account(id, email, password, name, phone) VALUES(account_seq.NEXTVAL, #{email}, #{password}, #{name}, #{phone})
 	</insert>
 	
+	<!-- 로그인 날짜를 오늘 날짜로 수정 -->
 	<update id="loginDate" >
 		UPDATE account SET logindate = SYSDATE WHERE id = #{id}
 	</update>
 	
+	<!-- 계정 정보 수정 -->
 	<update id="updateAccount" parameterType="account">
 		UPDATE account
 			SET name = #{name}
@@ -33,15 +38,43 @@
 		WHERE id = #{id}
 	</update>
 	
+	<!-- 프로필 이미지 저장/수정 -->
 	<update id="saveImageAccount" parameterType="account">
 		UPDATE account
 			SET profile_img = #{profile_img}
 		WHERE id = #{id}
 	</update>
 	
+	<!-- 회원 탈퇴 -->
 	<delete id="expireAccount">
 		DELETE FROM account
 		WHERE id = #{id}
 		  AND password = #{password}
+	</delete>
+	
+	<!-- 주소 조회 -->
+	<select id="selectAddress" resultType="address">
+		SELECT a.id
+			 , a.email
+			 , a.password
+			 , a.name
+			 , a.phone
+			 , b.address
+		FROM account a
+		JOIN deliver_address b
+		  ON a.id = b.aid
+		WHERE a.id = 8;
+	</select>
+	
+	<!-- 주소 추가 -->
+	<insert id="insertAddress" parameterType="address">
+		INSERT INTO address (aid, address) 
+		VALUES (#{aid}, #{address})
+	</insert>
+	
+	<!-- 주소 삭제 -->
+	<delete id="deleteAddress">
+		DELETE FROM address
+		WHERE id = #{id}
 	</delete>
 </mapper>

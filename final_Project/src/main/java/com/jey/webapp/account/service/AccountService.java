@@ -2,6 +2,7 @@ package com.jey.webapp.account.service;
 
 import java.util.List;
 
+import com.jey.webapp.account.dto.AccountAddressDTO;
 import com.jey.webapp.account.dto.AccountDTO;
 
 
@@ -14,4 +15,7 @@ public interface AccountService {
 	public boolean updateProfile(AccountDTO dto) throws Exception;
 	public boolean signout(AccountDTO dto) throws Exception;
 	public boolean saveImage(AccountDTO dto) throws Exception;
+	public boolean addAddress(AccountAddressDTO ad_dto) throws Exception;
+	public boolean removeAddress(AccountAddressDTO ad_dto) throws Exception;
+	public List<AccountAddressDTO> getList(int aid) throws Exception;
 }
