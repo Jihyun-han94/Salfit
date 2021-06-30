@@ -57,9 +57,18 @@ public class AjaxAdminController {
 	
 	@RequestMapping(value = "/delivery", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	@ResponseBody
-	public String checkdelivery(@ModelAttribute AdminOrderDetailDTO dto) throws Exception {
+	public String checkdelivery(AdminOrderDTO ord, @ModelAttribute AdminOrderDetailDTO dto) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		boolean res = order.updateDetailStatus(dto);
+		boolean res = false;
+		
+		System.out.println(dto.getOid() +","+dto.getStatus());
+		
+		ord.setId(dto.getOid());
+		ord.setStatus(dto.getStatus());
+		
+		if(order.updateDetailStatus(dto)) {
+			res = order.updateStatus(ord);
+		}
 		
 		JSONObject json = new JSONObject();			
 		if(res) {

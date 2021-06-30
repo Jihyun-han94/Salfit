@@ -26,7 +26,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public List<AdminOrderDTO> selectList(AdminOrderDTO dto) throws Exception {
-		List<AdminOrderDTO> data = sqlSession.selectList("orderMapper.orderlist");
+		List<AdminOrderDTO> data = sqlSession.selectList("orderMapper.orderlist", dto);
 		return data;
 	}
 

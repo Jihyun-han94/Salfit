@@ -218,6 +218,9 @@ $(document).ready(function() {
 		if(urlParams.has('ddate')) {
 			var ddateParam = urlParams.get('ddate'); // null or not 
 		}
+		if(urlParams.has('id')) {
+			urlParams.delete('id');
+		}
 		if(urlParams.has('status')) {
 			urlParams.set('status', e.value);
 		} else {

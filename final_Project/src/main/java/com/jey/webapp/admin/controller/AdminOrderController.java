@@ -78,6 +78,7 @@ public class AdminOrderController {
 		List<AdminOrderDetailDTO> orderdetaillist = null;
 		System.out.println("ddate : "+dto.getDdate());
 		System.out.println("status : "+dto.getStatus());
+		System.out.println("id : "+dto.getId());
 		
 		if (dto.getDdate() == null || dto.getDdate() == "") {
 			if (dto.getStatus() == null || dto.getStatus() == "") {

@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>관리자 배송 관리</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
-<c:url var="order" value="/admin/order" />
+<c:url var="orderurl" value="/admin/order" />
 <c:url var="ajax_order" value="/ajax/admin/order" />
 
 </head>
@@ -20,10 +20,11 @@
 	</header>
 	<div class="bodyContainer">
 		<h1 class="corpBoardTitle">배송 관리(당일)</h1>
-		<a href="${order}/list" class="btn btn-outline-secondary pull-right">주문 관리</a>
-		<a href="${order}/calendar" class="btn btn-outline-secondary pull-right">배송 관리(월별)</a>
+		<a href="${orderurl}/list" class="btn btn-outline-secondary pull-right">주문 관리</a>
+		<a href="${orderurl}/calendar" class="btn btn-outline-secondary pull-right">배송 관리(월별)</a>
 		<section class="applicantTableSection">
 			<h3>오늘 배송 상품</h3>
+			<p><a href="${orderurl}/list?ddate=${dto.getStartdate()}" >${dto.getStartdate()} : 날짜가 포함된 전체 주문 보기 </a></p>
 			<table class="table text-center">
 				<thead class="thead-dark">
 					<tr>
@@ -36,7 +37,7 @@
 						<th scope="col">연락하기</th>
 						<th scope="col">상태 체크</th>
 						<th scope="col">배송 상태
-						<form id="select_status_form" action="${order}/delivery" method="get">
+						<form id="select_status_form" action="${orderurl}/delivery" method="get">
 							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" >
 						        <option value="" ${dto.getStatus() == null ? "selected" : "" }>전체</option>
 						        <option value="paid" ${dto.getStatus() == "paid" ? "selected" : "" }>배송전</option>
@@ -59,7 +60,7 @@
 					<c:otherwise>
 						<c:forEach var="order" items="${orderdetaillist}" varStatus="status">
 						<tr scope="row">
-						<th> ${order.getId()}</th>
+						<th><a href="${orderurl}/list?id=${order.getOid()}" >${order.getOid()}</a></th>
 						<td>${order.getPname()}</td>
 						<td>${order.getReceiver()}</td>
 						<td class="text-truncate" style="max-width: 100px;">
@@ -75,7 +76,7 @@
 						<td id="statusicon${order.getId()}">
 							<c:choose>
 								<c:when test="${order.getStatus().equals('paid')}" >
-									<i class="bi bi-check text-danger" onclick="checked(this, ${order.getId()}, document.getElementById('status${order.getId()}'));"  style="font-size: 2rem;"></i>
+									<i class="bi bi-check text-danger" onclick="checked(this, ${order.getId()},  ${order.getOid()}, document.getElementById('status${order.getId()}'));"  style="font-size: 2rem;"></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('shipping')}" >
 									<i class="bi bi-truck text-warning" style="font-size: 2rem; padding-left:4rem;"></i>
@@ -91,7 +92,7 @@
 						<td id="status${order.getId()}">
 							<c:choose>
 								<c:when test="${order.getStatus().equals('paid')}" >
-									<p>배송 준비 중</p>
+									<p>배송 준비중</p>
 								</c:when>
 								<c:when test="${order.getStatus().equals('shipping')}" >
 									<p>shipping</p>
@@ -149,14 +150,15 @@ $(document).ready(function() {
 	}
 
 
-	function checked(e, id, status) {
+	function checked(e, id, oid, status) {
 		$.ajax({
 			url: "${ajax_order}/delivery",
 			type: "post",
 			async: "false",
 			dataType: "json",
 			data: {
-				id: id,		 
+				id: id,
+				oid: id,
 				status: "shipping"
 			},
 			success: function (data) {
