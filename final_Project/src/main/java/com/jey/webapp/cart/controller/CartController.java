@@ -1,6 +1,7 @@
 package com.jey.webapp.cart.controller;
 
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,20 +32,23 @@ public class CartController {
 	/* 장바구니 조회 */
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String cartList(Model m, @ModelAttribute CartDTO dto,HttpServletRequest request, HttpSession session) throws Exception {
+	public String cartList(Model m, @ModelAttribute CartDTO dto,HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception {
 		
 		String forward = "";
 		
 		AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
 		session.setMaxInactiveInterval(60*60); //세션 한시간 만료
-		int userid = accountdto.getId();
-		System.out.println("userid 확인 : "+userid);
-			
 		if(accountdto == null) {
-			forward = "redirect:/account/login";
+			//PrintWriter writer = response.getWriter();
+			//response.setContentType("text/html ; charset=utf-8");
+			//writer.println("<script>alert('로그인 후 이용가능합니다.'); location.href='/account/login';</script>");
+			//writer.flush();
+			
 		}else {
 			forward = "cart/mycart";
-			dto.setAid(userid);
+			int userid = accountdto.getId();
+			System.out.println("userid 확인 : "+userid);
+			dto.setAid(userid);			
 			List<CartDTO> cartlist = cart.findAll(dto);
 			m.addAttribute("cartlist",cartlist);			
 			

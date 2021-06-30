@@ -5,7 +5,7 @@ public class CartDTO {
 	private int aid;
 	private int pid;
 	private int qty; // 수량
-	private String orderstate;
+	private String orderstatus;
 	private int price; 
 	private String email;
 	private String title;
@@ -13,10 +13,10 @@ public class CartDTO {
 	
 	
 	public String getOrderstate() {
-		return orderstate;
+		return orderstatus;
 	}
 	public void setOrderstate(String orderstate) {
-		this.orderstate = orderstate;
+		this.orderstatus = orderstate;
 	}
 	
 	public String getTitle() {

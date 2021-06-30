@@ -6,20 +6,22 @@
 <mapper namespace="orderMapper">
 
 <select id="selectall" parameterType="orderdetail" resultType="orderdetail">
-	SELECT  d.id
-			d.oid
-			d.pid
-			d.qty
-			d.price
-			d.status			 
-	FROM order_detail d
-	JOIN ordered o
-	ON d.oid = o.id
-	WHERE d.oid = #{oid}
+	SELECT *		 
+	FROM order_detail 
+	WHERE oid = #{oid}
 </select>
 
+<!-- 수정필요 -->
+
 <select id="selectList" parameterType="order" resultType="order">
-SELECT * 
+SELECT  id
+        ,aid
+        ,receiver
+        ,address
+        ,total
+        ,to_char(pdate,'yyyy-mm-dd') AS pdate
+        ,to_char(ddate,'yyyy-mm-dd') AS ddate
+        ,status 
 FROM ordered  
 WHERE aid = #{aid}
 

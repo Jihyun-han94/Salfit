@@ -34,31 +34,38 @@ public class OrderController {
 		//계정 정보 확인
 		AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
 		session.setMaxInactiveInterval(60*60); //세션 한시간 만료
-		int userid = accountdto.getId();
-		System.out.println("userid 확인 : "+userid);
 		
 		if(accountdto ==null ) {
-			mv.setViewName("account/join");
+			mv.setViewName("account/login");
 			
 		}else {
 			//account.id로 ordered table 조회 (주문내역 전체)
+			int userid = accountdto.getId();
+			System.out.println("userid 확인 : "+userid);
 			dto.setAid(userid);
 			List<OrderDTO> orderlist = order.findList(dto);
+			System.out.println("디버깅1"+orderlist.get(0).getAid());
+			System.out.println("디버깅1"+orderlist.get(0).getTotal());
+			System.out.println("pdate :"+orderlist.get(0).getPdate());	
 			mv.addObject("orderlist", orderlist);
-			
+			System.out.println("디버깅2");
 			OrderDetailDTO orderdetail_dto = new OrderDetailDTO();
-			
+			System.out.println("디버깅4");
 			//제품이름 때문에 orderdetail 조회해야함 (ordered.id로) 
 			for(OrderDTO data : orderlist) {
 				orderdetail_dto.setOid(data.getId());
+				System.out.println("디버깅5");
 				List<OrderDetailDTO> orderdetail_arr = order.selectall(orderdetail_dto);
+				System.out.println("디버깅6");
+				mv.addObject("orderdetaillist", orderdetail_arr);
+				
+				System.out.println("디버깅7");
+			
+				System.out.println("디버깅8");
 			}
-			
-			
-			
+			mv.setViewName("order/list");
 		}
 		
-		mv.setViewName("order/list");
 		
 		return mv;
 	}

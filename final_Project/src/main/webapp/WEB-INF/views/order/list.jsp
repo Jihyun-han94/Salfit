@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,20 +20,23 @@
 <br>
 
 <h1>최근주문내역</h1>
-<table id="orderedlist">
+<table id="orderedlist" border="1">
 <th>날짜</th>
 <th>상품정보</th>
 <th>결제금액</th>
 <th>상태</th>
-</table>
-<c:forEach var="data" items="${requestScope.orderlist }">
+
+<c:forEach var="data" items="${requestScope.orderlist }" >
 <tr>
 <td>${data.pdate }</td>
-<td></td>
-<td>${total }</td>
-<td>${status }</td>
+<td>${data.total }</td>
+<td>${data.status }</td>
+<td>-</td>
 </tr>
 </c:forEach>
+
+</table>
+
 <jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 
 </body>
