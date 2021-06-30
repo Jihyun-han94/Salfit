@@ -42,12 +42,26 @@ ALTER TABLE deliver_address ADD CONSTRAINT deliver_address_aid_FK FOREIGN KEY(ai
 
 COMMENT ON COLUMN deliver_address.address IS '배송지';
 
+INSERT INTO deliver_address VALUES(8, '서울시 동작구 신대방동 78-2');
+
 ALTER TABLE account ADD (profile_img VARCHAR2(1024));
 COMMENT ON COLUMN account.profile_img IS '사용자 프로필 이미지';
 ------------------------------------------------------TEST--------------------------------------
 SELECT * FROM account;
 
+SELECT * FROM DELIVER_ADDRESS;
+
 ALTER TABLE account RENAME COLUMN type TO atype;
 
 INSERT INTO account VALUES(1, 'admin@admin.com', 'admin', '관리자', 01012345678, 'a', SYSDATE, SYSDATE, NULL, NULL);
 
+		SELECT a.id
+			 , a.email
+			 , a.password
+			 , a.name
+			 , a.phone
+			 , b.address
+		FROM account a
+		JOIN deliver_address b
+		  ON a.id = b.aid
+		WHERE a.id = 8;
