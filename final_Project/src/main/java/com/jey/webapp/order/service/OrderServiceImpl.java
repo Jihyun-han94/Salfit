@@ -76,6 +76,31 @@ public class OrderServiceImpl implements OrderService {
 		return dao.selectDetailListSelected(dto);
 	}
 
+	@Override
+	public List<AdminOrderDTO> findList(AdminOrderDetailDTO dto) {
+		return dao.selectList(dto);
+	}
+
+	@Override
+	public List<AdminOrderDetailDTO> findDetailList(AdminOrderDetailDTO dto) {
+		return dao.selectDetailList(dto);
+	}
+
+	@Override
+	public List<AdminOrderDTO> findListSelected(AdminOrderDetailDTO dto) {
+		return dao.selectListSelected(dto);
+	}
+
+	@Override
+	public List<AdminOrderDetailDTO> findDetailListSelected(AdminOrderDetailDTO dto) {
+		return dao.selectDetailListSelected(dto);
+	}
+
+	@Override
+	public boolean updateDetailStatus(AdminOrderDetailDTO dto) {
+		return dao.updateDetailStatus(dto);
+	}
+
 
 
 

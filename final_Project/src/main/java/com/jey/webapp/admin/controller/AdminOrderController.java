@@ -106,9 +106,6 @@ public class AdminOrderController {
 		
 		List<AdminOrderDTO> orderlist = order.findList(dto);
 		List<AdminOrderDetailDTO> orderdetaillist = order.findDetailList(dto);
-
-		
-		
 		
 		m.addAttribute("orderlist",orderlist);
 		m.addAttribute("orderdetaillist",orderdetaillist);
@@ -128,4 +125,33 @@ public class AdminOrderController {
 		return "admin/order/calendar";
 	}
 	
+	
+	/* 당일 배송 관리 */
+	@RequestMapping(value = "/delivery", method = RequestMethod.GET)
+	public String manageDelivery(Model m, @ModelAttribute AdminOrderDetailDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
+		
+		List<AdminOrderDTO> orderlist = null;
+		List<AdminOrderDetailDTO> orderdetaillist = null;
+		System.out.println("startdate : "+dto.getStartdate());
+		System.out.println("status : "+dto.getStatus());
+		
+		if (dto.getStartdate() == null || dto.getStartdate() == "") {
+			if (dto.getStatus() == null || dto.getStatus() == "") {
+				orderlist = order.findList(dto);
+				orderdetaillist = order.findDetailList(dto);
+			} else {
+				orderlist = order.findListSelected(dto);
+				orderdetaillist = order.findDetailListSelected(dto);
+			}
+		} else {
+			orderlist = order.findListSelected(dto);
+			orderdetaillist = order.findDetailListSelected(dto);
+		}
+		
+		
+		m.addAttribute("orderlist",orderlist);
+		m.addAttribute("orderdetaillist",orderdetaillist);
+		m.addAttribute("dto",dto);
+		return "admin/order/manageday";
+	}
 }

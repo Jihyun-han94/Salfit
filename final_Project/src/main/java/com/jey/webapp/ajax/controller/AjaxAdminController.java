@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jey.webapp.order.dto.AdminOrderDTO;
+import com.jey.webapp.order.dto.AdminOrderDetailDTO;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.order.service.OrderService;
@@ -45,6 +46,20 @@ public class AjaxAdminController {
 		ModelAndView mv = new ModelAndView();
 		
 		boolean res = order.updateStatus(dto);
+		
+		JSONObject json = new JSONObject();			
+		if(res) {
+			json.put("res", "true");
+		}
+		
+		return json.toJSONString();
+	}
+	
+	@RequestMapping(value = "/delivery", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
+	@ResponseBody
+	public String checkdelivery(@ModelAttribute AdminOrderDetailDTO dto) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		boolean res = order.updateDetailStatus(dto);
 		
 		JSONObject json = new JSONObject();			
 		if(res) {

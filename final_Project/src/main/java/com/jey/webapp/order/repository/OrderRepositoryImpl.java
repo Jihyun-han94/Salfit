@@ -106,6 +106,40 @@ public class OrderRepositoryImpl implements OrderRepository {
 		}
 	}
 
+	@Override
+	public List<AdminOrderDTO> selectList(AdminOrderDetailDTO dto) {
+		List<AdminOrderDTO> data = sqlSession.selectList("orderMapper.deliverlist");
+		return data;
+	}
+
+	@Override
+	public List<AdminOrderDetailDTO> selectDetailList(AdminOrderDetailDTO dto) {
+		List<AdminOrderDetailDTO> data = sqlSession.selectList("orderMapper.deliverdetaillist");
+		return data;
+	}
+
+	@Override
+	public List<AdminOrderDTO> selectListSelected(AdminOrderDetailDTO dto) {
+		List<AdminOrderDTO> data = sqlSession.selectList("orderMapper.deliverlistsel", dto);
+		return data;
+	}
+
+	@Override
+	public List<AdminOrderDetailDTO> selectDetailListSelected(AdminOrderDetailDTO dto) {
+		List<AdminOrderDetailDTO> data = sqlSession.selectList("orderMapper.deliverdetaillistsel", dto);
+		return data;
+	}
+
+	@Override
+	public boolean updateDetailStatus(AdminOrderDetailDTO dto) {
+		int rs = sqlSession.update("orderMapper.updateDelivery", dto);	
+		if(rs == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 
 	

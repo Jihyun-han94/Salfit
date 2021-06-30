@@ -86,7 +86,7 @@
 							      <div class="modal-body">
 							      	 <div class="row">
 							      	 	  <div class="col-1 col-sm-1">
-									        상품명
+									        상품 번호
 									      </div>
 									      <div class="col-4 col-sm-5">
 									        상품명
@@ -238,7 +238,6 @@ $(document).ready(function() {
 	}
 	
 	function zoomin(e, id, icon, status) {
-		orderid(id);
 		
 		if(status.innerText == "paid") {
 		$.ajax({
