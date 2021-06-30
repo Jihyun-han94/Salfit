@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.jey.webapp.account.dto.AccountDTO;
+
 @WebFilter(
 		urlPatterns = {
 					 "/account/update"
@@ -41,8 +43,10 @@ public class LoginCheckFilter implements Filter {
 		HttpSession session = req.getSession();
 		
 		if(session.getAttribute("logined") != null && (boolean)session.getAttribute("logined")) {
-			if(session.getAttribute("account") != null) {
+			if(session.getAttribute("account") != null  && ((AccountDTO)session.getAttribute("account")).getAtype().equals("i")) {
 				chain.doFilter(request, response);
+			} else if(session.getAttribute("account") != null  && ((AccountDTO)session.getAttribute("account")).getAtype().equals("a")) {
+				resp.sendRedirect(req.getContextPath() + "/");
 			} else {
 				session.invalidate();
 				resp.sendRedirect(req.getContextPath() + "/account/login");

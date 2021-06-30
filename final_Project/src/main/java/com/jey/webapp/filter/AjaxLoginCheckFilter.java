@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
+import com.jey.webapp.account.dto.AccountDTO;
+
 @WebFilter(
 	urlPatterns = {"/ajax/product/like"
 				,"/ajax/cart/add"
@@ -48,10 +50,12 @@ public class AjaxLoginCheckFilter implements Filter {
 		
 		if(session.getAttribute("logined") != null) {
 			if((boolean)session.getAttribute("logined")) {
-				if(session.getAttribute("account") != null) {
+				if(session.getAttribute("account") != null && ((AccountDTO)session.getAttribute("account")).getAtype().equals("i")) {
 					out.flush();
 					chain.doFilter(request, response);
 					out.close();
+				} else if(session.getAttribute("account") != null  && ((AccountDTO)session.getAttribute("account")).getAtype().equals("a")) {
+					resp.sendRedirect(req.getContextPath() + "/");
 				} else {
 					session.invalidate();
 					out.println(json.toJSONString());
