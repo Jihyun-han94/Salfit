@@ -96,10 +96,10 @@ body .signcontainer .signcontent label:not([for='remember']) {
   display: none;
 }
 body .signcontainer .signcontent input.inpt {
-  font-size: 14px;
+  font-size: 12px;
+  width: 83%;
+  height: 20px;
   display: block;
-  width: 100%;
-  height: 40px;
   margin-bottom: 12px;
   padding: 16px 13px;
   color: #999999;

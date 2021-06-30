@@ -73,52 +73,10 @@
 		</ul>
 	</nav> <!-- .cd-secondary-nav -->
 </header> <!-- .cd-auto-hide-header -->
-<%-- 	
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="form-title text-center">
-          <h4>Login</h4>
-        </div>
-		<p style="color:red;">${param.error}</p>
-		<div class="d-flex flex-column text-center">
-		<form action="${login}" method="POST">
-			<div>
-				<label style="color:red;">${error != null ? error : ""}</label>
-			</div>
-			<div class="form-group">
-				<label for="id_email">이메일</label>
-				<input id="id_email" type="email" name="email" placeholder="email" required>
-			</div>
-			<div class="form-group">
-				<label for="id_password">비밀번호</label>
-				<input id="id_password" type="password" name="password" placeholder="password" required>
-			</div>
-			<div class="g-signin2" data-onsuccess="onSignIn"><a href="${google_url}">구글 로그인</a></div>
-			<div>
-				<button type="submit" class="btn btn-info btn-block btn-round">로그인</button>
-				<c:url var="main" value="/product/main" />
-				<button type="button" class="btn btn-info btn-block btn-round" onclick="location.href='${main}'">취소</button>
-			</div>
-		</form>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
-</div> --%>
 
 <!-- Modal -->
 <div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-40size" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -128,18 +86,17 @@
       <div class="modal-body">
       <div class="form-title text-center">
         </div>
-		<%-- <p style="color:red;">${param.error}</p> --%>
 		<div class="d-flex flex-column text-center">
+		<h2 style="margin-bottom: 10px; color: #475c01;">회원 비밀번호 확인</h2>
+		<h5>외부로부터 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.</h5>
+		<h5>항상 비밀번호는 타인에게 노출되지 않도록 주의해 주세요.</h5>
+		<br>
 		<form action="${updateView}" method="POST">
 			<div class="form-group">
-			<%-- <input type="hidden" name="id" id="id" value="${requestScope.account.getId() }"> --%>
-				<%-- <label for="id_email">이메일</label>
-				<input id="id_email" type="email" name="email" value="${requestScope.account.getEmail() }" disabled> --%>
-			</div>
-			<div class="form-group">
-				<label for="id_password">비밀번호 확인</label>
-				<input id="id_password" type="password" name="password" placeholder="password" required>
-				<button type="submit" class="btn btn-info btn-block btn-round">확인</button>
+				<input style="margin-bottom: 20px;" id="id_password_confirm" type="password" name="password" placeholder="password" required>
+				<div>
+					<button type="submit" class="btn_confirm">확인</button>
+				</div>
 			</div>
 		</form>
       </div>

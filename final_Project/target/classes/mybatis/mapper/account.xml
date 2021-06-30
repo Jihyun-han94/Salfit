@@ -13,6 +13,9 @@
 		SELECT * FROM account WHERE email = #{email} AND password = #{password}
 	</select>
 	
+	<select id="checkEmail" parameterType="String" resultType="_int">
+		SELECT count(*) as cnt FROM account WHERE email = #{email}
+	</select>
 	
 	<insert id="insertAccount" parameterType="account">
 		INSERT INTO account(id, email, password, name, phone) VALUES(account_seq.NEXTVAL, #{email}, #{password}, #{name}, #{phone})
