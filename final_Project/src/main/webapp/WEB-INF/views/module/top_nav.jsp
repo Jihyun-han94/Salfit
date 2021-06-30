@@ -23,7 +23,21 @@
 	<c:url var="admin_order" value="/admin/order/list" />
 	<c:url var="admin_delivery" value="/admin/order/calendar" />
 	<c:url var="admin_statistics" value="/admin/order/summary" />
-	
+<style>
+.btn_confirm {
+ padding: 5px 25px;
+ border: 1px solid #bac600;
+ color: #263238;
+ background: transparent;
+ -moz-border-radius: 2px;
+ -webkit-border-radius: 2px;
+ border-radius: 2px;
+}
+.btn_confirm:hover {
+  background-color: #bac600;
+  color: #ffffff;
+}
+</style>	
 </head>
 <body>
 	<header class="cd-auto-hide-header">

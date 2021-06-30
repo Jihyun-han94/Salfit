@@ -61,10 +61,10 @@ public class AccountController {
 		boolean res = account.join(dto);
 		if(res) {
 			m.addAttribute("dto",dto);
-			return "account/joinres";
+			return "account/login";
 		} else {
 			m.addAttribute("error","회원가입 실패!");
-			return "account/joinres";
+			return "account/join";
 		}
 	}
 	

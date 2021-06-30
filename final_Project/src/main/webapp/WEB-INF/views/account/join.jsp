@@ -107,6 +107,7 @@ function send() {
 	}
 	
 	document.account_form.submit();
+	alert("회원가입이 완료되었습니다.");
 }
 </script>
 </head>
