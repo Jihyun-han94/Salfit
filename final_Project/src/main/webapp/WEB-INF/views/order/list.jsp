@@ -29,9 +29,9 @@
 <c:forEach var="data" items="${requestScope.orderlist }" >
 <tr>
 <td>${data.pdate }</td>
+<td>${data.title }</td>
 <td>${data.total }</td>
 <td>${data.status }</td>
-<td>-</td>
 </tr>
 </c:forEach>
 

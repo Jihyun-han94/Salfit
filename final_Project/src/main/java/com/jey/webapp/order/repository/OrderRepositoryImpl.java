@@ -23,7 +23,11 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public List<OrderDTO> selectList(OrderDTO dto) throws Exception {
+		System.out.println("aid!!"+dto.getAid());
 		List<OrderDTO> orderlist = sqlSession.selectList("orderMapper.selectList", dto);
+		
+		System.out.println("pdate!!"+orderlist.get(0).getPdate());
+		System.out.println("total!!"+orderlist.get(0).getTotal());
 		return orderlist;
 	}
 

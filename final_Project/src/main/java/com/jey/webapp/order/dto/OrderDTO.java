@@ -1,8 +1,6 @@
 package com.jey.webapp.order.dto;
 
-import java.util.*;
-
-import oracle.sql.DATE;
+import java.sql.Date;
 
 public class OrderDTO {
 	
@@ -11,11 +9,17 @@ public class OrderDTO {
 	private String receiver; // 수령인
 	private String address; // 배송지
 	private int total; //총 결제 금액
-	private DATE pdate; //결제 일시
-	private DATE ddate; //배송 예정일
+	private Date pdate; //결제 일시
+	private Date ddate; //배송 예정일
 	private String status; //주문 상태
-
+	private String title;
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getId() {
 		return id;
 	}
@@ -46,16 +50,17 @@ public class OrderDTO {
 	public void setTotal(int total) {
 		this.total = total;
 	}
-	public DATE getPdate() {
+	public Date getPdate() {
 		return pdate;
 	}
-	public void setPdate(DATE pdate) {
+	public void setPdate(Date pdate) throws Exception {
 		this.pdate = pdate;
 	}
-	public DATE getDdate() {
+	public Date getDdate() {
 		return ddate;
 	}
-	public void setDdate(DATE ddate) {
+	public void setDdate(Date ddate) throws Exception {
+	
 		this.ddate = ddate;
 	}
 	public String getStatus() {

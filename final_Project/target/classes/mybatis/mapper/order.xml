@@ -14,38 +14,40 @@
 <!-- 수정필요 -->
 
 <select id="selectList" parameterType="order" resultType="order">
-SELECT  id
-        ,aid
-        ,receiver
-        ,address
-        ,total
-        ,to_char(pdate,'yyyy-mm-dd') AS pdate
-        ,to_char(ddate,'yyyy-mm-dd') AS ddate
-        ,status 
-FROM ordered  
-WHERE aid = #{aid}
-
-
+	SELECT  o.id	
+        ,o.aid 
+        ,o.receiver 
+        ,o.address 
+        ,o.total 
+        ,o.pdate
+        ,o.ddate 
+        ,o.status 
+        ,p.title AS title
+	FROM ordered o 
+	JOIN order_detail d
+	ON o.id = d.oid
+	JOIN product p
+	ON d.pid = p.id
+	WHERE o.aid = #{aid}
 </select>
 
 
 <insert id="insertordered" parameterType="order">
-INSERT INTO ordered (id,aid,receiver,address,total,pdate,ddate)
-VALUES(ordered_seq.NEXTVAL,#{aid},#{receiver},#{address},#{total},SYSDATE,SYSDATE+1)
+	INSERT INTO ordered (id,aid,receiver,address,total,pdate,ddate)
+	VALUES(ordered_seq.NEXTVAL,#{aid},#{receiver},#{address},#{total},SYSDATE,SYSDATE+1)
 
 </insert>
 	
 <select id="selectone" parameterType="order" resultType="order">
-select * 
-from ordered 
-where aid = #{aid} AND to_char(pdate, 'yyyymmdd' ) = to_char(sysdate, 'yyyymmdd')
+	SELECT  *
+	FROM ordered 
+	WHERE aid = #{aid} AND to_char(pdate, 'yyyymmdd' ) = to_char(sysdate, 'yyyymmdd')
 </select>	
 
 <insert id="insertorderdetail" parameterType="orderdetail">
 
-INSERT INTO ORDER_DETAIL (id,oid,pid,qty,price)
-VALUES (ORDER_DETAIL_SEQ.NEXTVAL, #{oid},#{pid},#{qty},#{price})
-
+	INSERT INTO ORDER_DETAIL (id,oid,pid,qty,price)
+	VALUES (ORDER_DETAIL_SEQ.NEXTVAL, #{oid},#{pid},#{qty},#{price})
 
 </insert>
 
