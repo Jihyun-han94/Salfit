@@ -236,7 +236,6 @@
   	SELECT bcnt FROM board
   	 WHERE id = #{id}
   </select>
-
   <update id="incview">
   	UPDATE board
   	   SET vcnt = vcnt + 1

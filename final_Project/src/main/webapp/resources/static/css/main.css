@@ -22,7 +22,7 @@ body {
 }
 
 a {
-  color: green;
+  color: #bac600;
   text-decoration: none;
 }
 
@@ -185,7 +185,7 @@ a {
   border-top: 1px solid #f2f2f2;
 }
 .cd-primary-nav > ul a:hover, .cd-primary-nav > ul a.active {
-  color: green;
+  color: #bac600;
 }
 @media only screen and (min-width: 1024px) {
   .cd-primary-nav {
@@ -284,7 +284,7 @@ a {
   transform: translateX(-50%);
   width: 0;
   height: 4px;
-  background: green;
+  background: #bac600;
   transition: all .5s ease-out;
 }
 
@@ -472,7 +472,7 @@ Intro Section
   width: 100%;
   margin-top: 60px;
   height: 300px;
-  background: url(/salfit/resources/img/koreanmain.png) no-repeat center center;
+  /* background: url(/salfit/resources/img/real_main.png) no-repeat center center; */
   background-size: 105% 100%;
 }
 .cd-hero .cd-hero-content {
