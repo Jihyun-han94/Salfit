@@ -180,8 +180,8 @@
 					// 알림창 
 					 $('#staticBackdrop').modal('show');
 				} else if(data.res == "no_login") {
-					$('#loginModal').modal('show');
-					location.href = data.redirect; 
+					/* $('#loginModal').modal('show'); */
+					location.href = data.redirect;
 				}
 			}				
 		});
