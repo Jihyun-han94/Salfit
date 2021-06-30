@@ -19,6 +19,11 @@
 	<c:url var="updateView" value="/account/update_view" />
 	<c:url var="product" value="/product" />
 	<c:url var="cart" value="/cart" />
+	<c:url var="admin_product" value="/admin/product" />
+	<c:url var="admin_order" value="/admin/order/list" />
+	<c:url var="admin_delivery" value="/admin/order/calendar" />
+	<c:url var="admin_statistics" value="/admin/order/summary" />
+	
 </head>
 <body>
 	<header class="cd-auto-hide-header">
@@ -33,16 +38,27 @@
 			</a> <!-- .nav-trigger -->
 		<ul id="cd-navigation">
 		<c:choose>
-			<c:when test="${sessionScope.logined }">
-				<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>
-				<li><a href="${cart }">Cart</a></li>
+			<c:when test="${sessionScope.atype == 'a' }">
+				<li><a href="${admin_product }">상품 관리</a></li>
+				<li><a href="${admin_order }">주문 관리</a></li>
+				<li><a href="${admin_delivery }">배송 관리</a></li>
+				<li><a href="${admin_statistics }">통계</a></li>
 				<li><a href="${logout }">Logout</a></li>
-				<li><a href="#0">Contact Us</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${login }">Login</a></li>
-				<li><a href="${join }">Join</a></li>
-				<li><a href="#0">Contact Us</a></li>
+				<c:choose>
+					<c:when test="${sessionScope.logined }">
+						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>
+						<li><a href="${cart }">Cart</a></li>
+						<li><a href="${logout }">Logout</a></li>
+						<li><a href="#0">Contact Us</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="${login }">Login</a></li>
+						<li><a href="${join }">Join</a></li>
+						<li><a href="#0">Contact Us</a></li>
+					</c:otherwise>
+				</c:choose>
 			</c:otherwise>
 		</c:choose>
 		</ul>

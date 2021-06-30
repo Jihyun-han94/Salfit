@@ -85,6 +85,7 @@ public class AccountController {
 			
 			session.setAttribute("account", dto);
 			session.setAttribute("logined", true);
+			session.setAttribute("atype", dto.getAtype());
 			m.addAttribute("dto",dto);
 
 			if(dto.getAtype().equals("a")) {
