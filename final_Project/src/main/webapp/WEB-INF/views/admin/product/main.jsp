@@ -34,6 +34,12 @@
 			<jsp:param name="producttypes" value="${producttypes}" />
 		</jsp:include>
 	</div>
+	
+	
+	<div id="registerOK" class="alert alert-info collapse" role="alert">새 상품이 등록되었습니다.</div>	
+	<div id="removeOK" class="alert alert-danger collapse" role="alert">상품 게시글이 삭제되었습니다.</div>
+
+	
 	<div>
 		<div class="productContainer">
 			<div class="text-right">
@@ -146,4 +152,33 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
+<script>
+$(function(){
+	//등록, 삭제 후 문구 처리
+	
+	function getSearchParams(k){
+		 var p={};
+		 location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){p[k]=v});
+		 return k?p[k]:p;
+		}
+	var result = getSearchParams("result");
+	if(result != null) {
+		
+		$(function(){
+			if(result === 'registerOK'){
+				$('#registerOK').show();
+				setTimeout(function() { 
+				       $('#registerOK').fadeOut(1000); 
+				   }, 5000);
+			}
+			if(result === 'removeOK'){
+				$('#removeOK').show();
+				setTimeout(function() { 
+				       $('#removeOK').fadeOut(1000); 
+				   }, 5000);
+			}
+		})
+	}
+})
+</script>
 </html>

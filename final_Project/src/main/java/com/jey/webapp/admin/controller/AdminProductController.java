@@ -169,6 +169,7 @@ public class AdminProductController {
 		boolean res = product.add(dto);
 		
 		if(res) {
+			m.addAttribute("result", "registerOK");
 			forward = "redirect:/admin/product";
 		} else {
 			m.addAttribute("data", dto);
@@ -256,6 +257,7 @@ public class AdminProductController {
 			mv.addObject("newline", "\n\r");
 			mv.addObject("ptypes", product.getProductTypes());
 			mv.addObject("item", dto);
+			m.addAttribute("result", "updateOK");
 			mv.setViewName("redirect:/admin/product/detail?id=" + dto.getId());
 		} else {
 			m.addAttribute("ptypes", product.getProductTypes());
@@ -274,6 +276,7 @@ public class AdminProductController {
 		String forward = ""
 ;		boolean res = product.remove(dto);
 		if(res) {
+			m.addAttribute("result", "removeOK");
 			forward = "redirect:/admin/product";
 		} else {
 			forward = "error/default";

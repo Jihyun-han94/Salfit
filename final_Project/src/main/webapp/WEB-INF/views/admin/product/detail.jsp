@@ -16,6 +16,7 @@
 	<header>
 		<%-- <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
 	</header>
+	<div id="updateOK" class="alert alert-success collapse" role="alert">상품 정보를 수정했습니다.</div>
  	<div id="bodyContainer1">
       <div class="row my-10 mx-5 "> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
          <div class="col-4">
@@ -66,6 +67,29 @@
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
+$(function(){
+	//등록, 삭제 후 문구 처리
+	
+	function getSearchParams(k){
+		 var p={};
+		 location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){p[k]=v});
+		 return k?p[k]:p;
+		}
+	var result = getSearchParams("result");
+	if(result != null) {
+		
+		$(function(){
+			if(result === 'updateOK'){
+				$('#updateOK').show();
+				setTimeout(function() { 
+				       $('#updateOK').fadeOut(1000); 
+				   }, 5000);
+			}
+		})
+	}
+})
+	
+	
 	/* 리뷰 */
 	
 	var oldListCnt = "${oldListCnt}";
