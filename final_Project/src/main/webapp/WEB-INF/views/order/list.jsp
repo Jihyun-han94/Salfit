@@ -19,7 +19,7 @@
 <br>
 <br>
 
-<h1>최근주문내역</h1>
+<h1>${username }님의 주문내역</h1>
 
 <table id="orderedlist" border="1">
 	<th>날짜</th>
@@ -30,7 +30,7 @@
 <c:url var ="detail" value="/order/detail" />
 <c:forEach var="data" items="${requestScope.orderlist }" >
 	<tr>
-		<td><a href="${detail }?id=${data.getId() }"></a>${data.pdate }</td>
+		<td><a href="${detail }?id=${data.id }">${data.pdate }</a></td>
 		<td>${data.receiver }</td>
 		<td>${data.address }</td>
 		<td>${data.total }</td>

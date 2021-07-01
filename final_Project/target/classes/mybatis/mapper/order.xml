@@ -8,9 +8,17 @@
 <!-- 수정필요 -->
 
 <select id="selectall" parameterType="orderdetail" resultType="orderdetail">
-	SELECT *
-	FROM order_detail  
-	WHERE oid = #{oid} 
+	SELECT  d.id
+        	,d.oid 
+        	,d.pid 
+        	,d.qty 
+        	,d.price 
+        	,d.status
+        	,p.title
+	FROM order_detail d  
+	JOIN product p
+	ON d.pid = p.id
+	WHERE d.oid = #{oid} 
 </select>
 
 <select id ="selectList" parameterType="order" resultType="order" >

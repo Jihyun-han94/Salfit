@@ -12,9 +12,16 @@ public class OrderDetailDTO {
 	private int qty; // 제품 수량
 	private String status; // 주문상태 (paid,shipping,delivered, holding)
 	private int price; //제품 가격
+	private String title; //제품 이름
 	
 	
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getId() {
 		return id;
 	}

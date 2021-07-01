@@ -41,6 +41,9 @@ public class OrderController {
 		}else {
 			//account.id로 ordered table 조회 (주문내역 전체)
 			int userid = accountdto.getId();
+			String username = accountdto.getName();
+			System.out.println("username 확인!!"+ username);
+			mv.addObject("username", username);
 			System.out.println("userid 확인 : "+userid);
 			dto.setAid(userid);
 			List<OrderDTO> orderlist = order.findList(dto);
@@ -64,6 +67,7 @@ public class OrderController {
 				System.out.println("디버깅8");
 			}
 			mv.setViewName("order/list");
+			
 		}
 		
 		
@@ -75,7 +79,13 @@ public class OrderController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detailList(@ModelAttribute OrderDTO dto) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		int orderid = dto.getId();
+		System.out.println("orderid :" + orderid);
+		OrderDetailDTO orderdetaildto = new OrderDetailDTO();
+		orderdetaildto.setOid(orderid);
+		List<OrderDetailDTO> orderdetaillist = order.selectall(orderdetaildto);
 		
+		mv.addObject("orderdetaillist", orderdetaillist);
 		mv.setViewName("order/detail");
 		
 		return mv;
