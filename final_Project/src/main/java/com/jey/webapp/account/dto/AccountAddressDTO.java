@@ -1,8 +1,16 @@
 package com.jey.webapp.account.dto;
 
 public class AccountAddressDTO {
+	private int ano;
 	private int aid;
 	private String address;
+	
+	public int getAno() {
+		return ano;
+	}
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
 	public int getAid() {
 		return aid;
 	}

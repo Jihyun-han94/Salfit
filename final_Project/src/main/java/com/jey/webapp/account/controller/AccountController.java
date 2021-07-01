@@ -141,7 +141,8 @@ public class AccountController {
 	/* 회원정보 수정 */
 	
 	@RequestMapping(value = "/update_view", method = RequestMethod.POST)
-	public ModelAndView modify(HttpServletRequest req, HttpSession session, Model m, AccountDTO accountDTO, AccountAddressDTO address) throws Exception {
+	public ModelAndView modify(HttpServletRequest req, HttpSession session,
+			Model m, AccountDTO accountDTO, AccountAddressDTO addressDTO) throws Exception {
 		ModelAndView mv = new ModelAndView("account/update");
 		session = req.getSession();
 		AccountDTO dto = (AccountDTO) session.getAttribute("account");
@@ -153,13 +154,17 @@ public class AccountController {
 		
 		if(!(dtoPass.equals(pass))) {
 			System.out.println("잘못된 접근입니다.");
-//			return "redirect:/";
 		}
 		mv.addObject("account", dto);
 		
-		List<AccountAddressDTO> addressList = account.getList(address.getAid());
-		m.addAttribute("addressList", addressList);
+		int userid = dto.getId();
+		addressDTO.setAid(userid);
 		
+		// 주소 목록 띄우기
+		List<AccountAddressDTO> addressList = account.getList(addressDTO.getAid());
+		mv.addObject("addressList", addressList);
+		System.out.println("aid : " + addressDTO.getAid());
+		System.out.println("나와라!! : " + account.getList(addressDTO.getAid()));
 		System.out.println(((AccountDTO) session.getAttribute("account")).getEmail());
 		return mv;
 	}

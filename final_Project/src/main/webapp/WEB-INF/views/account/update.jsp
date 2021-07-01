@@ -108,6 +108,16 @@ function expire() {
   font-weight: bold;
   background-color: #bac600;
 }
+input {
+	width: 450px;
+	border: 1px solid #e7e7e7;
+}
+.inputstyle .addressstyle {
+	font-size: 18px;
+}
+.btn_submit {
+	text-align: center;
+}
 </style>
 <c:url var="update" value="/account/update"	/>
 <c:url var="add" value="/account/profile_update" />
@@ -140,7 +150,7 @@ function expire() {
 			</div>
 		</form>
 
-	<form action="${update }" name="update_form" method="POST">
+	<form class="inputstyle" action="${update }" name="update_form" method="POST">
 		<input type="hidden" name="id" id="id" value="${requestScope.account.getId() }">
 		<div style="margin-bottom: 20px;">
 			<label for="email">이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 28px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -164,25 +174,23 @@ function expire() {
 			<input id="id_phnumber" type="text" name="phone" value="${requestScope.account.getPhone() }" required>
 		</div>
 	</form>
-		<form id="address_form" style="margin-bottom: 50px;">
+		<form id="address_form" class="addressstyle" style="margin-bottom: 20px;">
 			<label for="address">주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 28px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<textarea style="resize: none;" id="id_address" rows="2" cols="30"></textarea>  <button class="input-file-button" type="button" onclick="addressSend();">추가</button>
+			<input id="id_address" type="text" name="address"></textarea>  <button class="input-file-button" type="button" onclick="addressSend();">추가</button>
 		</form>
-		<div id="address">
-			<ol class="address_list">
-				<c:forEach var="addressList" items="${addressList }">
-					<li>
-						<p>${addressList.getAddress() }</p>
-						<c:if test="${addressList.getAid() == account.getId() }">
-							<button type="button" onclick="delComment(this, ${addressList.getId() })">삭제</button>
-						</c:if>
-					</li>
-				</c:forEach>
-			</ol>
+		<div id="address_list" style="margin-bottom: 50px; margin-left: 150px;">
+			<c:forEach var="addressList" items="${addressList }">
+			<div>
+				<span>주소 목록&nbsp;&nbsp;</span>
+				<span>${addressList.getAno() }&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<span>${addressList.getAddress() }&nbsp;&nbsp;</span>
+				<button type="button" class="input-file-button" onclick="delAddress(this, ${addressList.getAid() })">삭제</button>
+			</div>
+			</c:forEach>
 		</div>
 	
 		
-		<div style="margin-bottom: 100px;">
+		<div class="btn_submit" style="margin-bottom: 100px;">
 			<button type="button" onclick="updateInfo();" class="btn_confirm">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;
 			<button class="btn_confirm" data-toggle="modal" id="btn_exp" data-target="#ModalExpire">탈퇴</button>
 		</div>

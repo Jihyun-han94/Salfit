@@ -106,6 +106,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
 	@Override
 	public List<AccountAddressDTO> getListAddress(int aid) throws Exception {
+		System.out.println(sqlSession.selectList("accountMapper.selectAddress", aid));
 		return sqlSession.selectList("accountMapper.selectAddress", aid);
 	}
 

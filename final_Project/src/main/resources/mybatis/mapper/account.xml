@@ -53,18 +53,15 @@
 	</delete>
 	
 	<!-- 주소 조회 -->
-	<select id="selectAddress" resultType="address">
-		SELECT a.id
-			 , a.email
-			 , a.password
-			 , a.name
-			 , a.phone
-			 , b.address
-		FROM account a
-		JOIN deliver_address b
-		  ON a.id = b.aid
-		WHERE a.id = 8;
-	</select>
+	<select id="selectAddress" parameterType="address" resultType="address">
+      SELECT b.aid
+          , b.id AS ano
+          , b.address
+      FROM account a
+      JOIN deliver_address b
+        ON a.id = b.aid
+      WHERE a.id = #{aid}
+   </select>
 	
 	<!-- 주소 추가 -->
 	<insert id="insertAddress" parameterType="address">
