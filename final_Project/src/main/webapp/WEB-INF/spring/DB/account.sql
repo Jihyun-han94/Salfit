@@ -64,10 +64,12 @@ ALTER TABLE account RENAME COLUMN type TO atype;
 
 INSERT INTO account VALUES(1, 'admin@admin.com', 'admin', '관리자', 01012345678, 'a', SYSDATE, SYSDATE, NULL, NULL);
 
-		SELECT a.id
-			 , b.id
+		SELECT a.email
+			 , a.name
+			 , b.aid
+			 , b.id AS ano
 			 , b.address
-		FROM account a
-		JOIN deliver_address b
+		FROM deliver_address b
+		JOIN account a
 		  ON a.id = b.aid
 		WHERE a.id = 8;
