@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jey.webapp.order.dto.AdminOrderDTO;
 import com.jey.webapp.order.dto.AdminOrderDetailDTO;
+import com.jey.webapp.order.dto.Criteria;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.order.repository.OrderRepository;
@@ -99,6 +100,16 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public boolean updateDetailStatus(AdminOrderDetailDTO dto) {
 		return dao.updateDetailStatus(dto);
+	}
+
+	@Override
+	public List<AdminOrderDTO> listPage(Criteria cri) throws Exception {
+		return dao.listPage(cri);
+	}
+
+	@Override
+	public int getTotalCount(Criteria cri) throws Exception {
+		return dao.getTotalCount(cri);
 	}
 
 

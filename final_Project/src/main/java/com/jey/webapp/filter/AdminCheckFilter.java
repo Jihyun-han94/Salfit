@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.jey.webapp.account.dto.AccountDTO;
 
 @WebFilter(
-		urlPatterns = {"/admin/*"}
+//		urlPatterns = {"/admin/*"}
 )
 public class AdminCheckFilter implements Filter {
 

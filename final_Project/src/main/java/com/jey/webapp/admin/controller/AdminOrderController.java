@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.order.dto.AdminOrderDTO;
 import com.jey.webapp.order.dto.AdminOrderDetailDTO;
+import com.jey.webapp.order.dto.Criteria;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
+import com.jey.webapp.order.dto.PageMaker;
 import com.jey.webapp.order.service.OrderService;
 
 @Controller
@@ -58,7 +62,7 @@ public class AdminOrderController {
 		boolean res = order.add(dto, detail);
 		
 		if(res == true) {
-			return "admin/order/manage";
+			return "admin/order/list";
 		}
 		
 		return "error/default";
@@ -66,23 +70,47 @@ public class AdminOrderController {
 	
 	
 	/* 주문확인 */
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void listPageTest() throws Exception{
+//		Criteria cri = new Criteria();
+//		cri.setPage(1);
+//		cri.setPerPageNum(10);
+//		List<AdminOrderDTO> boards = order.listPage(cri);
+//		for (AdminOrderDTO board : boards) {
+//			System.out.println(board.getId()+ ":" + board.getAddress());
+//		}		
+//		int totalCount = order.getTotalCount(cri);
+//		System.out.println("totalCount: "+totalCount);
+		
+		int page = 6;
+		int perPageNum = 10;
+		
+		UriComponents uriComponets = UriComponentsBuilder.newInstance()
+				.path("/{module}/{page}")
+				.queryParam("page", page)
+				.queryParam("perPageNum", perPageNum)
+				.build()
+				.expand("admin","order/list")
+				.encode();
+		
+		String uri = "/admin/order/list?page=" + page + "&perPageNum=" + perPageNum;
+		
+		System.out.println(uri);
+		System.out.println(uriComponets.toString());
+	}
+	
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String manageOrder(Model m, @ModelAttribute AdminOrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
-//		session = request.getSession();
-//		AccountDTO account = (AccountDTO) session.getAttribute("account");
-//		System.out.println(account.getId());
-//		m.addAttribute("account", account);
-		
+	public String manageOrder(@ModelAttribute Criteria cri, Model m, @ModelAttribute AdminOrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
 		List<AdminOrderDTO> orderlist = null;
 		List<AdminOrderDetailDTO> orderdetaillist = null;
-		System.out.println("ddate : "+dto.getDdate());
-		System.out.println("status : "+dto.getStatus());
-		System.out.println("id : "+dto.getId());
+		
+		System.out.println(cri.getPage() +","+ cri.getPerPageNum() +","+ cri.getId());
+		
 		
 		if (dto.getDdate() == null || dto.getDdate() == "") {
 			if (dto.getStatus() == null || dto.getStatus() == "") {
-				orderlist = order.findList(dto);
+				orderlist = order.listPage(cri);
 				orderdetaillist = order.findDetailList(dto);
 			} else {
 				orderlist = order.findListSelected(dto);
@@ -94,11 +122,47 @@ public class AdminOrderController {
 		}
 		
 		
+		PageMaker pageMaker = new PageMaker(cri);
+		int totalCount = order.getTotalCount(cri);
+		pageMaker.setTotalCount(totalCount);
+
+		m.addAttribute("pageMaker", pageMaker);
 		m.addAttribute("orderlist",orderlist);
 		m.addAttribute("orderdetaillist",orderdetaillist);
 		m.addAttribute("dto",dto);
-		return "admin/order/manage";
+		m.addAttribute("cri", cri);
+		return "admin/order/list";
 	}
+	
+	
+//	@RequestMapping(value = "/list", method = RequestMethod.GET)
+//	public String manageOrder(@ModelAttribute Criteria cri, Model m, @ModelAttribute AdminOrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
+//		List<AdminOrderDTO> orderlist = null;
+//		List<AdminOrderDetailDTO> orderdetaillist = null;
+//		System.out.println("ddate : "+dto.getDdate());
+//		System.out.println("status : "+dto.getStatus());
+//		System.out.println("id : "+dto.getId());
+//		System.out.println(cri.getPage() +","+ cri.getPerPageNum());
+//		
+//		if (dto.getDdate() == null || dto.getDdate() == "") {
+//			if (dto.getStatus() == null || dto.getStatus() == "") {
+//				orderlist = order.findList(dto);
+//				orderdetaillist = order.findDetailList(dto);
+//			} else {
+//				orderlist = order.findListSelected(dto);
+//				orderdetaillist = order.findDetailListSelected(dto);
+//			}
+//		} else {
+//			orderlist = order.findListSelected(dto);
+//			orderdetaillist = order.findDetailListSelected(dto);
+//		}
+//		
+//		
+//		m.addAttribute("orderlist",orderlist);
+//		m.addAttribute("orderdetaillist",orderdetaillist);
+//		m.addAttribute("dto",dto);
+//		return "admin/order/list";
+//	}
 	
 	
 	/* 주문 상태 별  */
@@ -153,6 +217,6 @@ public class AdminOrderController {
 		m.addAttribute("orderlist",orderlist);
 		m.addAttribute("orderdetaillist",orderdetaillist);
 		m.addAttribute("dto",dto);
-		return "admin/order/manageday";
+		return "admin/order/delivery";
 	}
 }

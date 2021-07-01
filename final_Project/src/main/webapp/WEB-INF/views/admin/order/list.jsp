@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 배송 관리</title>
+<title>관리자 주문 관리</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="order" value="/admin/order" />
 <c:url var="ajax_order" value="/ajax/admin/order" />
@@ -20,9 +20,27 @@
 	</header>
 	<div class="bodyContainer">
 		<h1 class="corpBoardTitle">주문 관리</h1>
+		<c:if test="${cri.getId() != 0}">
+		<a href="${order}/list" class="btn btn-outline-secondary pull-right">전체 주문 보기</a>
+		</c:if>
 		<a href="${order}/calendar" class="btn btn-outline-secondary pull-right">배송 관리</a>
 		<section class="applicantTableSection">
 			<h3>전체 주문</h3>
+			
+			<c:if test="${cri.getId() == 0}">
+			<div class="row">
+				<div class="col-md-10"></div>
+				<div class="col-md-1"><sapn>페이지 당 주문건수: </sapn></div>	
+				<div class="col-md-1 text-right">
+					<select class="form-control" id="perPageSel">
+				  		<option value="10">10</option>
+				  		<option value="15">15</option>
+				  		<option value="20">20</option>
+					</select>
+				</div>
+			</div>
+			</c:if>
+			
 			<table class="table text-center">
 				<thead class="thead-dark">
 					<tr>
@@ -37,6 +55,7 @@
 						<th scope="col">연락하기</th>
 						<th scope="col">상태 체크</th>
 						<th scope="col">주문 처리 상태
+						<c:if test="${cri.getId() == 0}">
 						<form id="select_status_form" action="${order}/list" method="get">
 							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" >
 						        <option value="" ${dto.getStatus() == null ? "selected" : "" }>전체</option>
@@ -46,6 +65,7 @@
 						        <option value="delivered" ${dto.getStatus() == "delivered" ? "selected" : "" }>배송완료</option>
 						    </select>
 						</form>
+						</c:if>
 						</th>
 					</tr>
 				</thead>
@@ -186,6 +206,43 @@
 			</table>
 
 		</section>
+		
+		<c:if test="${cri.getId() == 0}">
+		<section>
+			<!-- 페이지 번호 -->	
+			<div class="text-center">
+				<nav aria-label="pagination">
+					<ul class="pagination">
+					
+						<!-- prev 버튼 -->
+						<li id="page-prev">
+							<a href="list${pageMaker.makeQuery(pageMaker.startPage-1)}" aria-label="Prev">
+								<span aria-hidden="true">«</span>
+							</a>
+						</li>
+						
+						<!-- 페이지 번호 (시작 페이지 번호부터 끝 페이지 번호까지) -->
+						<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+						    <li id="page${idx}">
+							    <a href="list${pageMaker.makeQuery(idx)}">
+							    	<!-- 시각 장애인을 위한 추가 -->
+							      	<span>${idx}<span class="sr-only">(current)</span></span>
+							    </a>
+						    </li>
+						</c:forEach>
+						
+						<!-- next 버튼 -->
+						<li id="page-next">
+						    <a href="list${pageMaker.makeQuery(pageMaker.endPage)}" aria-label="Next">
+						    	<span aria-hidden="true">»</span>
+						    </a>
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+		</section>
+		</c:if>
 
 	</div>
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
@@ -209,8 +266,48 @@ $(document).ready(function() {
 		modaloid.text(orderId);
 	});
 	
+	
+	/* paging */
+	//perPageNum select 박스 설정
+	setPerPageNumSelect();
+	
+	//prev 버튼 활성화, 비활성화 처리
+	var canPrev = '${pageMaker.prev}';
+	if(canPrev !== 'true'){
+		$('#page-prev').addClass('disabled');
+	}
+	
+	//next 버튼 활성화, 비활성화 처리
+	var canNext = '${pageMaker.next}';
+	if(canNext !== 'true'){
+		$('#page-next').addClass('disabled');
+	}
+	
+	//현재 페이지 파란색으로 활성화
+	var thisPage = '${pageMaker.cri.page}';
+	//매번 refresh 되므로 다른 페이지 removeClass 할 필요는 없음->Ajax 이용시엔 해야함
+	$('#page'+thisPage).addClass('active');
 		
 });
+
+
+	var perPageNum = "${pageMaker.cri.perPageNum}";
+	var $perPageSel = $('#perPageSel');
+	var thisPage = '${pageMaker.cri.page}';
+	function setPerPageNumSelect(){
+		$perPageSel.val(perPageNum).prop("selected",true);
+		//PerPageNum가 바뀌면 링크 이동
+		$perPageSel.on('change',function(){
+			let status = document.getElementById('selectOrderStatus').value;
+			//searchStatus($('#selectOrderStatus'));
+			//pageMarker.makeQuery 사용 못하는 이유: makeQuery는 page만을 매개변수로 받기에 변경된 perPageNum을 반영못함
+			if(status != null || status == "") {
+				window.location.href = "list?status="+status+"&page=1&perPageNum="+$perPageSel.val();
+			} else {
+				window.location.href = "list?page=1&perPageNum="+$perPageSel.val();
+			}
+		})
+	}
 
 	function searchStatus(e) {
 		const url = new URL(window.location.href);
@@ -225,6 +322,16 @@ $(document).ready(function() {
 			urlParams.set('status', e.value);
 		} else {
 			urlParams.append('status', e.value);
+		}
+		if(urlParams.has('page')) {
+			urlParams.set('page', "1");
+		} else {
+			urlParams.append('page', "1");
+		}
+		if(urlParams.has('perPageNum')) {
+			urlParams.set('perPageNum', perPageNum);
+		} else {
+			urlParams.append('perPageNum', "10");
 		}
 		window.location.href = "list?" + urlParams;
 	}

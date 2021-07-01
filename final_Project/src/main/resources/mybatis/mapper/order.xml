@@ -50,28 +50,23 @@
 	</select>
 	
 	<select id="orderlistsel" parameterType="adminorder" resultType="adminorder">
-	SELECT o.id,
-			o.aid,
-			o.receiver,
-			a.phone,
-			o.address,
-			o.paytype,
-			o.total,
-			o.pdate,
-			o.ddate,
-			o.edate,
-			o.status
-		FROM ordered o
-		JOIN account a
-		  ON a.id = o.aid
-		 WHERE 1=1
-	 <if test='status != "" and status != null'>
-		 AND o.status = #{status}
-	 </if>
-	 <if test="ddate != null">
-		 AND TO_DATE(#{ddate}, 'YYYY-MM-DD') BETWEEN TO_DATE(o.ddate, 'YYYY-MM-DD') AND (TO_DATE(o.edate, 'YYYY-MM-DD') + 1)
-	 </if>
-		ORDER BY o.id DESC
+	 SELECT *
+	  FROM (SELECT ROW_NUMBER() OVER (ORDER BY pdate DESC, o.id DESC) NUM
+	         , o.*
+	         , a.phone
+	          FROM ordered o
+	          JOIN account a
+			  ON a.id = o.aid
+			 WHERE 1=1
+		 <if test='status != "" and status != null'>
+			 AND o.status = #{status}
+		 </if>
+		 <if test="ddate != null">
+			 AND TO_DATE(#{ddate}, 'YYYY-MM-DD') BETWEEN TO_DATE(o.ddate, 'YYYY-MM-DD') AND (TO_DATE(o.edate, 'YYYY-MM-DD') + 1)
+		 </if>
+			ORDER BY o.id DESC
+		  ) 
+	  WHERE NUM BETWEEN #{pageStart} AND (#{pageStart} + #{perPageNum} - 1)
 	</select>
 	
 	<select id="orderdetaillistsel" parameterType="adminorder" resultType="adminorderdetail">
@@ -217,4 +212,30 @@
 		   SET status = #{status}
 		 WHERE id = #{id}
 	 </update>
+	 
+	 
+	 
+	 
+	 <select id="listPage" resultType="adminorder">
+	 SELECT *
+	  FROM (SELECT ROW_NUMBER() OVER (ORDER BY pdate DESC, o.id DESC) NUM
+	         , o.*
+	         , a.phone
+	          FROM ordered o
+	          JOIN account a
+			  ON a.id = o.aid
+			WHERE 1=1
+			 <if test='id != "" and id != null'>
+				 AND o.id = #{id}
+			 </if>
+	         ORDER BY pdate DESC, o.id DESC
+	        ) 
+	  WHERE NUM BETWEEN #{pageStart} AND (#{pageStart} + #{perPageNum} - 1)
+	</select>
+	
+	<select id="gettotalcount" resultType="_int">
+		SELECT count(o.id)
+		FROM ordered o
+		WHERE o.id &gt; 0
+	</select>
 </mapper>

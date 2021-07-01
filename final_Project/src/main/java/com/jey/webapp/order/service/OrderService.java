@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.jey.webapp.order.dto.AdminOrderDTO;
 import com.jey.webapp.order.dto.AdminOrderDetailDTO;
+import com.jey.webapp.order.dto.Criteria;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.product.dto.ProductDTO;
@@ -27,5 +28,6 @@ public interface OrderService {
 	public List<AdminOrderDTO> findListSelected(AdminOrderDetailDTO dto);
 	public List<AdminOrderDetailDTO> findDetailListSelected(AdminOrderDetailDTO dto);
 	public boolean updateDetailStatus(AdminOrderDetailDTO dto);
-
+	public List<AdminOrderDTO> listPage(Criteria cri) throws Exception;
+	public int getTotalCount(Criteria cri) throws Exception;
 }

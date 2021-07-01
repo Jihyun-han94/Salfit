@@ -24,7 +24,7 @@
 		<a href="${orderurl}/calendar" class="btn btn-outline-secondary pull-right">배송 관리(월별)</a>
 		<section class="applicantTableSection">
 			<h3>오늘 배송 상품</h3>
-			<p><a href="${orderurl}/list?ddate=${dto.getStartdate()}" >${dto.getStartdate()} : 날짜가 포함된 전체 주문 보기 </a></p>
+		<%-- 	<p><a href="${orderurl}/list?ddate=${dto.getStartdate()}" >${dto.getStartdate()} : 날짜가 포함된 전체 주문 보기 </a></p> --%>
 			<table class="table text-center">
 				<thead class="thead-dark">
 					<tr>

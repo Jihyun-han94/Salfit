@@ -113,3 +113,15 @@ INSERT INTO review VALUES(10, 21, 1, ' dddddddd~~~', 2, SYSDATE);
 
 
 ALTER TABLE ordered DROP CONSTRAINT ordered_status_CK;
+
+SELECT *
+	  FROM (SELECT ROW_NUMBER() OVER (ORDER BY pdate) NUM
+	         , o.*
+	          FROM ordered o
+	         ORDER BY pdate
+	        ) 
+	 WHERE NUM BETWEEN 11 AND 20;
+	 
+SELECT count(id)
+		FROM ordered
+		WHERE id > 0;

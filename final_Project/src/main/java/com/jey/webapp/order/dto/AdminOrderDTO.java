@@ -1,5 +1,7 @@
 package com.jey.webapp.order.dto;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 import oracle.sql.DATE;
 
 public class AdminOrderDTO {
@@ -81,4 +83,49 @@ public class AdminOrderDTO {
 		this.status = status;
 	}
 	
+	
+	
+	
+	private int page = 1;
+	private int perPageNum = 10;
+	
+	
+	//pageStart를 반환
+	public int getPageStart() {
+		return (this.page - 1)*perPageNum;
+	}
+	
+	public String makeQuery() {
+		return UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", this.perPageNum)
+				.build().encode().toString();
+	}
+
+	public int getPage() {
+		return page;
+	}
+	
+	public void setPage(int page) {
+		if(page <= 0) {
+			this.page = 1;
+		}else {
+			this.page = page;
+		}
+	}
+	public int getPerPageNum() {
+		return perPageNum;
+	}
+	public void setPerPageNum(int perPageNum) {
+		if(perPageNum <=0 || perPageNum > 100) {
+			this.perPageNum = 10;
+		}else {
+			this.perPageNum = perPageNum;
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Criteria [page=" + page + ", perPageNum=" + perPageNum +"]";
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jey.webapp.order.dto.AdminOrderDTO;
 import com.jey.webapp.order.dto.AdminOrderDetailDTO;
+import com.jey.webapp.order.dto.Criteria;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
@@ -138,6 +139,16 @@ public class OrderRepositoryImpl implements OrderRepository {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<AdminOrderDTO> listPage(Criteria cri) {
+		return sqlSession.selectList("orderMapper.listPage", cri);
+	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		return sqlSession.selectOne("orderMapper.gettotalcount",cri);
 	}
 
 
