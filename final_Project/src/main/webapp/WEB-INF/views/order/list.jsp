@@ -20,19 +20,22 @@
 <br>
 
 <h1>최근주문내역</h1>
-<table id="orderedlist" border="1">
-<th>날짜</th>
-<th>상품정보</th>
-<th>결제금액</th>
-<th>상태</th>
 
+<table id="orderedlist" border="1">
+	<th>날짜</th>
+	<th>수령인</th>
+	<th>주소</th>
+	<th>결제금액</th>
+	<th>상태</th>
+<c:url var ="detail" value="/order/detail" />
 <c:forEach var="data" items="${requestScope.orderlist }" >
-<tr>
-<td>${data.pdate }</td>
-<td>${data.title }</td>
-<td>${data.total }</td>
-<td>${data.status }</td>
-</tr>
+	<tr>
+		<td><a href="${detail }?id=${data.getId() }"></a>${data.pdate }</td>
+		<td>${data.receiver }</td>
+		<td>${data.address }</td>
+		<td>${data.total }</td>
+		<td>${data.status }</td>
+	</tr>
 </c:forEach>
 
 </table>
