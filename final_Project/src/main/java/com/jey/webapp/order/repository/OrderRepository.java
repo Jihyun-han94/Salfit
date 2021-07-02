@@ -13,14 +13,15 @@ public interface OrderRepository {
 	
 	public OrderDetailDTO select(OrderDTO dto) throws Exception;
 	public OrderDTO selectone(OrderDTO dto) throws Exception;
-	public List<AdminOrderDTO> selectList(AdminOrderDTO dto)  throws Exception;
-	public List<AdminOrderDetailDTO> selectDetailList(AdminOrderDTO dto);
+	public List<OrderDTO> selectList(OrderDTO dto)  throws Exception;
 	public boolean insert(OrderDTO dto, OrderDetailDTO detail)  throws Exception;
 	public boolean insert(OrderDTO dto)  throws Exception;
 	public boolean insert(OrderDetailDTO dto)  throws Exception;
 	public boolean update(OrderDetailDTO dto)  throws Exception;
 	public boolean insert(int id)  throws Exception;	// 리뷰추가용
 	public List<OrderDetailDTO> selectall(OrderDetailDTO dto) throws Exception;
+	public List<AdminOrderDTO> selectList(AdminOrderDTO dto)  throws Exception;
+	public List<AdminOrderDetailDTO> selectDetailList(AdminOrderDTO dto);
 	public boolean updateStatus(AdminOrderDTO dto);	// 관리자 주문관리용 
 	public List<AdminOrderDTO> selectListSelected(AdminOrderDTO dto);
 	public List<AdminOrderDetailDTO> selectDetailListSelected(AdminOrderDTO dto);
