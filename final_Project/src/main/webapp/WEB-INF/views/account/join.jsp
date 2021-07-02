@@ -158,29 +158,7 @@ function send() {
 	</article>
 	<div class="signhalf bg"></div>
 </section>
-
 <br><br>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  -->
-<script type="text/javascript">
-$('.signtabs .tab').click(function(){
-    if ($(this).hasClass('signup')) {
-        $('.signtabs .tab').removeClass('active');
-        $(this).addClass('active');
-        $('.cont').hide();
-        $('.signin-cont').show();
-    }
-    if ($(this).hasClass('signin')) {
-        $('.signtabs .tab').removeClass('active');
-        $(this).addClass('active');
-        $('.cont').hide();
-        $('.signup-cont').show();
-    } 
-});
-
-</script>
-<!-- 구글 api 사용을 위한 스크립트 -->
-<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
-
 <%@ include file="/WEB-INF/views/module/footer.jsp" %>
 </body>
 </html>

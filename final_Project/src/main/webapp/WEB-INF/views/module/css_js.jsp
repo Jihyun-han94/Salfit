@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/salfit/resources/static/css/main.css"> <!-- Resource style -->
 <link rel="stylesheet" href="/salfit/resources/static/css/total.css">
 <link rel="stylesheet" href="/salfit/resources/static/css/account.css">
-
+<link rel="stylesheet" href="/salfit/resources/static/css/footer.css">
 
 <!-- JS -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/static/jquery/js/jquery-3.6.0.min.js"></script>

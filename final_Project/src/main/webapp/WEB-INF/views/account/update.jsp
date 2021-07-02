@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보</title>
- <%@ include file="/WEB-INF/views/module/css_js.jsp" %>
- <link rel="stylesheet" href="/webapp/resources/static/css/total.css">
+<%@ include file="/WEB-INF/views/module/css_js.jsp" %>
 </head>
 <c:url var="expire" value="/ajax/account/expire"	/>
 <c:url var="view_address" value="/ajax/account/address/view"	/>
@@ -29,6 +28,7 @@ var checkRePass = function(){
 }
 
 function addressSend() {
+	alert();
 	/* $.ajax({
 		url: "${add_address }",
 		type: "post",
@@ -47,7 +47,7 @@ function addressSend() {
 	getAddressList(1, "서울 강남구 논현동"); // 주소 목록 출력
 }
 
-function getAddressList(ano, address)) {
+function getAddressList(ano, address) {
 	var item = document.createElement("div");
 	var no = document.createElement("span");
 	var content = document.createElement("span");

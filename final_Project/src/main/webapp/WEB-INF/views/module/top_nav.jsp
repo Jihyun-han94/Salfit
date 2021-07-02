@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!doctype html>
-<html lang="en" class="no-js">
-<head>
-	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- google 로그인 -->
-	<meta name ="google-signin-client_id" content="1082904925061-uort5h8csjfdcshpe89qs881hjdbfhfg.apps.googleusercontent.com">
 	<link href="https://fonts.googleapis.com/css?family=David+Libre|Hind:400,700" rel="stylesheet">
-
-	<%@ include file="/WEB-INF/views/module/css_js.jsp" %>
 	<c:url var="main" value="/" />
 	<c:url var="join" value="/account/join" />
 	<c:url var="login" value="/account/login" />
@@ -23,23 +15,7 @@
 	<c:url var="admin_order" value="/admin/order/list" />
 	<c:url var="admin_delivery" value="/admin/order/calendar" />
 	<c:url var="admin_statistics" value="/admin/order/summary" />
-<style>
-.btn_confirm {
- padding: 5px 25px;
- border: 1px solid #bac600;
- color: #263238;
- background: transparent;
- -moz-border-radius: 2px;
- -webkit-border-radius: 2px;
- border-radius: 2px;
-}
-.btn_confirm:hover {
-  background-color: #bac600;
-  color: #ffffff;
-}
-</style>	
-</head>
-<body>
+
 	<header class="cd-auto-hide-header">
 		<div class="logo"><a href="${main }"><img src="/salfit/resources/img/log.png" alt="Logo" height="80px"></a></div>
 	
@@ -109,7 +85,7 @@
 			<div class="form-group">
 				<input style="margin-bottom: 20px;" id="id_password_confirm" type="password" name="password" placeholder="password" required>
 				<div>
-					<button type="submit" class="btn_confirm">확인</button>
+					<button type="submit" class="btn_nav_confirm">확인</button>
 				</div>
 			</div>
 		</form>
@@ -121,31 +97,6 @@
 </div>
 </div>
 
-<script type="text/javascript">
-
-	  function onSignIn(googleUser) {
-		  var profile = googleUser.getBasicProfile();
-		  var id_token = googleUser.getAuthResponse().id_token;
-		  var xhr = new XMLHttpRequest();
-		  xhr.open('POST', 'http://localhost/google_login');
-		  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		  xhr.onload = function() {
-		    console.log('Signed in as: ' + xhr.responseText);
-		  };
-		  xhr.send('idtoken=' + id_token);
-	}//onSignIn
-	
-function onSignInFailure(t){		
-	console.log(t);
-}
-</script>
-	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script>
 	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
 </script>
-<script src="/webapp/resources/js/main.js"></script> <!-- Resource jQuery -->>
-<!-- 구글 api 사용을 위한 스크립트 -->
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-</body>
-</html>
