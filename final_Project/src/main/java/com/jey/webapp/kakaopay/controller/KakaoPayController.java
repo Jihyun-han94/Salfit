@@ -137,6 +137,11 @@ public class KakaoPayController {
 			
 			
 		}
+			//cart에서 삭제하는 method
+			System.out.println("디버깅.......!!!"+dto.getAid());
+			boolean deleteresult = cart.delete(dto);
+			
+			
 			m.addAttribute("ordered", order_dto);
 		
 		
