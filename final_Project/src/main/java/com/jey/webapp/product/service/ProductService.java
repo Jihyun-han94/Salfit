@@ -29,5 +29,6 @@ public interface ProductService {
 	public boolean like(LikeDTO like);
 	public boolean checkLikeExist(LikeDTO like);
 	public void incview(int id);
+	public List<ProductDTO> searchOldProductList(ProductSearchDTO search);
 
 }

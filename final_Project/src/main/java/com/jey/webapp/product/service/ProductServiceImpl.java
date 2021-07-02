@@ -108,5 +108,10 @@ public class ProductServiceImpl implements ProductService {
 		dao.updateView(id);
 	}
 
+	@Override
+	public List<ProductDTO> searchOldProductList(ProductSearchDTO search) {
+		return dao.findOldProductList(search);
+	}
+
 
 }

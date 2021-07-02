@@ -29,4 +29,5 @@ public interface ProductRepository {
 	public boolean addLike(LikeDTO like);
 	public boolean findLike(LikeDTO like);
 	public void updateView(int id);
+	public List<ProductDTO> findOldProductList(ProductSearchDTO search);
 }

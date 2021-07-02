@@ -32,10 +32,10 @@ public class ProductController {
 
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView main( @ModelAttribute ProductSearchDTO search, HttpServletRequest request, HttpSession session) throws Exception {
+	public ModelAndView scroll( @ModelAttribute ProductSearchDTO search, HttpServletRequest request, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		session = request.getSession();
-
+		mv.setViewName("product/pagingmain");
+		
 		List<ProductDTO> productlist = null;
 		List<Integer> liked = new ArrayList<Integer>();
 		List<ProductDTO> likedProduct = null;
@@ -61,15 +61,52 @@ public class ProductController {
 		} else {
 			productlist = product.findList(search);
 		}
-
-		
-		mv.setViewName("product/main");
-//		mv.addObject("account", account);
+		System.out.println("product size : "+productlist.size());
 		mv.addObject("productlist", productlist);
 		mv.addObject("producttypes", product.getProductTypes());
 		mv.addObject("liked", liked);
+		mv.addObject("oldListCnt", productlist.size());
 		return mv;
 	}
+	
+//	@RequestMapping(value = "", method = RequestMethod.GET)
+//	public ModelAndView main( @ModelAttribute ProductSearchDTO search, HttpServletRequest request, HttpSession session) throws Exception {
+//		ModelAndView mv = new ModelAndView();
+//		session = request.getSession();
+//
+//		List<ProductDTO> productlist = null;
+//		List<Integer> liked = new ArrayList<Integer>();
+//		List<ProductDTO> likedProduct = null;
+//		
+//		AccountDTO account = null;
+//		// 로그인 사용자의 경우 -> 하트 표시 
+//		if(session.getAttribute("logined") != null && (boolean)session.getAttribute("logined")) {
+//			if(session.getAttribute("account") != null) {
+//				account = (AccountDTO) session.getAttribute("account");
+//				// 세션 + 필터로 관리자만 active 'n'인 상품 보기 가능 
+//				search.setAid(account.getId());  
+//				liked = new ArrayList<Integer>();
+//				likedProduct = product.getAllLikePid(account.getId());  
+//				for(ProductDTO lk : likedProduct) {
+//					liked.add(lk.getId());
+//				}
+//			}
+//		}
+//		if(search.getPtype() == 0 && search.getSearchtype() == null) {
+//			productlist = product.findAll(search);
+//		} else if (search.getSearch() == "") {
+//			productlist = product.findAll(search);
+//		} else {
+//			productlist = product.findList(search);
+//		}
+//
+//		
+//		mv.setViewName("product/main");
+//		mv.addObject("productlist", productlist);
+//		mv.addObject("producttypes", product.getProductTypes());
+//		mv.addObject("liked", liked);
+//		return mv;
+//	}
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detail(HttpServletRequest request, @RequestParam int id, HttpSession session) throws Exception {
@@ -77,7 +114,6 @@ public class ProductController {
 		session = request.getSession();
 		AccountDTO account = null;
 		account = (AccountDTO) session.getAttribute("account");
-		System.out.println("detail session" + account);
 		
 		// --조회수(중복 제거)--
 		HashMap<String, String> hashmap = (HashMap) session.getAttribute("viewCnt");

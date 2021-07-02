@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.LikeDTO;
 import com.jey.webapp.product.dto.ProductDTO;
+import com.jey.webapp.product.dto.ProductSearchDTO;
 import com.jey.webapp.product.dto.ReviewSearchDTO;
 import com.jey.webapp.product.service.ProductService;
 
@@ -43,7 +44,6 @@ public class AjaxProductController {
 	public void like(@ModelAttribute LikeDTO like, HttpServletResponse resp) throws Exception {
 		PrintWriter out = resp.getWriter();
 		boolean res = false;
-		System.out.println(like.getCancel());
 		if(like.getCancel().equals("true") ) {
 			if(product.checkLikeExist(like)) {
 				res = product.dislike(like);
@@ -58,7 +58,6 @@ public class AjaxProductController {
 		ProductDTO dto = product.findId(like.getPid());
 		int gcnt = dto.getGcnt();
 		JSONObject json = new JSONObject();	
-		System.out.println(res);
 		json.put("res", res);
 		json.put("gcnt", gcnt);
 		json.put("cancel", like.getCancel());
@@ -82,6 +81,41 @@ public class AjaxProductController {
 		
 	}
 
+	
+	/* 상품 더보기 */
+	
+	@RequestMapping(value = "/moreProducts", produces = "application/text;charset=UTF-8", method=RequestMethod.GET)
+	@ResponseBody
+	public String searchMoreProducts(@ModelAttribute ProductSearchDTO search, HttpServletResponse resp) throws Exception {
+//		System.out.println(search.getStartIndex()+","+search.getEndIndex());
+//		System.out.println(search.getSearchtype());
+//		search.setSearch("");
+		System.out.println(search.getSearch());
+//		System.out.println(search.getPtype());
+//		System.out.println(search.getOldListCnt());
+		// startIndex ~ endIndex 범위에 해당하는 list 조회 
+		List<ProductDTO> productlist = product.searchOldProductList(search);
+//		List<ProductDTO> productlist = null;
+//		if(search.getPtype() == 0 && search.getSearchtype() == null) {
+//			System.out.println("findall");
+//			productlist = product.findAll(search);
+//		} else if (search.getSearch() == "") {
+//			System.out.println("searchohldlist");
+//			productlist = product.searchOldProductList(search);
+//		} else {
+//			System.out.println("findlist");
+//			productlist = product.findList(search);
+//		}
+//		
+//		for(ProductDTO dto : productlist) {	
+//			System.out.println(dto.getTitle());
+//		}
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = mapper.writeValueAsString(productlist);
+		return jsonStr;
+		
+	}
 	
 	
 }

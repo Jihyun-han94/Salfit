@@ -130,6 +130,14 @@ public class ProductDTO {
 			this.active = "n";
 		}
 	}
+	public void setCdate(String format) {
+		this.cdate = cdate;
+		
+	}
+	public void setUdate(String format) {
+		this.udate = udate;
+		
+	}
 	
 	
 }

@@ -164,4 +164,10 @@ public class ProductRepositoryImpl implements ProductRepository {
 	public void updateView(int id) {
 		sqlSession.update("productMapper.updateView", id);	
 	}
+
+	@Override
+	public List<ProductDTO> findOldProductList(ProductSearchDTO search) {
+		List<ProductDTO> data = sqlSession.selectList("productMapper.oldProducts", search);
+		return data;
+	}
 }

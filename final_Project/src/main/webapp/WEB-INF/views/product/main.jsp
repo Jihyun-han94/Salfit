@@ -7,11 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>상품 메인</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="like" value="/ajax/product/like" />
 <c:url var="login" value="/account/login" />
-
+<c:url var="moreProducts" value="/ajax/product/moreProducts" />
 </head>
 <body>
 	<header>
@@ -24,7 +25,7 @@
 				<c:if test="${not empty param.ptype}" >
 					<input type="hidden" name="ptype" value="${param.ptype }">
 				</c:if>
-			    <select name="searchtype">
+			    <select id="searchtype" name="searchtype">
 			        <option value="t">제품 명</option>
 			        <option value="c">제품 정보</option>
 			    </select>

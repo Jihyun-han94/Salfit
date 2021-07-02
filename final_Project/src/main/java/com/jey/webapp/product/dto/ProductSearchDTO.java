@@ -5,6 +5,27 @@ public class ProductSearchDTO {
 	private int aid;
 	private String searchtype;
 	private String search;
+	private int startIndex;
+	private int endIndex;
+	private int oldListCnt;
+	public int getStartIndex() {
+		return startIndex;
+	}
+	public void setStartIndex(int startIndex) {
+		this.startIndex = startIndex;
+	}
+	public int getEndIndex() {
+		return endIndex;
+	}
+	public void setEndIndex(int endIndex) {
+		this.endIndex = endIndex;
+	}
+	public int getOldListCnt() {
+		return oldListCnt;
+	}
+	public void setOldListCnt(int oldListCnt) {
+		this.oldListCnt = oldListCnt;
+	}
 	
 	public int getPtype() {
 		return ptype;
