@@ -29,16 +29,6 @@
 	<table border="1" id="id_cart" name="id_cart">
 		<th><div class="allCheck">
    		<input type="checkbox" name="allCheck" id="allCheck" /><label for="allCheck">모두 선택</label> 
-  		<script>
-  		$("#allCheck").click(function(){
- 		var chk = $("#allCheck").prop("checked");
- 		if(chk) {
-  		$(".chBox").prop("checked", true);
- 		} else {
-  		$(".chBox").prop("checked", false);
- 		}
-		});
-  		</script>
   		</div></th>
 		<th>이미지</th>
 		<th>item</th>
@@ -54,11 +44,7 @@
 		<div class="checkBox">
    		<input type="checkbox" name="chBox" class="chBox" data-cartNum="${data.id}" />
   		
-  		<script>
-		$(".chBox").click(function(){
- 		$("#allCheck").prop("checked", false);
-		});
-  		</script>
+  		
   		</div>
   		
   		</td>
@@ -79,6 +65,39 @@
     
     <button type="button" class="selectDelete_btn">삭제하기</button> 
     
+
+    </div>
+	
+	<br>
+	<table border="1" id="id_price" name="id_price">
+		<th>총 상품금액</th>
+		<th>총 배송비</th>
+		<th>결제예정금액</th>
+		<tr>
+		<td>${sumMoney }</td>
+		<td>${delfee }</td>
+		<td>${totalMoney }</td>
+		</tr>
+	</table>
+
+	<button type="button" class="buy_btn1">선택 상품주문</button>
+	
+</form>
+	<script>
+  		$("#allCheck").click(function(){
+ 		var chk = $("#allCheck").prop("checked");
+ 		if(chk) {
+  		$(".chBox").prop("checked", true);
+ 		} else {
+  		$(".chBox").prop("checked", false);
+ 		}
+		});
+  	</script>
+	<script>
+		$(".chBox").click(function(){
+ 		$("#allCheck").prop("checked", false);
+		});
+  		</script>
     <script type="text/javascript">
  	$(".selectDelete_btn").click(function(){
   	var confirm_val = confirm("정말 삭제하시겠습니까?");
@@ -103,23 +122,7 @@
   	} 
  	});
 	</script>
-    </div>
 	
-	<br>
-	<table border="1" id="id_price" name="id_price">
-		<th>총 상품금액</th>
-		<th>총 배송비</th>
-		<th>결제예정금액</th>
-		<tr>
-		<td>${sumMoney }</td>
-		<td>${delfee }</td>
-		<td>${totalMoney }</td>
-		</tr>
-	</table>
-
-	<button type="button" class="buy_btn1">선택 상품주문</button>
-	
-</form>
 		<script type="text/javascript">
  		$(".buy_btn1").click(function(){
   		var confirm_val = confirm("해당 상품을 구매하시겠습니까?");
