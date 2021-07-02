@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.order.service.OrderService;
@@ -27,10 +28,48 @@ public class OrderController {
 
 	/* 주문 내역 전체 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView list(@ModelAttribute OrderDTO dto) throws Exception {
+	public ModelAndView list(@ModelAttribute OrderDTO dto,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("order/list");
+		//계정 정보 확인
+		AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
+		session.setMaxInactiveInterval(60*60); //세션 한시간 만료
+		
+		if(accountdto ==null ) {
+			mv.setViewName("account/login");
+			
+		}else {
+			//account.id로 ordered table 조회 (주문내역 전체)
+			int userid = accountdto.getId();
+			String username = accountdto.getName();
+			System.out.println("username 확인!!"+ username);
+			mv.addObject("username", username);
+			System.out.println("userid 확인 : "+userid);
+			dto.setAid(userid);
+			List<OrderDTO> orderlist = order.findList(dto);
+			System.out.println("디버깅1"+orderlist.get(0).getAid());
+			System.out.println("디버깅1"+orderlist.get(0).getTotal());
+			System.out.println("pdate :"+orderlist.get(0).getPdate());	
+			mv.addObject("orderlist", orderlist);
+			System.out.println("디버깅2");
+			OrderDetailDTO orderdetail_dto = new OrderDetailDTO();
+			System.out.println("디버깅4");
+			//제품이름 때문에 orderdetail 조회해야함 (ordered.id로) 
+			for(OrderDTO data : orderlist) {
+				orderdetail_dto.setOid(data.getId());
+				System.out.println("디버깅5");
+				List<OrderDetailDTO> orderdetail_arr = order.selectall(orderdetail_dto);
+				System.out.println("디버깅6");
+				mv.addObject("orderdetaillist", orderdetail_arr);
+				
+				System.out.println("디버깅7");
+			
+				System.out.println("디버깅8");
+			}
+			mv.setViewName("order/list");
+			
+		}
+		
 		
 		return mv;
 	}
@@ -40,7 +79,13 @@ public class OrderController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detailList(@ModelAttribute OrderDTO dto) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		int orderid = dto.getId();
+		System.out.println("orderid :" + orderid);
+		OrderDetailDTO orderdetaildto = new OrderDetailDTO();
+		orderdetaildto.setOid(orderid);
+		List<OrderDetailDTO> orderdetaillist = order.selectall(orderdetaildto);
 		
+		mv.addObject("orderdetaillist", orderdetaillist);
 		mv.setViewName("order/detail");
 		
 		return mv;

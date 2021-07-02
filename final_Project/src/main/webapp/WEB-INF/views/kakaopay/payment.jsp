@@ -10,7 +10,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <title>Insert title here</title>
 </head>
 <body>

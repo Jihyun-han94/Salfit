@@ -13,6 +13,7 @@ public class OrderDTO {
 	private String ddate;
 	private String edate;
 	private String status;
+	private String title;
 	public int getId() {
 		return id;
 	}
@@ -73,5 +74,10 @@ public class OrderDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 }

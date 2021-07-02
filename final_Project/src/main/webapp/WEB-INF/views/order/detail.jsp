@@ -1,23 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
+
 </head>
 <body>
-	<h1>결제 화면</h1>
-	<div>
-		상품명 : 과일 샐러드 <br>
-		수량 : 1개 <br>
-		금액 : 10000원<br>
-	</div>
-	<div>
-		<c:url var="pay" value="/resources" />
-		<a><img src = "${pay_img }/img/kakaopay/payment_icon_yellow_medium.png"></a>
-	</div>
+<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+	<h1>주문 상세 정보</h1>
+	<table border="1">
+	<th>주문번호</th>
+	<th>제품 이름</th>
+	<th>제품 수량</th>
+	<th>제품 가격</th>
+	<th>주문처리상태</th>
 	
+	<c:forEach var="data" items="${requestScope.orderdetaillist }" >
+	<tr>
+	<td>${data.oid }</td>
+	<td>${data.title }</td>
+	<td>${data.qty }</td>
+	<td>${data.price }</td>
+	<td>${data.status }</td>
+	</tr>
+	</c:forEach>
+	
+	</table>
+<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>	
 </body>
 </html>

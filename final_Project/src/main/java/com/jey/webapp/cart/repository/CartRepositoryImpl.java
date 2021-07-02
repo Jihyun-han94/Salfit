@@ -97,5 +97,15 @@ public class CartRepositoryImpl implements CartRepository {
 		return cartlist;
 	}
 
+	@Override
+	public boolean deletey(CartDTO dto) throws Exception {
+		boolean result = false;
+		int res = sqlSession.delete("cartMapper.deletey", dto);
+		if(res == 1) {
+			result = true;
+		}
+		
+		return result;
+	}
 
 }

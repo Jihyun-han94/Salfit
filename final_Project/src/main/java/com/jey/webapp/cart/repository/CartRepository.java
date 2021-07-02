@@ -14,5 +14,6 @@ public interface CartRepository {
 	public boolean deleteall(CartDTO dto)  throws Exception;
 	public int sumMoney(CartDTO dto) throws Exception;
 	public int findPrice(CartDTO dto)throws Exception;
-	public List<CartDTO> yselectList(CartDTO dto);
+	public List<CartDTO> yselectList(CartDTO dto) throws Exception;
+	public boolean deletey(CartDTO dto) throws Exception;
 }

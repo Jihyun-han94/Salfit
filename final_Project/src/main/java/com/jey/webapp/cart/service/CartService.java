@@ -16,5 +16,6 @@ public interface CartService {
 	public int sumMoney(CartDTO dto) throws Exception;
 	public int findPrice(CartDTO dto) throws Exception;
 	public boolean updateOrderState(CartDTO dto) throws Exception;
-	public List<CartDTO> yfindAll(CartDTO dto);
+	public List<CartDTO> yfindAll(CartDTO dto)throws Exception;
+	public boolean delete(CartDTO dto) throws Exception;
 }
