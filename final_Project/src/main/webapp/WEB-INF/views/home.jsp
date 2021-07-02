@@ -191,7 +191,7 @@
 	</div>
 </div>
 <div class="row d-flex justify-content-center align-items-center h-50 w-20 m-4">
-<img src="./resources/img/delivery.png">
+<img src="./resources/img/healthy.png">
 </div>
 
 </main> <!-- .cd-main-content -->
@@ -221,8 +221,7 @@
 		<br>
 		<form action="${updateView}" method="POST">
 			<div class="form-group">
-				<!-- <label for="id_password">비밀번호 확인</label> -->
-				<input style="margin-bottom: 20px;" id="id_password" type="password" name="password" placeholder="password" required>
+				<input style="margin-bottom: 20px;" id="id_password_confirm" type="password" name="password" placeholder="password" required>
 				<div>
 					<button type="submit" class="btn_confirm">확인</button>
 				</div>

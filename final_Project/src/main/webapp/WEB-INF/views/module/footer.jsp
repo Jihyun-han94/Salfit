@@ -1,28 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<%@ include file="/WEB-INF/views/module/css_js.jsp" %>
-<style>
-.total {
-	width: 100%;
-	height: 120px;
-	background-color: #eae9e8;
-	color: #475c01;
-	text-align: center;
-	font-size: small;
-	font-family: 'Kakao', 'sans-serif', 'normal';
-}
-.clearfix {
-	margin-bottom: 10px;
-}
-</style>
-</head>
-<body>
-<footer class="total">
+
+<footer class="footer_total">
 <!-- SNS 정보  -->
 <div class="clearfix">
 	<a href="https://www.instagram.com/" style="padding: 5px 10px; display:inline-block; margin-top: 10px;" target="blank">
@@ -42,5 +22,3 @@
 	<span>Contact <strong><a href="eungeeee1002@gmail.com"></a></strong> for more information.<a href="/salfit/">[Shop admin]</a></span>
 </div>
 </footer>
-</body>
-</html>

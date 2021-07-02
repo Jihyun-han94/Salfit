@@ -48,6 +48,22 @@ a {
   transition: transform .5s;
   transition: transform .5s, -webkit-transform .5s;
 }
+.cd-none-hide-header {
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #ffffff;
+  /* Force Hardware Acceleration */
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  will-change: transform;
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+}
 .cd-auto-hide-header::after {
   clear: both;
   content: "";

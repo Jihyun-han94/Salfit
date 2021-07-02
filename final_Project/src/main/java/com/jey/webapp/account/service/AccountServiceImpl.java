@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jey.webapp.account.dto.AccountAddressDTO;
 import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.account.repository.AccountRepository;
 
@@ -68,6 +69,21 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public boolean saveImage(AccountDTO dto) throws Exception {
 		return dao.updateImage(dto);
+	}
+
+	@Override
+	public boolean addAddress(AccountAddressDTO ad_dto) throws Exception {
+		return dao.insertAddress(ad_dto);
+	}
+
+	@Override
+	public boolean removeAddress(AccountAddressDTO ad_dto) throws Exception {
+		return dao.deleteAddress(ad_dto);
+	}
+
+	@Override
+	public List<AccountAddressDTO> getList(int aid) throws Exception {
+		return dao.getListAddress(aid);
 	}
 
 

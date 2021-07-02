@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/* footer.jsp */
+.footer_total {
+	width: 100%;
+	height: 120px;
+	background-color: #eae9e8;
+	color: #475c01;
+	text-align: center;
+	font-size: small;
+	font-family: 'Kakao', 'sans-serif', 'normal';
+}
+.clearfix {
+	margin-bottom: 10px;
+}
