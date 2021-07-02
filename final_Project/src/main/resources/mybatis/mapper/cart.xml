@@ -11,9 +11,16 @@
 	</delete>
 
 	<select id="yselectAll" parameterType="cart" resultType="cart">
-	 SELECT * 
-	 FROM cart
-	 WHERE aid =#{aid} AND orderstatus='y'
+	 SELECT c.id
+	 		,c.aid
+	 		,c.pid
+	 		,c.qty
+	 		,c.orderstatus
+	 		,p.price
+	 FROM cart c
+	 JOIN product p 
+	 ON c.pid = p.id
+	 WHERE c.aid =#{aid} AND c.orderstatus='y'
 	</select>
 	<select id="select" parameterType="cart" resultType="cart">
 			SELECT c.id
