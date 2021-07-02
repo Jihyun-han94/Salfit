@@ -15,7 +15,7 @@ public interface AccountService {
 	public boolean updateProfile(AccountDTO dto) throws Exception;
 	public boolean signout(AccountDTO dto) throws Exception;
 	public boolean saveImage(AccountDTO dto) throws Exception;
-	public boolean addAddress(AccountAddressDTO ad_dto) throws Exception;
+	public boolean addAddress(String address) throws Exception;
 	public boolean removeAddress(AccountAddressDTO ad_dto) throws Exception;
 	public List<AccountAddressDTO> getList(int aid) throws Exception;
 }

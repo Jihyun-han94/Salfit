@@ -85,7 +85,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 	}
 
 	@Override
-	public boolean insertAddress(AccountAddressDTO ad_dto) throws Exception {
+	public boolean insertAddress(String ad_dto) throws Exception {
 		boolean res = false;
 		int rs = sqlSession.insert("accountMapper.insertAddress", ad_dto);
 		if(rs == 1) {

@@ -72,7 +72,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public boolean addAddress(AccountAddressDTO ad_dto) throws Exception {
+	public boolean addAddress(String ad_dto) throws Exception {
 		return dao.insertAddress(ad_dto);
 	}
 
