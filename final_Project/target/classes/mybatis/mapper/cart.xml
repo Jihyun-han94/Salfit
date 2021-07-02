@@ -5,18 +5,9 @@
   
 <mapper namespace="cartMapper">
 	<select id="yselectAll" parameterType="cart" resultType="cart">
-	 SELECT c.id
-			,c.aid
-			,c.pid
-			,c.qty
-			,c.orderstatus
-			,p.price AS price
-			,p.title AS title
-			,(price*c.qty) money  
-	 FROM cart c
-	 JOIN product p
-	 ON c.pid = p.id
-	 WHERE c.aid =#{aid} AND c.orderstatus='y'
+	 SELECT * 
+	 FROM cart
+	 WHERE aid =#{aid} AND orderstatus='y'
 	</select>
 	<select id="select" parameterType="cart" resultType="cart">
 			SELECT c.id
@@ -36,10 +27,10 @@
 		ORDER BY c.id DESC
 	</select>
 
-	<update id="update">
-	UPDATE cart
-	SET orderstatus = 'y'
-	WHERE orderstatus = 'n'
+	<update id="update" parameterType="cart" >
+	UPDATE CART
+	SET ORDERSTATUS = 'y'
+	where ORDERSTATUS = 'n'and id = #{id}
 	</update>
 
 

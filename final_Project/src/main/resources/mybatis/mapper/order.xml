@@ -33,10 +33,15 @@
 	VALUES(ordered_seq.NEXTVAL,#{aid},#{receiver},#{address},#{total},SYSDATE,SYSDATE+1)
 </insert>
 
+
 <select id="selectone" parameterType="order" resultType="order">
-	SELECT  *
-	FROM ordered 
-	WHERE aid = #{aid} AND to_char(pdate, 'yyyymmdd' ) = to_char(sysdate, 'yyyymmdd')
+	SELECT *
+	FROM (
+        SELECT*
+        FROM ORDERED
+        ORDER BY ROWNUM DESC
+	)
+	WHERE ROWNUM = 1 AND aid = #{aid} AND to_char(pdate, 'yyyymmdd' ) = to_char(sysdate, 'yyyymmdd')
 </select>	
 
 <insert id="insertorderdetail" parameterType="orderdetail">

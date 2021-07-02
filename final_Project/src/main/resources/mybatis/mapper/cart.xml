@@ -7,14 +7,14 @@
 	<select id="yselectAll" parameterType="cart" resultType="cart">
 	 SELECT * 
 	 FROM cart
-	 WHERE aid =#{aid} AND orderstate='y'
+	 WHERE aid =#{aid} AND orderstatus='y'
 	</select>
 	<select id="select" parameterType="cart" resultType="cart">
 			SELECT c.id
 			,c.aid
 			,c.pid
 			,c.qty
-			,c.orderstate
+			,c.orderstatus
 			,p.price AS price
 			,p.title AS title
 			,(price*c.qty) money
@@ -27,10 +27,10 @@
 		ORDER BY c.id DESC
 	</select>
 
-	<update id="update">
+	<update id="update" parameterType="cart" >
 	UPDATE CART
-	SET ORDERSTATE = 'y'
-	where ORDERSTATE = 'n'
+	SET ORDERSTATUS = 'y'
+	where ORDERSTATUS = 'n'and id = #{id}
 	</update>
 
 
@@ -46,7 +46,7 @@
 			,c.aid
 			,c.pid
 			,c.qty
-			,c.orderstate
+			,c.orderstatus
 			,a.email AS email
 			,p.price AS price
 			,p.title AS title
@@ -57,7 +57,7 @@
 		  ON c.aid = a.id
 		JOIN product p
 		  ON c.pid = p.id
-		WHERE c.aid = #{aid} AND orderstate = 'n'
+		WHERE c.aid = #{aid} AND orderstatus = 'n'
 		ORDER BY c.id DESC
 	
 	</select>
@@ -66,7 +66,7 @@
 		FROM cart c
 		JOIN product p
 		  on c.pid = p.id
-		WHERE c.aid = #{aid} AND c.orderstate ='n'
+		WHERE c.aid = #{aid} AND c.orderstatus ='n'
 		ORDER BY c.id DESC  
 	
 	</select>
