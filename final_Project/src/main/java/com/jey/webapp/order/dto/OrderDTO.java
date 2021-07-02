@@ -7,7 +7,7 @@ public class OrderDTO {
 	private int aid;
 	private String receiver;
 	private String address;
-	private String paytype;
+	private String paytype ="";
 	private int total;
 	private String pdate;
 	private String ddate;

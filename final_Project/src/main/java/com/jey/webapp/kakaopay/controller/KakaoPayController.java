@@ -111,9 +111,15 @@ public class KakaoPayController {
 		System.out.println(address);
 		System.out.println("주문자 계정 :"+order_dto.getAid());
 		System.out.println(total);
+		System.out.println(order_dto.getPdate());
+		System.out.println(order_dto.getDdate());
+		System.out.println(order_dto.getEdate());
+		order_dto.setEdate("2021-07-05");
+		order_dto.setDdate("2021-07-03");
+		order_dto.setPdate("2021-07-02");
 		
 		List<CartDTO>cartlist = cart.yfindAll(dto); //장바구니에 담은 제품만 조회
-		
+		order_dto.setPaytype("card");
 		boolean result = order.add(order_dto); //ordered table에 insert
 		
 		//ordered table 조회

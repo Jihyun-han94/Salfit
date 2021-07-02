@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="com.jey.webapp.order.dto.OrderDTO" %>
+<%-- <%@ page import="com.jey.webapp.order.dto.OrderDTO" %>
 <%@ page import="com.jey.webapp.order.dto.OrderDetailDTO" %>
-<%@ page import="com.jey.webapp.order.service.OrderService" %>
+<%@ page import="com.jey.webapp.order.service.OrderService" %> --%>
 
-<c:url var ="pay" value="/pay" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
@@ -25,7 +25,7 @@
 
 		<h1>주문서 작성</h1>
 		<c:url var="buy" value="/pay" />
-		<form action="${pay }" method="post">
+		<form action="${buy }" method="post">
 		
 			<table border="1" id="id_cart" name="id_cart">
 				<th>이미지</th>
@@ -72,7 +72,7 @@
 		<c:forEach var="data" items="${requestScope.cartlist }">
 			<input id="aid" name="aid" value="${data.aid }" hidden />
 		</c:forEach>
-	
+		<input id="paytype" name="paytype" value="card" hidden />
 	<button type="submit" >결제하기</button>
 	
 	</form>

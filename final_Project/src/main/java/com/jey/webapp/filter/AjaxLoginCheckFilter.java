@@ -21,10 +21,10 @@ import com.jey.webapp.account.dto.AccountDTO;
 
 @WebFilter(
 	urlPatterns = {"/ajax/product/like"
-				,"/ajax/cart/add"
-				,"/ajax/cart/changeQty"
-				,"/ajax/cart/delete"
-				,"/ajax/cart/buy"
+//				,"/ajax/cart/add"
+//				,"/ajax/cart/changeQty"
+//				,"/ajax/cart/delete"
+//				,"/ajax/cart/buy"
 	}
 )
 public class AjaxLoginCheckFilter implements Filter {

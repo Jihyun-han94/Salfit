@@ -125,3 +125,13 @@ SELECT *
 SELECT count(id)
 		FROM ordered
 		WHERE id > 0;
+		
+		
+		
+SELECT *
+		FROM (
+	        SELECT*
+	        FROM ORDERED
+	        ORDER BY ROWNUM DESC
+		)
+		WHERE ROWNUM = 1 AND pdate = to_char(sysdate, 'yyyy-mm-dd')

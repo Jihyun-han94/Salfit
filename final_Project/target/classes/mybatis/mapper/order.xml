@@ -26,12 +26,10 @@
 		WHERE aid = #{aid}
 	</select>
 	
-	
-	<insert id="insertordered" parameterType="order">
-		INSERT INTO ordered (id,aid,receiver,address,total,pdate,ddate)
-		VALUES(ordered_seq.NEXTVAL,#{aid},#{receiver},#{address},#{total},SYSDATE,SYSDATE+1)
-	</insert>
-	
+	 <insert id="insertordered" parameterType="order">
+	  	INSERT INTO ordered(id, aid, receiver, address, paytype, total, pdate, ddate, edate)
+	  	     VALUES(#{id}, #{aid}, #{receiver}, #{address}, #{paytype}, #{total}, #{pdate}, #{ddate}, #{edate})
+	 </insert> 
 	
 	<select id="selectone" parameterType="order" resultType="order">
 		SELECT *
@@ -40,7 +38,7 @@
 	        FROM ORDERED
 	        ORDER BY ROWNUM DESC
 		)
-		WHERE ROWNUM = 1 AND aid = #{aid} AND to_char(pdate, 'yyyymmdd' ) = to_char(sysdate, 'yyyymmdd')
+		WHERE ROWNUM = 1 AND aid = #{aid} AND pdate = to_char(sysdate, 'yyyy-mm-dd')
 	</select>	
 	
 	<insert id="insertorderdetail" parameterType="orderdetail">
