@@ -10,6 +10,10 @@
  <link rel="stylesheet" href="/webapp/resources/static/css/total.css">
 </head>
 <c:url var="expire" value="/ajax/account/expire"	/>
+<c:url var="view_address" value="/ajax/account/address/view"	/>
+<c:url var="add_address" value="/ajax/account/address/add"	/>
+<c:url var="delete_address" value="/ajax/account/address/delete"	/>
+
 <script type="text/javascript">
 var checkRePass = function(){
     let oPwd = document.getElementById("id_password").value;
@@ -22,6 +26,39 @@ var checkRePass = function(){
         document.getElementById("pass_check_res").style.display = "none";
         return true;
     }
+}
+
+function addressSend() {
+	/* $.ajax({
+		url: "${add_address }",
+		type: "post",
+		datatype: "json",
+		data: {
+			ano: ano,
+			address: address
+		},
+		success: function(data){
+			if(data.res == "success") {
+				alert("주소 등록이 완료되었습니다.");
+			} 
+			getAddressList(); // 주소 목록 출력
+		}
+	}); */
+	getAddressList(1, "서울 강남구 논현동"); // 주소 목록 출력
+}
+
+function getAddressList(ano, address)) {
+	var item = document.createElement("div");
+	var no = document.createElement("span");
+	var content = document.createElement("span");
+	
+	no.innerText = ano;
+	content.innerText = address.content;
+	
+	item.append(no);
+	item.append(content);
+	
+	document.getElementById("address_list").prepend(item);
 }
 
 function updateInfo() {
@@ -176,7 +213,7 @@ input {
 	</form>
 		<form id="address_form" class="addressstyle" style="margin-bottom: 20px;">
 			<label for="address">주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 28px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<input id="id_address" type="text" name="address"></textarea>  <button class="input-file-button" type="button" onclick="addressSend();">추가</button>
+			<input id="id_address" type="text" name="address">  <button class="input-file-button" type="button" onclick="addressSend();">추가</button>
 		</form>
 		<div id="address_list" style="margin-bottom: 50px; margin-left: 150px;">
 			<c:forEach var="addressList" items="${addressList }">

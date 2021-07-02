@@ -72,6 +72,6 @@
 	<!-- 주소 삭제 -->
 	<delete id="deleteAddress">
 		DELETE FROM address
-		WHERE id = #{id}
+		WHERE aid = #{aid}
 	</delete>
 </mapper>
