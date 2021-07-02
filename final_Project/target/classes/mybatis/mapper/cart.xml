@@ -4,6 +4,49 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="cartMapper">
+	<delete id="deletey" parameterType="cart"> 
+	DELETE FROM cart WHERE aid = #{aid} AND  orderstatus = 'y'
+	
+	</delete>
+
+	<select id="yselectAll" parameterType="cart" resultType="cart">
+	 SELECT c.id
+	 		,c.aid
+	 		,c.pid
+	 		,c.qty
+	 		,c.orderstatus
+	 		,p.price
+	 FROM cart c
+	 JOIN product p 
+	 ON c.pid = p.id
+	 WHERE c.aid =#{aid} AND c.orderstatus='y'
+	</select>
+	
+	<select id="select" parameterType="cart" resultType="cart">
+			SELECT c.id
+			,c.aid
+			,c.pid
+			,c.qty
+			,c.orderstatus
+			,p.price AS price
+			,p.title AS title
+			,(price*c.qty) money
+		FROM cart c
+		JOIN account a
+		  ON c.aid = a.id
+		JOIN product p
+		  ON c.pid = p.id
+		WHERE c.id = #{id} 
+		ORDER BY c.id DESC
+	</select>
+
+	<update id="update" parameterType="cart" >
+	UPDATE CART
+	SET ORDERSTATUS = 'y'
+	where ORDERSTATUS = 'n'and id = #{id}
+	</update>
+	
+	
 	<!-- 장바구니 담기 버튼 클릭하면 실행되는 쿼리문 -->
 	<insert id="insert">
 		INSERT INTO cart(id,aid,pid,qty,startdate,enddate,days)
@@ -16,6 +59,7 @@
 			,c.aid
 			,c.pid
 			,c.qty
+			,c.orderstatus
 			,a.email AS email
 			,p.price AS price
 			,p.title AS title
@@ -33,7 +77,7 @@
 		  ON c.pid = p.id
 	  	JOIN product_img i
 		  ON p.id = i.pid
-		WHERE c.aid = #{aid} 
+		WHERE c.aid = #{aid}  AND orderstatus = 'n'
 		ORDER BY c.id DESC
 	
 	</select>
@@ -42,7 +86,7 @@
 		FROM cart c
 		JOIN product p
 		  on c.pid = p.id
-		WHERE c.aid = #{aid}
+		WHERE c.aid = #{aid} AND c.orderstatus ='n'
 		ORDER BY c.id DESC  
 	
 	</select>

@@ -1,4 +1,4 @@
-package com.jey.webapp.order.dto;
+package com.jey.webapp.admin.dto;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;

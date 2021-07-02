@@ -1,4 +1,4 @@
-package com.jey.webapp.order.dto;
+package com.jey.webapp.admin.dto;
 
 
 public class AdminOrderDetailDTO {

@@ -17,57 +17,53 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import com.jey.webapp.account.dto.AccountDTO;
-import com.jey.webapp.order.dto.AdminOrderDTO;
-import com.jey.webapp.order.dto.AdminOrderDetailDTO;
-import com.jey.webapp.order.dto.Criteria;
-import com.jey.webapp.order.dto.OrderDTO;
-import com.jey.webapp.order.dto.OrderDetailDTO;
-import com.jey.webapp.order.dto.PageMaker;
-import com.jey.webapp.order.service.OrderService;
+import com.jey.webapp.admin.dto.AdminOrderDTO;
+import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
+import com.jey.webapp.admin.dto.Criteria;
+import com.jey.webapp.admin.dto.PageMaker;
+import com.jey.webapp.admin.service.AdminService;
 
 @Controller
 @RequestMapping(value = "/admin/order")
 public class AdminOrderController {
 	
 	@Autowired
-	private OrderService order;
+	private AdminService order;
 
-	/* 주문번호 생성 */
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String createOrder(Model m, @ModelAttribute OrderDTO dto, @ModelAttribute OrderDetailDTO detail, HttpServletRequest request, HttpSession session) throws Exception {
-		
-		
-		// 주문 임의 설정 
-		dto.setAid(2);
-		dto.setReceiver("김은순");
-		dto.setAddress("수원시 영통구 하동 광교호수로 152번길 23");
-		dto.setPaytype("카카오페이");
-		dto.setTotal(59600);
-		dto.setStatus("paid");
-		dto.setPdate("2021-06-25");
-		dto.setDdate("2021-06-26");
-		dto.setEdate("2021-06-27");
-		
-		// 디테일
-		detail.setPid(22);
-		detail.setOid(6);
-		detail.setQty(2);
-//		detail.setPrice(4000);
-		detail.setStartdate("2021-06-29");
-		detail.setEnddate("2021-06-29");
-		detail.setDays(2);
-		
-		boolean res = order.add(dto, detail);
-		
-		if(res == true) {
-			return "admin/order/list";
-		}
-		
-		return "error/default";
-	}
-	
+//	/* 주문번호 생성 */
+//	@RequestMapping(value = "/add", method = RequestMethod.GET)
+//	public String createOrder(Model m, @ModelAttribute OrderDTO dto, @ModelAttribute OrderDetailDTO detail, HttpServletRequest request, HttpSession session) throws Exception {
+//		
+//		
+//		// 주문 임의 설정 
+//		dto.setAid(2);
+//		dto.setReceiver("김은순");
+//		dto.setAddress("수원시 영통구 하동 광교호수로 152번길 23");
+//		dto.setPaytype("카카오페이");
+//		dto.setTotal(59600);
+//		dto.setStatus("paid");
+//		dto.setPdate("2021-06-25");
+//		dto.setDdate("2021-06-26");
+//		dto.setEdate("2021-06-27");
+//		
+//		// 디테일
+//		detail.setPid(22);
+//		detail.setOid(6);
+//		detail.setQty(2);
+////		detail.setPrice(4000);
+//		detail.setStartdate("2021-06-29");
+//		detail.setEnddate("2021-06-29");
+//		detail.setDays(2);
+//		
+//		boolean res = order.add(dto, detail);
+//		
+//		if(res == true) {
+//			return "admin/order/list";
+//		}
+//		
+//		return "error/default";
+//	}
+//	
 	
 	/* 주문확인 */
 	@RequestMapping(value = "/test", method = RequestMethod.GET)

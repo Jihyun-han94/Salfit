@@ -4,238 +4,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orderMapper">
-	<select id="orderlist" parameterType="adminorder" resultType="adminorder">
-	SELECT o.id,
-			o.aid,
-			o.receiver,
-			a.phone,
-			o.address,
-			o.paytype,
-			o.total,
-			o.pdate,
-			o.ddate,
-			o.edate,
-			o.status
-		FROM ordered o
-		JOIN account a
-		  ON a.id = o.aid
-		 WHERE 1=1
-	 <if test='id != "" and id != null'>
-		 AND o.id = #{id}
-	 </if>
-		ORDER BY o.id DESC
-	</select>
-	
-	<select id="orderdetaillist" parameterType="adminorder" resultType="adminorderdetail">
-	SELECT d.id,
-			d.oid,
-			d.pid,
-			p.title AS pname,
-			d.qty,
-			p.price,
-			d.startdate,
-			d.enddate,
-			d.days,
-			o.receiver,
-			o.address,
-			d.status
-		FROM order_detail d
-		JOIN product p
-		  ON p.id = d.pid
-		JOIN ordered o
-		  ON o.id = d.oid
-		   WHERE 1=1
-		  	
-		ORDER BY d.id
-	</select>
-	
-	<select id="orderlistsel" parameterType="adminorder" resultType="adminorder">
-	 SELECT *
-	  FROM (SELECT ROW_NUMBER() OVER (ORDER BY pdate DESC, o.id DESC) NUM
-	         , o.*
-	         , a.phone
-	          FROM ordered o
-	          JOIN account a
-			  ON a.id = o.aid
-			 WHERE 1=1
-		 <if test='status != "" and status != null'>
-			 AND o.status = #{status}
-		 </if>
-		 <if test="ddate != null">
-			 AND TO_DATE(#{ddate}, 'YYYY-MM-DD') BETWEEN TO_DATE(o.ddate, 'YYYY-MM-DD') AND (TO_DATE(o.edate, 'YYYY-MM-DD') + 1)
-		 </if>
-			ORDER BY o.id DESC
-		  ) 
-	  WHERE NUM BETWEEN #{pageStart} AND (#{pageStart} + #{perPageNum} - 1)
-	</select>
-	
-	<select id="orderdetaillistsel" parameterType="adminorder" resultType="adminorderdetail">
-	SELECT d.id,
-			d.oid,
-			d.pid,
-			p.title AS pname,
-			d.qty,
-			p.price,
-			d.startdate,
-			d.enddate,
-			d.days,
-			o.receiver,
-			o.address,
-			d.status
-		FROM order_detail d
-		JOIN product p
-		  ON p.id = d.pid
-		JOIN ordered o
-		  ON o.id = d.oid
-		   WHERE 1=1
-		  	
-		ORDER BY d.id
-	</select>
+	<!-- 수정필요 -->
 
-	 <select id="seq_order" resultType="_int">
-	    SELECT ordered_seq.NEXTVAL AS seq_order FROM dual
-	 </select>
-	 
-	 <select id="seq_order_detail" resultType="_int">
-	    SELECT order_detail_seq.NEXTVAL AS seq_order_detail FROM dual
-	 </select>
-	 
-	 <insert id="insertOrder" parameterType="order">
-	  	INSERT INTO ordered(id, aid, receiver, address, paytype, total, pdate, ddate, edate)
-	  	     VALUES(#{id}, #{aid}, #{receiver}, #{address}, #{paytype}, #{total}, #{pdate}, #{ddate}, #{edate})
-	 </insert> 
-
-   	 <insert id="insertOrderDetail" parameterType="orderdetail">
-	  	INSERT INTO order_detail(id, oid, pid, qty, price, startdate, enddate, days)
-	  	     VALUES(#{id}, #{oid}, #{pid}, #{qty}, #{price}, #{startdate}, #{enddate}, #{days})
-	 </insert> 
-	 
-	 <update id="updateOrder" parameterType="adminorder">
-		UPDATE ordered
-		   SET status = #{status}
-		 WHERE id = #{id}
-	 </update>
-	 
-	 
-	 
-	<select id="deliverlist" parameterType="adminorder" resultType="adminorder">
-	SELECT o.id,
-			o.aid,
-			o.receiver,
-			a.phone,
-			o.address,
-			o.paytype,
-			o.total,
-			o.pdate,
-			o.ddate,
-			o.edate,
-			o.status
-		FROM ordered o
-		JOIN account a
-		  ON a.id = o.aid
-		ORDER BY o.id DESC
-	</select>
-	
-	<select id="deliverdetaillist" parameterType="adminorder" resultType="adminorderdetail">
-	SELECT d.id,
-			d.oid,
-			d.pid,
-			p.title AS pname,
-			d.qty,
-			p.price,
-			d.startdate,
-			d.enddate,
-			d.days,
-			o.receiver,
-			o.address,
-			d.status
-		FROM order_detail d
+	<select id="selectall" parameterType="orderdetail" resultType="orderdetail">
+		SELECT  d.id
+	        	,d.oid 
+	        	,d.pid 
+	        	,d.qty 
+	        	,d.price 
+	        	,d.status
+	        	,p.title
+		FROM order_detail d  
 		JOIN product p
-		  ON p.id = d.pid
-		JOIN ordered o
-		  ON o.id = d.oid
-		   WHERE 1=1
-		  	
-		ORDER BY d.id
+		ON d.pid = p.id
+		WHERE d.oid = #{oid} 
 	</select>
 	
-	<select id="deliverlistsel" parameterType="adminorder" resultType="adminorder">
-	SELECT o.id,
-			o.aid,
-			o.receiver,
-			a.phone,
-			o.address,
-			o.paytype,
-			o.total,
-			o.pdate,
-			o.ddate,
-			o.edate,
-			o.status
-		FROM ordered o
-		JOIN account a
-		  ON a.id = o.aid
-		 WHERE 1=1
-		ORDER BY o.id DESC
-	</select>
-	
-	<select id="deliverdetaillistsel" parameterType="adminorder" resultType="adminorderdetail">
-	SELECT d.id,
-			d.oid,
-			d.pid,
-			p.title AS pname,
-			d.qty,
-			p.price,
-			d.startdate,
-			d.enddate,
-			d.days,
-			o.receiver,
-			o.address,
-			d.status
-		FROM order_detail d
-		JOIN product p
-		  ON p.id = d.pid
-		JOIN ordered o
-		  ON o.id = d.oid
-		   WHERE 1=1
-		<if test='status != "" and status != null'>
-			 AND d.status = #{status}
-		 </if>
-		 <if test="startdate != null">
-			 AND TO_DATE(#{startdate}, 'YYYY-MM-DD') BETWEEN TO_DATE(d.startdate, 'YYYY-MM-DD') AND (TO_DATE(d.enddate, 'YYYY-MM-DD'))
-		 </if>
-		ORDER BY d.id
+	<select id ="selectList" parameterType="order" resultType="order" >
+		SELECT *
+		FROM ordered  
+		WHERE aid = #{aid}
 	</select>
 	
 	
-	 <update id="updateDelivery" parameterType="adminorderdetail">
-		UPDATE order_detail
-		   SET status = #{status}
-		 WHERE id = #{id}
-	 </update>
-	 
-	 
-	 
-	 
-	 <select id="listPage" resultType="adminorder">
-	 SELECT *
-	  FROM (SELECT ROW_NUMBER() OVER (ORDER BY pdate DESC, o.id DESC) NUM
-	         , o.*
-	         , a.phone
-	          FROM ordered o
-	          JOIN account a
-			  ON a.id = o.aid
-			WHERE 1=1
-			 <if test='id != "" and id != null'>
-				 AND o.id = #{id}
-			 </if>
-	         ORDER BY pdate DESC, o.id DESC
-	        ) 
-	  WHERE NUM BETWEEN #{pageStart} AND (#{pageStart} + #{perPageNum} - 1)
-	</select>
+	<insert id="insertordered" parameterType="order">
+		INSERT INTO ordered (id,aid,receiver,address,total,pdate,ddate)
+		VALUES(ordered_seq.NEXTVAL,#{aid},#{receiver},#{address},#{total},SYSDATE,SYSDATE+1)
+	</insert>
 	
-	<select id="gettotalcount" resultType="_int">
-		SELECT count(o.id)
-		FROM ordered o
-		WHERE o.id &gt; 0
-	</select>
+	
+	<select id="selectone" parameterType="order" resultType="order">
+		SELECT *
+		FROM (
+	        SELECT*
+	        FROM ORDERED
+	        ORDER BY ROWNUM DESC
+		)
+		WHERE ROWNUM = 1 AND aid = #{aid} AND to_char(pdate, 'yyyymmdd' ) = to_char(sysdate, 'yyyymmdd')
+	</select>	
+	
+	<insert id="insertorderdetail" parameterType="orderdetail">
+		INSERT INTO ORDER_DETAIL (id,oid,pid,qty,price)
+		VALUES (ORDER_DETAIL_SEQ.NEXTVAL, #{oid},#{pid},#{qty},#{price})
+	</insert>
 </mapper>

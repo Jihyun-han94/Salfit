@@ -17,13 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.jey.webapp.admin.dto.AdminOrderDTO;
+import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
+import com.jey.webapp.admin.dto.Criteria;
+import com.jey.webapp.admin.service.AdminService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jey.webapp.order.dto.AdminOrderDTO;
-import com.jey.webapp.order.dto.AdminOrderDetailDTO;
-import com.jey.webapp.order.dto.OrderDTO;
-import com.jey.webapp.order.dto.ReviewDTO;
-import com.jey.webapp.order.service.OrderService;
 import com.jey.webapp.product.dto.LikeDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ReviewSearchDTO;
@@ -35,7 +33,7 @@ import com.jey.webapp.product.service.ProductService;
 public class AjaxAdminController {
 	
 	@Autowired
-	private OrderService order;
+	private AdminService order;
 
 	
 	/* 주문확인 후 배송 상태표시 */
