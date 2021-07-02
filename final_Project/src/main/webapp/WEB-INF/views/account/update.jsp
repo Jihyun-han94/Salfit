@@ -28,37 +28,41 @@ var checkRePass = function(){
 }
 
 function addressSend() {
-	alert();
-	/* $.ajax({
+	$.ajax({
 		url: "${add_address }",
 		type: "post",
 		datatype: "json",
 		data: {
-			ano: ano,
-			address: address
+			address: document.getElementById("id_address").value
 		},
 		success: function(data){
 			if(data.res == "success") {
 				alert("주소 등록이 완료되었습니다.");
 			} 
-			getAddressList(); // 주소 목록 출력
+			getAddressList(data.ano, data.address); // 주소 목록 출력
 		}
-	}); */
-	getAddressList(1, "서울 강남구 논현동"); // 주소 목록 출력
+	});
 }
 
-function getAddressList(ano, address) {
+function getAddressList(ano, address, delete_btn) {
 	var item = document.createElement("div");
 	var no = document.createElement("span");
 	var content = document.createElement("span");
+	var delete_btn = document.createElement("button");
 	
-	no.innerText = ano;
+	no.innerText = "주소 목록 " + ano;
 	content.innerText = address.content;
+	delete_btn.innerText = "삭제";
+	delete_btn.type = "button";
+	delete_btn.style = "color:red;"
+	delete_btn.className = "input-file-button"
+	delete_btn.onclick = function() {deleteAddress()};
 	
 	item.append(no);
 	item.append(content);
+	item.append(delete_btn);
 	
-	document.getElementById("address_list").prepend(item);
+	document.getElementById("address_list").append(item);
 }
 
 function updateInfo() {

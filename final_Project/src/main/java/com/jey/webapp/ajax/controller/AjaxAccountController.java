@@ -42,12 +42,13 @@ public class AjaxAccountController {
 	
 	@RequestMapping(value = "/address/add", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
 	@ResponseBody	// ViewResolver 를 사용하지 않음.
-	public String addAddress(@RequestBody AccountAddressDTO ad_dto) throws Exception {
-		boolean res = account.addAddress(ad_dto);
-		JSONObject json = new JSONObject();
-		if(res) {
-			json.put("success", true);
-		}
+	public String addAddress(@RequestParam String address) throws Exception {
+			System.out.println(address);
+		 boolean res = account.addAddress(address);
+		 JSONObject json = new JSONObject();
+		 if(res) {
+		 	json.put("success", true);
+		 }
 		
 		return json.toJSONString();
 	}

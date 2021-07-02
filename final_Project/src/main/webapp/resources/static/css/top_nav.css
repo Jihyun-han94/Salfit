@@ -1,0 +1,15 @@
+@charset "UTF-8";
+/* top_nav.jsp */
+.btn_nav_confirm {
+ padding: 5px 25px;
+ border: 1px solid #bac600;
+ color: #263238;
+ background: transparent;
+ -moz-border-radius: 2px;
+ -webkit-border-radius: 2px;
+ border-radius: 2px;
+}
+.btn_nav_confirm:hover {
+  background-color: #bac600;
+  color: #ffffff;
+}
