@@ -2,6 +2,7 @@ package com.jey.webapp.product.service;
 
 import java.util.*;
 
+import com.jey.webapp.admin.dto.PtypeDTO;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.LikeDTO;
 import com.jey.webapp.product.dto.ProductDTO;
@@ -30,5 +31,7 @@ public interface ProductService {
 	public boolean checkLikeExist(LikeDTO like);
 	public void incview(int id);
 	public List<ProductDTO> searchOldProductList(ProductSearchDTO search);
+	public boolean addPtype(ProductTypeDTO dto);
+	public boolean deletePtype(ProductTypeDTO dto);
 
 }

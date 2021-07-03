@@ -13,6 +13,7 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
+	<br><br><br><br><br><br><br><br><br>
 	<div>
 		<div>
 			<c:url var="search" value="/admin/product" />
@@ -29,6 +30,11 @@
 			</form>
 		</div>
 	</div>
+	<br><br><br><br><br><br><br><br><br>
+	<div id="addOK" class="alert alert-info collapse" role="alert">새 카테고리가 등록되었습니다.</div>	
+	<div id="addFail" class="alert alert-danger collapse" role="alert">카테고리 등록 실패</div>
+	<div id="deleteOK" class="alert alert-danger collapse" role="alert">해당 카테고리가 삭제되었습니다.</div>
+	
 	<div>
 		<jsp:include page="/WEB-INF/views/product/categories.jsp" flush="false" >
 			<jsp:param name="producttypes" value="${producttypes}" />
@@ -177,8 +183,44 @@ $(function(){
 				       $('#removeOK').fadeOut(1000); 
 				   }, 5000);
 			}
+			if(result === 'addOK'){
+				$('#addOK').show();
+				setTimeout(function() { 
+				       $('#addOK').fadeOut(1000); 
+				   }, 5000);
+			}
+			if(result === 'addFail'){
+				$('#addFail').show();
+				setTimeout(function() { 
+				       $('#addFail').fadeOut(1000); 
+				   }, 5000);
+			}
+			if(result === 'deleteOK'){
+				$('#deleteOK').show();
+				setTimeout(function() { 
+				       $('#deleteOK').fadeOut(1000); 
+				   }, 5000);
+			}
 		})
 	}
+	
+    /* $('#subscribe-email-form').on('submit', function(e){
+        e.preventDefault();
+        $.ajax({
+            url: url, //this is the submit URL
+            type: 'GET', //or POST
+            data: $('#subscribe-email-form').serialize(),
+            success: function(data){
+                 alert('successfully submitted')
+            }
+        });
+    }); */
+    
+	function form_submit() {
+        document.getElementById("paymentitrform").submit();
+   }  
+
 })
+
 </script>
 </html>

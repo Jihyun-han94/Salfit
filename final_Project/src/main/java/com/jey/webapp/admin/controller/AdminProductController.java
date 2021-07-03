@@ -28,10 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jey.webapp.account.dto.AccountDTO;
+import com.jey.webapp.admin.dto.PtypeDTO;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductFileDTO;
 import com.jey.webapp.product.dto.ProductSearchDTO;
+import com.jey.webapp.product.dto.ProductTypeDTO;
 import com.jey.webapp.product.service.ProductService;
 
 @Controller
@@ -272,11 +274,83 @@ public class AdminProductController {
 	
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String userJoin(Model m, @ModelAttribute ProductDTO dto) throws Exception {
+	public String deleteProduct(Model m, @ModelAttribute ProductDTO dto) throws Exception {
 		String forward = ""
 ;		boolean res = product.remove(dto);
 		if(res) {
 			m.addAttribute("result", "removeOK");
+			forward = "redirect:/admin/product";
+		} else {
+			forward = "error/default";
+		}
+		
+		return forward;
+	}
+	
+	
+	/* 카테고리 추가 */
+	@RequestMapping(value = "/ptype/add", method = RequestMethod.POST)
+	public String newCategory(Model m, @ModelAttribute ProductTypeDTO dto,
+			@RequestParam MultipartFile file,
+			HttpServletRequest req) throws Exception {
+		
+		String forward = "admin/product";
+		String origin_name = "";
+		String change_name = "";
+		String file_ext = "";
+		
+		ArrayList<String> permit_ext = new ArrayList<String>();
+		permit_ext.add("jpg");	permit_ext.add("png"); permit_ext.add("gif");	permit_ext.add("tif");
+		
+		if(!file.isEmpty()) {
+			if(file.getSize() <= 10 * 1024 * 1024) {
+				UUID uuid = UUID.randomUUID();
+				
+				origin_name = file.getOriginalFilename();
+				change_name = uuid.toString() + "_" + origin_name;
+				file_ext = FilenameUtils.getExtension(file.getOriginalFilename());
+				
+				if(permit_ext.contains(file_ext)) {
+					File save_path = new File(req.getServletContext().getRealPath("/") + "/resources/upload/category/");
+					if(!save_path.exists()) {
+						Files.createDirectories(save_path.toPath());
+					}
+					file.transferTo(new File(save_path + "/" + change_name));
+					dto.setImgurl("/resources/upload/category/" + change_name);
+				} else {
+					System.out.println("해당 확장자는 업로드 할 수 없습니다.");
+					forward = "error/default";
+				}
+			} else {
+				System.out.println("업로드 파일의 크기가 큽니다.");
+				forward = "error/default";
+			}
+		} else {
+			dto.setImgurl("/resources/upload/category/default.png");
+		}
+		
+		boolean res = product.addPtype(dto);
+		System.out.println("success?" + res);
+		if(res) {
+			m.addAttribute("result", "addOK");
+			forward = "redirect:/admin/product";
+		} else {
+			m.addAttribute("result", "addFail");
+			forward = "redirect:/admin/product";
+		}
+		
+		return forward;
+	}
+	
+	/* 카테고리 삭제 */
+	
+	
+	@RequestMapping(value = "/ptype/delete", method = RequestMethod.GET)
+	public String deletePtype(Model m, @ModelAttribute ProductTypeDTO dto) throws Exception {
+		String forward = "";
+		boolean res = product.deletePtype(dto);
+		if(res) {
+			m.addAttribute("result", "deleteOK");
 			forward = "redirect:/admin/product";
 		} else {
 			forward = "error/default";

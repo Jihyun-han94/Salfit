@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jey.webapp.admin.dto.PtypeDTO;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.LikeDTO;
 import com.jey.webapp.product.dto.ProductDTO;
@@ -169,5 +170,25 @@ public class ProductRepositoryImpl implements ProductRepository {
 	public List<ProductDTO> findOldProductList(ProductSearchDTO search) {
 		List<ProductDTO> data = sqlSession.selectList("productMapper.oldProducts", search);
 		return data;
+	}
+
+	@Override
+	public boolean addPtype(ProductTypeDTO dto) {
+		boolean result = false;
+		int rs = sqlSession.insert("productMapper.insertPtype", dto);
+		if(rs == 1) {
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
+	public boolean deletePtype(ProductTypeDTO dto) {
+		boolean res = false;
+		int rs = sqlSession.delete("productMapper.deletePtype", dto);	
+		if(rs == 1) {
+			res = true;
+		}
+		return res;
 	}
 }

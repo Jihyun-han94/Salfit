@@ -1,19 +1,20 @@
-DROP TABLE liked;
+DROP TABLE product_type;
 DROP SEQUENCE liked_seq;
 
+CREATE SEQUENCE ptype_seq START WITH 1 INCREMENT BY 1 NOCACHE;
 CREATE TABLE product_type(
         id NUMBER,
-        name NVARCHAR2(256)
+        name NVARCHAR2(256),
+        imgurl NVARCHAR2(1024)
 );
 
 ALTER TABLE product_type ADD CONSTRAINT product_type_id_PK PRIMARY KEY(id);
 ALTER TABLE product_type MODIFY name CONSTRAINT product_type_name_NN NOT NULL;
+ALTER TABLE product_type MODIFY imgurl CONSTRAINT product_type_imgurl_NN NOT NULL;
 
 COMMENT ON COLUMN product_type.id IS '상품 카테고리 구분 식별 번호';
 COMMENT ON COLUMN product_type.name IS '상품 카테고리 (이름)';
-
-
-
+COMMENT ON COLUMN product_type.imgurl IS '상품 카테고리 이미지 url';
 
 CREATE SEQUENCE product_seq START WITH 1 INCREMENT BY 1 NOCACHE;
 CREATE TABLE product(
@@ -31,10 +32,8 @@ CREATE TABLE product(
         active CHAR(1) DEFAULT 'y'
 );
 
-
-
 ALTER TABLE product ADD CONSTRAINT product_id_PK PRIMARY KEY(id);
-ALTER TABLE product ADD CONSTRAINT product_ptype_FK FOREIGN KEY(ptype) REFERENCES product_type(id);
+ALTER TABLE product ADD CONSTRAINT product_ptype_FK FOREIGN KEY(ptype) REFERENCES product_type(id) ON DELETE SET NULL;
 ALTER TABLE product ADD CONSTRAINT product_aid_FK FOREIGN KEY(aid) REFERENCES account(id);
 ALTER TABLE product MODIFY title CONSTRAINT product_title_NN NOT NULL;
 ALTER TABLE product MODIFY price CONSTRAINT product_price_NN NOT NULL;
@@ -97,7 +96,7 @@ INSERT INTO product_type VALUES(1, '채식주의자');
 INSERT INTO product_type VALUES(2, '육식러버');
 INSERT INTO product_type VALUES(3, '다이어터');
 
-SELECT * FROM product ;
+SELECT * FROM product_type;
 
 
 INSERT INTO product(id, ptype, aid, title, price, contents) VALUES(1, 1, 1, '체다치즈 샐러드', 3000, '맛있는 체다치즈가 듬뿍~!');

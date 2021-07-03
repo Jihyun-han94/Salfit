@@ -112,7 +112,7 @@ body {
 	<header>
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
 <div>
 	<div>
 		<c:url var="search" value="/product" />
@@ -129,7 +129,7 @@ body {
 		</form>
 	</div>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 <div>
 	<jsp:include page="/WEB-INF/views/product/categories.jsp" flush="false" >
 		<jsp:param name="producttypes" value="${producttypes}" />
@@ -137,19 +137,8 @@ body {
 </div>
 <div class="productContainer" id="container"> 
 	<div class="productIndividual">
-	<!-- <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4"> -->
-	<!-- <h1>Blog Posts</h1>
- 	<div class="itemindiv">
-		<h2 class="title">Blog post title</h2>
-		<p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident quod debitis in repellat veritatis minus ab ex maiores itaque quis.</p>
-		<div class="user-info">
-			<img src="https://randomuser.me/api/portraits/women/26.jpg" alt="pic" />
-			<span>Leah Taylor</span>
-		</div>
-	</div>  -->
 	</div>
 </div>
-<!-- </div> -->
 
 <div class="loading">
 	<div class="ball"></div>
@@ -212,7 +201,6 @@ async function getPost(index) {
 			oldListCnt : oldListCnt
 		},
 		success: function (data) {
-			/* alert("ajax success!" + data); */
 			if(${oldListCnt} == 0) {
 				const postElement = document.createElement('div');
 				postElement.classList.add('itemindiv');
@@ -228,10 +216,6 @@ async function getPost(index) {
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		   }
 	});
-	
-	
-/* 	const data = { post: postData, user: userData.results[0] }; */
-	
 }
 
 function getRandomNr() {
@@ -278,12 +262,6 @@ function addDataToDOM(data) {
 							+'</div>'
 							+'</div>';
 	
-	/* postElement.innerHTML = '<div class="col mb-3 ">'
-							+'<h2 class="title">'+data[i].title+'</h2>'
-							+'<p class="text">'+data[i].contents+'</p>'
-							+'<div class="user-info"><img src=${pageContext.request.contextPath}'+data[i].url+' alt='+data[i].img+' /><span>'+data[i].cdate + data[i].gcnt+'</span></div>'
-							+ '</div>';  */
-							
 	postrow.appendChild(postElement);
 	}
 	container.appendChild(postrow);

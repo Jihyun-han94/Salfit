@@ -2,6 +2,7 @@ package com.jey.webapp.product.repository;
 
 import java.util.*;
 
+import com.jey.webapp.admin.dto.PtypeDTO;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.LikeDTO;
 import com.jey.webapp.product.dto.ProductDTO;
@@ -30,4 +31,6 @@ public interface ProductRepository {
 	public boolean findLike(LikeDTO like);
 	public void updateView(int id);
 	public List<ProductDTO> findOldProductList(ProductSearchDTO search);
+	public boolean addPtype(ProductTypeDTO dto);
+	public boolean deletePtype(ProductTypeDTO dto);
 }

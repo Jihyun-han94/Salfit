@@ -1,8 +1,6 @@
-package com.jey.webapp.product.dto;
+package com.jey.webapp.admin.dto;
 
-import java.util.*;
-
-public class ProductTypeDTO {
+public class PtypeDTO {
 	private int id;
 	private String name;
 	private String imgurl;
@@ -25,5 +23,5 @@ public class ProductTypeDTO {
 		this.imgurl = imgurl;
 	}
 	
-
+	
 }

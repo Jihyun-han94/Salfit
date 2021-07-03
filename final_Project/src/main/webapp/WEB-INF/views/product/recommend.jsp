@@ -43,7 +43,5 @@
 	        <span class="carousel-control-next-icon"></span>
 	      </a>
 	    </div>
-	   <div class="">
-	   </div>
 	</div>
 </div>

@@ -326,6 +326,14 @@
   	 WHERE id = #{pid} 
   </update>
   
+  <insert id="insertPtype" parameterType="producttype">
+  	INSERT INTO product_type(id, name, imgurl)
+  	     VALUES(ptype_seq.NEXTVAL, #{name}, #{imgurl})
+  </insert> 
+  
+   <delete id="deletePtype" parameterType="producttype">
+		DELETE FROM product_type WHERE id = #{id}
+	</delete>
   
   <!-- 
   <update id="incbad">

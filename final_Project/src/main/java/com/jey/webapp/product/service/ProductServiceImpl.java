@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jey.webapp.admin.dto.PtypeDTO;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.LikeDTO;
 import com.jey.webapp.product.dto.ProductDTO;
@@ -111,6 +112,16 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductDTO> searchOldProductList(ProductSearchDTO search) {
 		return dao.findOldProductList(search);
+	}
+
+	@Override
+	public boolean addPtype(ProductTypeDTO dto) {
+		return dao.addPtype(dto);
+	}
+
+	@Override
+	public boolean deletePtype(ProductTypeDTO dto) {
+		return dao.deletePtype(dto);
 	}
 
 
