@@ -18,4 +18,6 @@ public interface CartService {
 	public boolean updateOrderState(CartDTO dto) throws Exception;
 	public List<CartDTO> yfindAll(CartDTO dto)throws Exception;
 	public boolean delete(CartDTO dto) throws Exception;
+	public String findDdate(CartDTO dto);
+	public String findEdate(CartDTO dto);
 }

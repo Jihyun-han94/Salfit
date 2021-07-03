@@ -28,7 +28,7 @@
 	
 	 <insert id="insertordered" parameterType="order">
 	  	INSERT INTO ordered(id, aid, receiver, address, paytype, total, pdate, ddate, edate)
-	  	     VALUES(#{id}, #{aid}, #{receiver}, #{address}, #{paytype}, #{total}, #{pdate}, #{ddate}, #{edate})
+	  	     VALUES(ordered_seq.NEXTVAL, #{aid}, #{receiver}, #{address}, #{paytype}, #{total}, to_char(sysdate, 'yyyy-mm-dd'), #{ddate}, #{edate})
 	 </insert> 
 	
 	<select id="selectone" parameterType="order" resultType="order">
@@ -42,7 +42,7 @@
 	</select>	
 	
 	<insert id="insertorderdetail" parameterType="orderdetail">
-		INSERT INTO ORDER_DETAIL (id,oid,pid,qty,price)
-		VALUES (ORDER_DETAIL_SEQ.NEXTVAL, #{oid},#{pid},#{qty},#{price})
+		INSERT INTO ORDER_DETAIL (id,oid,pid,qty,price,startdate,enddate,days)
+		VALUES (order_detail_seq.NEXTVAL, #{oid},#{pid},#{qty},#{price},#{startdate},#{enddate},#{days})
 	</insert>
 </mapper>

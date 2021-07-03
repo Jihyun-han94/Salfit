@@ -96,20 +96,15 @@ COMMENT ON COLUMN review.cdate IS '리뷰 작성일';
 
 --------------------------------------------------------------------------------------------------------
 SELECT * FROM ordered;
+SELECT * FROM order_detail;
 
 DELETE FROM ordered WHERE id = 2;
-
-INSERT INTO ordered VALUES(1, 2, '최예림', '광교호수로 152번길', '카드', 13000, SYSDATE, SYSDATE+1, 'paid');
-INSERT INTO ordered VALUES(20, 1, '김은순', '광교호수로 153번길', '카카오페이', 119000, to_char(sysdate-1,'yyyy-mm-dd'), to_char(sysdate+1,'yyyy-mm-dd'), 'paid');
-INSERT INTO ordered(id, aid, receiver, address, paytype, total) VALUES(1, 1, '김은순', '광교호수로 153번길', '카카오페이', 119000);
-INSERT INTO ordered(id, aid, receiver, address, paytype, total) VALUES(2, 2, '최예림', '광교호수로 152번길', '카드', 13000);
 
 INSERT INTO review VALUES(1, 21, 1, '너무너무맛있는 샐러드~~~~~', 5, SYSDATE);
 INSERT INTO review VALUES(2, 21, 1, '맛있는 샐러드~~dddddddd~~~', 4, SYSDATE);
 INSERT INTO review VALUES(3, 21, 1, ' 샐러드~~dddddddd~~~', 3, SYSDATE);
 INSERT INTO review VALUES(4, 21, 1, ' ~~dddddddd~~~', 2, SYSDATE);
 INSERT INTO review VALUES(10, 21, 1, ' dddddddd~~~', 2, SYSDATE);
-
 
 
 ALTER TABLE ordered DROP CONSTRAINT ordered_status_CK;
@@ -125,7 +120,6 @@ SELECT *
 SELECT count(id)
 		FROM ordered
 		WHERE id > 0;
-		
 		
 		
 SELECT *

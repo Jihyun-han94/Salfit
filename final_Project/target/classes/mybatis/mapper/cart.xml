@@ -15,6 +15,9 @@
 	 		,c.pid
 	 		,c.qty
 	 		,c.orderstatus
+	 		,c.startdate
+	 		,c.enddate
+	 		,c.days
 	 		,p.price
 	 FROM cart c
 	 JOIN product p 
@@ -27,6 +30,9 @@
 			,c.aid
 			,c.pid
 			,c.qty
+			,c.startdate
+	 		,c.enddate
+	 		,c.days
 			,c.orderstatus
 			,p.price AS price
 			,p.title AS title
@@ -59,6 +65,9 @@
 			,c.aid
 			,c.pid
 			,c.qty
+			,c.startdate
+	 		,c.enddate
+	 		,c.days
 			,c.orderstatus
 			,a.email AS email
 			,p.price AS price
@@ -67,9 +76,6 @@
 			,i.name
 			,i.path
 			,i.url
-			,c.startdate
-			,c.enddate
-			,c.days
 		FROM cart c
 		JOIN account a
 		  ON c.aid = a.id
@@ -94,5 +100,28 @@
      DELETE cart
      where id = #{id}
      </delete>
+     
+     
+     <select id="findDdate" parameterType="cart" resultType="string">
+	 SELECT *
+		FROM(
+		   SELECT c.startdate
+		   FROM cart c
+		   WHERE c.aid =#{aid} AND c.orderstatus='y'
+		   ORDER BY c.startdate
+		)
+		WHERE ROWNUM = 1
+	</select>
+	
+	<select id="findEdate" parameterType="cart" resultType="string">
+	 SELECT *
+		FROM(
+		   SELECT c.enddate
+		   FROM cart c
+		   WHERE c.aid =#{aid} AND c.orderstatus='y'
+		   ORDER BY c.enddate DESC
+		)
+		WHERE ROWNUM = 1
+	</select>
 
 </mapper>

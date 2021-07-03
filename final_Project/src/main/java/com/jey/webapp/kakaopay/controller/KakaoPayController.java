@@ -30,8 +30,6 @@ public class KakaoPayController {
 	private CartService cart;
 	@Autowired	
 	private OrderService order;
-
-	
 	
 	@RequestMapping(value="", method = RequestMethod.GET)
 	public String payment(Model m, HttpServletRequest request,@ModelAttribute CartDTO dto) throws Exception {
@@ -45,25 +43,13 @@ public class KakaoPayController {
 		int totalMoney = 0;
 		int delfee = 0; //배송비
 		
-		System.out.println("디버그!!!!!!!!");
 	
 		for(int i=0;i<id.length;i++){
-		 System.out.print(id[i]+", ");
 		 cartNum = Integer.parseInt(id[i]);
 		 dto.setId(cartNum);
-		 System.out.println("디버그!!!!!!!!");
 		 dto = cart.find(dto);
 		 cart.updateOrderState(dto);
 		
-		 
-		 System.out.println("cart.aid"+dto.getAid());
-		 System.out.println("cart.pid"+dto.getPid());
-		 System.out.println("cart.qty"+dto.getQty());
-		 System.out.println("cartdto price"+dto.getPrice());
-		 System.out.println("cartdto money"+dto.getMoney());
-		 
-		 
-		 
 		 cartlist.add(dto);
 		 price_arr.add(dto.getMoney());
 		}
@@ -71,7 +57,6 @@ public class KakaoPayController {
 		for(int i : price_arr) {
 			sumMoney =sumMoney + i;
 		}
-		System.out.println("summoney 디버깅"+sumMoney);
 		
 		if(sumMoney >=30000) {
 			delfee=0;
@@ -89,10 +74,7 @@ public class KakaoPayController {
 		m.addAttribute("cartlist",cartlist);
 		m.addAttribute("sumMoney", sumMoney);
 		
-		
-		
 		String forward  = "kakaopay/payment";
-		
 		
 		return forward;
 	}
@@ -107,49 +89,34 @@ public class KakaoPayController {
 		int total = order_dto.getTotal();
 		order_dto.setAid(aid);
 		
-		System.out.println(receiver);
-		System.out.println(address);
-		System.out.println("주문자 계정 :"+order_dto.getAid());
-		System.out.println(total);
-		System.out.println(order_dto.getPdate());
-		System.out.println(order_dto.getDdate());
-		System.out.println(order_dto.getEdate());
-		order_dto.setEdate("2021-07-05");
-		order_dto.setDdate("2021-07-03");
-		order_dto.setPdate("2021-07-02");
-		
 		List<CartDTO>cartlist = cart.yfindAll(dto); //장바구니에 담은 제품만 조회
+		order_dto.setDdate(cart.findDdate(dto));	// 가장 빠른 배송일 
+		order_dto.setEdate(cart.findEdate(dto));	// 가장 늦은 배송일
+		
 		order_dto.setPaytype("card");
 		boolean result = order.add(order_dto); //ordered table에 insert
 		
-		//ordered table 조회
+		//ordered table 셋팅 
 		order_dto = order.selectone(order_dto);
 		
-		System.out.println(result);
-		
 		OrderDetailDTO orderdetail_dto = new OrderDetailDTO();
-			
-			
-			orderdetail_dto.setOid(order_dto.getId());
 		
-			for(CartDTO data:cartlist) {
+		for(CartDTO data:cartlist) {
+			orderdetail_dto.setOid(order_dto.getId());
 			orderdetail_dto.setPid(data.getPid());
 			orderdetail_dto.setPrice(data.getPrice());
 			orderdetail_dto.setQty(data.getQty());
+			orderdetail_dto.setStartdate(data.getStartdate());
+			orderdetail_dto.setEnddate(data.getEnddate());
+			orderdetail_dto.setDays(data.getDays());
 			
-			System.out.println("productid 디버깅중"+data.getPid());
+			//order_detail table 셋팅
 			result = order.addDetail(orderdetail_dto);
-			System.out.println("order_detail insert"+result);
-			
-			
 		}
 			//cart에서 삭제하는 method
-			System.out.println("디버깅.......!!!"+dto.getAid());
 			boolean deleteresult = cart.delete(dto);
 			
-			
 			m.addAttribute("ordered", order_dto);
-		
 		
 		return forward;
 	}

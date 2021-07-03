@@ -16,4 +16,6 @@ public interface CartRepository {
 	public int findPrice(CartDTO dto)throws Exception;
 	public List<CartDTO> yselectList(CartDTO dto) throws Exception;
 	public boolean deletey(CartDTO dto) throws Exception;
+	public String findDdate(CartDTO dto);
+	public String findEdate(CartDTO dto);
 }
