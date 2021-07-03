@@ -144,12 +144,21 @@
 			    monthNamesShort: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], 
 			    dayNames: ['월요일','화요일','수요일','목요일','금요일','토요일','일요일'], 
 			    dayNamesMin: ['월','화','수','목','금','토','일'], 
-			    dateFormat: 'yy-mm-dd', 
+			    dateFormat: 'yy-mm-dd',
 			    minDate: 1, maxDate: "+2M +1D"
 			};
 
 		$.datepicker.setDefaults($.datepicker.regional['kr']);
 		$('.datepicker').datepicker('setDate', '+1D');
+		
+	    $('#datepickerS').datepicker("option", "onClose", function ( selectedDate ) {
+	        $("#datepickerE").datepicker( "option", "minDate", selectedDate );
+	    });
+
+	    $('#datepickerE').datepicker("option", "minDate", $("#datepickerS").val());
+	    $('#datepickerE').datepicker("option", "onClose", function ( selectedDate ) {
+	        $("#datepickerS").datepicker( "option", "maxDate", selectedDate );
+	    });
 		
   	} );
 
