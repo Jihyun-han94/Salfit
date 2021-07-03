@@ -82,12 +82,12 @@
 						<th> ${order.getId()}
 							<c:choose>
 								<c:when test="${order.getStatus().equals('paid')}">
-									<a id="${order.getId()} " type="button" data-toggle="modal" data-target="#staticBackdrop" class="ordermodal btn" onclick="zoomin(this, ${order.getId()},document.getElementById('statusicon${order.getId()}') , document.getElementById('status${order.getId()}'));" >
+									<a id="${order.getId()} " type="button"  data-target="#staticBackdrop" class="ordermodal btn" onclick="zoomin(this, ${order.getId()},document.getElementById('statusicon${order.getId()}') , document.getElementById('status${order.getId()}'));" >
 									<i class="bi bi-zoom-in" style="font-size: 1.5rem; color: cornflowerblue;" ></i>
 									</a>
 								</c:when>
 								<c:otherwise>
-									<a id="${order.getId()} " type="button" data-toggle="modal" data-target="#staticBackdrop" class="ordermodal btn" >
+									<a id="${order.getId()} " type="button" data-target="#staticBackdrop" class="ordermodal btn" >
 										<i class="bi bi-zoom-in" style="font-size: 1.5rem; color: cornflowerblue;" ></i>
 									</a>
 								</c:otherwise>
@@ -95,48 +95,30 @@
 
 							<!-- Modal -->
 							<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+							  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
 							    <div class="modal-content">
 							      <div class="modal-header">
 							        <h5 class="modal-title" id="staticBackdropLabel">주문번호 :  <span id="oidinmodal">${oreder.getId()}</span></h5>
+							        <c:set var="oid" value="" />
 							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							          <span aria-hidden="true">&times;</span>
 							        </button>
 							      </div>
-							      <div class="modal-body">
+							      <div id="modalbody" class="modal-body">
 							      	 <div class="row">
 							      	 	  <div class="col-1 col-sm-1">
 									        상품 번호
 									      </div>
-									      <div class="col-4 col-sm-5">
+									      <div class="col-3 col-sm-4">
 									        상품명
 									      </div>
 									      <div class="col-3 col-sm-3">
 									      	주문 수량 / 가격 
 									      </div>
-									      <div class="col-4 col-sm-3">
+									      <div class="col-5 col-sm-4">
 									      	구독 기간(일수)
 									      </div>
 									 </div><hr>
-								    <c:forEach var="orderdetail" items="${orderdetaillist}" varStatus="loop">
-								      <%-- 	<c:if test="${orderdetail.getOid() == order.getId()}"> --%>
-							      	 <div class="row">
-								      	  <div class="col-1 col-sm-1">
-								        	${orderdetail.getOid()}
-								          </div>
-								          <div class="col-4 col-sm-5">
-								            <a href="#" class="tooltip-test" title="Tooltip">${orderdetail.getPname()}</a>
-								          </div>
-								          <div class="col-3 col-sm-3">
-								             ${orderdetail.getQty()} 개 / ${orderdetail.getPrice()} 원 
-								          </div>
-								          <div class="col-4 col-sm-3">
-								          	${orderdetail.getStartdate()} ~ ${orderdetail.getEnddate()} (${orderdetail.getDays()} 일간)
-								          </div>
-								    </div>
-								      	<%-- </c:if> --%>
-									  	${!loop.last ? '<hr>' : ''}	
-									  </c:forEach>
 								      </div>
 								      <div class="modal-footer">
 							        <button type="button"  class="btn btn-secondary"  data-dismiss="modal">주문확인 완료</button>
@@ -152,10 +134,6 @@
 						</td>
 						<td class="text-truncate" style="max-width: 150px;">
 							${order.getPaytype()} / ${order.getTotal()}</td>
-						<%-- <fmt:formatDate var="pdate" value="${order.getPdate() }"
-	                		pattern="yyyy년 MM월 dd일 a hh시 mm분 ss초" />
-						<fmt:formatDate var="ddate" value="${order.getDdate() }"
-	                		pattern="yyyy년 MM월 dd일 a hh시 mm분 ss초" /> --%>
 						<td>${order.getPdate() }</td>
 						<td>${order.getDdate() }</td>
 						<td>${order.getEdate() }</td>
@@ -250,11 +228,44 @@ $(document).ready(function() {
 	/* 모달에 장바구니 아이디 넘겨주기 */
 	$(".ordermodal").click(function(){
 		var orderId = $(this).attr('id'); 
-	  	var modalheader = $(".modal-header");
 	  	var modaloid = $("#oidinmodal");
-		let node = "<input type='hidden' data-id='"+orderId+"' value='"+orderId+"'>";
-		$(node).appendTo(modalheader);
 		modaloid.text(orderId);
+		
+		const container = document.getElementById('modalbody');
+		var orderdetail = []; var i = 0;
+   		    <c:forEach items="${orderdetaillist}" var="orderdetail" varStatus="loop">
+	  			if (${orderdetail.getOid()} == orderId) { 
+	  				i++;
+    		     	orderdetail.push(
+ 		  				{	"title": "${orderdetail.getPname()}",
+    		        	"oid" : "${orderdetail.getOid()}",
+    		        	"start": "${orderdetail.getStartdate()}",
+    		        	"end":"${orderdetail.getEnddate()}", 
+  		        		"qty" : "${orderdetail.getQty()}",
+  		        		"price" : "${orderdetail.getPrice()}",
+      					"period" : "${orderdetail.getStartdate()} ~ ${orderdetail.getEnddate()} (${orderdetail.getDays()} 일)",
+      					"receiver" : "${orderdetail.getReceiver()}",
+      					"phone" : "${orderdetail.getPhone()}",
+      					"address" : "${orderdetail.getAddress()}",
+    		        	"id": "${orderdetail.getId()}"
+   		        		}
+   		        	)
+	  			}
+   		    </c:forEach>
+
+   		for(var j=0; j < i; j++) {
+			let NodeList = "";
+			let newNode = "<div class='row'>";
+				newNode += "<div id='detailid' class='col-1 col-sm-1'>"+orderdetail[j].id+"</div>";	
+				newNode += "<div class='col-3 col-sm-4'><a id='detailpname' href='/salfit/product/detail?id="+orderdetail[j].id+"' class='tooltip-test' title='Tooltip'>"+orderdetail[j].title+"</a></div>";
+				newNode += "<div id='detailqtyprice' class='col-3 col-sm-3'>"+orderdetail[j].qty + " / " + orderdetail[j].price+"</div>";
+				newNode += "<div id='detailperiod' class='col-5 col-sm-4'>"+orderdetail[j].period+"</div>";
+				newNode += "</div><hr>";
+			NodeList += newNode;
+			$(NodeList).appendTo(container);
+		}
+		// modal show 
+		$('#staticBackdrop').modal('show');
 	});
 	
 	
@@ -353,7 +364,6 @@ $(document).ready(function() {
 			},
 			success: function (data) {
 					if(data.res == "true") {
-						alert(id);
 						icon.setAttribute("class", "bi bi-check text-danger");
 						icon.setAttribute("style", "font-size: 2rem;");
 						icon.setAttribute("onclick", "checked(this, "+id+", "+status+");")
@@ -374,6 +384,7 @@ $(document).ready(function() {
 						        $('#qo'+id).popover('hide');
 						    }, 3000);
 						});
+						
 					} 
 			}				
 		});
