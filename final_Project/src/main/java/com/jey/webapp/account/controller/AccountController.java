@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,7 +95,9 @@ public class AccountController {
 			if(dto.getAtype().equals("a")) {
 				forward = "redirect:/admin/product";
 			} else {
-				forward = "redirect:/";
+				String referer = (String) session.getAttribute("referer");
+				 if(referer==null || referer=="") {referer = "/";}
+				forward = "redirect:"+ referer;
 			}
 		} else {
 			m.addAttribute("error", "아이디 또는 비밀번호를 다시 입력하세요.");
@@ -107,14 +110,17 @@ public class AccountController {
 
 		// 로그인 첫 화면 요청 메소드
 		@RequestMapping(value = "/login", method = RequestMethod.GET)
-		public String googleLogin(Model m, HttpSession session) {
-
+		public String googleLogin(HttpServletRequest request, Model m, HttpSession session) {
+			/* 이전페이지 기억 */
+			String referer = request.getHeader("referer");
+			session.setAttribute("referer", referer);
+			m.addAttribute("referer", referer);
+			
 			/* 구글code 발행 */
 			OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 			String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
 
 			System.out.println("구글:" + url);
-
 			m.addAttribute("google_url", url);
 
 			/* 생성한 인증 URL을 View로 전달 */
