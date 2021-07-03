@@ -10,6 +10,7 @@ CREATE TABLE account(
         password NVARCHAR2(64),
         name NVARCHAR2(64),
         phone NVARCHAR2(64),
+        profile_img VARCHAR2(1024),
         atype NVARCHAR2(64) DEFAULT 'i',
         joindate DATE DEFAULT SYSDATE,
         logindate DATE DEFAULT SYSDATE,
@@ -32,11 +33,12 @@ COMMENT ON COLUMN account.atype IS '사용자 구분(관리자"a"/일반회원"i
 COMMENT ON COLUMN account.joindate IS '사용자 가입일';
 COMMENT ON COLUMN account.logindate IS '사용자 접속일';
 COMMENT ON COLUMN account.expiredate IS '사용자 탈회일';
+COMMENT ON COLUMN account.profile_img IS '사용자 프로필 이미지';
 
 
 CREATE SEQUENCE address_seq START WITH 1 INCREMENT BY 1 NOCACHE;
 CREATE TABLE deliver_address(
-		id NUMBER,
+        id NUMBER,
         aid NUMBER,
         address NVARCHAR2(1024)
 );
@@ -44,10 +46,14 @@ CREATE TABLE deliver_address(
 
 ALTER TABLE deliver_address ADD CONSTRAINT deliver_address_id_PK PRIMARY KEY(id);
 ALTER TABLE deliver_address ADD CONSTRAINT deliver_address_aid_FK FOREIGN KEY(aid) REFERENCES account(id) ON DELETE CASCADE;
+ALTER TABLE deliver_address MODIFY address CONSTRAINT deliver_address_address_NN NOT NULL;
 
 COMMENT ON COLUMN deliver_address.id IS '배송지 식별 번호';
 COMMENT ON COLUMN deliver_address.aid IS '사용자 식별 번호';
 COMMENT ON COLUMN deliver_address.address IS '배송지';
+
+-----------------------------------------------------------------------------------------------------------------------------
+
 
 INSERT INTO deliver_address VALUES(address_seq.NEXTVAL, 8, '서울시 동작구 신대방동 78-2');
 INSERT INTO deliver_address VALUES(address_seq.NEXTVAL, 8, '서울시 강남구 논현동 102-3');

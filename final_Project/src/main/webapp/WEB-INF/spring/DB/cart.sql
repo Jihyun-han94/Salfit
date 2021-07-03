@@ -20,6 +20,7 @@ ALTER TABLE cart MODIFY qty CONSTRAINT cart_qty_NN NOT NULL;
 ALTER TABLE cart MODIFY startdate CONSTRAINT cart_startdate_NN NOT NULL;
 ALTER TABLE cart MODIFY enddate CONSTRAINT cart_enddate_NN NOT NULL;
 ALTER TABLE cart MODIFY days CONSTRAINT cart_days_NN NOT NULL;
+ALTER TABLE cart ADD CONSTRAINT cart_orderstatus_CK CHECK(active IN('n', 'y'));
 
 COMMENT ON COLUMN cart.id IS '장바구니 고유 번호';
 COMMENT ON COLUMN cart.aid IS '장바구니 소유주 식별 번호';
