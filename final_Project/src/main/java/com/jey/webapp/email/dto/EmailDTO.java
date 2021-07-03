@@ -3,7 +3,6 @@ package com.jey.webapp.email.dto;
 public class EmailDTO {
 	private String senderName;    //발신자 이름
     private String senderMail;    //발신자 이메일 주소
-    private String receiveMail;    //수신자 이메일 주소
     private String subject;            //제목
     private String message;            //본문
     
@@ -18,12 +17,6 @@ public class EmailDTO {
 	}
 	public void setSenderMail(String senderMail) {
 		this.senderMail = senderMail;
-	}
-	public String getReceiveMail() {
-		return receiveMail;
-	}
-	public void setReceiveMail(String receiveMail) {
-		this.receiveMail = receiveMail;
 	}
 	public String getSubject() {
 		return subject;

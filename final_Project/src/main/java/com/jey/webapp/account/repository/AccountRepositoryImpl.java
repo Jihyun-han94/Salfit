@@ -2,6 +2,7 @@ package com.jey.webapp.account.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,9 +86,9 @@ public class AccountRepositoryImpl implements AccountRepository {
 	}
 
 	@Override
-	public boolean insertAddress(String ad_dto) throws Exception {
+	public boolean insertAddress(Map m) throws Exception {
 		boolean res = false;
-		int rs = sqlSession.insert("accountMapper.insertAddress", ad_dto);
+		int rs = sqlSession.insert("accountMapper.insertAddress", m);
 		if(rs == 1) {
 			res = true;
 		}
