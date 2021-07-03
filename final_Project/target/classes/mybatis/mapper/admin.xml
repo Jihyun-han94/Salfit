@@ -66,7 +66,7 @@
 		 </if>
 			ORDER BY o.id DESC
 		  ) 
-	  WHERE NUM BETWEEN #{pageStart} AND (#{pageStart} + #{perPageNum} - 1)
+	  WHERE NUM BETWEEN (#{pageStart}+1) AND (#{pageStart} + #{perPageNum} )
 	</select>
 	
 	<select id="orderdetaillistsel" parameterType="adminorder" resultType="adminorderdetail">
@@ -230,12 +230,15 @@
 			 </if>
 	         ORDER BY pdate DESC, o.id DESC
 	        ) 
-	  WHERE NUM BETWEEN #{pageStart} AND (#{pageStart} + #{perPageNum} - 1)
+	  WHERE NUM BETWEEN (#{pageStart}+1) AND (#{pageStart} + #{perPageNum})
 	</select>
 	
 	<select id="gettotalcount" resultType="_int">
 		SELECT count(o.id)
 		FROM ordered o
 		WHERE o.id &gt; 0
+		<if test='status != "" and status != null'>
+			AND o.status = #{status}
+		</if>
 	</select>
 </mapper>

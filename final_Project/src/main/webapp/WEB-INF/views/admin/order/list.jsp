@@ -209,38 +209,29 @@
 		
 		<c:if test="${cri.getId() == 0}">
 		<section>
-			<!-- 페이지 번호 -->	
-			<div class="text-center">
-				<nav aria-label="pagination">
-					<ul class="pagination">
-					
-						<!-- prev 버튼 -->
-						<li id="page-prev">
-							<a href="list${pageMaker.makeQuery(pageMaker.startPage-1)}" aria-label="Prev">
-								<span aria-hidden="true">«</span>
-							</a>
-						</li>
-						
-						<!-- 페이지 번호 (시작 페이지 번호부터 끝 페이지 번호까지) -->
-						<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-						    <li id="page${idx}">
-							    <a href="list${pageMaker.makeQuery(idx)}">
-							    	<!-- 시각 장애인을 위한 추가 -->
-							      	<span>${idx}<span class="sr-only">(current)</span></span>
-							    </a>
-						    </li>
-						</c:forEach>
-						
-						<!-- next 버튼 -->
-						<li id="page-next">
-						    <a href="list${pageMaker.makeQuery(pageMaker.endPage)}" aria-label="Next">
-						    	<span aria-hidden="true">»</span>
-						    </a>
-						</li>
-						
-					</ul>
-				</nav>
-			</div>
+		<!-- 페이지 번호 -->
+			<nav aria-label="Page navigation">
+			  <ul class="pagination justify-content-center">
+			    <li id="page-prev" lass="page-item disabled">
+			      <a class="page-link" href="list${pageMaker.makeQuery(pageMaker.startPage-1)}" aria-label="Prev" tabindex="-1" aria-disabled="true">
+			      <span aria-hidden="true">«</span>
+			      </a>
+			    </li>
+			    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				    <li id="page${idx}" class="page-item">
+					    <a class="page-link" href="list${pageMaker.makeQuery(idx)}">
+					    	<!-- 시각 장애인을 위한 추가 -->
+					      	<span>${idx}<span class="sr-only">(current)</span></span>
+					    </a>
+				    </li>
+				</c:forEach>
+			    <li id="page-next" class="page-item">
+			      <a class="page-link" href="list${pageMaker.makeQuery(pageMaker.endPage)}" aria-label="Next">
+			      <span aria-hidden="true">»</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
 		</section>
 		</c:if>
 
@@ -284,7 +275,8 @@ $(document).ready(function() {
 	}
 	
 	//현재 페이지 파란색으로 활성화
-	var thisPage = '${pageMaker.cri.page}';
+	/* var thisPage = '${pageMaker.cri.page}'; */
+	var thisPage = '${param.page}';
 	//매번 refresh 되므로 다른 페이지 removeClass 할 필요는 없음->Ajax 이용시엔 해야함
 	$('#page'+thisPage).addClass('active');
 		
