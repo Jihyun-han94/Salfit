@@ -1,6 +1,7 @@
 package com.jey.webapp.account.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.jey.webapp.account.dto.AccountAddressDTO;
 import com.jey.webapp.account.dto.AccountDTO;
@@ -15,7 +16,7 @@ public interface AccountRepository {
 	public boolean update(AccountDTO dto) throws Exception;
 	public boolean delete(AccountDTO dto) throws Exception;
 	public boolean updateImage(AccountDTO dto) throws Exception;
-	public boolean insertAddress(String ad_dto) throws Exception;
+	public boolean insertAddress(Map m) throws Exception;
 	public boolean deleteAddress(AccountAddressDTO ad_dto) throws Exception;
 	public List<AccountAddressDTO> getListAddress(int aid) throws Exception;
 }

@@ -19,6 +19,7 @@
 	<c:url var="updateView" value="/account/update_view" />
 	<c:url var="product" value="/product" />
 	<c:url var="cart" value="/cart" />
+	<c:url var="email_write" value="/email/write" />
 	<c:url var="admin_product" value="/admin/product" />
 	<c:url var="admin_order" value="/admin/order/list" />
 	<c:url var="admin_delivery" value="/admin/order/calendar" />
@@ -69,12 +70,12 @@
 						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>
 						<li><a href="${cart }">Cart</a></li>
 						<li><a href="${logout }">Logout</a></li>
-						<li><a href="#0">Contact Us</a></li>
+						<li><a href="${email_write }">Contact Us</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="${login }">Login</a></li>
 						<li><a href="${join }">Join</a></li>
-						<li><a href="#0">Contact Us</a></li>
+						<li><a href="${email_write }">Contact Us</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:otherwise>

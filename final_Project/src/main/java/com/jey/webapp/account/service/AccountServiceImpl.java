@@ -1,6 +1,8 @@
 package com.jey.webapp.account.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,8 +74,12 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public boolean addAddress(String ad_dto) throws Exception {
-		return dao.insertAddress(ad_dto);
+	public boolean addAddress(int aid, String address) throws Exception {
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("aid", aid);
+		m.put("address", address);
+		boolean res = dao.insertAddress(m);
+		return res;
 	}
 
 	@Override

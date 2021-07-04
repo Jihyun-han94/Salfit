@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jey.webapp.account.dto.AccountAddressDTO;
+import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.account.service.AccountService;
 
 
@@ -42,15 +45,23 @@ public class AjaxAccountController {
 	
 	@RequestMapping(value = "/address/add", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
 	@ResponseBody	// ViewResolver 를 사용하지 않음.
-	public String addAddress(@RequestParam String address) throws Exception {
-			System.out.println(address);
-		 boolean res = account.addAddress(address);
+	public String addAddress(@RequestParam String address, HttpSession session) throws Exception {
+		AccountDTO dto = (AccountDTO) session.getAttribute("account");
+		
+		int aid = dto.getId();
+		AccountAddressDTO addressDTO = new AccountAddressDTO();
+		addressDTO.setAid(aid);
+		
+		 boolean res = account.addAddress(aid, address);
 		 JSONObject json = new JSONObject();
 		 if(res) {
-		 	json.put("success", true);
+		 	json.put("res", "success");
+		 	json.put("address", address);
+		 } else {
+			 json.put("res", "fail");
 		 }
 		
-		return json.toJSONString();
+		 return json.toJSONString();
 	}
 	
 //	@RequestMapping(value = "/address/delete", method = RequestMethod.GET, produces = "application/json; charset=utf-8" )

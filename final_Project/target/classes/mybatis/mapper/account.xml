@@ -55,7 +55,7 @@
 	<!-- 주소 조회 -->
 	<select id="selectAddress" parameterType="address" resultType="address">
       SELECT b.aid
-          , b.id AS ano
+          , ROWNUM AS ano
           , b.address
       FROM account a
       JOIN deliver_address b
@@ -64,14 +64,14 @@
    </select>
 	
 	<!-- 주소 추가 -->
-	<insert id="insertAddress" parameterType="address">
-		INSERT INTO address (aid, address) 
-		VALUES (#{aid}, #{address})
+	<insert id="insertAddress" parameterType="HashMap">
+		INSERT INTO deliver_address
+		VALUES (address_seq.NEXTVAL, #{aid},  #{address})
 	</insert>
 	
 	<!-- 주소 삭제 -->
 	<delete id="deleteAddress">
-		DELETE FROM address
+		DELETE FROM deliver_address
 		WHERE aid = #{aid}
 	</delete>
 </mapper>

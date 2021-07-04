@@ -26,7 +26,6 @@ var checkRePass = function(){
         return true;
     }
 }
-
 function addressSend() {
 	$.ajax({
 		url: "${add_address }",
@@ -37,34 +36,40 @@ function addressSend() {
 		},
 		success: function(data){
 			if(data.res == "success") {
-				alert("주소 등록이 완료되었습니다.");
-			} 
-			getAddressList(data.ano, data.address); // 주소 목록 출력
+				alert("주소 등록이 완료되었습니다.")
+				getAddressList(data.address) // 주소 목록 출력
+			} else {
+				alert("주소 등록에 실패했습니다.")
+			}
 		}
 	});
 }
-
-function getAddressList(ano, address, delete_btn) {
+function getAddressList(address) {
 	var item = document.createElement("div");
 	var no = document.createElement("span");
+	var lbl = document.createElement("span")
 	var content = document.createElement("span");
 	var delete_btn = document.createElement("button");
 	
-	no.innerText = "주소 목록 " + ano;
-	content.innerText = address.content;
+	lbl.innerText = "주소 목록 ";
+	no.innerText = " " + (document.getElementById("address_list").getElementsByTagName("span").length/3+1);
+	content.innerText = address;
 	delete_btn.innerText = "삭제";
 	delete_btn.type = "button";
 	delete_btn.style = "color:red;"
 	delete_btn.className = "input-file-button"
 	delete_btn.onclick = function() {deleteAddress()};
 	
+	item.append(lbl);
 	item.append(no);
 	item.append(content);
 	item.append(delete_btn);
 	
 	document.getElementById("address_list").append(item);
 }
-
+function deleteAddress() {
+	
+}
 function updateInfo() {
 	var name = document.getElementById("id_name").value;
 	var password = document.getElementById("id_password").value;
@@ -87,7 +92,6 @@ function updateInfo() {
 		return;
 	}
 }
-
 function expire() {
 	$.ajax({
 		url: "${expire }",
@@ -106,7 +110,6 @@ function expire() {
 		}
 	});
 }
-
 </script>
 <style>
 .btn_confirm {
@@ -126,11 +129,9 @@ function expire() {
 	font-size: 40px;
 	font-weight: bold;
 }
-
 .body_class {
 	font-size: 15px;
 }
-
 .body_class_item {
 	margin: 0 auto;
 	width:50%;
@@ -225,7 +226,7 @@ input {
 				<span>주소 목록&nbsp;&nbsp;</span>
 				<span>${addressList.getAno() }&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				<span>${addressList.getAddress() }&nbsp;&nbsp;</span>
-				<button type="button" class="input-file-button" onclick="delAddress(this, ${addressList.getAid() })">삭제</button>
+				<button type="button" class="input-file-button" onclick="delAddress(this, ${addressList.getAno() })">삭제</button>
 			</div>
 			</c:forEach>
 		</div>
