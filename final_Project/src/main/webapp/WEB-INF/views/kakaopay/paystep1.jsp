@@ -6,13 +6,13 @@
 <meta charset="UTF-8">
 <title>paystep1</title>
 </head>
+<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <!-- jQuery -->
 <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 <br>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
-
 function iamport(){
 	//가맹점 식별코드
 	

@@ -13,6 +13,10 @@
 	        	,d.qty 
 	        	,d.price 
 	        	,d.status
+	        	,d.startdate
+	        	,d.enddate
+	        	,d.days
+	        	,d.status
 	        	,p.title
 		FROM order_detail d  
 		JOIN product p

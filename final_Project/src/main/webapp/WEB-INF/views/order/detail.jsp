@@ -26,7 +26,9 @@
 	<th>제품 수량</th>
 	<th>제품 가격</th>
 	<th>주문처리상태</th>
+	<th>리뷰</th>
 	
+	<c:url var ="review" value="/order/review/add" />
 	<c:forEach var="data" items="${requestScope.orderdetaillist }" >
 	<tr>
 	<td>${data.oid }</td>
@@ -34,6 +36,7 @@
 	<td>${data.qty }</td>
 	<td>${data.price }</td>
 	<td>${data.status }</td>
+	<td><a href="${review }?pid=${data.pid }">리뷰작성하기</a></td>
 	</tr>
 	</c:forEach>
 	
