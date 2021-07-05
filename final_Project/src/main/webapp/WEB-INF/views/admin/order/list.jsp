@@ -105,27 +105,13 @@
 							        </button>
 							      </div>
 							      <div id="modalbody" class="modal-body">
-							      	 <div class="row">
-							      	 	  <div class="col-1 col-sm-1">
-									        상품 번호
-									      </div>
-									      <div class="col-3 col-sm-4">
-									        상품명
-									      </div>
-									      <div class="col-3 col-sm-3">
-									      	주문 수량 / 가격 
-									      </div>
-									      <div class="col-5 col-sm-4">
-									      	구독 기간(일수)
-									      </div>
-									 </div><hr>
-								      </div>
-								      <div class="modal-footer">
-							        <button type="button"  class="btn btn-secondary"  data-dismiss="modal">주문확인 완료</button>
 							      </div>
-							    </div>
-							  </div>
-							</div>
+							      <div class="modal-footer">
+						        <button type="button"  class="btn btn-secondary"  data-dismiss="modal">주문확인 완료</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 						</th>
 						<td>${order.getAid()}</td>
 						<td>${order.getReceiver()}</td>
@@ -296,6 +282,9 @@ $(document).ready(function() {
 	var thisPage = '${param.page}';
 	//매번 refresh 되므로 다른 페이지 removeClass 할 필요는 없음->Ajax 이용시엔 해야함
 	$('#page'+thisPage).addClass('active');
+	if(${empty param.page}) {
+		$('#page1').addClass('active');
+	}
 		
 });
 
