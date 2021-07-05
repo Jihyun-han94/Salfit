@@ -16,7 +16,56 @@
 	<c:url var="admin_order" value="/admin/order/list" />
 	<c:url var="admin_delivery" value="/admin/order/calendar" />
 	<c:url var="admin_statistics" value="/admin/order/summary" />
-
+	<style>
+.new-order-counter {
+ position:absolute;
+ top: -7px;
+ right: -11px;
+ min-width: 8px;
+ height: 20px;
+ line-height: 20px;
+ margin-top: -11px;
+ padding: 0 6px;
+ font-weight: normal;
+ font-size: small;
+ color: white;
+ text-align: center;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+ background: #e23442;
+ /* border: 1px solid #911f28; */
+ border-radius: 11px;
+ background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
+ background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
+ background-image: -o-linear-gradient(top, #e8616c, #dd202f);
+ background-image: linear-gradient(to bottom, #e8616c, #dd202f);
+ -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+ box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+}
+.delivery-counter {
+ position:absolute;
+ top: -5px;
+ right: -4px;
+ min-width: 8px;
+ height: 20px;
+ line-height: 20px;
+ margin-top: -11px;
+ padding: 0 6px;
+ font-weight: normal;
+ font-size: small;
+ color: white;
+ text-align: center;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+ background: #3b8de2;
+ /* border: 1px solid #215a96; */
+ border-radius: 11px;
+ background-image: -webkit-linear-gradient(top, #67a7e9, #2580df);
+ background-image: -moz-linear-gradient(top, #67a7e9, #2580df);
+ background-image: -o-linear-gradient(top, #67a7e9, #2580df);
+ background-image: linear-gradient(to bottom, #67a7e9, #2580df);
+ -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+ box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+}
+</style>
 	<header class="cd-auto-hide-header">
 		<div class="logo"><a href="${main }"><img src="/salfit/resources/img/log.png" alt="Logo" height="80px"></a></div>
 	
@@ -31,7 +80,7 @@
 		<c:choose>
 			<c:when test="${sessionScope.atype == 'a' }">
 				<li><a href="${admin_product }">상품 관리</a></li>
-				<li><a href="${admin_order }">주문 관리</a></li>
+				<li id="neworder_nav"><a href="${admin_order }" style="position:relative;">주문 관리<span id="neworder_alert"></span></a></li>
 				<li><a href="${admin_delivery }">배송 관리</a></li>
 				<li><a href="${admin_statistics }">통계</a></li>
 				<li><a href="${logout }">Logout</a></li>
@@ -100,4 +149,28 @@
 
 <script>
 	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+	
+	var websocket;
+   	var neworder_alert = document.getElementById("neworder_alert");
+   	var neworder_nav = document.getElementById("neworder_nav");
+	var prev_val = neworder_alert.innerText; 
+   	neworder_nav.addEventListener("click", function(){
+	    	neworder_alert.classList.remove('new-order-counter');
+   	});
+    websocket = new WebSocket("ws://localhost/salfit/alert");
+    
+    websocket.onmessage = function(message) {
+    	//alert(message.data);
+    	onMessage(message); 
+    }
+    
+    function onMessage(evt) {
+    	if(!neworder_alert.classList.contains('new-order-counter')) {
+    		neworder_alert.classList.add('new-order-counter');
+	    }
+    	//var val = prev_val + 1;
+   		neworder_alert.innerText = "new";  
+}
+	    	
+	
 </script>

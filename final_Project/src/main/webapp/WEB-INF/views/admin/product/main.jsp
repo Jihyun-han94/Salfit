@@ -219,7 +219,6 @@ $(function(){
 	function form_submit() {
         document.getElementById("paymentitrform").submit();
    }  
-
 })
 
 </script>

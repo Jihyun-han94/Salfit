@@ -38,6 +38,7 @@ function iamport(){
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
 	        window.location.href = '/salfit/order/detail?id='+${ordered.id};
 	        
+	        //관리자 주문알림 
 	    } else {
 	    	 var msg = '결제에 실패하였습니다.';
 	         msg += '에러내용 : ' + rsp.error_msg;

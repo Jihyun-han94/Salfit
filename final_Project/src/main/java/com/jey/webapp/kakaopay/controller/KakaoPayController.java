@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
+import com.jey.webapp.alert.AlertHandler;
 import com.jey.webapp.cart.dto.CartDTO;
 import com.jey.webapp.cart.service.CartService;
 import com.jey.webapp.order.dto.OrderDTO;
@@ -30,6 +33,8 @@ public class KakaoPayController {
 	private CartService cart;
 	@Autowired	
 	private OrderService order;
+	@Autowired
+	private AlertHandler alerthandler;
 	
 	@RequestMapping(value="", method = RequestMethod.GET)
 	public String payment(Model m, HttpServletRequest request,@ModelAttribute CartDTO dto) throws Exception {
@@ -115,6 +120,16 @@ public class KakaoPayController {
 		}
 			//cart에서 삭제하는 method
 			boolean deleteresult = cart.delete(dto);
+			
+			
+			// 주문알림 
+			List<WebSocketSession>sList = this.alerthandler.sockList;
+			for(WebSocketSession ws: sList) {
+				String text = "새로운 주문이 들어왔습니다.";
+				TextMessage msg = new TextMessage(text);
+				ws.sendMessage(msg);
+			}
+			
 			
 			m.addAttribute("ordered", order_dto);
 		

@@ -26,9 +26,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.admin.dto.PtypeDTO;
+import com.jey.webapp.alert.AlertHandler;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.dto.ProductFileDTO;
@@ -328,9 +331,8 @@ public class AdminProductController {
 		} else {
 			dto.setImgurl("/resources/upload/category/default.png");
 		}
-		
+
 		boolean res = product.addPtype(dto);
-		System.out.println("success?" + res);
 		if(res) {
 			m.addAttribute("result", "addOK");
 			forward = "redirect:/admin/product";
