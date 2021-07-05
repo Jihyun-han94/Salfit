@@ -1,6 +1,7 @@
 package com.jey.webapp.admin.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
 import com.jey.webapp.admin.dto.PageMaker;
 import com.jey.webapp.admin.service.AdminService;
+import com.jey.webapp.product.dto.ProductDTO;
 
 @Controller
 @RequestMapping(value = "/admin/order")
@@ -30,72 +32,7 @@ public class AdminOrderController {
 	@Autowired
 	private AdminService order;
 
-//	/* 주문번호 생성 */
-//	@RequestMapping(value = "/add", method = RequestMethod.GET)
-//	public String createOrder(Model m, @ModelAttribute OrderDTO dto, @ModelAttribute OrderDetailDTO detail, HttpServletRequest request, HttpSession session) throws Exception {
-//		
-//		
-//		// 주문 임의 설정 
-//		dto.setAid(2);
-//		dto.setReceiver("김은순");
-//		dto.setAddress("수원시 영통구 하동 광교호수로 152번길 23");
-//		dto.setPaytype("카카오페이");
-//		dto.setTotal(59600);
-//		dto.setStatus("paid");
-//		dto.setPdate("2021-06-25");
-//		dto.setDdate("2021-06-26");
-//		dto.setEdate("2021-06-27");
-//		
-//		// 디테일
-//		detail.setPid(22);
-//		detail.setOid(6);
-//		detail.setQty(2);
-////		detail.setPrice(4000);
-//		detail.setStartdate("2021-06-29");
-//		detail.setEnddate("2021-06-29");
-//		detail.setDays(2);
-//		
-//		boolean res = order.add(dto, detail);
-//		
-//		if(res == true) {
-//			return "admin/order/list";
-//		}
-//		
-//		return "error/default";
-//	}
-//	
-	
 	/* 주문확인 */
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public void listPageTest() throws Exception{
-//		Criteria cri = new Criteria();
-//		cri.setPage(1);
-//		cri.setPerPageNum(10);
-//		List<AdminOrderDTO> boards = order.listPage(cri);
-//		for (AdminOrderDTO board : boards) {
-//			System.out.println(board.getId()+ ":" + board.getAddress());
-//		}		
-//		int totalCount = order.getTotalCount(cri);
-//		System.out.println("totalCount: "+totalCount);
-		
-		int page = 6;
-		int perPageNum = 10;
-		
-		UriComponents uriComponets = UriComponentsBuilder.newInstance()
-				.path("/{module}/{page}")
-				.queryParam("page", page)
-				.queryParam("perPageNum", perPageNum)
-				.build()
-				.expand("admin","order/list")
-				.encode();
-		
-		String uri = "/admin/order/list?page=" + page + "&perPageNum=" + perPageNum;
-		
-		System.out.println(uri);
-		System.out.println(uriComponets.toString());
-	}
-	
-	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String manageOrder(@ModelAttribute Criteria cri, Model m, @ModelAttribute AdminOrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
 		List<AdminOrderDTO> orderlist = null;
@@ -215,4 +152,26 @@ public class AdminOrderController {
 		m.addAttribute("dto",dto);
 		return "admin/order/delivery";
 	}
+	
+	
+	/* 통계 */
+	@RequestMapping(value = "/summary", method = RequestMethod.GET)
+	public String summary(Model m,@ModelAttribute ProductDTO dto) throws Exception{
+		List<ProductDTO> top5list = null;
+		List<String> top5 = new ArrayList<String>();
+		List<Integer> top5bcnt = new ArrayList<Integer>();
+		
+		top5list = order.topselling(dto);
+		for(ProductDTO l: top5list) {
+			top5.add(l.getTitle()); 
+		}
+		for(ProductDTO l: top5list) {
+			top5bcnt.add(l.getBcnt());
+		}
+		m.addAttribute("top5list",top5list);
+		m.addAttribute("top5",top5);
+		m.addAttribute("top5bcnt",top5bcnt);
+		return "admin/order/chart";
+	}
+	
 }

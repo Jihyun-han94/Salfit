@@ -5,6 +5,7 @@ import java.util.*;
 import com.jey.webapp.admin.dto.AdminOrderDTO;
 import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
+import com.jey.webapp.product.dto.ProductDTO;
 
 
 
@@ -22,4 +23,5 @@ public interface AdminService {
 	public boolean updateDetailStatus(AdminOrderDetailDTO dto);
 	public List<AdminOrderDTO> listPage(Criteria cri) throws Exception;
 	public int getTotalCount(Criteria cri) throws Exception;
+	public List<ProductDTO> topselling(ProductDTO dto);
 }

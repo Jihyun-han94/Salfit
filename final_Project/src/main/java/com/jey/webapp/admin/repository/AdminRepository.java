@@ -5,6 +5,7 @@ import java.util.*;
 import com.jey.webapp.admin.dto.AdminOrderDTO;
 import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
+import com.jey.webapp.product.dto.ProductDTO;
 
 
 public interface AdminRepository {
@@ -21,5 +22,6 @@ public interface AdminRepository {
 	public boolean updateDetailStatus(AdminOrderDetailDTO dto);
 	public List<AdminOrderDTO> listPage(Criteria cri);
 	public int getTotalCount(Criteria cri);
+	public List<ProductDTO> topselling(ProductDTO dto);
 	
 }

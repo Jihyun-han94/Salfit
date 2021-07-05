@@ -9,6 +9,7 @@ import com.jey.webapp.admin.dto.AdminOrderDTO;
 import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
 import com.jey.webapp.admin.repository.AdminRepository;
+import com.jey.webapp.product.dto.ProductDTO;
 
 
 @Service
@@ -78,6 +79,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int getTotalCount(Criteria cri) throws Exception {
 		return dao.getTotalCount(cri);
+	}
+
+	@Override
+	public List<ProductDTO> topselling(ProductDTO dto) {
+		return dao.topselling(dto);
 	}
 
 
