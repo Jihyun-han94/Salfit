@@ -232,6 +232,12 @@ $(document).ready(function() {
 		modaloid.text(orderId);
 		
 		const container = document.getElementById('modalbody');
+		container.innerHTML = '<div class="row">'
+							+ '	  <div class="col-1 col-sm-1">번호</div>'
+							+ '   <div class="col-3 col-sm-4">상품명</div>'
+							+ '   <div class="col-3 col-sm-3">주문 수량 / 가격</div>'
+							+ '   <div class="col-5 col-sm-4">구독 기간(일수)</div>'
+							+ '</div><hr>';
 		var orderdetail = []; var i = 0;
    		    <c:forEach items="${orderdetaillist}" var="orderdetail" varStatus="loop">
 	  			if (${orderdetail.getOid()} == orderId) { 
@@ -258,9 +264,9 @@ $(document).ready(function() {
 			let newNode = "<div class='row'>";
 				newNode += "<div id='detailid' class='col-1 col-sm-1'>"+orderdetail[j].id+"</div>";	
 				newNode += "<div class='col-3 col-sm-4'><a id='detailpname' href='/salfit/product/detail?id="+orderdetail[j].id+"' class='tooltip-test' title='Tooltip'>"+orderdetail[j].title+"</a></div>";
-				newNode += "<div id='detailqtyprice' class='col-3 col-sm-3'>"+orderdetail[j].qty + " / " + orderdetail[j].price+"</div>";
+				newNode += "<div id='detailqtyprice' class='col-3 col-sm-3'>"+orderdetail[j].qty + " 개 / " + orderdetail[j].price+" 원</div>";
 				newNode += "<div id='detailperiod' class='col-5 col-sm-4'>"+orderdetail[j].period+"</div>";
-				newNode += "</div><hr>";
+				newNode += "</div>";
 			NodeList += newNode;
 			$(NodeList).appendTo(container);
 		}
