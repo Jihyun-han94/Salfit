@@ -19,6 +19,8 @@
 	<c:url var="updateView" value="/account/update_view" />
 	<c:url var="product" value="/product" />
 	<c:url var="cart" value="/cart" />
+	<c:url var="about" value="/about_us" />
+	<c:url var="notice" value="/notice" />
 	<c:url var="email_write" value="/email/write" />
 	<c:url var="admin_product" value="/admin/product" />
 	<c:url var="admin_order" value="/admin/order/list" />
@@ -70,12 +72,10 @@
 						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>
 						<li><a href="${cart }">Cart</a></li>
 						<li><a href="${logout }">Logout</a></li>
-						<li><a href="${email_write }">Contact Us</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="${login }">Login</a></li>
 						<li><a href="${join }">Join</a></li>
-						<li><a href="${email_write }">Contact Us</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:otherwise>
@@ -110,10 +110,10 @@
 
 <nav class="cd-secondary-nav">
 	<ul>
-		<li><a href="#0">Notice</a></li>
+		<li><a href="${notice }">Notice</a></li>
 		<li><a href="${product }">Menu</a></li>
-		<li><a href="#0">Buy</a></li>
-		<li><a href="#0">Review</a></li>
+		<li><a href="${about }">About</a></li>
+		<li><a href="${email_write }">Contact Us</a></li>
 	</ul>
 </nav> <!-- .cd-secondary-nav -->
 <br><br><br>

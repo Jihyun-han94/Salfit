@@ -24,6 +24,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/static/jquery/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/static/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/common.js" ></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/main.js" ></script>
 
 <!-- popper -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

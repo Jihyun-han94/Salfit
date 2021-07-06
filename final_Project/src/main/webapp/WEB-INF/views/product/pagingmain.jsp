@@ -20,20 +20,24 @@
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
 	<br><br><br><br><br><br><br><br><br>
+<main style="font-family: 'Kakao', 'sans-serif', 'normal';">
+<div style="margin: 0 auto;">
 <div>
 	<div>
-		<c:url var="search" value="/product" />
-		<form id="search_form" action="${search }" method="get">
-			<c:if test="${not empty param.ptype}" >
-				<input type="hidden" name="ptype" value="${param.ptype }">
-			</c:if>
-		    <select id="searchtype" name="searchtype">
-		        <option value="t">제품 명</option>
-		        <option value="c">제품 정보</option>
-		    </select>
-			<input type="text" name="search">
-			<button type="submit">검색</button>
-		</form>
+		<div style="text-align: center;">
+			<c:url var="search" value="/admin/product" />
+			<form id="search_form" action="${search }" method="get">
+				<c:if test="${not empty param.ptype}" >
+					<input type="hidden" name="ptype" value="${param.ptype }">
+				</c:if>
+			    <select id="searchtype" name="searchtype" style="width:150px; height:50px; border-color: #e7e7e7; border-right: 5px solid #e7e7e7;">
+			        <option value="t">제품 명</option>
+			        <option value="c">제품 정보</option>
+			    </select>
+				<input type="text" name="search" style="width: 400px; height:50px; border:1px solid #e7e7e7; border-left: 5px solid #e7e7e7;">
+				<button type="submit" class="btn_confirm" style="height: 50px;">검색</button>
+			</form>
+		</div>
 	</div>
 </div>
 <br><br><br><br><br><br><br><br><br>
@@ -52,7 +56,8 @@
 	<div class="ball"></div>
 	<div class="ball"></div>
 </div>
-
+</div>
+</main>
 <jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
@@ -60,12 +65,9 @@ const container = document.getElementById('container');
 const loading = document.querySelector('.loading');
 var oldListCnt = "${oldListCnt}";
 /* alert("oldlistcnt: "+oldListCnt); */
-
 var startIndex = 1;	// 인덱스 초기값
 var searchStep = 4;	// 4개씩 로딩
 getPost(startIndex);
-
-
 window.addEventListener('scroll', infiniteScroll);
 function infiniteScroll () {
 	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
@@ -75,13 +77,11 @@ function infiniteScroll () {
 			showLoading();
 		}
 }
-
 function showLoading() {
 	loading.classList.add('show');
 	
 	setTimeout(getPost(startIndex), 5000)
 }
-
 async function getPost(index) {
 	let _endIndex = index+searchStep-1;
 	var ptype = 0;
@@ -124,11 +124,9 @@ async function getPost(index) {
 		   }
 	});
 }
-
 function getRandomNr() {
 	return Math.floor(Math.random() * 100) + 1;
 }
-
 function addDataToDOM(data) {
 	const postrow = document.createElement('div');
 	postrow.classList.add('row', 'row-cols-xs-1', 'row-cols-sm-2', 'row-cols-md-3', 'row-cols-lg-4');
@@ -174,8 +172,6 @@ function addDataToDOM(data) {
 	container.appendChild(postrow);
 	loading.classList.remove('show');
 }
-
-
 function liked(gcnt, pid, e, aid) {
 	let cancel = e.dataset.value;
 	$.ajax({
@@ -205,7 +201,6 @@ function liked(gcnt, pid, e, aid) {
 		}		
 	});
 } 
-
 function myFunction(e) {
 	   var element = document.getElementById("myDIV");
 	   e.classList.toggle("bi-heart-fill", "bi-heart");

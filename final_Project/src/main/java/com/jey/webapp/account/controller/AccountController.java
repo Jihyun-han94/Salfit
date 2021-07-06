@@ -148,21 +148,23 @@ public class AccountController {
 	
 	/* 회원정보 수정 */
 	
-	@RequestMapping(value = "/update_view", method = RequestMethod.POST)
+	@RequestMapping(value = "/update_view", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView modify(HttpServletRequest req, HttpSession session,
-			Model m, AccountDTO accountDTO, AccountAddressDTO addressDTO) throws Exception {
+			Model m, AccountAddressDTO addressDTO) throws Exception {
 		ModelAndView mv = new ModelAndView("account/update");
 		session = req.getSession();
 		AccountDTO dto = (AccountDTO) session.getAttribute("account");
+		String pass = req.getParameter("password");
+		dto.setPassword(pass);
 		System.out.println(dto.getId() + dto.getEmail());
 		
-		String dtoPass = accountDTO.getPassword();
-		String pass = req.getParameter("password");
-		System.out.println(dtoPass);
-		
-		if(!(dtoPass.equals(pass))) {
-			System.out.println("잘못된 접근입니다.");
+		dto = account.login(dto);
+		if(dto.getId() == -1) {
+			System.out.println("실패");
+			mv.setViewName("redirect:/");
+			return mv;
 		}
+		
 		mv.addObject("account", dto);
 		
 		int userid = dto.getId();
@@ -194,7 +196,7 @@ public class AccountController {
 	/* 프로필 사진 추가 */
 	@RequestMapping(value = "/profile_update", method = RequestMethod.POST)
 	public String profile_modify(@RequestParam MultipartFile file,
-			HttpServletRequest req, Model m, HttpSession session) throws Exception {
+			HttpServletRequest req, Model m, HttpSession session, AccountAddressDTO addressDTO) throws Exception {
 		System.out.println("메소드 시작!");
 		// 1. 사용자가 업로드한 이미지를 추출한다. --> file 자체로 추출 함 (하나기 때문)
 		
@@ -222,8 +224,16 @@ public class AccountController {
 		String thumbnail_path = "/file/" + thumbnail_name;
 		// 6. 이미지 저장된 경로를 DB에 저장한다.
 		AccountDTO dto = (AccountDTO) session.getAttribute("account");
+		System.out.println("썸네일저장 전");
 		dto.setProfile_img(thumbnail_path);
-		m.addAttribute("account", account.saveImage(dto));
+		System.out.println("이미지 경로 db 저장 실행 전");
+		account.saveImage(dto);
+		m.addAttribute("account", dto);
+		int userid = dto.getId();
+		addressDTO.setAid(userid);
+		List<AccountAddressDTO> addressList = account.getList(addressDTO.getAid());
+		m.addAttribute("addressList", addressList);
+		System.out.println("이미지 경로 db 저장 실행 후");
 		return "account/update";
 	}
 	
@@ -238,7 +248,7 @@ public class AccountController {
 		if(!(dtoPass.equals(pass))) {
 			m.addAttribute("error", "회원탈퇴 실패");
 			System.out.println("회원탈퇴 실패");
-			return "redirect:/account/update";
+			return "redirect:/account/update_view";
 		}
 		account.signout(dto);
 		m.addAttribute("dto",dto);

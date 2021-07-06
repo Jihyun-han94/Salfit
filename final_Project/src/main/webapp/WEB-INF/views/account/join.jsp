@@ -23,7 +23,6 @@ body {
 h1 {
   font-family: 'Arita-dotum-Medium';
 }
-
 p {
 	font-size: x-small;
 	text-align: center;
@@ -65,7 +64,6 @@ function emailCheck() {
 		}
 	});
 }
-
 function send() {
 	var username = document.getElementById("id_username");
 	if(username.value == "" || username.value == undefined){
@@ -115,6 +113,7 @@ function send() {
 <nav>
 	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
 </nav>
+<main class="cd-main-content sub-nav">
 <section class="signcontainer">
 	<article class="signhalf">
 	     <h1>Join us!</h1>
@@ -158,7 +157,8 @@ function send() {
 	</article>
 	<div class="signhalf bg"></div>
 </section>
-<br><br>
+</main>
+<br><br><br><br>
 <%@ include file="/WEB-INF/views/module/footer.jsp" %>
 </body>
 </html>

@@ -23,7 +23,6 @@ body {
 h1 {
   font-family: 'Arita-dotum-Medium';
 }
-
 p {
 	font-size: x-small;
 	text-align: center;
@@ -65,7 +64,6 @@ function emailCheck() {
 		}
 	});
 }
-
 function send() {
 	var username = document.getElementById("id_username");
 	if(username.value == "" || username.value == undefined){
@@ -115,6 +113,7 @@ function send() {
 <nav>
 	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
 </nav>
+<div class="cd-main-content sub-nav">
 <section class="signcontainer">
 	<article class="signhalf">
 	     <h1>Please Login<br>to Continue</h1>
@@ -158,8 +157,8 @@ function send() {
 	</article>
 	<div class="signhalf bg"></div>
 </section>
-
-<br><br>
+</div>
+<br><br><br><br>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  -->
 <script type="text/javascript">
@@ -177,7 +176,6 @@ $('.signtabs .tab').click(function(){
         $('.signup-cont').show();
     }
 });
-
 </script>
 <!-- 구글 api 사용을 위한 스크립트 -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>

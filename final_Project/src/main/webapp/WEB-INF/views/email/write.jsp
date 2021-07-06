@@ -12,9 +12,8 @@
 <h2>이메일 보내기</h2>
 <form method="post" action="${email_send}"> 
 <!-- post방식으로 자료를 컨트롤러로 보냄 -->
- 
-발신자 이름 : <input name="senderName"><br>
-발신자 이메일 : <input name="senderMail"><br>
+문의자 : <input name="senderName"><br>
+답변을 받으실 메일 주소 : <input name="senderMail"><br>
 내용 : <textarea rows="5" cols="80" name="message"></textarea>
 <br>
 <input type="submit" value="전송">

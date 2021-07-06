@@ -32,7 +32,11 @@ public class EmailServiceImpl implements EmailService {
         // 이메일 제목
         msg.setSubject("[문의 메일드립니다.]", "utf-8");
         // 이메일 본문
-        msg.setText(dto.getMessage(), "utf-8");
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("문의자 : " + dto.getSenderName() + "\r\n");
+        buffer.append("답변할 메일 주소 : " + dto.getSenderMail() + "\r\n");
+        buffer.append("내용 : " + dto.getMessage());
+        msg.setText(buffer.toString(), "utf-8");
 
         // 이메일 보내기
         mailSender.send(msg);

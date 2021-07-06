@@ -1,8 +1,6 @@
 @charset "UTF-8";
 /* -------------------------------- 
-
 Primary style
-
 -------------------------------- */
 *, *::after, *::before {
   box-sizing: border-box;
@@ -27,9 +25,7 @@ a {
 }
 
 /* -------------------------------- 
-
 1. Auto-Hiding Navigation - Simple
-
 -------------------------------- */
 .cd-auto-hide-header {
   position: fixed;
@@ -258,9 +254,7 @@ a {
 }
 
 /* -------------------------------- 
-
 2. Auto-Hiding Navigation - with Sub Nav
-
 -------------------------------- */
 
 
@@ -389,9 +383,7 @@ a {
 }
 
 /* -------------------------------- 
-
 3. Auto-Hiding Navigation - with Sub Nav + Hero Image
-
 -------------------------------- */
 .cd-secondary-nav.fixed {
   position: fixed;
@@ -416,9 +408,7 @@ a {
 }
 
 /* -------------------------------- 
-
 Main content
-
 -------------------------------- */
 .cd-main-content {
   padding: 60px 5% 2em;
@@ -426,7 +416,7 @@ Main content
 }
 .cd-main-content.sub-nav {
   /* to be used if there is sub nav */
-  padding-top: 110px;
+  padding-top: 80px;
 }
 .cd-main-content.sub-nav-hero {
   /* to be used if there is hero image + subnav */
@@ -435,26 +425,18 @@ Main content
 .cd-main-content.sub-nav-hero.secondary-nav-fixed {
   margin-top: 50px;
 }
-.cd-main-content p {
-  max-width: 1024px;
-  line-height: 1.6;
-  margin: 2em auto;
-  font-family: "David Libre", serif;
-  color: #a5a8a9;
-}
+
 @media only screen and (min-width: 1024px) {
   .cd-main-content {
     padding-top: 80px;
   }
   .cd-main-content.sub-nav {
-    padding-top: 150px;
+    padding-top: 100px;
   }
   .cd-main-content.sub-nav-hero.secondary-nav-fixed {
     margin-top: 70px;
   }
-  .cd-main-content p {
-    font-size: 2.4rem;
-  }
+
 }
 
 /*
@@ -478,9 +460,7 @@ Main content
 }
 
 /* -------------------------------- 
-
 Intro Section
-
 -------------------------------- */
 .cd-hero {
   /* vertically align its content */

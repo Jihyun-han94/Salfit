@@ -10,23 +10,25 @@
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <body>
-	<header>
-		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
-	</header>
-	<br><br><br><br><br><br><br><br><br>
+<nav>
+	<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
+</nav>
+<br><br><br><br><br><br><br><br>
+<main style="font-family: 'Kakao', 'sans-serif', 'normal';">
+<div style="margin: 0 auto;">
 	<div>
-		<div>
+		<div style="text-align: center;">
 			<c:url var="search" value="/admin/product" />
 			<form id="search_form" action="${search }" method="get">
 				<c:if test="${not empty param.ptype}" >
 					<input type="hidden" name="ptype" value="${param.ptype }">
 				</c:if>
-			    <select name="searchtype">
+			    <select name="searchtype" style="width:150px; height:50px; border-color: #e7e7e7; border-right: 5px solid #e7e7e7;">
 			        <option value="t">제품 명</option>
 			        <option value="c">제품 정보</option>
 			    </select>
-				<input type="text" name="search">
-				<button type="submit">검색</button>
+				<input type="text" name="search" style="width: 400px; height:50px; border:1px solid #e7e7e7; border-left: 5px solid #e7e7e7;">
+				<button type="submit" class="btn_confirm" style="height: 50px;">검색</button>
 			</form>
 		</div>
 	</div>
@@ -51,7 +53,7 @@
 			<div class="text-right">
 				<c:url var="add" value="/admin/product/add" />
 				<form action="${add}" method="get">
-					<button class="btn btncustom productAddBtn rounded-pill" type="submit">새 상품 등록
+					<button class="btn btncustom productAddBtn rounded-pill" type="submit" style="font-size:13px;">새 상품 등록
 					 <i class="bi bi-file-earmark-plus"></i></button>
 				</form>
 			</div>
@@ -59,7 +61,7 @@
 		<div class="productIndividual">
 			<c:if test="${empty requestScope.productlist}" >
 				<div>
-					<p>제품이 존재하지 않습니다.</p>
+					<p style="text-align:center;">제품이 존재하지 않습니다.</p>
 				</div>
 			</c:if>
 			<c:if test="${not empty requestScope.productlist}">
@@ -73,9 +75,7 @@
 								<input type="hidden" name="aid" value="${item.getAid()}" readonly>
 								<a href="${detail}?id=${item.getId()}">
 									<img class="rounded card-img-top productImg"
-										src="${pageContext.request.contextPath}${item.getUrl()}"
-										
-										>
+										src="${pageContext.request.contextPath}${item.getUrl()}">
 								</a>
 								<div class="card-body bg-transparent border-0">
 									<h5 class="card-title card-text">
@@ -156,6 +156,8 @@
 		</div>
 		</div>
 	</div>
+	</div>
+</main>
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script>
@@ -220,6 +222,5 @@ $(function(){
         document.getElementById("paymentitrform").submit();
    }  
 })
-
 </script>
 </html>

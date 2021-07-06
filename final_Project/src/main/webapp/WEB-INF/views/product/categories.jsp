@@ -10,8 +10,8 @@
 <c:url var="all" value="/product" />
 <div class="productContainer">
 	<c:if test="${sessionScope.account.getAtype() == 'a' }" >
-		<div class="text-right">
-			<button type="button" class="btn btncustom productAddBtn rounded-pill" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+		<div class="text-right" style="margin-bottom: 20px;">
+			<button type="button" style="font-size:13px;" class="btn btncustom productAddBtn rounded-pill" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
 			카테고리 수정
 			 <i class="bi bi-file-earmark-plus"></i></button>
 		</div>

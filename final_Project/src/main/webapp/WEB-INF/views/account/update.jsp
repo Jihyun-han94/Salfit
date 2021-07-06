@@ -51,8 +51,9 @@ function getAddressList(address) {
 	var content = document.createElement("span");
 	var delete_btn = document.createElement("button");
 	
-	lbl.innerText = "주소 목록 ";
-	no.innerText = " " + (document.getElementById("address_list").getElementsByTagName("span").length/3+1);
+	lbl.innerText = "[방금 추가 된 주소입니다.]";
+	//no.innerText = " " + (document.getElementById("address_list").getElementsByTagName("span").length/3+1);
+	
 	content.innerText = address;
 	delete_btn.innerText = "삭제";
 	delete_btn.type = "button";
@@ -83,10 +84,10 @@ function updateInfo() {
 	}
 	if(password == "") {
 		alert("패스워드를 입력하세요.")
-	} else if (${account.getPhone() } == password) {
+	}/*  else if (${account.getPhone() } == password) {
 		alert("새로운 패스워드로 변경하세요.")
 		return;
-	}
+	} */
 	if(phone == "") {
 		alert("전화번호를 입력하세요.");
 		return;
