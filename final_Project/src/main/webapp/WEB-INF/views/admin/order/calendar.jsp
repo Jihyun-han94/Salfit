@@ -16,7 +16,7 @@
 
 :root {
   --fc-border-color: #E4EFE7;
-  --fc-daygrid-event-dot-width: 5px;
+  --fc-daygrid-event-dot-width: 1px;
   --fc-today-bg-color: #EFF7E1;
   
   --fc-button-text-color: #3B8C42;
@@ -97,12 +97,11 @@
   <body id="calendarBody">
   <header>
  		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
-	</header><br><br><br><br><br><br>
+	</header><br><br><br><br><br><br><br><br>
 	<div class="bodyContainer">
-		<h1 class="text-center mb-5">배송 관리</h1><br><br><br>
-		  <div id='calendar-container'>
-		    <div id='calendar'></div>
-  		</div>
+		  <div id='calendar-container' class="col-10 m-auto">
+		    <div id='calendar' ></div>
+  		  </div>
     </div>
     
     	<!-- Modal -->

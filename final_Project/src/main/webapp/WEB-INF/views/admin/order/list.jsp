@@ -19,41 +19,46 @@
  		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
 	</header><br><br><br><br><br><br><br><br>
 	<div class="bodyContainer">
-		<h1 class="text-center mb-5">주문 관리</h1>
-		<c:if test="${cri.getId() != 0}">
-		<a href="${order}/list" class="btn btn-outline-secondary pull-right">전체 주문 보기</a>
+	<c:if test="${!empty param.ddate}">
+		<a href="${order}/calendar" class="pull-left mb-5 ml-5"><i class="bi bi-arrow-left-circle" style="font-size: 3rem; color: grey;"></i> 달력</a>
+	</c:if>
+		<h1 class="text-center mb-3">주문 내역</h1>
+		<p class="text-center mb-3"><c:if test="${!empty param.ddate}">&lt${param.ddate} 배송 상품 포함&gt</c:if> </p>
+		<c:if test="${!empty param.ddate}">
+		<a href="${order}/delivery?startdate=${param.ddate}" class="pull-right mb-5">${param.ddate} 배송 상품 목록 </a>
 		</c:if>
-		<section class="applicantTableSection mb-5">
+		<c:if test="${cri.getId() != 0}">
+		<a href="${order}/list" class="pull-right mb-5">전체 주문 보기</a>
+		</c:if>
+		<section class="mb-5 col-10 m-auto">
 			
-			<c:if test="${cri.getId() == 0}">
+			<c:if test="${cri.getId() == 0 && empty param.ddate}">
 			<div class="row">
-				<div class="col-md-10"></div>
-				<div class="col-md-1 mb-4"><sapn>페이지 당 주문건수: </sapn></div>	
-				<div class="col-md-1 text-right">
-					<select class="form-control" id="perPageSel">
-				  		<option value="10">10</option>
-				  		<option value="15">15</option>
-				  		<option value="20">20</option>
+				<div class="col-md-1 mb-5 ml-auto">	
+					<select class="form-control align-middle" id="perPageSel">
+				  		<option value="10">10개씩 표시</option>
+				  		<option value="15">15개씩 표시</option>
+				  		<option value="20">20개씩 표시</option>
 					</select>
 				</div>
 			</div>
 			</c:if>
 			
-			<table class="table text-center">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">주문번호</th>
-						<th scope="col">회원번호</th>
-						<th scope="col">수령자 이름</th>
-						<th scope="col">주소</th>
-						<th scope="col">결제수단 / 총금액</th>
-						<th scope="col">결제일자</th>
-						<th scope="col">배송시작일</th>
-						<th scope="col">배송완료일</th>
-						<th scope="col">연락하기</th>
-						<th scope="col">상태 체크</th>
-						<th scope="col">주문 처리 상태
-						<c:if test="${cri.getId() == 0}">
+			<table class="table text-center table-hover border-success align-middle">
+				<thead class="thead table-borderless">
+					<tr class="" style="height: 50px">
+						<th scope="col" class="align-middle">주문번호</th>
+						<th scope="col" class="align-middle">회원번호</th>
+						<th scope="col" class="align-middle">수령자 이름</th>
+						<th scope="col" class="align-middle">주소</th>
+						<th scope="col" class="align-middle">결제수단 / 총금액</th>
+						<th scope="col" class="align-middle">결제일자</th>
+						<th scope="col" class="align-middle">배송시작일</th>
+						<th scope="col" class="align-middle">배송완료일</th>
+						<th scope="col" class="align-middle">연락하기</th>
+						<th scope="col" class="align-middle">상태 체크</th>
+						<th scope="col" class="align-middle">
+						<c:if test="${cri.getId() == 0 && empty param.ddate}">
 						<form id="select_status_form" action="${order}/list" method="get">
 							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" >
 						        <option value="" ${dto.getStatus() == null ? "selected" : "" }>전체</option>
@@ -132,9 +137,7 @@
 									<i></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('checked')}" >
-									<%-- <a onclick="checked(this, ${order.getId()});">  --%>
 										<i class="bi bi-check text-danger" onclick="checked(this, ${order.getId()}, document.getElementById('status${order.getId()}'));"  style="font-size: 2rem;"></i>
-									<!-- </a> -->
 								</c:when>
 								<c:when test="${order.getStatus().equals('shipping')}" >
 										<i class="bi bi-truck text-warning" style="font-size: 2rem; padding-left:4rem;"></i>
@@ -169,13 +172,13 @@
 
 		</section>
 		
-		<c:if test="${cri.getId() == 0}">
+		<c:if test="${cri.getId() == 0 && empty param.ddate}">
 		<section class="mt-5">
 		<!-- 페이지 번호 -->
 			<nav aria-label="Page navigation">
 			  <ul class="pagination justify-content-center">
-			    <li id="page-prev" lass="page-item disabled">
-			      <a class="page-link" href="list${pageMaker.makeQuery(pageMaker.startPage-1)}" aria-label="Prev" tabindex="-1" aria-disabled="true">
+			    <li id="page-prev" class="page-item">
+			      <a class="page-link" href="list${pageMaker.makeQuery(pageMaker.startPage)}" aria-label="Prev" tabindex="-1" aria-disabled="true">
 			      <span aria-hidden="true">«</span>
 			      </a>
 			    </li>
@@ -263,22 +266,11 @@ $(document).ready(function() {
 	//perPageNum select 박스 설정
 	setPerPageNumSelect();
 	
-	//prev 버튼 활성화, 비활성화 처리
 	var canPrev = '${pageMaker.prev}';
-	if(canPrev !== 'true'){
-		$('#page-prev').addClass('disabled');
-	}
-	
-	//next 버튼 활성화, 비활성화 처리
 	var canNext = '${pageMaker.next}';
-	if(canNext !== 'true'){
-		$('#page-next').addClass('disabled');
-	}
 	
 	//현재 페이지 파란색으로 활성화
-	/* var thisPage = '${pageMaker.cri.page}'; */
 	var thisPage = '${param.page}';
-	//매번 refresh 되므로 다른 페이지 removeClass 할 필요는 없음->Ajax 이용시엔 해야함
 	$('#page'+thisPage).addClass('active');
 	if(${empty param.page}) {
 		$('#page1').addClass('active');
@@ -405,11 +397,6 @@ $(document).ready(function() {
 						
 						let NodeList = "";
 						let newNode = "<a id='qoo"+id+"' data-toggle='popover' data-trigger='hover' data-content='배송중~'></a>";
-						/* let newNode = "<div class='alert alert-warning alert-dismissible fade show' role='alert'>";
-						newNode += "<strong>배송중!</strong>";
-						newNode += "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
-						newNode += "<span aria-hidden='true'>&times;</span>";
-						newNode += "</button></div>"; */
 						NodeList += newNode;
 						$(NodeList).appendTo(e);
 						

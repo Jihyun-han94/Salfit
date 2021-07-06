@@ -7,6 +7,7 @@ public class Criteria {
 	private int page;
 	private int perPageNum;
 	private String status;
+	private String ddate;
 	
 	public Criteria() {
 		this.page = 1;
@@ -63,6 +64,14 @@ public class Criteria {
 		this.status = status;
 	}
 	
+	public String getDdate() {
+		return ddate;
+	}
+
+	public void setDdate(String ddate) {
+		this.ddate = ddate;
+	}
+
 	@Override
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", status=" + status + "]";

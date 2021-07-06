@@ -19,24 +19,23 @@
  		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
 	</header><br><br><br><br><br><br><br><br>
 	<div class="bodyContainer">
-		<h1 class="corpBoardTitle">배송 관리(당일)</h1>
-		<a href="${orderurl}/list" class="btn btn-outline-secondary pull-right">주문 관리</a>
-		<a href="${orderurl}/calendar" class="btn btn-outline-secondary pull-right">배송 관리(월별)</a>
-		<section class="applicantTableSection">
-			<h3>오늘 배송 상품</h3>
-		<%-- 	<p><a href="${orderurl}/list?ddate=${dto.getStartdate()}" >${dto.getStartdate()} : 날짜가 포함된 전체 주문 보기 </a></p> --%>
-			<table class="table text-center">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">주문번호</th>
-						<th scope="col">상품 명</th>
-						<th scope="col">수령자 이름</th>
-						<th scope="col">주소</th>
-						<th scope="col">배송시작일</th>
-						<th scope="col">배송완료일</th>
-						<th scope="col">연락하기</th>
-						<th scope="col">상태 체크</th>
-						<th scope="col">배송 상태
+	<a href="${orderurl}/calendar" class="pull-left mb-5 ml-5"><i class="bi bi-arrow-left-circle" style="font-size: 3rem; color: grey;"></i> 달력</a>
+		<h1 class="text-center mb-3">배송 목록</h1>
+		<p class="text-center mb-3">&lt${param.startdate} 배송 상품&gt</p>
+		<a href="${orderurl}/list?ddate=${dto.getStartdate()}" class="pull-right mb-5">${dto.getStartdate()} 날짜 포함 주문 전체 보기</a>
+		<section class="col-10 m-auto">
+			<table class="table text-center table-hover border-success align-middle">
+				<thead class="thead table-borderless">
+					<tr class="" style="height: 50px">
+						<th scope="col" class="align-middle">주문번호</th>
+						<th scope="col" class="align-middle">상품 명</th>
+						<th scope="col" class="align-middle">수령자 이름</th>
+						<th scope="col" class="align-middle">주소</th>
+						<th scope="col" class="align-middle">배송시작일</th>
+						<th scope="col" class="align-middle">배송완료일</th>
+						<th scope="col" class="align-middle">연락하기</th>
+						<th scope="col" class="align-middle">상태 체크</th>
+						<th scope="col" class="align-middle">
 						<form id="select_status_form" action="${orderurl}/delivery" method="get">
 							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" >
 						        <option value="" ${dto.getStatus() == null ? "selected" : "" }>전체</option>

@@ -16,10 +16,18 @@
 
 
 /* list.jsp */
-.pagination > li > a
+.pagination > li > .page-link
+{
+	background-color: white;
+    color: #3B8C42;
+    border: solid 1px #fff !Important; 
+    border-radius: 30px;
+}
+.pagination > li > a 
 {
     background-color: white;
-    color: #5A4181;
+    color: #3B8C42;
+    border-color: #fff;
 }
 
 .pagination > li > a:focus,
@@ -27,20 +35,22 @@
 .pagination > li > span:focus,
 .pagination > li > span:hover
 {
-    color: #5a5a5a;
+    color: rgb(67, 90, 58);
     background-color: #eee;
-    border-color: #ddd;
+    border-color: #fff;
+    border-radius: 30px;
 }
 
 .pagination > .active > a
 {
     color: white;
-    background-color: #5A4181 !Important;
-    border: solid 1px #5A4181 !Important;
+    background-color: #3B8C42 !Important;
+    border: solid 1px #fff !Important; 
+    border-radius: 30px;
 }
 
 .pagination > .active > a:hover
 {
-    background-color: #5A4181 !Important;
-    border: solid 1px #5A4181;
+    background-color: #3B8C42 !Important;
+    border: solid 1px #3B8C42; 
 }

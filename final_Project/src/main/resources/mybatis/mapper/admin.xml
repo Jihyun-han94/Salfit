@@ -237,6 +237,9 @@
 			 <if test='id != "" and id != null'>
 				 AND o.id = #{id}
 			 </if>
+			 <if test='ddate != "" and ddate != null'>
+				 AND o.ddate = #{ddate}
+			 </if>
 	         ORDER BY pdate DESC, o.id DESC
 	        ) 
 	  WHERE NUM BETWEEN (#{pageStart}+1) AND (#{pageStart} + #{perPageNum})
