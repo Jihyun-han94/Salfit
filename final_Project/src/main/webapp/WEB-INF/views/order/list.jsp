@@ -34,7 +34,31 @@
 		<td>${data.receiver }</td>
 		<td>${data.address }</td>
 		<td>${data.total }</td>
-		<td>${data.status }</td>
+		<c:choose>
+			<c:when  test ="${data.status eq 'bpayment' }">
+			<td>결제 하러가기</td> <!--결제 되게 a태그 넣기-->
+			</c:when>
+			<c:when test = "${data.status eq 'paid' }">
+			<td>결제 완료</td>
+			</c:when>
+			<c:when test = "${data.status eq 'paid' }">
+			<td>결제 완료</td>
+			</c:when>
+			<c:when test = "${data.status eq 'shipping' }">
+			<td>배송 중</td>
+			</c:when>
+			<c:when test = "${data.status eq 'delivered' }">
+			<td>배송 완료</td>
+			</c:when>
+			<c:when test = "${data.status eq 'holding' }">
+			<td>취소요청</td>
+			</c:when>
+			<c:when test = "${data.status eq 'canceled' }">
+			<td>취소 완료</td>
+			</c:when>
+			
+		</c:choose>
+		
 	</tr>
 </c:forEach>
 

@@ -39,7 +39,7 @@ function iamport(){
 	        msg += 'pay provider' + rsp.pg_provider;
 	        msg += 'pay method : ' + rsp.pay_method;
 	        
-	        window.location.href = '/salfit/pay?paymethod='+rsp.pay_method+"&id="+${ordered.id};
+	        window.location.href = '/salfit/pay/confirm?paymethod='+rsp.pay_method+"&id="+${ordered.id};
 	        
 	        //관리자 주문알림 
 	    } else {
