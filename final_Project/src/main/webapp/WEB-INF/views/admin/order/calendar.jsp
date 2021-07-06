@@ -11,6 +11,28 @@
 <jsp:include page="/WEB-INF/views/module/fullcalendar.jsp"></jsp:include>
 <c:url var="producturl" value="/admin/product/detail" />
 <c:url var="orderurl" value="/admin/order" />
+<style>
+
+
+:root {
+  --fc-border-color: #E4EFE7;
+  --fc-daygrid-event-dot-width: 5px;
+  --fc-today-bg-color: #EFF7E1;
+  
+  --fc-button-text-color: #3B8C42;
+  --fc-button-bg-color: #FFFF;
+  --fc-button-border-color: #FFFF;
+  --fc-button-hover-bg-color: #F6F6F6;
+  --fc-button-hover-border-color: #F6F6F6;
+  --fc-button-active-bg-color: #F6F6F6;
+  --fc-button-active-border-color: #F6F6F6;
+  
+  --fc-event-bg-color: #EFF7E1;
+  --fc-event-border-color: #E97878;
+  --fc-event-text-color: #FFFF;
+  --fc-event-selected-overlay-color: rgba(0, 0, 0, 0.25);
+}
+</style>
 <script>
    document.addEventListener('DOMContentLoaded', function() {
        var groupMap = [
@@ -19,7 +41,7 @@
      		        	"id" : "${order.getOid()}",
      		        	"start": "${order.getStartdate()}",
      		        	"end":"${order.getEnddate()}", 
-     		        	"color": '#ff9f89',
+     		        	"color": '#3B8C42',
      		        	"extendedProps" : {
      		        		"qty" : "${order.getQty()}",
      		        		"price" : "${order.getPrice()}",
@@ -43,6 +65,7 @@
        navLinks: true,
        dayMaxEvents: true, 
        initialView: 'dayGridMonth',
+       expandRows: true,
        selectable: true,
        selectHelper: true,
        /* select: function(start, end, startStr, jsEvent, view){
@@ -50,7 +73,7 @@
            window.location = root_url + info.dateStr;
        }, */
        dateClick: function(info) {
-    	    info.dayEl.style.backgroundColor = 'red';
+    	    info.dayEl.style.backgroundColor = '#CEE6B4';
          var root_url="${orderurl}/delivery?startdate=";
          window.location = root_url + info.dateStr;
     	  },
@@ -73,8 +96,8 @@
   </head>
   <body id="calendarBody">
   <header>
-<%-- 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
-	</header>
+ 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
+	</header><br><br><br><br><br><br><br><br>
 	<div class="bodyContainer">
 		<h1 class="corpBoardTitle">배송 관리</h1>
 		<div class="row">
@@ -84,8 +107,10 @@
 		        </div>
 		    </div>
 		</div>
-    <div id='calendar'></div>
-    
+		  <div id='calendar-container'>
+		    <div id='calendar'></div>
+  		</div>
+    </div>
     
     	<!-- Modal -->
 	<div class="modal" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -145,5 +170,6 @@
 	    </div>
 	  </div>
 	</div>
+	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
   </body>
 </html>

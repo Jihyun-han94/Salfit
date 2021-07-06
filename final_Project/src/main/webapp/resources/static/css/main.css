@@ -90,7 +90,7 @@ a {
   left: 5%;
 }
 .cd-auto-hide-header .logo a, .cd-auto-hide-header .logo img {
-  display: block;
+  display: inline-block;
 }
 
 .cd-auto-hide-header .nav-trigger {

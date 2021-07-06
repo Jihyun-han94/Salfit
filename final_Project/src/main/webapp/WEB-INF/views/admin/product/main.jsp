@@ -16,22 +16,6 @@
 <br><br><br><br><br><br><br><br>
 <main style="font-family: 'Kakao', 'sans-serif', 'normal';">
 <div style="margin: 0 auto;">
-	<div>
-		<div style="text-align: center;">
-			<c:url var="search" value="/admin/product" />
-			<form id="search_form" action="${search }" method="get">
-				<c:if test="${not empty param.ptype}" >
-					<input type="hidden" name="ptype" value="${param.ptype }">
-				</c:if>
-			    <select name="searchtype" style="width:150px; height:50px; border-color: #e7e7e7; border-right: 5px solid #e7e7e7;">
-			        <option value="t">제품 명</option>
-			        <option value="c">제품 정보</option>
-			    </select>
-				<input type="text" name="search" style="width: 400px; height:50px; border:1px solid #e7e7e7; border-left: 5px solid #e7e7e7;">
-				<button type="submit" class="btn_confirm" style="height: 50px;">검색</button>
-			</form>
-		</div>
-	</div>
 	<br><br><br><br><br><br><br><br><br>
 	<div id="addOK" class="alert alert-info collapse" role="alert">새 카테고리가 등록되었습니다.</div>	
 	<div id="addFail" class="alert alert-danger collapse" role="alert">카테고리 등록 실패</div>
