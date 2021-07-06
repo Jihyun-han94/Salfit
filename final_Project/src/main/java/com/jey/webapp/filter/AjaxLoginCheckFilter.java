@@ -46,8 +46,7 @@ public class AjaxLoginCheckFilter implements Filter {
 		JSONObject json = new JSONObject();
 		json.put("res", "no_login");
 		json.put("redirect",
-				((HttpServletRequest)request).getContextPath() + "/account/login");
-		
+				((HttpServletRequest)request).getContextPath() + "/account/login?next=" + req.getHeader("referer"));
 		if(session.getAttribute("logined") != null) {
 			if((boolean)session.getAttribute("logined")) {
 				if(session.getAttribute("account") != null && ((AccountDTO)session.getAttribute("account")).getAtype().equals("i")) {

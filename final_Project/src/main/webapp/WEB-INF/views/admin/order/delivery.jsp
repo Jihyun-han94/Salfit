@@ -16,8 +16,8 @@
 <body>
 
 	<header>
-<%-- 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
-	</header>
+ 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
+	</header><br><br><br><br><br><br><br><br>
 	<div class="bodyContainer">
 		<h1 class="corpBoardTitle">배송 관리(당일)</h1>
 		<a href="${orderurl}/list" class="btn btn-outline-secondary pull-right">주문 관리</a>

@@ -16,21 +16,19 @@
 <body>
 
 	<header>
-<%-- 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
-	</header>
+ 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
+	</header><br><br><br><br><br><br><br><br>
 	<div class="bodyContainer">
-		<h1 class="corpBoardTitle">주문 관리</h1>
+		<h1 class="text-center mb-5">주문 관리</h1>
 		<c:if test="${cri.getId() != 0}">
 		<a href="${order}/list" class="btn btn-outline-secondary pull-right">전체 주문 보기</a>
 		</c:if>
-		<a href="${order}/calendar" class="btn btn-outline-secondary pull-right">배송 관리</a>
-		<section class="applicantTableSection">
-			<h3>전체 주문</h3>
+		<section class="applicantTableSection mb-5">
 			
 			<c:if test="${cri.getId() == 0}">
 			<div class="row">
 				<div class="col-md-10"></div>
-				<div class="col-md-1"><sapn>페이지 당 주문건수: </sapn></div>	
+				<div class="col-md-1 mb-4"><sapn>페이지 당 주문건수: </sapn></div>	
 				<div class="col-md-1 text-right">
 					<select class="form-control" id="perPageSel">
 				  		<option value="10">10</option>
@@ -172,7 +170,7 @@
 		</section>
 		
 		<c:if test="${cri.getId() == 0}">
-		<section>
+		<section class="mt-5">
 		<!-- 페이지 번호 -->
 			<nav aria-label="Page navigation">
 			  <ul class="pagination justify-content-center">

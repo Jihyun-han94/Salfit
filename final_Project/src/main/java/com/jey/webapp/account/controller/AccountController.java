@@ -82,6 +82,11 @@ public class AccountController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String userLogin(Model m, @ModelAttribute AccountDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String forward = "";
+		String next = "/";
+		if(dto.getNext() != null && !dto.getNext().equals("null")) {
+			System.out.println(dto.getNext());
+			next = dto.getNext();
+		}
 		dto = account.login(dto);
 		if(dto != null && dto.getId() > 0) {
 			HttpSession session = request.getSession();
@@ -95,13 +100,15 @@ public class AccountController {
 			if(dto.getAtype().equals("a")) {
 				forward = "redirect:/admin/product";
 			} else {
-				String referer = (String) session.getAttribute("referer");
-				 if(referer==null || referer=="") {referer = "/";}
-				forward = "redirect:"+ referer;
+					forward = "redirect:"+next;
 			}
 		} else {
 			m.addAttribute("error", "아이디 또는 비밀번호를 다시 입력하세요.");
-			forward = "redirect:/account/login";
+			if(!next.equals("/")) {
+				forward = "redirect:/account/login?next=" + next; 
+			} else {
+				forward = "redirect:/account/login";
+			}
 		}
 		return forward;
 	}
@@ -111,11 +118,6 @@ public class AccountController {
 		// 로그인 첫 화면 요청 메소드
 		@RequestMapping(value = "/login", method = RequestMethod.GET)
 		public String googleLogin(HttpServletRequest request, Model m, HttpSession session) {
-			/* 이전페이지 기억 */
-			String referer = request.getHeader("referer");
-			session.setAttribute("referer", referer);
-			m.addAttribute("referer", referer);
-			
 			/* 구글code 발행 */
 			OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 			String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);

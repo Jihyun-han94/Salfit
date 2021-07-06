@@ -128,6 +128,9 @@ function send() {
 	                    <label for="id_email_lg">email</label>
 	                    <input type="password" name="password" id="id_password_lg" class="inpt" required="required" placeholder="Your password">
 	          			<label for="id_password_lg">password</label>
+	          			<c:if test="${not empty param.next}" >
+							<input type="hidden" name="next" value="${param.next}">
+						</c:if>
 	                    <div class="submit-wrap">
 	                        <input type="submit" value="Sign in" class="submit">
 	                       	<%-- <div class="g-signin2" data-onsuccess="onSignIn"><a href="${google_url}"></a></div> --%>

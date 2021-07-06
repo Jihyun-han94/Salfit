@@ -13,6 +13,7 @@ public class AccountDTO {
 	private Date logindate;
 	private Date expiredate;
 	private String profile_img;
+	private String next;
 	
 	public String getProfile_img() {
 		return profile_img;
@@ -75,6 +76,12 @@ public class AccountDTO {
 	}
 	public void setExpiredate(Date expiredate) {
 		this.expiredate = expiredate;
+	}
+	public String getNext() {
+		return next;
+	}
+	public void setNext(String next) {
+		this.next = next;
 	}
 	
 	
