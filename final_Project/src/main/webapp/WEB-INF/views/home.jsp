@@ -53,13 +53,13 @@
 		<c:if test="${not empty param.ptype}" >
 			<input type="hidden" name="ptype" value="${param.ptype }">
 		</c:if>
-	    <select name="searchtype" style="width:80px; color: #e1e1e1; font-size:13px; border-radius: 10px; height:30px; border-color: #ffff; text-align: center;">
+	    <select name="searchtype" style="width:80px; color: #D3D3D3; font-size:13px; border-radius: 10px; height:30px; border-color: #ffff; text-align: center;">
 	        <option>category</option>
 	        <option value="t">제품 명</option>
 	        <option value="c">제품 정보</option>
 	    </select>
-		<input type="text" name="search" style="width: 230px; height:23px; border-radius: 20px; border:1px solid #e1e1e1;">
-		<button type="submit" class="btn_search" style="margin-left:-12px;"><i class="bi bi-search" style="color: #e1e1e1; font-size:7px; margin-left:-12px;"></i></button>
+		<input type="text" name="search" style="width: 230px; height:23px; border-radius: 20px; border:1px solid #D3D3D3;">
+		<button type="submit" class="btn_search" style="margin-left:-12px;"><i class="bi bi-search" style="color: #D3D3D3; font-size:7px; margin-left:-12px;"></i></button>
 	</form>
 	</div>
 

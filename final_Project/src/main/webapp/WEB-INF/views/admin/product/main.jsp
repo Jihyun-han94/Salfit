@@ -34,14 +34,6 @@
 	
 	<div>
 		<div class="productContainer">
-			<div class="text-right">
-				<c:url var="add" value="/admin/product/add" />
-				<form action="${add}" method="get">
-					<button class="btn btncustom productAddBtn rounded-pill" type="submit" style="font-size:13px;">새 상품 등록
-					 <i class="bi bi-file-earmark-plus"></i></button>
-				</form>
-			</div>
-		
 		<div class="productIndividual">
 			<c:if test="${empty requestScope.productlist}" >
 				<div>
