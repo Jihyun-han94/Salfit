@@ -17,14 +17,14 @@ import com.jey.webapp.account.dto.AccountDTO;
 
 @WebFilter(
 		urlPatterns = {
-					 "/account/update"
-					, "/account/update_view"
-					, "/account/profile_update"
-					, "/account/signout"
-					, "/cart"
-					, "/order"
-					, "/order/detail"
-					, "/order/review/add"
+					 //"/account/update"
+					//, "/account/update_view"
+					//, "/account/profile_update"
+					//, "/account/signout"
+					//, "/cart"
+					//, "/order"
+					//, "/order/detail"
+					//, "/order/review/add"
 					}
 )
 public class LoginCheckFilter implements Filter {

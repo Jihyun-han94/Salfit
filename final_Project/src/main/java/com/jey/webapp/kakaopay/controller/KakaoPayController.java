@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.alert.AlertHandler;
 import com.jey.webapp.cart.dto.CartDTO;
 import com.jey.webapp.cart.service.CartService;
@@ -135,4 +138,30 @@ public class KakaoPayController {
 		
 		return forward;
 	}
+	
+	@RequestMapping(value="comfirm", method = RequestMethod.GET)
+	public ModelAndView confirmpayment(Model m, HttpServletRequest request,@ModelAttribute CartDTO dto) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+
+		HttpSession session = request.getSession();
+		//계정 정보 확인
+		AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
+		
+		System.out.println("orderid디버깅까꿍"+dto.getId());
+		String paymethod = request.getParameter("paymethod");
+		System.out.println(paymethod);
+		
+		//ordered table과 order_detail status 바꿔야됨!!
+		
+		
+		
+		// 결제 정보 Model m 으로 paystep2.jsp 에 전달하기!!
+		
+		
+		mv.setViewName("/kakaopay/paystep2");
+		
+		return mv;
+	}
+	
 }

@@ -141,9 +141,10 @@ $(".buy_btn1").click(function(){
 
 	 		$("input[class='chBox']:checked").each(function(){
 			buy_Arr.push($(this).attr("data-cartNum"));
+			
 			});
-		
 	 		
+	 		console.log(buy_Arr);
 	 		
 	 		const str = buy_Arr.join('&id=');
 	 		console.log(str);   
@@ -151,17 +152,24 @@ $(".buy_btn1").click(function(){
 	 		    console.log(element); 
 	 		});
 		
+	 		if(buy_Arr.length == 0){
+	 			alert("제품을 선택해주세요!");
+	 		}
+	
 
-		$.ajax({
-		url :  "${buy }",
-		type : "post",
-		datatype:"json",
-		data : { chbox : buy_Arr },
-		success : function(data){
-			location.href = "<%=request.getContextPath() %>/pay?id="+str;
-		}
-	  	});
-	  		} 
+			$.ajax({
+			url :  "${buy }",
+			type : "post",
+			datatype:"json",
+			data : { chbox : buy_Arr },
+			success : function(data){
+				location.href = "<%=request.getContextPath() %>/pay?id="+str;
+			}
+		  	});
+  		
+	 	}
+	 	
+	 	
 	 	});
 </script>
 </html>

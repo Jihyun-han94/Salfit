@@ -234,6 +234,7 @@
 					let newNode = "<div style='display: none;' class='card form-group col-sm-12 mx-auto p-0' onClick='window.open('"+data[i].id+"')>";
 					newNode += "<div class='card-body pt-3'><div class='row px-3 mb-2'>";
 					newNode += "<strong class='d-block text-gray-dark'>"+data[i].aname+"</strong>";
+					newNode += "<img src='/salfit/resources"+data[i].profile_img+"' width='30px'></strong>";
 					newNode += "<span class='text-muted ml-auto'>"+data[i].cdate2+"</span>";
 					newNode += "</div><span>"+data[i].contents+"</span></div></div>";
 					NodeList += newNode;

@@ -36,7 +36,10 @@ function iamport(){
 	        msg += '상점 거래ID : ' + rsp.merchant_uid;
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
-	        window.location.href = '/salfit/order/detail?id='+${ordered.id};
+	        msg += 'pay provider' + rsp.pg_provider;
+	        msg += 'pay method : ' + rsp.pay_method;
+	        
+	        window.location.href = '/salfit/pay/confirm?paymethod='+rsp.pay_method+"&id="+${ordered.id};
 	        
 	        //관리자 주문알림 
 	    } else {
