@@ -5,14 +5,14 @@
 <footer class="footer_total">
 <!-- SNS 정보  -->
 <div class="clearfix">
-	<a href="https://www.instagram.com/" style="padding: 5px 10px; display:inline-block; margin-top: 10px;" target="blank">
-		<img src="/salfit/resources/img/instagram.png" style="width:20px;"></a> 
-	<a href="https://pf.kakao.com/" style="padding: 5px 10px;display:inline-block;"target="blank">
-		<img src="/salfit/resources/img/kakao.png" style="width:20px;"></a>
-	<a href="https://blog.naver.com/" style="padding: 5px 10px;display:inline-block;" target="blank">
-		<img src="/salfit/resources/img/naver.png" style="width:20px;"></a>
-	<a href="https://www.youtube.com/" style="padding: 5px 10px;display:inline-block;" target="blank">
-		<img src="/salfit/resources/img/youtube.png" style="width:20px;"></a>
+	<a href="https://www.instagram.com/" style="padding: 5px 10px; display:inline-block; margin-top: 10px; font-size: 20px; color:#475c01;" target="blank">
+		<i class="bi bi-instagram"></i></a>
+	<a href="https://pf.kakao.com/" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;"target="blank">
+		<i class="bi bi-twitter"></i></a>
+	<a href="https://blog.naver.com/" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;" target="blank">
+		<i class="bi bi-facebook"></i></a>
+	<a href="https://www.youtube.com/" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;" target="blank">
+		<i class="bi bi-youtube"></i></a>
 </div>
 
 <!-- 쇼핑몰 운영자 정보  -->

@@ -96,8 +96,8 @@ INSERT INTO product_type VALUES(1, '채식주의자');
 INSERT INTO product_type VALUES(2, '육식러버');
 INSERT INTO product_type VALUES(3, '다이어터');
 
-SELECT * FROM product_type;
-
+SELECT * FROM product;
+select product_seq.nextval from dual;
 
 INSERT INTO product(id, ptype, aid, title, price, contents) VALUES(1, 1, 1, '체다치즈 샐러드', 3000, '맛있는 체다치즈가 듬뿍~!');
 INSERT INTO product(id, ptype, aid, title, price, contents) VALUES(2, 2, 1, '닭가슴살 샐러드', 3500, '다이어트 시 단백질 보충~!');

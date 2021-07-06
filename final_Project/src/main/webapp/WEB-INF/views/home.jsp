@@ -48,7 +48,20 @@
 </head>
 <body>
 <header class="cd-auto-hide-header">
-	<div class="logo"><a href="${main }"><img src="./resources/img/log.png" alt="Logo" height="80px"></a></div>
+	<div class="logo"><a href="${main }"><img src="./resources/img/log.png" alt="Logo" height="80px"></a>
+	<form id="search_form" action="${search }" method="get" style="padding-left: 50px; padding-top: 23px; float:right;">
+		<c:if test="${not empty param.ptype}" >
+			<input type="hidden" name="ptype" value="${param.ptype }">
+		</c:if>
+	    <select name="searchtype" style="width:80px; color: #D3D3D3; font-size:13px; border-radius: 10px; height:30px; border-color: #ffff; text-align: center;">
+	        <option>category</option>
+	        <option value="t">제품 명</option>
+	        <option value="c">제품 정보</option>
+	    </select>
+		<input type="text" name="search" style="width: 230px; height:23px; border-radius: 20px; border:1px solid #D3D3D3;">
+		<button type="submit" class="btn_search" style="margin-left:-12px;"><i class="bi bi-search" style="color: #D3D3D3; font-size:7px; margin-left:-12px;"></i></button>
+	</form>
+	</div>
 
 	<nav class="cd-primary-nav">
 		<a href="#cd-navigation" class="nav-trigger">
@@ -113,7 +126,9 @@
 		<li><a href="${notice }">Notice</a></li>
 		<li><a href="${product }">Menu</a></li>
 		<li><a href="${about }">About</a></li>
-		<li><a href="${email_write }">Contact Us</a></li>
+		<li><a href="mailto:salfit.contact@gmail.com?Subject=[문의 메일]%20&body=해당%20이메일%20주소로%20순차적으로%20답변을%20드립니다.
+		%0D%0A%0D%0A신청하는%20분%20이름:%0D%0A신청하는%20분%20연락처:%0D%0A문의사항:%0D%0A
+		(원활한%20상담을%20위해%20상품명,%20수량,%20희망시간%20등을%20적어주세요.)" target="_top">Contact Us</a></li>
 	</ul>
 </nav> <!-- .cd-secondary-nav -->
 <br><br><br>

@@ -17,7 +17,8 @@
 	<c:url var="admin_product" value="/admin/product" />	
 	<c:url var="admin_order" value="/admin/order/list" />	
 	<c:url var="admin_delivery" value="/admin/order/calendar" />	
-	<c:url var="admin_statistics" value="/admin/order/summary" />	
+	<c:url var="admin_statistics" value="/admin/order/summary" />
+	<c:url var="search" value="/admin/product" />
 	<style>	
 .new-order-counter {	
  position:absolute;	
@@ -69,8 +70,21 @@
 }	
 </style>	
 	<header class="cd-auto-hide-header">	
-		<div class="logo"><a href="${main }"><img src="/salfit/resources/img/log.png" alt="Logo" height="80px"></a></div>	
-		
+		<div class="logo">
+		<a href="${main }"><img src="/salfit/resources/img/log.png" alt="Logo" height="80px" style="float: left;"></a>
+				<form id="search_form" action="${search }" method="get" style="padding-left: 50px; padding-top: 25px; float:right;">
+		<c:if test="${not empty param.ptype}" >
+			<input type="hidden" name="ptype" value="${param.ptype }">
+		</c:if>
+	    <select name="searchtype" style="width:80px; color: #D3D3D3; font-size:13px; border-radius: 10px; height:30px; border-color: #ffff; text-align: center;">
+	        <option>category</option>
+	        <option value="t">제품 명</option>
+	        <option value="c">제품 정보</option>
+	    </select>
+		<input type="text" name="search" style="width: 230px; height:23px; border-radius: 20px; border:1px solid #D3D3D3;">
+		<button type="submit" class="btn_search" style="margin-left:-12px;"><i class="bi bi-search" style="color: #D3D3D3; font-size:7px; margin-left:-12px;"></i></button>
+	</form>
+			</div>
 		<nav class="cd-primary-nav">	
 			<a href="#cd-navigation" class="nav-trigger">	
 				<span>	

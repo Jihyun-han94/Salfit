@@ -13,3 +13,15 @@
   background-color: #bac600;
   color: #ffffff;
 }
+
+.btn_search {
+	border: none;
+	background-color: transparent;
+}
+
+.bi bi-search {
+	color:#e7e7e7;
+}
+.bi bi-search:hover {
+	color: black;
+}

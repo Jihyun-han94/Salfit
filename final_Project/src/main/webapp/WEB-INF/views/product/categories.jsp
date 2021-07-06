@@ -8,22 +8,24 @@
 <c:url var="addC" value="/admin/product/ptype/add" />
 <form action="${addC}" method="post" enctype="multipart/form-data">
 <c:url var="all" value="/product" />
-<div class="productContainer">
+<div class="productContainer" style="margin-top: -200px;">
 	<c:if test="${sessionScope.account.getAtype() == 'a' }" >
 		<div class="text-right" style="margin-bottom: 20px;">
 			<button type="button" style="font-size:13px;" class="btn btncustom productAddBtn rounded-pill" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-			카테고리 수정
+			카테고리 등록
 			 <i class="bi bi-file-earmark-plus"></i></button>
 		</div>
 	</c:if>
 	<div class="">
 		<c:if test="${empty requestScope.productlist}" >
 			<div class="productIndiv">
-				<div class="col mb-3 ">
+			<div class="row">
+					<div class="col-4 mb-4 "></div>
+				<div class="col-4 mb-4 ">
 					<div class="card border-0 text-center">
 						<a href="${all}">
 							<img class="rounded card-img-top productImg"
-								src="${pageContext.request.contextPath}/resources/upload/product/all.png">
+								src="${pageContext.request.contextPath}/resources/upload/product/no-category.png">
 						</a>
 						<div class="card-body bg-transparent border-0">
 							<h5 class="card-title card-text">
@@ -32,6 +34,8 @@
 						</div>
 					</div>
 				</div>
+					<div class="col-4 mb-4 "></div>
+					</div>
 			</div>
 		</c:if>
 		<c:if test="${not empty requestScope.productlist}">
@@ -82,30 +86,27 @@
 
 <!-- add category modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">상품 카테고리 추가</h5>
+  <div class="modal-dialog modal-dialog-centered modal-30size"  role="document">
+    <div class="modal-content row d-flex justify-content-center">
+      <div class="modal-header border-bottom-0">
+        <!-- <h5 class="modal-title" id="exampleModalLabel">상품 카테고리 추가</h5> -->
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">×</span>
         </button>
       </div>
+      <div class="d-flex flex-column text-center justify-content-center">
       <div class="modal-body">
-          <div class="form-group">
-            <label for="category-name" class="col-form-label">카테고리 명 :</label>
-            <input type="text" class="form-control" id="category-name" name="name">
-          </div>
-          <div class="form-group">
-            <label for="file" class="col-form-label">대표 이미지 :</label>
-            <input type="file" class="form-control" id="file" name="file" accept=“image/*” onchange="PreviewImage();">
+          <div class="form-group row d-flex justify-content-center">
+            <input type="text" style="width: 200px;" class="form-control" id="category-name" name="name" placeholder="카테고리 명">
+            <input type="file" class="form-control" style="width: 200px;" id="file" name="file" accept=“image/*” onchange="PreviewImage();">
           </div>
       </div>
-      <div class="modal-footer">
-      	<input type="submit" value="SUBMIT" class="btn"/>
-        <button type="submit"  class="btn btn-primary">등록</button>
+      <div class="modal-footer d-flex flex-column text-center justify-content-center">
+        <button type="submit"  class="btn_confirm">등록</button>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 </form>
