@@ -44,7 +44,7 @@
 		<td>
 		
 		<div class="checkBox">
-   		<input type="checkbox" name="chBox" class="chBox" data-cartNum="${data.id}" />
+   		<input type="checkbox" name="chBox" class="chBox" data-cartNum="${data.id}" checked="checked" />
   		
   		</div>
   		

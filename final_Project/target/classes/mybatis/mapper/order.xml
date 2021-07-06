@@ -5,7 +5,11 @@
 
 <mapper namespace="orderMapper">
 	<!-- 수정필요 -->
-
+	<insert id="insertReview" parameterType="review">
+    INSERT INTO review (id,pid,aid,contents,rating)
+           VALUES (review_seq.NEXTVAL,#{pid},#{aid},#{contents},#{rating})
+    </insert>
+    
 	<select id="selectall" parameterType="orderdetail" resultType="orderdetail">
 		SELECT  d.id
 	        	,d.oid 

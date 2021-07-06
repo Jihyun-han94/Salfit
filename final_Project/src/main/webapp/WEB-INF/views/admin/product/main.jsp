@@ -79,7 +79,7 @@
 								</a>
 								<div class="card-body bg-transparent border-0">
 									<h5 class="card-title card-text">
-										<a href="${detail}?id=${item.getId() }">${item.getPtype() }${item.getTitle() }</a>
+										<a href="${detail}?id=${item.getId() }">${item.getTitle() }</a>
 									</h5>
 									<c:if test="${item.getActive() == 'y'}" >
 										<i class="bi bi-eye-fill" style="color:red;">공개된 상품</i>

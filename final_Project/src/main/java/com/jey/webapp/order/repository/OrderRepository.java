@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
+import com.jey.webapp.order.dto.ReviewDTO;
 
 
 public interface OrderRepository {
@@ -14,7 +15,7 @@ public interface OrderRepository {
 	public boolean insert(OrderDTO dto)  throws Exception;
 	public boolean insert(OrderDetailDTO dto)  throws Exception;
 	public boolean update(OrderDetailDTO dto)  throws Exception;
-	public boolean insert(int id)  throws Exception;	// 리뷰추가용
+	public boolean insert(ReviewDTO dto)  throws Exception;	// 리뷰추가용
 	public List<OrderDetailDTO> selectall(OrderDetailDTO dto) throws Exception;
 	
 }

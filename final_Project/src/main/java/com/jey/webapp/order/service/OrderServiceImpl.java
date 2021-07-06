@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
+import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.order.repository.OrderRepository;
 
 
@@ -47,8 +48,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public boolean add(int id) throws Exception {
-		return false;
+	public boolean add(ReviewDTO dto) throws Exception {
+		boolean result = dao.insert(dto);
+		return result;
 	}
 
 	@Override

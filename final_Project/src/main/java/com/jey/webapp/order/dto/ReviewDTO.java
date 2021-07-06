@@ -11,6 +11,15 @@ public class ReviewDTO {
 	private int rating;
 	private Date cdate;
 	private String cdate2;
+	private String profile_img; //account 프로필 이미지
+	
+	
+	public String getProfile_img() {
+		return profile_img;
+	}
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
 
 	public int getId() {
 		return id;

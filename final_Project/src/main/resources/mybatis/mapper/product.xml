@@ -155,11 +155,10 @@
          , r.contents
          , r.rating
          , r.cdate 
+         , a.profile_img AS profile_img
       FROM review r 
       JOIN account a
         ON r.aid = a.id
-      <!-- JOIN account_img i
-        ON r.aid = i.aid -->
       WHERE r.pid = #{id}  
      ORDER BY r.cdate DESC
   </select>

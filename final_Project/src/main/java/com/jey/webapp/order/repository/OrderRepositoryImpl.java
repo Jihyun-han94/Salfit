@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
+import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductTypeDTO;
 
 
@@ -60,9 +61,13 @@ public class OrderRepositoryImpl implements OrderRepository {
 	}
 
 	@Override
-	public boolean insert(int id) throws Exception {
-		
-		return false;
+	public boolean insert(ReviewDTO dto) throws Exception {
+		boolean result = false;
+		int res = sqlSession.insert("orderMapper.insertReview",dto);
+		if(res ==1) {
+			result = true;
+		}
+		return result;
 	}
 
 	@Override

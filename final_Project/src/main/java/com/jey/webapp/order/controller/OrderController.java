@@ -13,16 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
+import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.order.service.OrderService;
 //머지용
 
 @Controller
 @RequestMapping(value = "/order")
 public class OrderController {
+	
 	@Autowired
 	private OrderService order;
 
@@ -97,11 +100,36 @@ public class OrderController {
 	public ModelAndView add(@ModelAttribute OrderDetailDTO dto) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		
 		mv.setViewName("order/addreview");
+		mv.addObject("orderdetail", dto);
 		
 		return mv;
 	}
+	@RequestMapping(value = "/review/add", method = RequestMethod.POST)
+	public ModelAndView add(@ModelAttribute ReviewDTO dto,HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		AccountDTO accountDTO = (AccountDTO) session.getAttribute("account");
+		int userid = accountDTO.getId();
+		dto.setAid(userid);
+		
+	    String [] rCheck = request.getParameterValues("rating");
+	    dto.setRating(rCheck.length);
+	    System.out.println("dto 점수 확인 : "+dto.getRating());
+		System.out.println("pid 확인"+dto.getPid());
+		System.out.println("contents 확인"+dto.getContents());
+		System.out.println("aid 확인"+dto.getAid());
+		
+		boolean result = order.add(dto);
+		System.out.println("add 결과 :"+result);
 	
+		mv.setViewName("redirect:/prduct/detail?id="+dto.getPid());
+
+		
+		return mv;
+	}
 	
 	
 }

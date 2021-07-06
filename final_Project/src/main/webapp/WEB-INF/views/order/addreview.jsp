@@ -42,7 +42,7 @@
     z-index: 10;
     width: 60px;
     height: 60px;
-    background-image: url('./img/starrate.png');
+    background-image: url('/salfit/resources/img/starrate.png');
     background-repeat: no-repeat;
     background-size: 60px 60px;
     cursor: pointer;
@@ -63,22 +63,6 @@
     box-sizing: border-box;
     border: 1px solid #e0e0e0;
 }
-.rating .rate_radio + label {
-    position: relative;
-    display: inline-block;
-    margin-left: -4px;
-    z-index: 10;
-    width: 60px;
-    height: 60px;
-    background-image: url('/salfit/resources/img/starrate.png');
-    background-repeat: no-repeat;
-    background-size: 60px 60px;
-    cursor: pointer;
-    background-color: #f0f0f0;
-}
-.rating .rate_radio:checked + label {
-    background-color: #ff8;
-}
 </style>
 <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 
@@ -93,10 +77,12 @@ Rating.prototype.setRate = function(newrate){
     items.forEach(function(item, idx){
         if(idx < newrate){
             item.checked = true;
+       
         }else{
             item.checked = false;
         }
     });
+        
 }
 let rating = new Rating();//별점 인스턴스 생성
 document.addEventListener('DOMContentLoaded', function(){
@@ -105,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function(){
         let elem = e.target;
         if(elem.classList.contains('rate_radio')){
             rating.setRate(parseInt(elem.value));
+            
         }
     })
 });
@@ -121,8 +108,8 @@ document.addEventListener('DOMContentLoaded', function(){
 <br>
 
 <div class="wrap">
-
-    <form name="reviewform" class="reviewform" method="post" action="/save">
+	<c:url var="review" value="/order/review/add" />
+    <form name="reviewform" class="reviewform" method="post" action="${review }">
         <input type="hidden" name="rate" id="rate" value="0"/>
         <h1 class="title_star">상품은 만족하셨나요?</h1>
  
@@ -139,15 +126,16 @@ document.addEventListener('DOMContentLoaded', function(){
                 <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
                 <label for="rating4"></label>
                 <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
-                <label for="rating5"></label>
+                <label for="rating5" ></label>
             </div>
         </div>
         <div class="review_contents">
             <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-            <textarea rows="10" class="review_textarea"></textarea>
-        </div>   
+            <textarea rows="10" class="review_textarea" name="contents"></textarea>
+        </div>
+        	<input value=${orderdetail.getPid() } name="pid" hidden>   
         <div class="cmd">
-            <input type="button" name="save" id="save" value="등록">
+            <button type="submit" name="save" id="save" >등록</button>
         </div>
     </form>
 </div>
