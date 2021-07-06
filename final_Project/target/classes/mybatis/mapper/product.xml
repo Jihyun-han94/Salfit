@@ -155,7 +155,6 @@
          , r.contents
          , r.rating
          , r.cdate 
-         , a.profile_img AS profile_img
       FROM review r 
       JOIN account a
         ON r.aid = a.id
@@ -172,6 +171,7 @@
          , r.contents
          , r.rating
          , r.cdate 
+         , a.profile_img AS profile_img
       FROM review r 
       JOIN account a
         ON r.aid = a.id

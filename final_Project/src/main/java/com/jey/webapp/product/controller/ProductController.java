@@ -133,6 +133,7 @@ public class ProductController {
 		if(item.getId() != -1 && item.getActive().equals("y")) {
 			List<ProductRecommendDTO> recommend = product.findSimilarList(item);
 			List<ReviewDTO> reviews = product.findReviewList(item);
+			
 			if(account == null) {
 				mv.addObject("logined", false);	
 			} else {

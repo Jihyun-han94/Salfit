@@ -20,6 +20,9 @@ public class ProductDTO {
 	private Date cdate;
 	private Date udate;
 	private String active;
+	
+	
+	
 	public int getId() {
 		return id;
 	}
