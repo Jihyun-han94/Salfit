@@ -33,7 +33,8 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public boolean update(OrderDetailDTO dto) throws Exception {
-		return false;
+		
+		return dao.update(dto);
 	}
 
 	@Override
@@ -63,6 +64,18 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderDetailDTO> selectall(OrderDetailDTO dto) throws Exception {
 		List<OrderDetailDTO> list = dao.selectall(dto);
 		return list;
+	}
+
+	@Override
+	public boolean updatestatus(OrderDTO dto) throws Exception {
+		
+		return dao.updatestatus(dto);
+	}
+
+	@Override
+	public OrderDTO findorder(OrderDTO dto) throws Exception {
+		dto = dao.findorder(dto);
+		return dto;
 	}
 
 

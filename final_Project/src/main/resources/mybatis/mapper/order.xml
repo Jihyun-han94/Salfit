@@ -4,9 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orderMapper">
-	<!-- 수정필요 -->
+	<select id ="findorder" parameterType="order" resultType="order">
+		SELECT * 
+		FROM ordered
+		WHERE id=#{id}
+	</select>
+	
+	<update id = "update" parameterType = "orderdetail">
+		UPDATE order_detail
+		SET status = 'paid'
+		WHERE oid = #{oid} 
+	</update>
+	
+	<update id="updatestatus" parameterType="order">
+		UPDATE ordered
+		SET status = 'paid'
+		WHERE id = #{id} AND aid=#{aid}
+	</update>
+	
 	<insert id="insertReview" parameterType="review">
-    INSERT INTO review (id,pid,aid,contents,rating)
+    	INSERT INTO review (id,pid,aid,contents,rating)
            VALUES (review_seq.NEXTVAL,#{pid},#{aid},#{contents},#{rating})
     </insert>
     
@@ -53,4 +70,5 @@
 		INSERT INTO ORDER_DETAIL (id,oid,pid,qty,price,startdate,enddate,days)
 		VALUES (order_detail_seq.NEXTVAL, #{oid},#{pid},#{qty},#{price},#{startdate},#{enddate},#{days})
 	</insert>
+	
 </mapper>
