@@ -13,7 +13,6 @@
 <c:url var="orderurl" value="/admin/order" />
 <style>
 
-
 :root {
   --fc-border-color: #E4EFE7;
   --fc-daygrid-event-dot-width: 1px;
@@ -27,10 +26,12 @@
   --fc-button-active-bg-color: #F6F6F6;
   --fc-button-active-border-color: #F6F6F6;
   
+  --fc-bg-event-color: rgb(143, 223, 130);
+  --fc-bg-event-opacity: 0.1;
   --fc-event-bg-color: #EFF7E1;
   --fc-event-border-color: #E97878;
   --fc-event-text-color: #FFFF;
-  --fc-event-selected-overlay-color: rgba(0, 0, 0, 0.25);
+  --fc-event-selected-overlay-color: #CEE6B4;
 }
 </style>
 <script>
@@ -58,7 +59,7 @@
  	var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
     	headerToolbar: {
-            left: 'prevYear,prev,next,nextYear today',
+            left: 'prevYear,prev,next,nextYear,today',
             center: 'title',
             right: 'dayGridMonth,dayGridWeek,dayGridDay,listMonth'
           },
