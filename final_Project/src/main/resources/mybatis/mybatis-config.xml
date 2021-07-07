@@ -16,6 +16,7 @@
 		<typeAlias alias="order" type="com.jey.webapp.order.dto.OrderDTO"  />
 		<typeAlias alias="adminorder" type="com.jey.webapp.admin.dto.AdminOrderDTO"  />
 		<typeAlias alias="adminorderdetail" type="com.jey.webapp.admin.dto.AdminOrderDetailDTO"  />
+		<typeAlias alias="summary" type="com.jey.webapp.admin.dto.SummaryDTO"  />
 		<typeAlias alias="review" type="com.jey.webapp.order.dto.ReviewDTO"  />
 		<typeAlias alias="reviewsearch" type="com.jey.webapp.product.dto.ReviewSearchDTO"  />
 		<typeAlias alias="like" type="com.jey.webapp.product.dto.LikeDTO"  />

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.jey.webapp.admin.dto.AdminOrderDTO;
 import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
+import com.jey.webapp.admin.dto.SummaryDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 
 
@@ -104,6 +105,16 @@ public class AdminRepositoryImpl implements AdminRepository {
 	@Override
 	public List<ProductDTO> topselling(ProductDTO dto) {
 		return sqlSession.selectList("adminMapper.top5products", dto);
+	}
+
+	@Override
+	public int numOfProducts(SummaryDTO summary) {
+		return sqlSession.selectOne("adminMapper.numOfProducts",summary);
+	}
+
+	@Override
+	public SummaryDTO monthlyOrderSum(SummaryDTO summary) {
+		return sqlSession.selectOne("adminMapper.monthlySum",summary);
 	}
 
 

@@ -5,6 +5,7 @@ import java.util.*;
 import com.jey.webapp.admin.dto.AdminOrderDTO;
 import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
+import com.jey.webapp.admin.dto.SummaryDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 
 
@@ -24,4 +25,6 @@ public interface AdminService {
 	public List<AdminOrderDTO> listPage(Criteria cri) throws Exception;
 	public int getTotalCount(Criteria cri) throws Exception;
 	public List<ProductDTO> topselling(ProductDTO dto);
+	public int numOfProducts(SummaryDTO summary);
+	public SummaryDTO monthlyOrderSum(SummaryDTO summary);
 }

@@ -117,42 +117,42 @@
 	      </div>
 	      <div class="modal-body">
 	      	 <div class="row">
-	      	 	  <div class="col-4 col-sm-3">
+	      	 	  <div class="col-4 col-sm-4">
 			        [상품명  / 주문 수량]
 			      </div>
-			      <div class="col-8 col-sm-9">
+			      <div class="col-8 col-sm-8">
 			        <span id="titleinmodal"></span>
 			      </div>
 			 </div><hr>
 			 <div class="row">
-	      	 	  <div class="col-4 col-sm-3">
+	      	 	  <div class="col-4 col-sm-4">
 			        [배송 주소]         
 			      </div>
-			      <div class="col-8 col-sm-9">
+			      <div class="col-8 col-sm-8">
 			        <span id="addressinmodal"></span>
 			      </div>
 			 </div><hr>
 			 <div class="row">
-	      	 	  <div class="col-4 col-sm-3">
+	      	 	  <div class="col-4 col-sm-4">
 			        [받는 사람]         
 			      </div>
-			      <div class="col-8 col-sm-9">
+			      <div class="col-8 col-sm-8">
 			        <span id="receiverinmodal"></span>
 			      </div>
 			 </div><hr>
 			 <div class="row">
-	      	 	  <div class="col-4 col-sm-3">
+	      	 	  <div class="col-4 col-sm-4">
 			        [전화번호]         
 			      </div>
-			      <div class="col-8 col-sm-9">
+			      <div class="col-8 col-sm-8">
 			        <span id="phoneinmodal"></span>
 			      </div>
 			 </div><hr>
 			  <div class="row">
-	      	 	  <div class="col-4 col-sm-3">
+	      	 	  <div class="col-4 col-sm-4">
 			        [구독 기간(일수)]  
 			      </div>
-			      <div class="col-8 col-sm-9">
+			      <div class="col-8 col-sm-8">
 			        <span id="periodinmodal"></span>
 			      </div>
 			 </div>

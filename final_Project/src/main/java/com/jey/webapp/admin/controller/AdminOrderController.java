@@ -1,8 +1,11 @@
 package com.jey.webapp.admin.controller;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +25,7 @@ import com.jey.webapp.admin.dto.AdminOrderDTO;
 import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
 import com.jey.webapp.admin.dto.PageMaker;
+import com.jey.webapp.admin.dto.SummaryDTO;
 import com.jey.webapp.admin.service.AdminService;
 import com.jey.webapp.product.dto.ProductDTO;
 
@@ -156,7 +160,45 @@ public class AdminOrderController {
 	
 	/* 통계 */
 	@RequestMapping(value = "/summary", method = RequestMethod.GET)
-	public String summary(Model m,@ModelAttribute ProductDTO dto) throws Exception{
+	public String summary(Model m,@ModelAttribute ProductDTO dto, SummaryDTO summary) throws Exception{
+		
+//		한달동안 매출액, 주문건수, 총 상품 갯수 
+		
+		Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+        
+        int start; int end; int dates;
+        List<Integer> numOfProducts = new ArrayList<>();
+        List<Integer> numOforders = new ArrayList<>();
+        List<Integer> revenue = new ArrayList<>();
+        int numOfdeliveryToday = 0;
+        String searchdate = "";
+        
+        for(int month=0; month < 12; month++,numOfdeliveryToday=0) {
+        	calendar.set(year, month, 1);
+        	start = calendar.getActualMinimum(Calendar.DAY_OF_MONTH);
+        	end = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        	dates = end - start + 1;
+        	
+        	summary.setMonth(dateFormat.format(calendar.getTime()));
+        	SummaryDTO monthlyOrderSum = order.monthlyOrderSum(summary);
+        	numOforders.add(monthlyOrderSum.getNumOfOrders());
+        	revenue.add(monthlyOrderSum.getRevenue());
+	        
+        	for(int i = 0; i < dates; i++,start++) {
+	        	calendar.set(year, month, start);
+	        	summary.setMonth(dateFormat.format(calendar.getTime()));
+	        	numOfdeliveryToday += order.numOfProducts(summary);
+	        }
+	        numOfProducts.add(numOfdeliveryToday);
+        }
+        m.addAttribute("numOfProducts",numOfProducts);
+        m.addAttribute("numOforders",numOforders);
+        m.addAttribute("revenue",revenue);
+		
+		
+//		인기상품
 		List<ProductDTO> top5list = null;
 		List<String> top5 = new ArrayList<String>();
 		List<Integer> top5bcnt = new ArrayList<Integer>();
@@ -171,6 +213,10 @@ public class AdminOrderController {
 		m.addAttribute("top5list",top5list);
 		m.addAttribute("top5",top5);
 		m.addAttribute("top5bcnt",top5bcnt);
+		
+		
+		
+		
 		return "admin/order/chart";
 	}
 	

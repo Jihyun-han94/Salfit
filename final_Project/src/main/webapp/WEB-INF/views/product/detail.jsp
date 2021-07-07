@@ -14,6 +14,9 @@
 <c:url var="cart" value="/cart" />
 <c:url var="ajax_cart" value="/ajax/cart" />
 </head>
+<style>
+
+</style>
 <body>
 	<header>
 		<%-- <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
@@ -32,7 +35,7 @@
             </div>
          </div>
          <div class="col-4">
- 			<img class="w-100 rounded card-img-top productImg" width="500px" height="400px"
+ 			<img class=" rounded" width="500px" height="400px"
 					src="${pageContext.request.contextPath}${item.getUrl()}">       
          </div>
          <!-- 오른쪽 : 수량 & 장바구니에 담기  -->

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.jey.webapp.admin.dto.AdminOrderDTO;
 import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
+import com.jey.webapp.admin.dto.SummaryDTO;
 import com.jey.webapp.admin.repository.AdminRepository;
 import com.jey.webapp.product.dto.ProductDTO;
 
@@ -84,6 +85,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<ProductDTO> topselling(ProductDTO dto) {
 		return dao.topselling(dto);
+	}
+
+	@Override
+	public int numOfProducts(SummaryDTO summary) {
+		return dao.numOfProducts(summary);
+	}
+
+	@Override
+	public SummaryDTO monthlyOrderSum(SummaryDTO summary) {
+		return dao.monthlyOrderSum(summary);
 	}
 
 

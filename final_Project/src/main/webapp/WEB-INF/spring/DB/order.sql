@@ -14,9 +14,8 @@ CREATE TABLE ordered(
         pdate NVARCHAR2(256) DEFAULT to_char(sysdate,'yyyy-mm-dd'),
         ddate NVARCHAR2(256),
         edate NVARCHAR2(256),
-        status NVARCHAR2(32) DEFAULT 'paid'
+        status NVARCHAR2(32) DEFAULT 'unpaid'
 );
-
 
 ALTER TABLE ordered ADD CONSTRAINT ordered_id_PK PRIMARY KEY(id);
 ALTER TABLE ordered ADD CONSTRAINT ordered_aid_FK FOREIGN KEY(aid) REFERENCES account(id) ON DELETE CASCADE;
@@ -128,4 +127,45 @@ SELECT *
 	        FROM ORDERED
 	        ORDER BY ROWNUM DESC
 		)
-		WHERE ROWNUM = 1 AND pdate = to_char(sysdate, 'yyyy-mm-dd')
+		WHERE ROWNUM = 1 AND pdate = to_char(sysdate, 'yyyy-mm-dd');
+		
+		
+
+
+-- 이번달 주문건수, 매출액 (pdate 기준)
+SELECT EXTRACT(month FROM TO_DATE(pdate, 'YYYY-MM-DD')) "Month",
+  COUNT(id) "No. of Orders",
+  NVL(sum(total), 0) "total"
+  FROM ordered
+  GROUP BY EXTRACT(month FROM TO_DATE(pdate, 'YYYY-MM-DD'))
+  ORDER BY "Month";
+  
+  
+  SELECT 
+  COUNT(id) "No. of Orders",
+  NVL(sum(total), 0)  "total"
+  FROM ordered
+  WHERE EXTRACT(month FROM TO_DATE(pdate, 'YYYY-MM-DD')) = EXTRACT(month FROM TO_DATE('2021-07-01', 'YYYY-MM-DD'))
+  AND status != 'unpaid';
+  
+  
+-- 총 판매 갯수 (startdate기준)
+  SELECT EXTRACT(month FROM TO_DATE(startdate, 'YYYY-MM-DD')) "Month",
+  COUNT(startdate) "No. of Orders",
+  sum(days*qty*price) "total",
+  sum(qty*days) "qty"
+  FROM order_detail
+  GROUP BY EXTRACT(month FROM TO_DATE(startdate, 'YYYY-MM-DD'))
+  ORDER BY "Month";
+  
+  
+-- 당일 배송 상품 갯수
+SELECT COUNT(*) AS numOfProducts,
+	NVL(sum(qty), 0) AS total 
+FROM order_detail
+   WHERE 1=1
+	 AND TO_DATE('2021-01-01', 'YYYY-MM-DD') BETWEEN TO_DATE(startdate, 'YYYY-MM-DD') AND (TO_DATE(enddate, 'YYYY-MM-DD'))
+  AND status != 'unpaid';
+  
+  
+  

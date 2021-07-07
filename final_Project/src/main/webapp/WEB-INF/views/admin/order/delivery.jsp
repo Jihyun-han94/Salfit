@@ -29,6 +29,7 @@
 					<tr class="" style="height: 50px">
 						<th scope="col" class="align-middle">주문번호</th>
 						<th scope="col" class="align-middle">상품 명</th>
+						<th scope="col" class="align-middle">주문 개수</th>
 						<th scope="col" class="align-middle">수령자 이름</th>
 						<th scope="col" class="align-middle">주소</th>
 						<th scope="col" class="align-middle">배송시작일</th>
@@ -61,6 +62,7 @@
 						<tr scope="row">
 						<th><a href="${orderurl}/list?id=${order.getOid()}" >${order.getOid()}</a></th>
 						<td>${order.getPname()}</td>
+						<td>${order.getQty()}</td>
 						<td>${order.getReceiver()}</td>
 						<td class="text-truncate" style="max-width: 100px;">
 							<a tabindex="0" role="button" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="top" title="상세 주소" data-content="${order.getAddress()}">${order.getAddress()}</a>
@@ -170,11 +172,6 @@ $(document).ready(function() {
 						
 						let NodeList = "";
 						let newNode = "<a id='qoo"+id+"' data-toggle='popover' data-trigger='hover' data-content='배송중~'></a>";
-						/* let newNode = "<div class='alert alert-warning alert-dismissible fade show' role='alert'>";
-						newNode += "<strong>배송중!</strong>";
-						newNode += "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
-						newNode += "<span aria-hidden='true'>&times;</span>";
-						newNode += "</button></div>"; */
 						NodeList += newNode;
 						$(NodeList).appendTo(e);
 						

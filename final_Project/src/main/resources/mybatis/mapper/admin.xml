@@ -184,6 +184,7 @@
 		ORDER BY o.id DESC
 	</select>
 	
+	<!-- 당일배송 상품검색 -->
 	<select id="deliverdetaillistsel" parameterType="adminorder" resultType="adminorderdetail">
 	SELECT d.id,
 			d.oid,
@@ -252,5 +253,25 @@
 			AND o.status = #{status}
 		</if>
 		 AND o.status != 'unpaid'
+	</select>
+	
+	
+	
+	
+	<!-- summary -->
+	<select id="numOfProducts" resultType="_int">
+		SELECT NVL(sum(qty), 0) AS numOfProducts
+		FROM order_detail
+	   WHERE 1=1
+		 AND TO_DATE(#{month}, 'YYYY-MM-DD') BETWEEN TO_DATE(startdate, 'YYYY-MM-DD') AND (TO_DATE(enddate, 'YYYY-MM-DD'))
+	  	 AND status != 'unpaid'
+	</select>
+	
+	<select id="monthlySum" resultType="summary">
+	  SELECT COUNT(id) "numOfOrders",
+	  		 NVL(sum(total), 0)  "revenue"
+	  	FROM ordered
+	   WHERE EXTRACT(month FROM TO_DATE(pdate, 'YYYY-MM-DD')) = EXTRACT(month FROM TO_DATE(#{month}, 'YYYY-MM-DD'))
+	  	 AND status != 'unpaid'
 	</select>
 </mapper>

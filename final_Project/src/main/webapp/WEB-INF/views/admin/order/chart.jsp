@@ -15,31 +15,90 @@
 <canvas id="myChart" width="400" height="400"></canvas>
 <script>
 var ctx = document.getElementById('myChart').getContext('2d');
-const labels = [];
-	for(var i = 1; i <= 12 ; i++){
-		labels.push(i);
-	};
-
+const labels = ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'];
+var revenue = new Array(12).fill(0);	var numOfOrders = new Array(12).fill(0); var numOfProducts = new Array(12).fill(0);
+alert(revenue);
+	<c:forEach items="${revenue}" var="rev" varStatus="loop">
+	    revenue.fill("${rev}", "${loop.index}", "${loop.count}");
+	</c:forEach>
+    <c:forEach items="${numOforders}" var="noo" varStatus="loop">
+    	numOfOrders.fill("${noo}", "${loop.index}", "${loop.count}");
+	</c:forEach>
+	    <c:forEach items="${numOfProducts}" var="nop" varStatus="loop">
+	    numOfProducts.fill("${nop}", "${loop.index}", "${loop.count}");
+	</c:forEach>
+	
 var myChart = new Chart(ctx, {
-    type: 'bar',
     data: {
         labels: labels,
         datasets: [{
-            label: '# 매출액',
-            data: [12, 19, 3, 5, 2, 3,12, 19, 3, 5, 2, 3],
+		    type: 'bar',
+            label: '# 총 매출액',
+            data: revenue,
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)'
             ],
             borderColor: [
-                 'rgb(54, 162, 235)'
+                 'rgb(54, 162, 235, 0.2)'
             ],
-            borderWidth: 1
-        }]
+            borderWidth: 1,
+            yAxisID: 'left-y-axis'
+        }, {
+        	type: 'line',
+            label: '# 총 주문 건수',
+            data: numOfOrders,
+            backgroundColor: [
+                'rgba(54, 162, 265, 1)'
+            ],
+            borderColor: [
+                 'rgb(54, 162, 235, 1)'
+            ],
+            borderWidth: 1,
+            yAxisID: 'right-y-axis'
+        }, {
+        	type: 'line',
+            label: '# 상품 총 배송 개수',
+            data: numOfProducts,
+            backgroundColor: [
+                '#E98580'
+            ],
+            borderColor: [
+                 '#E98580'
+            ],
+            borderWidth: 1,
+            yAxisID: 'right-y-axis'
+        } ]
     },
     options: {
         scales: {
-            y: {
-                beginAtZero: true
+        	x: {
+                grid: {
+					color: 'white'                  
+                },
+                ticks: {
+                  color: 'blue',
+                }
+              },
+            'left-y-axis': {
+                type: 'linear',
+                position: 'left',
+                beginAtZero: true,
+                grid: {
+					color: 'white'                  
+                },
+                ticks: {
+                    callback: function(value, index, values) {
+                        return '₩ ' + value;
+                    }
+                }
+            },
+            'right-y-axis': {
+                type: 'linear',
+                position: 'right',
+                beginAtZero: true,
+                grid: {
+					color: '#EFEFEF'                  
+                }
             }
         }
     }
