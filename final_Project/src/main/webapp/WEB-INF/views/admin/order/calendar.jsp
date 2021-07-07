@@ -8,6 +8,8 @@
 <head>
 <meta charset='utf-8' />
 <title>관리자 주문 관리</title>
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" />
 <jsp:include page="/WEB-INF/views/module/fullcalendar.jsp"></jsp:include>
 <c:url var="producturl" value="/admin/product/detail" />
 <c:url var="orderurl" value="/admin/order" />
@@ -95,10 +97,11 @@
    
  </script>
   </head>
-  <body id="calendarBody">
-  <header>
+  <body id="calendarBody" style="font-family: 'Kakao', 'sans-serif', 'normal';">
+  <header style="padding-bottom: 200px;">
  		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
-	</header><br><br><br><br><br><br><br><br>
+	</header>
+	<h1 style="text-align:center; padding-bottom:30px; color:#e1e1e1;">Delivery Schedule <span><i class="bi bi-calendar-check"></i></span></h1>
 	<div class="bodyContainer">
 		  <div id='calendar-container' class="col-10 m-auto">
 		    <div id='calendar' ></div>
@@ -118,7 +121,7 @@
 	      <div class="modal-body">
 	      	 <div class="row">
 	      	 	  <div class="col-4 col-sm-3">
-			        [상품명  / 주문 수량]
+			        상품명  / 주문 수량
 			      </div>
 			      <div class="col-8 col-sm-9">
 			        <span id="titleinmodal"></span>
@@ -126,7 +129,7 @@
 			 </div><hr>
 			 <div class="row">
 	      	 	  <div class="col-4 col-sm-3">
-			        [배송 주소]         
+			        배송 주소         
 			      </div>
 			      <div class="col-8 col-sm-9">
 			        <span id="addressinmodal"></span>
@@ -134,7 +137,7 @@
 			 </div><hr>
 			 <div class="row">
 	      	 	  <div class="col-4 col-sm-3">
-			        [받는 사람]         
+			        받는 사람         
 			      </div>
 			      <div class="col-8 col-sm-9">
 			        <span id="receiverinmodal"></span>
@@ -142,7 +145,7 @@
 			 </div><hr>
 			 <div class="row">
 	      	 	  <div class="col-4 col-sm-3">
-			        [전화번호]         
+			        전화번호         
 			      </div>
 			      <div class="col-8 col-sm-9">
 			        <span id="phoneinmodal"></span>
@@ -150,7 +153,7 @@
 			 </div><hr>
 			  <div class="row">
 	      	 	  <div class="col-4 col-sm-3">
-			        [구독 기간(일수)]  
+			        구독 기간(일수)  
 			      </div>
 			      <div class="col-8 col-sm-9">
 			        <span id="periodinmodal"></span>
@@ -158,7 +161,7 @@
 			 </div>
 		      </div>
 		      <div class="modal-footer">
-	        <button type="button"  class="btn btn-secondary"  data-dismiss="modal">확인</button>
+	        <button type="button"  class="btn_confirm"  data-dismiss="modal">확인</button>
 	      </div>
 	    </div>
 	  </div>

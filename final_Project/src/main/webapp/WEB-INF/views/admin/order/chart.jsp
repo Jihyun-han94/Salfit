@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>통계</title>
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
