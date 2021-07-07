@@ -147,21 +147,18 @@
 			    dateFormat: 'yy-mm-dd',
 			    minDate: 1, maxDate: "+2M +1D"
 			};
-
 		$.datepicker.setDefaults($.datepicker.regional['kr']);
 		$('.datepicker').datepicker('setDate', '+1D');
 		
 	    $('#datepickerS').datepicker("option", "onClose", function ( selectedDate ) {
 	        $("#datepickerE").datepicker( "option", "minDate", selectedDate );
 	    });
-
 	    $('#datepickerE').datepicker("option", "minDate", $("#datepickerS").val());
 	    $('#datepickerE').datepicker("option", "onClose", function ( selectedDate ) {
 	        $("#datepickerS").datepicker( "option", "maxDate", selectedDate );
 	    });
 		
   	} );
-
 </script>
 <script type="text/javascript">
 	/* 장바구니 */
@@ -195,12 +192,9 @@
 			}				
 		});
 	}
-
-
 	/* 리뷰 */
 	
 	var oldListCnt = "${oldListCnt}";
-
 	var startIndex = 1;	// 인덱스 초기값
 	var searchStep = 3;	// 3개씩 로딩
 		
@@ -251,7 +245,6 @@
 	
 	// 장바구니 수량 조정 
     var qty = document.getElementById('quantity');
-
     function minus() {
     	qty.value = parseInt(qty.value) - 1;
     }

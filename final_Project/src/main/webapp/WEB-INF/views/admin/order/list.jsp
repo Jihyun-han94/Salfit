@@ -133,6 +133,9 @@
 						</td>
 						<td id="statusicon${order.getId()}">
 							<c:choose>
+								<c:when test="${order.getStatus().equals('unpaid')}" >
+									<i></i>
+								</c:when>
 								<c:when test="${order.getStatus().equals('paid')}" >
 									<i></i>
 								</c:when>
@@ -149,6 +152,9 @@
 						</td>
 						<td id="status${order.getId()}">
 							<c:choose>
+								<c:when test="${order.getStatus().equals('paid')}" >
+									<p>paid</p>
+								</c:when>
 								<c:when test="${order.getStatus().equals('checked')}" >
 									<p>checked</p>
 								</c:when>
@@ -159,7 +165,7 @@
 									<p>delivered</p>
 								</c:when>
 								<c:otherwise>
-									<p>paid</p>
+									<p>unpaid</p>
 								</c:otherwise>
 							</c:choose>
 						</td>

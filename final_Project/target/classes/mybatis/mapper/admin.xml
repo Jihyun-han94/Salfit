@@ -23,9 +23,7 @@
 	 <if test='id != "" and id != null'>
 		 AND o.id = #{id}
 	 </if>
-	 <if test='status == "unpaid"'>
-		 AND o.status != #{status}
-	 </if>
+		 AND o.status != 'unpaid'
 		ORDER BY o.id DESC
 	</select>
 	
@@ -48,9 +46,7 @@
 		JOIN ordered o
 		  ON o.id = d.oid
 		   WHERE 1=1
-		<if test='status == "unpaid"'>
-		 AND o.status != #{status}
-	 	</if>  	
+		 AND o.status != 'unpaid'
 		ORDER BY d.id
 	</select>
 	
@@ -69,9 +65,7 @@
 		 <if test="ddate != null">
 			 AND TO_DATE(#{ddate}, 'YYYY-MM-DD') BETWEEN TO_DATE(o.ddate, 'YYYY-MM-DD') AND (TO_DATE(o.edate, 'YYYY-MM-DD') + 1)
 		 </if>
-		 <if test='status == "unpaid"'>
-			 AND o.status != #{status}
-		 </if>
+		 AND o.status != 'unpaid'
 			ORDER BY o.id DESC
 		  ) 
 	  WHERE NUM BETWEEN (#{pageStart}+1) AND (#{pageStart} + #{perPageNum} )
@@ -96,9 +90,7 @@
 		JOIN ordered o
 		  ON o.id = d.oid
 		   WHERE 1=1
-		<if test='status == "unpaid"'>
-		 AND o.status != #{status}
-		</if>  	
+		 AND o.status != 'unpaid'	
 		ORDER BY d.id
 	</select>
 	
@@ -144,9 +136,7 @@
 		JOIN account a
 		  ON a.id = o.aid
 		 WHERE 1=1
-		<if test='status == "unpaid"'>
-		 AND o.status != #{status}
-	 	</if>
+		 AND o.status != 'unpaid'
 		ORDER BY o.id DESC
 	</select>
 	
@@ -169,9 +159,7 @@
 		JOIN ordered o
 		  ON o.id = d.oid
 		   WHERE 1=1
-		<if test='status == "unpaid"'>
-		 AND o.status != #{status}
-	 	</if>
+		 AND o.status != 'unpaid'
 		  	
 		ORDER BY d.id
 	</select>
@@ -192,9 +180,7 @@
 		JOIN account a
 		  ON a.id = o.aid
 		 WHERE 1=1
-		<if test='status == "unpaid"'>
-		 AND o.status != #{status}
-	 	</if>
+		 AND o.status != 'unpaid'
 		ORDER BY o.id DESC
 	</select>
 	
@@ -223,9 +209,7 @@
 		 <if test="startdate != null">
 			 AND TO_DATE(#{startdate}, 'YYYY-MM-DD') BETWEEN TO_DATE(d.startdate, 'YYYY-MM-DD') AND (TO_DATE(d.enddate, 'YYYY-MM-DD'))
 		 </if>
-		 <if test='status == "unpaid"'>
-		 AND o.status != #{status}
-	 	</if>
+		  AND o.status != 'unpaid'
 		ORDER BY d.id
 	</select>
 	
@@ -254,9 +238,7 @@
 			 <if test='ddate != "" and ddate != null'>
 				 AND o.ddate = #{ddate}
 			 </if>
-			 <if test='status == "unpaid"'>
-				 AND o.status != #{status}
-			 </if>
+			  AND o.status != 'unpaid'
 	         ORDER BY pdate DESC, o.id DESC
 	        ) 
 	  WHERE NUM BETWEEN (#{pageStart}+1) AND (#{pageStart} + #{perPageNum})
@@ -269,8 +251,6 @@
 		<if test='status != "" and status != null'>
 			AND o.status = #{status}
 		</if>
-		<if test='status == "unpaid"'>
-		 AND o.status != #{status}
-	 	</if>
+		 AND o.status != 'unpaid'
 	</select>
 </mapper>
