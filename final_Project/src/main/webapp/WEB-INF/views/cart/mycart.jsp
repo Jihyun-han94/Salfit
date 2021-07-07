@@ -46,7 +46,7 @@ th, tr, th, table {
 <div style="margin: 0 auto; width:87%; font-family : 'Kakao', 'sans-serif', 'normal'; font-size:13px;">
 
 <c:if test="${empty requestScope.cartlist}" >
-	<div>
+	<div style="text-align:center;">
 		<i class="bi bi-cart-x" style="text-align:center; font-size: 250px; color: #e7e7e7;"></i>
 		<h2 style="text-align:center; padding-bottom: 20px;">장바구니에 상품이 존재하지 않습니다.</h2>
 		<a class="a_hover" style="padding-bottom: 20px; color:#bac600;" href="${product }">쇼핑하러 가기 <i class="bi bi-hand-index-thumb"></i></a>
@@ -106,12 +106,12 @@ th, tr, th, table {
 		<td style="border-top: solid 5px #e1e1e1; padding-top:10px; padding-bottom:13px; font-size: 20px; font-weight:bold;">${sumMoney }</td>
 		</tr>
 		<tr>
-		<th style="border-top: solid 1px #e1e1e1; padding-bottom:10px;">배송비<br><span style="color:gray; font-size: 10px;">* 배송비 : 30000원 이상 주문 시 무료</span></th>
+		<th style="border-top: solid 1px #e1e1e1; padding-bottom:10px;">배송비<br><span style="color:gray; font-size: 10px;">* 30000원 이상 주문 시 무료</span></th>
 		<td style="border-top: solid 1px #e1e1e1; padding-bottom:10px; padding-bottom:13px; padding-top:10px; font-size: 20px; font-weight:bold;">${delfee }</td>
 		</tr>
 		<tr>
 		<th style="border-top: solid 1px #e1e1e1; padding-bottom:10px;">결제 예정 금액</th>
-		<td style="border-top: solid 1px #e1e1e1; padding-bottom:10px; border-bottom: #ffff; padding-bottom:13px; padding-top:10px; font-size: 20px; color:red; font-weight:bold;">${totalMoney }</td>
+		<td style="border-top: solid 1px #e1e1e1; padding-bottom:10px; border-bottom: #ffff; padding-bottom:13px; padding-top:10px; font-size: 20px; color:#961533; font-weight:bold;">${totalMoney }</td>
 		</tr>
 	</table>
 	</div>
