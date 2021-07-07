@@ -10,6 +10,7 @@ import com.jey.webapp.admin.dto.AdminOrderDTO;
 import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
 import com.jey.webapp.admin.dto.SummaryDTO;
+import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 
 
@@ -115,6 +116,11 @@ public class AdminRepositoryImpl implements AdminRepository {
 	@Override
 	public SummaryDTO monthlyOrderSum(SummaryDTO summary) {
 		return sqlSession.selectOne("adminMapper.monthlySum",summary);
+	}
+
+	@Override
+	public List<ReviewDTO> toprating() {
+		return sqlSession.selectList("adminMapper.ratingTop5");
 	}
 
 

@@ -94,6 +94,7 @@
 		ORDER BY d.id
 	</select>
 	
+	<!-- 인기상품 top5  -->
 	<select id="top5products" resultType="product">
 	SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY bcnt) NUM,
 				 p.*
@@ -275,4 +276,21 @@
 	   	AND EXTRACT(month FROM TO_DATE(pdate, 'YYYY-MM-DD')) = EXTRACT(month FROM TO_DATE(#{month}, 'YYYY-MM-DD'))
 	  	 AND status != 'unpaid'
 	</select>
+	
+	
+	<!-- 평점 top5  -->
+	<select id="ratingTop5" resultType="review">
+	SELECT * 
+	FROM (SELECT r.pid
+				,Max(p.title) "pname"
+				,AVG(NVL(r.rating,0)) "rating"
+		  	FROM review r
+		 	JOIN  product p 
+		      ON  p.id = r.pid
+	  	GROUP BY r.pid
+	  	ORDER BY "rating" DESC
+	        ) 
+	  WHERE ROWNUM BETWEEN 1 AND 5
+	</select>
+	
 </mapper>

@@ -27,6 +27,7 @@ import com.jey.webapp.admin.dto.Criteria;
 import com.jey.webapp.admin.dto.PageMaker;
 import com.jey.webapp.admin.dto.SummaryDTO;
 import com.jey.webapp.admin.service.AdminService;
+import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.sun.istack.internal.Nullable;
 
@@ -71,36 +72,6 @@ public class AdminOrderController {
 		m.addAttribute("cri", cri);
 		return "admin/order/list";
 	}
-	
-	
-//	@RequestMapping(value = "/list", method = RequestMethod.GET)
-//	public String manageOrder(@ModelAttribute Criteria cri, Model m, @ModelAttribute AdminOrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
-//		List<AdminOrderDTO> orderlist = null;
-//		List<AdminOrderDetailDTO> orderdetaillist = null;
-//		System.out.println("ddate : "+dto.getDdate());
-//		System.out.println("status : "+dto.getStatus());
-//		System.out.println("id : "+dto.getId());
-//		System.out.println(cri.getPage() +","+ cri.getPerPageNum());
-//		
-//		if (dto.getDdate() == null || dto.getDdate() == "") {
-//			if (dto.getStatus() == null || dto.getStatus() == "") {
-//				orderlist = order.findList(dto);
-//				orderdetaillist = order.findDetailList(dto);
-//			} else {
-//				orderlist = order.findListSelected(dto);
-//				orderdetaillist = order.findDetailListSelected(dto);
-//			}
-//		} else {
-//			orderlist = order.findListSelected(dto);
-//			orderdetaillist = order.findDetailListSelected(dto);
-//		}
-//		
-//		
-//		m.addAttribute("orderlist",orderlist);
-//		m.addAttribute("orderdetaillist",orderdetaillist);
-//		m.addAttribute("dto",dto);
-//		return "admin/order/list";
-//	}
 	
 	
 	/* 주문 상태 별  */
@@ -219,7 +190,21 @@ public class AdminOrderController {
 		m.addAttribute("top5",top5);
 		m.addAttribute("top5bcnt",top5bcnt);
 		
+//		평점기준
+		List<ReviewDTO> rating5list = null;
+		List<String> rating5 = new ArrayList<String>();
+		List<Integer> rating = new ArrayList<Integer>();
 		
+		rating5list = order.toprating();
+		for(ReviewDTO r: rating5list) {
+			rating5.add(r.getPname()); 
+		}
+		for(ReviewDTO r: rating5list) {
+			rating.add(r.getRating());
+		}
+		m.addAttribute("rating5list",rating5list);
+		m.addAttribute("rating5",rating5);
+		m.addAttribute("rating",rating);
 		
 		
 		return "admin/order/chart";

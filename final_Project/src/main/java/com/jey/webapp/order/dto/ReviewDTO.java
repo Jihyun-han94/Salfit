@@ -5,6 +5,7 @@ import java.util.*;
 public class ReviewDTO {
 	private int id;
 	private int pid;
+	private String pname;
 	private int aid;
 	private String aname;
 	private String contents;
@@ -35,6 +36,12 @@ public class ReviewDTO {
 	}
 	public void setPid(int pid) {
 		this.pid = pid;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
 	public int getAid() {
 		return aid;

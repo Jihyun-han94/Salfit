@@ -18,8 +18,9 @@
 	<section class="mb-5 col-10 m-auto">
 		<nav>
 		  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-		    <a class="nav-link active" id="nav-monthly-tab" data-toggle="tab" href="#nav-monthly" role="tab" aria-controls="nav-monthly" aria-selected="true">월 매출액, 판매수</a>
-		    <a class="nav-link" id="nav-top5-tab" data-toggle="tab" href="#nav-top5" role="tab" aria-controls="nav-top5" aria-selected="false">인기 상품 top5</a>
+		    <a class="nav-link active" id="nav-monthly-tab" data-toggle="tab" href="#nav-monthly" role="tab" aria-controls="nav-monthly" aria-selected="true">월 매출액/ 판매수</a>
+		    <a class="nav-link" id="nav-top5-tab" data-toggle="tab" href="#nav-top5" role="tab" aria-controls="nav-top5" aria-selected="false">인기 상품 top5 (실구매 기준)</a>
+		    <a class="nav-link" id="nav-topRating-tab" data-toggle="tab" href="#nav-topRating" role="tab" aria-controls="nav-topRating" aria-selected="false">인기 상품 top5 (상품평 기준)</a>
 		  </div>
 		</nav>
 		<div class="tab-content" id="nav-tabContent">
@@ -30,8 +31,11 @@
 				<canvas id="myChart" width="400" height="400" class="mb-5 mt-5"></canvas>
 		
 			</div>
-		  	<div class="tab-pane fade" id="nav-top5" role="tabpanel" aria-labelledby="nav-top5-tab">
-		  		<canvas id="myChart2" width="400" height="400" class="mb-5 mt-5"></canvas>
+		  	<div class="tab-pane fade mt-5" id="nav-top5" role="tabpanel" aria-labelledby="nav-top5-tab">
+		  		<canvas id="myChart2" width="200" height="200" class="w-50  h-50 mb-5 mt-5 m-auto"></canvas>
+			</div>
+			<div class="tab-pane fade mt-5" id="nav-topRating" role="tabpanel" aria-labelledby="nav-topRating-tab">
+		  		<canvas id="myChart3" width="200" height="200" class="w-50  h-50 mb-5 mt-5 m-auto"></canvas>
 			</div>
 		</div>
 	</section>
@@ -64,6 +68,8 @@ function setYear(value) {
     window.location.href = "summary?selectedYear=" + value;
 }
 
+
+/* 매출액,판매수 */
 
 var ctx = document.getElementById('myChart').getContext('2d');
 const labels = ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'];
@@ -107,7 +113,7 @@ var myChart = new Chart(ctx, {
             yAxisID: 'right-y-axis'
         }, {
         	type: 'line',
-            label: '# 상품 총 배송 개수',
+            label: '# 총 배송 상품 개수',
             data: numOfProducts,
             backgroundColor: [
                 '#E98580'
@@ -150,13 +156,22 @@ var myChart = new Chart(ctx, {
 					color: '#EFEFEF'                  
                 }
             }
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size: 20
+                    }
+                }
+            }
         }
     }
 });
-</script>
 
 
-<script>
+/* 구매수 top5 */
+
 var top5 = [
 <c:forEach items="${top5}" var="title" varStatus="loop">
     "${title}"
@@ -191,7 +206,65 @@ var myChart2 = new Chart(ctx2, {
     		    ],
     		    hoverOffset: 4
     		  }]
-    		}
+    		},
+	options: {
+		plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size: 20
+                    }
+                }
+            }
+        }
+	}
+});
+
+
+/* 별점 top5 */
+
+var rating5 = [
+<c:forEach items="${rating5}" var="pname" varStatus="loop">
+    "${pname}"
+	    ${!loop.last ? ',' : ''}
+</c:forEach>
+]; 
+var rating = [
+<c:forEach items="${rating}" var="r" varStatus="loop">
+    "${r}"
+     ${!loop.last ? ',' : ''}
+</c:forEach>
+];
+var ctx3 = document.getElementById('myChart3').getContext('2d');
+
+var myChart3 = new Chart(ctx3, {
+	type: 'doughnut',
+    data: {
+    	  labels: rating5,
+    		  datasets: [{
+    		    label: '평가 상위 5위',
+    		    data: rating,
+    		    backgroundColor: [
+    		      'rgb(255, 99, 132)',
+    		      'rgb(54, 162, 235)',
+    		      'rgb(255, 205, 86)',
+    		      'rgb(153, 102, 255)',
+    		      'rgb(201, 203, 207)'
+    		    ],
+    		    hoverOffset: 4
+    		  }]
+    		},
+	options: {
+		plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size: 20
+                    }
+                }
+            }
+        }
+	}
 });
 </script>
 

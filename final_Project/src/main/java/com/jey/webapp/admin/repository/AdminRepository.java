@@ -6,6 +6,7 @@ import com.jey.webapp.admin.dto.AdminOrderDTO;
 import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
 import com.jey.webapp.admin.dto.SummaryDTO;
+import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 
 
@@ -26,5 +27,6 @@ public interface AdminRepository {
 	public List<ProductDTO> topselling(ProductDTO dto);
 	public int numOfProducts(SummaryDTO summary);
 	public SummaryDTO monthlyOrderSum(SummaryDTO summary);
+	public List<ReviewDTO> toprating();
 	
 }

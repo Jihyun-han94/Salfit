@@ -10,6 +10,7 @@ import com.jey.webapp.admin.dto.AdminOrderDetailDTO;
 import com.jey.webapp.admin.dto.Criteria;
 import com.jey.webapp.admin.dto.SummaryDTO;
 import com.jey.webapp.admin.repository.AdminRepository;
+import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
 
 
@@ -95,6 +96,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public SummaryDTO monthlyOrderSum(SummaryDTO summary) {
 		return dao.monthlyOrderSum(summary);
+	}
+
+	@Override
+	public List<ReviewDTO> toprating() {
+		return dao.toprating();
 	}
 
 

@@ -104,6 +104,7 @@ INSERT INTO review VALUES(2, 21, 1, '맛있는 샐러드~~dddddddd~~~', 4, SYSDA
 INSERT INTO review VALUES(3, 21, 1, ' 샐러드~~dddddddd~~~', 3, SYSDATE);
 INSERT INTO review VALUES(4, 21, 1, ' ~~dddddddd~~~', 2, SYSDATE);
 INSERT INTO review VALUES(10, 21, 1, ' dddddddd~~~', 2, SYSDATE);
+INSERT INTO review VALUES(15, 22, 1, '맛있는 샐러드~~dddddddd~~~', 4, SYSDATE);
 
 
 ALTER TABLE order_detail DROP CONSTRAINT order_detail_status_CK;
@@ -168,4 +169,29 @@ FROM order_detail
   AND status != 'unpaid';
   
   
+  -- 상품별 평점
+SELECT r.pid
+		,Max(p.title) "pname"
+		,AVG(NVL(r.rating,0)) "rating"
+  FROM review r
+ JOIN  product p 
+      ON  p.id = r.pid
+  GROUP BY r.pid
+  ORDER BY "rating" DESC;
   
+  select r.pid
+		,p.title from review r JOIN  product p ON  p.id = r.pid;
+
+		
+SELECT * 
+FROM (SELECT 
+			r.pid
+			,Max(p.title) "pname"
+	,AVG(NVL(r.rating,0)) "rating"
+	  	FROM review r
+	 	JOIN  product p 
+	      ON  p.id = r.pid
+  	GROUP BY r.pid
+  	ORDER BY "rating" DESC
+        ) 
+  WHERE ROWNUM BETWEEN 1 AND 5
