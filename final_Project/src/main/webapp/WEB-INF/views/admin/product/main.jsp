@@ -64,16 +64,16 @@
 										<a href="${detail}?id=${item.getId() }">${item.getTitle() }</a>
 									</h5>
 									<c:if test="${item.getActive() == 'y'}" >
-										<i class="bi bi-eye-fill" style="color:red;">공개된 상품</i>
+										<i class="bi bi-eye-fill" style="color:#E2A5AC; font-size: 13px;">공개된 상품</i>
 									</c:if>
 								</div>
 								<div class="card-footer bg-transparent border-0"> 
 									<p class="card-text">
 										<small class="text-muted">
 											<i class="bi bi-eye-fill" style="color:#6f9eaf;"></i> ${item.getVcnt()}
-										</small><span class="text-light">--</span>
+										</small>
 										<small class="text-muted">
-										<a id="heart${item.getId()}" class="bi bi-heart" style="color:#ff75a0;">
+										<a id="heart${item.getId()}" class="bi bi-heart" style="color:#ff75a0; padding-left: 10px;">
 												${item.getGcnt()}</a>
 										</small>
 									</p>

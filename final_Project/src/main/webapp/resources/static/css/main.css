@@ -19,7 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+a .cd-auto-hide-header {
   color: #bac600;
   text-decoration: none;
 }
