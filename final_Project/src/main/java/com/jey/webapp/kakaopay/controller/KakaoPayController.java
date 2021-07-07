@@ -139,8 +139,8 @@ public class KakaoPayController {
 		return forward;
 	}
 	
-	@RequestMapping(value="comfirm", method = RequestMethod.GET)
-	public ModelAndView confirmpayment(Model m, HttpServletRequest request,@ModelAttribute CartDTO dto) throws Exception {
+	@RequestMapping(value="confirm", method = RequestMethod.GET)
+	public ModelAndView confirmpayment(Model m, HttpServletRequest request,@ModelAttribute OrderDTO dto) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 
@@ -153,12 +153,18 @@ public class KakaoPayController {
 		System.out.println(paymethod);
 		
 		//ordered table과 order_detail status 바꿔야됨!!
-		
-		
+		dto.setAid(accountdto.getId());
+		order.updatestatus(dto); //ordered status 'paid'로 변경
+		OrderDetailDTO detailDTO = new OrderDetailDTO();
+		detailDTO.setOid(dto.getId());
+		order.update(detailDTO); // order_detail status 'paid'로 변경
 		
 		// 결제 정보 Model m 으로 paystep2.jsp 에 전달하기!!
+		dto = order.findorder(dto);
 		
-		
+		m.addAttribute("paymethod", paymethod);
+		m.addAttribute("orderDTO", dto);
+		m.addAttribute("username", accountdto.getName());
 		mv.setViewName("/kakaopay/paystep2");
 		
 		return mv;

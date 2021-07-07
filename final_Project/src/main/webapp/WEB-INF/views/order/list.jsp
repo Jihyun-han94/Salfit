@@ -27,6 +27,7 @@
 	<th>주소</th>
 	<th>결제금액</th>
 	<th>상태</th>
+	<th>배송확인</th>
 <c:url var ="detail" value="/order/detail" />
 <c:forEach var="data" items="${requestScope.orderlist }" >
 	<tr>
@@ -58,7 +59,7 @@
 			</c:when>
 			
 		</c:choose>
-		
+		<td>배송확인</td>
 	</tr>
 </c:forEach>
 

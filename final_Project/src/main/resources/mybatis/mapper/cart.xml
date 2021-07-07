@@ -47,9 +47,9 @@
 	</select>
 
 	<update id="update" parameterType="cart" >
-	UPDATE CART
-	SET ORDERSTATUS = 'y'
-	where ORDERSTATUS = 'n'and id = #{id}
+		UPDATE CART
+		SET ORDERSTATUS = 'y'
+		WHERE ORDERSTATUS = 'n'and id = #{id}
 	</update>
 	
 	

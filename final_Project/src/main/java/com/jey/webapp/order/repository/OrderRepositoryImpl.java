@@ -57,7 +57,12 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public boolean update(OrderDetailDTO dto) throws Exception {
-		return false;
+		boolean result = false;
+		int res = sqlSession.update("orderMapper.update", dto);
+		if(res ==1) {
+			result = true;
+		}
+		return result;
 	}
 
 	@Override
@@ -80,6 +85,22 @@ public class OrderRepositoryImpl implements OrderRepository {
 	public List<OrderDetailDTO> selectall(OrderDetailDTO dto) throws Exception {
 		List<OrderDetailDTO> list = sqlSession.selectList("orderMapper.selectall", dto);
 		return list;
+	}
+
+	@Override
+	public boolean updatestatus(OrderDTO dto) throws Exception {
+		boolean result = false;
+		int res = sqlSession.update("orderMapper.updatestatus", dto);
+		if (res == 1) {
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
+	public OrderDTO findorder(OrderDTO dto) throws Exception {
+		dto = sqlSession.selectOne("orderMapper.findorder", dto);
+		return dto;
 	}
 
 

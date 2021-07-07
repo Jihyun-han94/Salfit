@@ -18,4 +18,6 @@ public interface OrderService {
 	public boolean add(ReviewDTO dto) throws Exception;	
 	public OrderDTO selectone(OrderDTO dto) throws Exception;
 	public List<OrderDetailDTO> selectall(OrderDetailDTO dto) throws Exception;
+	public boolean updatestatus(OrderDTO dto) throws Exception;
+	public OrderDTO findorder(OrderDTO dto) throws Exception; 
 }
