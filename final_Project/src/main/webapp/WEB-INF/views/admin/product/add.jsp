@@ -57,7 +57,7 @@ i:hover {
 		</div>
 		<div style="margin-left:45px;">
 			<label for="id_contents">내용<span style="padding: 60px; color: #e7e7e7;">|</span></label>
-			<textarea id="id_contents" name="contents" cols="75" rows="15" style="text-align: center;"></textarea>
+			<textarea id="id_contents" name="contents" cols="75" rows="10" style="text-align: center;"></textarea>
 		</div>
 		<div style="margin-left:45px;">
 			<label for="id_active">공개 여부<span style="padding: 30px; color: #e7e7e7;">|</span></label>

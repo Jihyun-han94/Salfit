@@ -15,50 +15,143 @@
 <c:url var="ajax_cart" value="/ajax/cart" />
 </head>
 <style>
+.buttons {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
 
+.cart-button {
+    position: relative;
+    outline: 0;
+    background-color: #bac600;
+    color: #fff;
+    border: none;
+    height: 48px;
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    line-height: 0px;
+    overflow: hidden;
+    cursor: pointer
+}
+
+.cart-button:focus {
+    outline: none !important
+}
+
+.cart-button .fa-shopping-cart {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: -20%;
+    font-size: 1.8em;
+    transform: translate(-50%, -50%)
+}
+
+.cart-button .fa-square {
+    position: absolute;
+    z-index: 1;
+    top: -20%;
+    left: 53%;
+    font-size: 0.8em;
+    transform: translate(-50%, -50%)
+}
+
+.cart-button span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: #fff;
+    transform: translate(-50%, -50%)
+}
+
+.cart-button span.added {
+    opacity: 0
+}
+
+.cart-button.clicked .fa-shopping-cart {
+    animation: cart 2s ease-in forwards
+}
+
+.cart-button.clicked .fa-square {
+    animation: box 2s ease-in forwards
+}
+
+.cart-button.clicked span.add-to-cart {
+    animation: addcart 2s ease-in forwards
+}
+
+.cart-button.clicked span.added {
+    animation: added 2s ease-in forwards
+}
+
+@keyframes cart {
+    0% {left: -10%}
+    40%,60% {left: 50%}
+    100% {left: 110%}
+}
+
+@keyframes box {
+    0%,40% {top: -20%}
+    60% {top: 36%; left: 53%}
+    100% {top: 40%; left: 112%}
+}
+
+@keyframes addcart {
+    0%, 30% {opacity: 1}
+    30%,100% {opacity: 0}
+}
+
+@keyframes added {
+    0%, 80% {opacity: 0}
+    100% {opacity: 1}
+}
 </style>
 <body>
 	<header>
-		<%-- <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
+		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
+	<br><br><br><br><br><br><br><br><br><br>
  	<div id="bodyContainer1">
       <div class="row my-10 mx-5 "> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
-         <div class="col-4">
-        	<%--  <h1 style="padding-bottom: 50px;">
-	            ${fn:replace(item.getTitle(), newline, "<br>") }
-            </h1> --%>
-            <div>
-               <h3 style="font-weight: bolder; padding-bottom: 15px;">내용</h3>
+      	<div class="col-1"></div>
+         <div class="col-5">
+ 			<img class="rounded" width="500px" height="400px"
+					src="${pageContext.request.contextPath}${item.getUrl()}">       
+         </div>
+         <div class="col-1"></div>
+         <!-- 오른쪽 : 수량 & 장바구니에 담기  -->
+         <div class="col-5" style="">
+        	<div class="row g-2 align-items-left">
+        		<div class="col-lg">
+        			<h1 class="text-end" style="padding-bottom: 20px;">${item.getTitle() }</h1>
+        		</div>
+        	</div>
+        	<div>
+               <!-- <h3 style="font-weight: bolder; padding-bottom: 15px;">상품 설명</h3> -->
                <p class="font-weight-light" style="padding-bottom: 15px;">
                ${fn:replace(item.getContents(), newline, "<br>") }
                </p>
             </div>
-         </div>
-         <div class="col-4">
- 			<img class=" rounded" width="500px" height="400px"
-					src="${pageContext.request.contextPath}${item.getUrl()}">       
-         </div>
-         <!-- 오른쪽 : 수량 & 장바구니에 담기  -->
-         <div class="col-4">
-        	<div class="row g-3 align-items-center">
-        		<div class="col-lg col-auto">
-        			<h1 class="text-center">${item.getTitle() }</h1>
+            <div class="col-6 text-end">
+        			<h3 class="text-end" style="padding-bottom: 30px; font-size: 24px; font-weight: bold;">₩ ${item.getPrice() }</h3>
+        		</div>
+        	<div class="row row-cols-lg-auto g-3 align-items-left">
+        		<div>
+        			<label style="display: inline-block; margin-right: 140px;">
+        				구독 시작일 선택:<input type="hidden" class="datepicker" id="datepickerS"></label>
+        				<label style="display: inline-block;">
+        				구독 종일 선택:<input type="hidden" class="datepicker" id="datepickerE"></label>
+        			<p> <input style="margin-right: 30px;" type="text" class="alternate" id="alternateS" size="25" readonly>~<input type="text" style="margin-left: 30px;"class="alternate" id="alternateE" size="25" readonly></p><br>
+
         		</div>
         	</div>
-        	<div class="row row-cols-lg-auto g-3 align-items-center">
-        		<div class="col-6 text-end">
-        			<h3 class="text-end">
-        				구독 시작일 선택:<input type="hidden" class="datepicker" id="datepickerS"></h3>
-        			<p> <input type="text" class="alternate" id="alternateS" size="30" readonly></p><br>
-        			<h3 class="text-end">
-        				구독 종일 선택:<input type="hidden" class="datepicker" id="datepickerE"></h3>
-        			<p> <input type="text" class="alternate" id="alternateE" size="30" readonly></p><br>
-        		</div>
-        		<div class="col-6 text-end">
-        			<h3 class="text-end">₩ ${item.getPrice() }</h3>
-        		</div>
-        	</div>
-            <div class="row g-3 align-items-center">
+        	
+            <div class="row g-3 align-items-center" style="margin-top: -300px; margin-right: 100px;">
 			  <div class="col-sm-3 col-auto">
                  <div class="input-group input-group-sm mb-3 btn-default">
 				  	<button id="minus" onclick="minus();" class="btn btn-sm border-0" type="button" id="button-addon1">-</button>
@@ -67,7 +160,21 @@
                	</div>
 			  </div>
 			  <div class="col-sm-9">
-			  	<div class="input-group input-group-sm mb-3 btn-success">
+			  
+			  <div class="buttons">
+			  	<button class="cart-button" type="button" onclick="addToCart(this, ${item.getId()}
+					    , document.getElementById('quantity')
+					    , document.getElementById('datepickerS')
+					    , document.getElementById('datepickerE')
+					    , ${account.getId()}
+					    );" >
+			  		<span class="add-to-cart">Add to cart</span>
+			  		<span class="added">Item added</span>
+			  		<i class="fa fa-shopping-cart"></i>
+			  		<i class="fa fa-square"></i>
+			  	</button>
+			  </div>
+			  	<%-- <div class="input-group input-group-sm mb-3 btn-success">
 					<button type="button" class="btn btn-block badge-pill" 
 					    onclick="addToCart(this, ${item.getId()}
 					    , document.getElementById('quantity')
@@ -95,19 +202,19 @@
 			      		</div>
 			   		</div>
 				</div>
-		  		</div>
+		  		</div> --%>
 		  </div>
 		</div>
        	</div>
    		</div>
    	</div>
-	<div id="bodyContainer2">
+	<div id="bodyContainer2" style="margin-top: -250px;">
 		<jsp:include page="/WEB-INF/views/product/recommend.jsp" flush="false" >
 			<jsp:param name="item" value="${item}" />
 			<jsp:param name="recommend" value="${recommend}" />
 		</jsp:include>
 	</div>
-    <div id="bodyContainer3">
+    <div id="bodyContainer3" style="margin-top: 50px;">
 		<jsp:include page="/WEB-INF/views/product/reviews.jsp" flush="false" >
 			<jsp:param name="item" value="${item}" />
 			<jsp:param name="reviews" value="${reviews}" />
@@ -118,9 +225,22 @@
 			<jsp:param name="item" value="${item}" />
 		</jsp:include>
 	</div>
-	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
+	<footer>	
+		<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
+	</footer>
 </body>
-<script >
+<script>
+	document.addEventListener("DOMContentLoaded", function(event) {
+	const cartButtons = document.querySelectorAll('.cart-button');
+	cartButtons.forEach(button => {
+	button.addEventListener('click',cartClick);
+	});
+	function cartClick(){
+	let button =this;
+	button.classList.add('clicked');
+	}
+	});
+	
 	/* 날짜선택 */
 	$( function() {
 		$( "#datepickerS" ).datepicker({
@@ -150,20 +270,21 @@
 			    dateFormat: 'yy-mm-dd',
 			    minDate: 1, maxDate: "+2M +1D"
 			};
+
 		$.datepicker.setDefaults($.datepicker.regional['kr']);
 		$('.datepicker').datepicker('setDate', '+1D');
 		
 	    $('#datepickerS').datepicker("option", "onClose", function ( selectedDate ) {
 	        $("#datepickerE").datepicker( "option", "minDate", selectedDate );
 	    });
+
 	    $('#datepickerE').datepicker("option", "minDate", $("#datepickerS").val());
 	    $('#datepickerE').datepicker("option", "onClose", function ( selectedDate ) {
 	        $("#datepickerS").datepicker( "option", "maxDate", selectedDate );
 	    });
 		
   	} );
-</script>
-<script type="text/javascript">
+
 	/* 장바구니 */
 	function addToCart(e, pid, quantity, sd, ed, aid) {
 	    var start = $('#datepickerS').datepicker('getDate');
@@ -195,9 +316,12 @@
 			}				
 		});
 	}
+
+
 	/* 리뷰 */
 	
 	var oldListCnt = "${oldListCnt}";
+
 	var startIndex = 1;	// 인덱스 초기값
 	var searchStep = 3;	// 3개씩 로딩
 		
@@ -248,6 +372,7 @@
 	
 	// 장바구니 수량 조정 
     var qty = document.getElementById('quantity');
+
     function minus() {
     	qty.value = parseInt(qty.value) - 1;
     }

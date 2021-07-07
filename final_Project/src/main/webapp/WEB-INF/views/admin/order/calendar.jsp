@@ -8,6 +8,8 @@
 <head>
 <meta charset='utf-8' />
 <title>관리자 주문 관리</title>
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" />
 <jsp:include page="/WEB-INF/views/module/fullcalendar.jsp"></jsp:include>
 <c:url var="producturl" value="/admin/product/detail" />
 <c:url var="orderurl" value="/admin/order" />

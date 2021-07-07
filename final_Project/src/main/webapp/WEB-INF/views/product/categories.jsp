@@ -95,10 +95,13 @@
         </button>
       </div>
       <div class="d-flex flex-column text-center justify-content-center">
+      <h2 style="margin-bottom: 10px; color: #475c01;">카테고리 추가</h2>
       <div class="modal-body">
           <div class="form-group row d-flex justify-content-center">
-            <input type="text" style="width: 200px;" class="form-control" id="category-name" name="name" placeholder="카테고리 명">
-            <input type="file" class="form-control" style="width: 200px;" id="file" name="file" accept=“image/*” onchange="PreviewImage();">
+            <input type="text" style="width: 200px; margin-bottom: 10px;" class="form-control" id="category-name" name="name" placeholder="카테고리 명을 입력해 주세요.">
+            </div>
+          <div class="form-group row d-flex justify-content-center">
+            <input type="file" class="form-control" style="width: 200px; margin-bottom: 15px; border:none;" id="file" name="file" accept=“image/*” onchange="PreviewImage();">
           </div>
       </div>
       <div class="modal-footer d-flex flex-column text-center justify-content-center">

@@ -13,36 +13,32 @@
 <c:url var="moreReviews" value="/ajax/product/moreReviews" />
 </head>
 <body>
-	<header>
-		<%-- <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
+	<header style="padding-bottom:200px;">
+		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
+	
 	<div id="updateOK" class="alert alert-success collapse" role="alert">상품 정보를 수정했습니다.</div>
  	<div id="bodyContainer1">
       <div class="row my-10 mx-5 "> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
-         <div class="col-4">
+         <div class="col-1">
         	<%--  <h1 style="padding-bottom: 50px;">
 	            ${fn:replace(item.getTitle(), newline, "<br>") }
             </h1> --%>
-            <div>
-               <h3 style="font-weight: bolder; padding-bottom: 15px;">내용</h3>
-               <p class="font-weight-light" style="padding-bottom: 15px;">
-               ${fn:replace(item.getContents(), newline, "<br>") }
-               </p>
-            </div>
+            
          </div>
+         
          <div class="col-4">
- 			<img class="w-100 rounded card-img-top productImg" width="500px" height="400px"
+ 			<img class="rounded" width="500px" height="400px"
 					src="${pageContext.request.contextPath}${item.getUrl()}">       
          </div>
+         <div class="col-1"></div>
          <!-- 오른쪽 : 수정  -->
          <div class="col-4">
         	<div class="row g-3 align-items-center">
         		<div class="col-lg col-auto">
         			<h1 class="text-center">${item.getTitle() }</h1>
         		</div>
-        	</div>
-        	<div class="row row-cols-lg-auto g-3 align-items-center">
-        		<div>
+        	<div>
             	<c:url var="update" value="/admin/product/update" />
 	            <form action="${update}?id=${item.getId()}" method="GET">
 					<input type="hidden" name="id" value="${item.getId()}" readonly>
@@ -52,12 +48,18 @@
 				<br>
             </div>
         	</div>
+        	<div style="padding-left:90px;">
+               <h3 style="font-weight: bolder; padding-bottom: 15px; padding-top: 30px;">등록된 상품 설명</h3>
+               <p class="font-weight-light" style="padding-bottom: 15px;">
+               ${fn:replace(item.getContents(), newline, "<br>") }
+               </p>
+            </div>
             <div class="row g-3 align-items-center">
 			</div>
        	</div>
 		</div>
    	</div>
-    <div id="bodyContainer3">
+    <div id="bodyContainer3" style="padding-top:90px;">
 		<jsp:include page="/WEB-INF/views/admin/product/reviews.jsp" flush="false" >
 			<jsp:param name="item" value="${item}" />
 			<jsp:param name="reviews" value="${reviews}" />
