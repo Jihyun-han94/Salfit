@@ -12,29 +12,29 @@
 </head>
 
 <body>
- <header>
+	<header>
  		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
 	</header><br><br><br><br><br><br><br><br>
-<nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-link active" id="nav-monthly-tab" data-toggle="tab" href="#nav-monthly" role="tab" aria-controls="nav-monthly" aria-selected="true">월 매출액, 판매수</a>
-    <a class="nav-link" id="nav-top5-tab" data-toggle="tab" href="#nav-top5" role="tab" aria-controls="nav-top5" aria-selected="false">인기 상품 top5</a>
-  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  	<div class="tab-pane fade show active" id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
-  		<form action="<c:url value='/admin/order/summary' />" method="GET">
-  		<select id="selectedYear" name="selectedYear" onchange="setYear(this.value);">
-                <option value="" disabled ${param.selectedYear == null ? 'selected' : '' } >년도 선택</option>
-            </select>
-  		</form>
-		<canvas id="myChart" width="400" height="400"></canvas>
-
-	</div>
-  	<div class="tab-pane fade" id="nav-top5" role="tabpanel" aria-labelledby="nav-top5-tab">
-  		<canvas id="myChart2" width="400" height="400"></canvas>
-	</div>
-</div>
+	<section class="mb-5 col-10 m-auto">
+		<nav>
+		  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+		    <a class="nav-link active" id="nav-monthly-tab" data-toggle="tab" href="#nav-monthly" role="tab" aria-controls="nav-monthly" aria-selected="true">월 매출액, 판매수</a>
+		    <a class="nav-link" id="nav-top5-tab" data-toggle="tab" href="#nav-top5" role="tab" aria-controls="nav-top5" aria-selected="false">인기 상품 top5</a>
+		  </div>
+		</nav>
+		<div class="tab-content" id="nav-tabContent">
+		  	<div class="tab-pane fade show active" id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
+		  		<select id="selectedYear" name="selectedYear" class="mt-5" onchange="setYear(this.value);">
+	                <option value="" disabled ${param.selectedYear == null ? 'selected' : '' } >년도 선택</option>
+	            </select>
+				<canvas id="myChart" width="400" height="400" class="mb-5 mt-5"></canvas>
+		
+			</div>
+		  	<div class="tab-pane fade" id="nav-top5" role="tabpanel" aria-labelledby="nav-top5-tab">
+		  		<canvas id="myChart2" width="400" height="400" class="mb-5 mt-5"></canvas>
+			</div>
+		</div>
+	</section>
 <script>
 $(document).ready(function() {
 	let selectbox = document.getElementById("selectedYear");
