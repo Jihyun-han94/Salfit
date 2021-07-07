@@ -20,7 +20,6 @@
 	<div id="addOK" class="alert alert-info collapse" role="alert">새 카테고리가 등록되었습니다.</div>	
 	<div id="addFail" class="alert alert-danger collapse" role="alert">카테고리 등록 실패</div>
 	<div id="deleteOK" class="alert alert-danger collapse" role="alert">해당 카테고리가 삭제되었습니다.</div>
-	
 	<div>
 		<jsp:include page="/WEB-INF/views/product/categories.jsp" flush="false" >
 			<jsp:param name="producttypes" value="${producttypes}" />
