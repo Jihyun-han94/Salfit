@@ -271,7 +271,8 @@
 	  SELECT COUNT(id) "numOfOrders",
 	  		 NVL(sum(total), 0)  "revenue"
 	  	FROM ordered
-	   WHERE EXTRACT(month FROM TO_DATE(pdate, 'YYYY-MM-DD')) = EXTRACT(month FROM TO_DATE(#{month}, 'YYYY-MM-DD'))
+	   WHERE EXTRACT(year FROM TO_DATE(pdate, 'YYYY-MM-DD')) = EXTRACT(year FROM TO_DATE(#{month}, 'YYYY-MM-DD'))
+	   	AND EXTRACT(month FROM TO_DATE(pdate, 'YYYY-MM-DD')) = EXTRACT(month FROM TO_DATE(#{month}, 'YYYY-MM-DD'))
 	  	 AND status != 'unpaid'
 	</select>
 </mapper>

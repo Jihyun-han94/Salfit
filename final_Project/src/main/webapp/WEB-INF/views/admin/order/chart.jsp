@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -8,16 +8,66 @@
 <head>
 <meta charset="UTF-8">
 <title>통계</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 
 <body>
-<canvas id="myChart" width="400" height="400"></canvas>
+ <header>
+ 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
+	</header><br><br><br><br><br><br><br><br>
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-link active" id="nav-monthly-tab" data-toggle="tab" href="#nav-monthly" role="tab" aria-controls="nav-monthly" aria-selected="true">월 매출액, 판매수</a>
+    <a class="nav-link" id="nav-top5-tab" data-toggle="tab" href="#nav-top5" role="tab" aria-controls="nav-top5" aria-selected="false">인기 상품 top5</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  	<div class="tab-pane fade show active" id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
+  		<form action="<c:url value='/admin/order/summary' />" method="GET">
+  		<select id="selectedYear" name="selectedYear" onchange="setYear(this.value);">
+                <option value="" disabled ${param.selectedYear == null ? 'selected' : '' } >년도 선택</option>
+            </select>
+  		</form>
+		<canvas id="myChart" width="400" height="400"></canvas>
+
+	</div>
+  	<div class="tab-pane fade" id="nav-top5" role="tabpanel" aria-labelledby="nav-top5-tab">
+  		<canvas id="myChart2" width="400" height="400"></canvas>
+	</div>
+</div>
 <script>
+$(document).ready(function() {
+	let selectbox = document.getElementById("selectedYear");
+	generateYear(selectbox);
+		
+	<c:if test="${!empty param.selectedYear}">
+		selectbox.setAttribute("value", ${param.selectedYear});
+		let option = document.getElementById(${param.selectedYear});
+		option.setAttribute('selected', 'selected');
+	</c:if>
+});
+// years
+function generateYear(element) {
+    let date = new Date();
+    if (element.children.length <= 1) {
+        for(let year = date.getFullYear(); year >= 2020; year--) {
+            let option = document.createElement("option");
+            option.setAttribute("value", year);
+            option.setAttribute("id", year);
+            option.innerText = year;
+            element.appendChild(option);
+        }
+    }
+}
+
+function setYear(value) {
+    window.location.href = "summary?selectedYear=" + value;
+}
+
+
 var ctx = document.getElementById('myChart').getContext('2d');
 const labels = ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'];
 var revenue = new Array(12).fill(0);	var numOfOrders = new Array(12).fill(0); var numOfProducts = new Array(12).fill(0);
-alert(revenue);
 	<c:forEach items="${revenue}" var="rev" varStatus="loop">
 	    revenue.fill("${rev}", "${loop.index}", "${loop.count}");
 	</c:forEach>
@@ -105,7 +155,7 @@ var myChart = new Chart(ctx, {
 });
 </script>
 
-<canvas id="myChart2" width="400" height="400"></canvas>
+
 <script>
 var top5 = [
 <c:forEach items="${top5}" var="title" varStatus="loop">
@@ -144,6 +194,8 @@ var myChart2 = new Chart(ctx2, {
     		}
 });
 </script>
+
+<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 
 </html>

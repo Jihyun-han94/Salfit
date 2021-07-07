@@ -28,6 +28,7 @@ import com.jey.webapp.admin.dto.PageMaker;
 import com.jey.webapp.admin.dto.SummaryDTO;
 import com.jey.webapp.admin.service.AdminService;
 import com.jey.webapp.product.dto.ProductDTO;
+import com.sun.istack.internal.Nullable;
 
 @Controller
 @RequestMapping(value = "/admin/order")
@@ -160,12 +161,16 @@ public class AdminOrderController {
 	
 	/* 통계 */
 	@RequestMapping(value = "/summary", method = RequestMethod.GET)
-	public String summary(Model m,@ModelAttribute ProductDTO dto, SummaryDTO summary) throws Exception{
+	public String summary(Model m,@ModelAttribute ProductDTO dto, SummaryDTO summary, @RequestParam(required=false) String selectedYear) throws Exception{
+		Calendar calendar = Calendar.getInstance();
+		
+		int year = calendar.get(Calendar.YEAR);
+		if(selectedYear != null) {
+			year = Integer.parseInt(selectedYear);
+		} 
 		
 //		한달동안 매출액, 주문건수, 총 상품 갯수 
 		
-		Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
         
         int start; int end; int dates;
