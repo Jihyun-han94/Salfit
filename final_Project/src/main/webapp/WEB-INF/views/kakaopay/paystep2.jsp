@@ -19,7 +19,7 @@
 <br>
 <br>
 <h1>${username }님 결제 완료 되었습니다!</h1>
-<table>
+<table border="1">
 <th>날짜</th>
 <th>결제 금액</th>
 <th>결제 수단</th>

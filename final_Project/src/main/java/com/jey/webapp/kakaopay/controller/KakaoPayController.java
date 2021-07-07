@@ -139,7 +139,7 @@ public class KakaoPayController {
 		return forward;
 	}
 	
-	@RequestMapping(value="comfirm", method = RequestMethod.GET)
+	@RequestMapping(value="confirm", method = RequestMethod.GET)
 	public ModelAndView confirmpayment(Model m, HttpServletRequest request,@ModelAttribute OrderDTO dto) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();

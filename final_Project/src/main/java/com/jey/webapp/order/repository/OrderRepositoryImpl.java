@@ -90,7 +90,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 	@Override
 	public boolean updatestatus(OrderDTO dto) throws Exception {
 		boolean result = false;
-		int res = sqlSession.update("orderMapper.updatestauts", dto);
+		int res = sqlSession.update("orderMapper.updatestatus", dto);
 		if (res == 1) {
 			result = true;
 		}
