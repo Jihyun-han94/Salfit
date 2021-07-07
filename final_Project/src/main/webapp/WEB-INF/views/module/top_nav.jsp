@@ -122,7 +122,9 @@
 			<li><a href="${notice }">Notice</a></li>	
 			<li><a href="${product }">Menu</a></li>	
 			<li><a href="${about }">About</a></li>	
-			<li><a href="${email_write }">Contact Us</a></li>	
+			<li><a href="mailto:salfit.contact@gmail.com?Subject=[문의 메일]%20&body=해당%20이메일%20주소로%20순차적으로%20답변을%20드립니다.
+		%0D%0A%0D%0A신청하는%20분%20이름:%0D%0A신청하는%20분%20연락처:%0D%0A문의사항:%0D%0A
+		(원활한%20상담을%20위해%20상품명,%20수량,%20희망시간%20등을%20적어주세요.)" target="_top">Contact Us</a></li>	
 		</ul>	
 	</nav> <!-- .cd-secondary-nav -->	
 </header> <!-- .cd-auto-hide-header -->	

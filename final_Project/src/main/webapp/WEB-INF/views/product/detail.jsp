@@ -120,7 +120,7 @@
       <div class="row my-10 mx-5 "> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
       	<div class="col-1"></div>
          <div class="col-5">
- 			<img class="w-100 rounded card-img-top productImg" width="500px" height="1000px"
+ 			<img class="rounded" width="500px" height="400px"
 					src="${pageContext.request.contextPath}${item.getUrl()}">       
          </div>
          <div class="col-1"></div>
@@ -138,11 +138,11 @@
                </p>
             </div>
             <div class="col-6 text-end">
-        			<h3 class="text-end" style="padding-bottom: 30px;">₩ ${item.getPrice() }</h3>
+        			<h3 class="text-end" style="padding-bottom: 30px; font-size: 24px; font-weight: bold;">₩ ${item.getPrice() }</h3>
         		</div>
-        	<div class="row row-cols-lg-auto g-3 align-items-center">
+        	<div class="row row-cols-lg-auto g-3 align-items-left">
         		<div>
-        			<label style="display: inline-block; margin-right: 120px;">
+        			<label style="display: inline-block; margin-right: 140px;">
         				구독 시작일 선택:<input type="hidden" class="datepicker" id="datepickerS"></label>
         				<label style="display: inline-block;">
         				구독 종일 선택:<input type="hidden" class="datepicker" id="datepickerE"></label>
@@ -150,6 +150,7 @@
 
         		</div>
         	</div>
+        	
             <div class="row g-3 align-items-center" style="margin-top: -300px; margin-right: 100px;">
 			  <div class="col-sm-3 col-auto">
                  <div class="input-group input-group-sm mb-3 btn-default">

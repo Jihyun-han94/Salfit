@@ -14,8 +14,9 @@
 </head>
 <body>
 	<header>
-		<%-- <jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> --%>
+		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<div id="updateOK" class="alert alert-success collapse" role="alert">상품 정보를 수정했습니다.</div>
  	<div id="bodyContainer1">
       <div class="row my-10 mx-5 "> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
@@ -23,6 +24,7 @@
         	<%--  <h1 style="padding-bottom: 50px;">
 	            ${fn:replace(item.getTitle(), newline, "<br>") }
             </h1> --%>
+            
             <div>
                <h3 style="font-weight: bolder; padding-bottom: 15px;">내용</h3>
                <p class="font-weight-light" style="padding-bottom: 15px;">
@@ -30,6 +32,7 @@
                </p>
             </div>
          </div>
+         
          <div class="col-4">
  			<img class="w-100 rounded card-img-top productImg" width="500px" height="400px"
 					src="${pageContext.request.contextPath}${item.getUrl()}">       
