@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
 		return dao.insert(dto);
 	}
 
-	@Override
+	@Override //결제 후 status 변경
 	public boolean update(OrderDetailDTO dto) throws Exception {
 		
 		return dao.update(dto);
@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
 		return orderlist;
 	}
 
-	@Override
+	@Override //결제 후 status 변경
 	public boolean add(ReviewDTO dto) throws Exception {
 		boolean result = dao.insert(dto);
 		return result;
@@ -76,6 +76,30 @@ public class OrderServiceImpl implements OrderService {
 	public OrderDTO findorder(OrderDTO dto) throws Exception {
 		dto = dao.findorder(dto);
 		return dto;
+	}
+
+	@Override
+	public boolean updatedel(OrderDTO dto) throws Exception {
+		
+		return dao.updatedel(dto);
+	}
+
+	@Override
+	public boolean updatedel(OrderDetailDTO dto) throws Exception {
+		
+		return dao.updatedel(dto);
+	}
+
+	@Override
+	public boolean holdorder(OrderDTO dto) throws Exception {
+	
+		return dao.holdorder(dto);
+	}
+
+	@Override
+	public boolean holdorder(OrderDetailDTO dto) throws Exception {
+		
+		return dao.holdorder(dto);
 	}
 
 

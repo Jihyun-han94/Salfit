@@ -20,13 +20,17 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.jey.webapp.account.dto.AccountAddressDTO;
 import com.jey.webapp.account.dto.AccountDTO;
+import com.jey.webapp.account.service.AccountService;
 import com.jey.webapp.alert.AlertHandler;
 import com.jey.webapp.cart.dto.CartDTO;
 import com.jey.webapp.cart.service.CartService;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.order.service.OrderService;
+import com.jey.webapp.product.dto.ProductDTO;
+import com.jey.webapp.product.service.ProductService;
 
 @Controller
 @RequestMapping(value="/pay")
@@ -36,6 +40,10 @@ public class KakaoPayController {
 	private CartService cart;
 	@Autowired	
 	private OrderService order;
+	@Autowired	
+	private AccountService account;
+	@Autowired
+	private ProductService product;
 	@Autowired
 	private AlertHandler alerthandler;
 	
@@ -50,6 +58,12 @@ public class KakaoPayController {
 		int sumMoney =0;
 		int totalMoney = 0;
 		int delfee = 0; //배송비
+		
+		HttpSession session = request.getSession();
+		//계정 정보 확인
+		AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
+		
+		List<AccountAddressDTO> address_arr =account.getList(accountdto.getId());
 		
 	
 		for(int i=0;i<id.length;i++){
@@ -81,6 +95,8 @@ public class KakaoPayController {
 		
 		m.addAttribute("cartlist",cartlist);
 		m.addAttribute("sumMoney", sumMoney);
+		m.addAttribute("address_arr", address_arr);
+		
 		
 		String forward  = "kakaopay/payment";
 		
@@ -148,7 +164,7 @@ public class KakaoPayController {
 		//계정 정보 확인
 		AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
 		
-		System.out.println("orderid디버깅까꿍"+dto.getId());
+	
 		String paymethod = request.getParameter("paymethod");
 		System.out.println(paymethod);
 		
@@ -162,6 +178,14 @@ public class KakaoPayController {
 		// 결제 정보 Model m 으로 paystep2.jsp 에 전달하기!!
 		dto = order.findorder(dto);
 		
+		ProductDTO productdto = new ProductDTO();
+		//결제 완료시 product bcnt 1 증가
+		List<OrderDetailDTO> detail_arr = order.selectall(detailDTO);
+		for(OrderDetailDTO data:detail_arr) {
+			productdto.setId(data.getPid());
+			product.updatebcnt(productdto);
+		
+		}
 		m.addAttribute("paymethod", paymethod);
 		m.addAttribute("orderDTO", dto);
 		m.addAttribute("username", accountdto.getName());

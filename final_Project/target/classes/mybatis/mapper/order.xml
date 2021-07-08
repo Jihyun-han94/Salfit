@@ -4,6 +4,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orderMapper">
+	
+	<update id = "holdorder" parameterType = "order">
+		UPDATE ordered
+		SET status = 'holding'
+		WHERE id = #{id} 
+	</update>
+	
+	<update id = "holdorderdetail" parameterType = "orderdetail">
+		UPDATE order_detail
+		SET status = 'holding'
+		WHERE oid = #{oid} 
+	</update>
+	
+
+	<update id = "updatedelordered" parameterType = "order">
+		UPDATE ordered
+		SET status = 'delivered'
+		WHERE id = #{id} 
+	</update>
+	
+	<update id = "updatedeldetail" parameterType = "orderdetail">
+		UPDATE order_detail
+		SET status = 'delivered'
+		WHERE oid = #{oid} 
+	</update>
+
+
 	<select id ="findorder" parameterType="order" resultType="order">
 		SELECT * 
 		FROM ordered
