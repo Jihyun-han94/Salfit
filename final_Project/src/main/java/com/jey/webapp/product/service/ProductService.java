@@ -33,5 +33,6 @@ public interface ProductService {
 	public List<ProductDTO> searchOldProductList(ProductSearchDTO search);
 	public boolean addPtype(ProductTypeDTO dto);
 	public boolean deletePtype(ProductTypeDTO dto);
+	public boolean updatebcnt(ProductDTO productdto) throws Exception;
 
 }

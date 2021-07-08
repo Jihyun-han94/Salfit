@@ -33,4 +33,5 @@ public interface ProductRepository {
 	public List<ProductDTO> findOldProductList(ProductSearchDTO search);
 	public boolean addPtype(ProductTypeDTO dto);
 	public boolean deletePtype(ProductTypeDTO dto);
+	public boolean updatebcnt(ProductDTO productdto);
 }

@@ -191,4 +191,14 @@ public class ProductRepositoryImpl implements ProductRepository {
 		}
 		return res;
 	}
+
+	@Override
+	public boolean updatebcnt(ProductDTO productdto) {
+		boolean res = false;
+		int rs = sqlSession.update("productMapper.updatebcnt", productdto);	
+		if(rs == 1) {
+			res = true;
+		}
+		return res;
+	}
 }

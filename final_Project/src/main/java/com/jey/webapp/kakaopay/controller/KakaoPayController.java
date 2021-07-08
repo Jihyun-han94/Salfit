@@ -29,6 +29,7 @@ import com.jey.webapp.cart.service.CartService;
 import com.jey.webapp.order.dto.OrderDTO;
 import com.jey.webapp.order.dto.OrderDetailDTO;
 import com.jey.webapp.order.service.OrderService;
+import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.service.ProductService;
 
 @Controller
@@ -177,10 +178,14 @@ public class KakaoPayController {
 		// 결제 정보 Model m 으로 paystep2.jsp 에 전달하기!!
 		dto = order.findorder(dto);
 		
+		ProductDTO productdto = new ProductDTO();
 		//결제 완료시 product bcnt 1 증가
+		List<OrderDetailDTO> detail_arr = order.selectall(detailDTO);
+		for(OrderDetailDTO data:detail_arr) {
+			productdto.setId(data.getPid());
+			product.updatebcnt(productdto);
 		
-		
-		
+		}
 		m.addAttribute("paymethod", paymethod);
 		m.addAttribute("orderDTO", dto);
 		m.addAttribute("username", accountdto.getName());

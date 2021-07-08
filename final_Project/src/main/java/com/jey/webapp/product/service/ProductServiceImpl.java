@@ -124,5 +124,11 @@ public class ProductServiceImpl implements ProductService {
 		return dao.deletePtype(dto);
 	}
 
+	@Override
+	public boolean updatebcnt(ProductDTO productdto) throws Exception {
+		
+		return dao.updatebcnt(productdto);
+	}
+
 
 }
