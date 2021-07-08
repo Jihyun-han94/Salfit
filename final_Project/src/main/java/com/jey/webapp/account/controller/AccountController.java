@@ -271,4 +271,9 @@ public class AccountController {
 		return "redirect:/";
 	}
 	
+	/* notice */
+	@RequestMapping(value = "/notice", method = RequestMethod.GET)
+	public String notice() throws Exception {
+		return "account/notice";
+	}
 }

@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="/salfit/resources/static/css/footer.css">
 <link rel="stylesheet" href="/salfit/resources/static/css/top_nav.css">
 <!-- favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/newicon.ico" />
 
 <!-- JS -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/static/jquery/js/jquery-3.6.0.min.js"></script>

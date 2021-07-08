@@ -71,7 +71,7 @@
 </style>	
 	<header class="cd-auto-hide-header">	
 		<div class="logo">
-		<a href="${main }"><img src="/salfit/resources/img/log.png" alt="Logo" height="80px" style="float: left;"></a>
+		<a href="${main }"><img src="/salfit/resources/img/newlogo.png" alt="Logo" height="80px" style="float: left;"></a>
 				<form id="search_form" action="${search }" method="get" style="padding-left: 50px; padding-top: 25px; float:right;">
 		<c:if test="${not empty param.ptype}" >
 			<input type="hidden" name="ptype" value="${param.ptype }">

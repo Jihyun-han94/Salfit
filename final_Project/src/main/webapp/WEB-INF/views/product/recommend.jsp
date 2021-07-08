@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <div class="container text-center">
-	<h3>비슷한 상품</h3>
+	<h3 style="padding-bottom: 20px;">비슷한 상품</h3>
 	<div class="">
 		<div id="carouselExampleControls" class="carousel slide" data-ride="false">
 	      <div class="carousel-inner">
@@ -18,7 +18,7 @@
 			          <div class="col mb-3 ">
 				          <a href="${detail}?id=${similar.getId()}">
 				          <img class="recommend-image" src="${pageContext.request.contextPath}${similar.getUrl()}"  alt="similar-img"><br>
-				          <h5 class="">${similar.getTitle()}</h5>
+				          <h5 style="padding-bottom: 5px; padding-top: 5;">${similar.getTitle()}</h5>
 				          <em>₩ ${similar.getPrice()}</em>
 				          </a>
 			          </div>

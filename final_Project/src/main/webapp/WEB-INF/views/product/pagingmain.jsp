@@ -23,10 +23,7 @@
 	<br><br><br><br><br><br><br><br><br>
 <main style="font-family: 'Kakao', 'sans-serif', 'normal';">
 <div style="margin: 0 auto;">
-<div>
-	<div>
-	</div>
-</div>
+
 <br><br><br><br><br><br><br><br><br>
 <div>
 	<jsp:include page="/WEB-INF/views/product/categories.jsp" flush="false" >
@@ -138,16 +135,16 @@ function addDataToDOM(data) {
 							+'	<img class="rounded card-img-top productImg"'
 							+'		src="${pageContext.request.contextPath}'+data[i].url+'"></a>'
 							+'<div class="card-body bg-transparent border-0">'
-							+'	<h5 class="card-title card-text">'
+							+'	<h5 class="card-title card-text" style="display: inline-block;">'
 							+'		<a href="${detail}?id='+data[i].id+'">'+data[i].title+'</a>'
 							+'	</h5>'
-							+'</div>'
-							+'<div class="card-footer bg-transparent border-0">' 
-							+'	<p class="card-text">'
+							+'	<p class="card-text" style="display: inline-block; padding-left: 10px;">'
 							+'		<small class="text-muted">'
 							+ string
 							+'		</small>'
 							+'	</p>'
+							+'</div>'
+							+'<div class="card-footer bg-transparent border-0">' 
 							+'	<p class="card-text">'
 							+'		₩ '+data[i].price
 							+'	</p>'

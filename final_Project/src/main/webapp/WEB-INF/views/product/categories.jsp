@@ -52,7 +52,7 @@
 								<img class="rounded card-img-top productImg"
 									src="${pageContext.request.contextPath}${ptype.getImgurl()}">
 							</a>
-							<div class="card-body bg-transparent border-0">
+							<div class="card-body bg-transparent border-1">
 								<h5 class="card-title card-text">
 									<a href="?ptype=${ptype.id }">${ptype.name }</a>
 								</h5>
