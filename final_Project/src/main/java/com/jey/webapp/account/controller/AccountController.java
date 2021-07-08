@@ -74,11 +74,12 @@ public class AccountController {
 	
 	/* 로그인 */
 	
-//	@RequestMapping(value = "/login", method = RequestMethod.GET)
-//	public String login() throws Exception {
-//		return "account/login";
-//	}
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String googleLogin(HttpServletRequest request, Model m, HttpSession session) {
+		return "account/login";
+	}
 	
+	// 일반회원 로그인 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String userLogin(Model m, @ModelAttribute AccountDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String forward = "";
@@ -112,73 +113,44 @@ public class AccountController {
 		return forward;
 	}
 	
-	/* 구글로 로그인 */
 
-	// 로그인 첫 화면 요청 메소드
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String googleLogin(HttpServletRequest request, Model m, HttpSession session) {
-//		/* 구글code 발행 */
-//		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
-//		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
-//
-//		System.out.println("구글:" + url);
-//		m.addAttribute("google_url", url);
-
-		/* 생성한 인증 URL을 View로 전달 */
-		return "account/login";
-	}
-//
-//	// 구글 Callback호출 메소드
-//	  @RequestMapping(value = "/oauth2callback", method = { RequestMethod.GET, RequestMethod.POST })
-//	  public String googleCallback(Model m, @RequestParam String code) throws Exception {
-//
-//	    System.out.println("Google login success");
-//
-//	    // 메인페이지로 리다이렉트
-//	    return "account/google_success";
-//	  }
 	  
 	// 구글 login
-	  @RequestMapping(value = "/google_login", method = RequestMethod.POST )
-	  public String googlelogin(Model m, @ModelAttribute AccountDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		  	String forward = "";
-			String next = "/";
-			if(dto.getNext() != null && !dto.getNext().equals("null")) {
-				next = dto.getNext();
-			}
-			
-			boolean res = account.checkEmail(dto.getEmail());
-			
-			if(!res) {
-				// 회원가입
-				dto.setPhone("0");
-				dto.setAtype("g");
-				account.join(dto);
-			}
-			
-			dto = account.login(dto);
-			System.out.println(dto.getPassword());
-//			double gid = Double.parseDouble(dto.getPassword().substring(0, 9));
-//			int id = 0;
-//			id = (int) gid;
-//			int id = Integer.parseInt(dto.getPassword());
-//			System.out.println(id);
-			dto.setPhone("");
-			dto.setAtype("g");
-			dto.setId(dto.getId());
-			HttpSession session = request.getSession();
-			// session.setMaxInactiveInterval(60*60);
-
-			System.out.println(dto.getId());
-			session.setAttribute("account", dto);
-			session.setAttribute("logined", true);
-			session.setAttribute("atype", dto.getAtype());
-			m.addAttribute("dto",dto);
-
-			forward = "redirect:"+next;
-			return forward;
-
-	  }
+	@RequestMapping(value = "/google_login", method = RequestMethod.POST )
+	public String googlelogin(Model m, @ModelAttribute AccountDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	  	String forward = "";
+		String next = "/";
+		if(dto.getNext() != null && !dto.getNext().equals("null")) {
+			next = dto.getNext();
+		}
+		
+		boolean res = account.checkEmail(dto.getEmail());
+		
+		if(!res) {
+			// 회원가입
+		dto.setPhone("0");
+		dto.setAtype("g");
+			account.join(dto);
+		}
+		
+		dto = account.login(dto);
+		
+		dto.setPhone("");
+		dto.setAtype("g");
+		dto.setId(dto.getId());
+		HttpSession session = request.getSession();
+		// session.setMaxInactiveInterval(60*60);
+		
+		System.out.println(dto.getId());
+		session.setAttribute("account", dto);
+		session.setAttribute("logined", true);
+		session.setAttribute("atype", dto.getAtype());
+		m.addAttribute("dto",dto);
+		
+		forward = "redirect:"+next;
+		return forward;
+	
+	}
 	
 	/* 로그아웃 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

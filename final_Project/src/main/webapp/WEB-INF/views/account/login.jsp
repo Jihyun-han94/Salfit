@@ -132,12 +132,12 @@ function send() {
 							<input type="hidden" name="next" value="${param.next}">
 						</c:if>
 	                    <div class="submit-wrap">
-	                        <input type="submit" value="Sign in" class="submit">
+	                        <input type="submit" value="Sign in" class="submit mb-4">
+	                    <div class="google_login">
+	                    	<div class="g-signin2" data-width="270" data-height="40" data-longtitle="true" data-onsuccess="onSignIn" data-theme="light"></div>
+	                    </div>
 	                       	<%-- <div class="g-signin2" data-onsuccess="onSignIn"><a href="${google_url}"></a></div> --%>
 	                        <a href="#" class="more">Forgot your password?</a>
-	                    </div>
-	                    <div class="google_login">
-	                    	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 	                    </div>
 	  				</form>
 			  	</div>
