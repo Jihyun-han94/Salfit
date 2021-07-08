@@ -85,38 +85,38 @@
 
 /* detail.jsp */
 
-/* #bodyContainer1 {
-	height: 50rem;
-	background-color: red;
-	color: #fff;
+ #bodyContainer1 {
+	height: 70rem;
 }
 #bodyContainer2 {
-	height: 20rem;
-	background-color: yellow; 
+	height: 30rem;
 }
 #bodyContainer3 {
 	height: 40rem;
-	background-color: green; 
 }
- */
+ 
 
 .btn-default {
   font-family: Raleway-SemiBold;
-  font-size: 13px;
-  color: rgba(108, 88, 179, 0.75);
+  font-size: 2rem;
   letter-spacing: 1px;
-  line-height: 15px;
+  line-height: 16px;
   border: 2px solid #FFF;
   border-radius: 40px;
   background: transparent;
   transition: all 0.3s ease 0s;
+  color: #FFF;
 }
 
 .btn-default:hover {
-  color: #FFF;
-  background: rgba(108, 88, 179, 0.75);
-  border: 2px solid rgba(108, 89, 179, 0.75);
+  color: rgba(108, 88, 179, 0.75);
 }
+
+.productQty {
+	font-size: 1.8rem;
+}
+
+
 .btn-success {
   font-family: Raleway-SemiBold;
   font-size: 13px;

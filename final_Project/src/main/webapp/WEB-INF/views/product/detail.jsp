@@ -141,17 +141,55 @@
         			<h3 class="text-end" style="padding-bottom: 30px; font-size: 24px; font-weight: bold;">₩ ${item.getPrice() }</h3>
         		</div>
         	<div class="row row-cols-lg-auto g-3 align-items-left">
-        		<div>
-        			<label style="display: inline-block; margin-right: 140px;">
+        		<!-- <div>
+        			<label for="alternateS" style="display: inline-block; margin-right: 140px;">
         				구독 시작일 선택:<input type="hidden" class="datepicker" id="datepickerS"></label>
-        				<label style="display: inline-block;">
-        				구독 종일 선택:<input type="hidden" class="datepicker" id="datepickerE"></label>
-        			<p> <input style="margin-right: 30px;" type="text" class="alternate" id="alternateS" size="25" readonly>~<input type="text" style="margin-left: 30px;"class="alternate" id="alternateE" size="25" readonly></p><br>
+       				<label for="alternateE" style="display: inline-block;">
+        				구독 종료일 선택:<input type="hidden" class="datepicker" id="datepickerE"></label>
+        			<p> <input style="margin-right: 30px;" type="text" class="alternate" id="alternateS" size="25" readonly>
+        			~<input type="text" style="margin-left: 30px;" class="alternate" id="alternateE" size="25" readonly></p><br>
 
+        		</div> -->
+        		<div class="col-12 mb-5">
+        			<div class="row">
+        			<span class="col-4" >구독 시작일 선택 : <input type="hidden" class="datepicker" id="datepickerS" style="z-index: 98;"></span>
+        			<span class="col-1"></span>
+        			<span class="col-4" >구독 종료일 선택 : <input type="hidden" class="datepicker" id="datepickerE" style="z-index: 99;"></span>
+        			</div>
+        			<div class="row mt-4">
+        			<span class="col-4"> <input type="text" class="alternate" id="alternateS" size="22" readonly></span>
+        			<span class="col-1">~</span>
+        			<span class="col-4"> <input type="text" class="alternate" id="alternateE" size="22" readonly></span>
+        			</div>
+        		</div>
+        		<div class="col-12 mt-5">
+        			<div class="row">
+        			  <div class="col-sm-3 col-auto">
+		                 <div class="input-group  mb-3 btn-default">
+						  	<button id="minus" onclick="minus();" class="btn  border-0  font-weight-bold productQty" type="button">-</button>
+						  	<input id="quantity" type="text" class="form-control border-0 text-center productQty" placeholder="" value="1" min="1">
+						  	<button id="plus" onclick="plus();" class="btn  border-0 font-weight-bold productQty" type="button">+</button>
+		               	</div>
+					  </div>
+					  <div class="col-sm-2 col-auto"></div>
+					  <div class="col-sm-3 col-auto">
+	        			  <button class="cart-button" type="button" onclick="addToCart(this, ${item.getId()}
+							    , document.getElementById('quantity')
+							    , document.getElementById('datepickerS')
+							    , document.getElementById('datepickerE')
+							    , ${account.getId()}
+							    );" >
+					  		<span class="add-to-cart">Add to cart</span>
+					  		<span class="added">Item added</span>
+					  		<i class="fa fa-shopping-cart"></i>
+					  		<i class="fa fa-square"></i>
+					  	  </button>
+				  	  </div>
+			  		</div>
         		</div>
         	</div>
         	
-            <div class="row g-3 align-items-center" style="margin-top: -300px; margin-right: 100px;">
+            <%--<div class="row g-3 align-items-center" style="margin-top: -300px; margin-right: 100px;">
 			  <div class="col-sm-3 col-auto">
                  <div class="input-group input-group-sm mb-3 btn-default">
 				  	<button id="minus" onclick="minus();" class="btn btn-sm border-0" type="button" id="button-addon1">-</button>
@@ -161,8 +199,8 @@
 			  </div>
 			  <div class="col-sm-9">
 			  
-			  <div class="buttons">
-			  	<button class="cart-button" type="button" onclick="addToCart(this, ${item.getId()}
+			   <div class="buttons">
+			   <button class="cart-button" type="button" onclick="addToCart(this, ${item.getId()}
 					    , document.getElementById('quantity')
 					    , document.getElementById('datepickerS')
 					    , document.getElementById('datepickerE')
@@ -172,8 +210,8 @@
 			  		<span class="added">Item added</span>
 			  		<i class="fa fa-shopping-cart"></i>
 			  		<i class="fa fa-square"></i>
-			  	</button>
-			  </div>
+			  	</button> 
+			  </div> --%>
 			  	<%-- <div class="input-group input-group-sm mb-3 btn-success">
 					<button type="button" class="btn btn-block badge-pill" 
 					    onclick="addToCart(this, ${item.getId()}
@@ -202,19 +240,19 @@
 			      		</div>
 			   		</div>
 				</div>
-		  		</div> --%>
+		  		</div> 
 		  </div>
-		</div>
+		</div>  --%>
        	</div>
    		</div>
    	</div>
-	<div id="bodyContainer2" style="margin-top: -250px;">
+	<div id="bodyContainer2" >
 		<jsp:include page="/WEB-INF/views/product/recommend.jsp" flush="false" >
 			<jsp:param name="item" value="${item}" />
 			<jsp:param name="recommend" value="${recommend}" />
 		</jsp:include>
 	</div>
-    <div id="bodyContainer3" style="margin-top: 50px;">
+    <div id="bodyContainer3" >
 		<jsp:include page="/WEB-INF/views/product/reviews.jsp" flush="false" >
 			<jsp:param name="item" value="${item}" />
 			<jsp:param name="reviews" value="${reviews}" />
@@ -374,7 +412,9 @@
     var qty = document.getElementById('quantity');
 
     function minus() {
-    	qty.value = parseInt(qty.value) - 1;
+	   	if(parseInt(qty.value) > 1) {
+    		qty.value = parseInt(qty.value) - 1;
+	   	}
     }
     function plus() {
     	qty.value = parseInt(qty.value) + 1;
