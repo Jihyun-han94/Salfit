@@ -37,11 +37,14 @@
 			,p.price AS price
 			,p.title AS title
 			,(price*c.qty) money
+			,i.url
 		FROM cart c
 		JOIN account a
 		  ON c.aid = a.id
 		JOIN product p
 		  ON c.pid = p.id
+		JOIN product_img i
+		 ON p.id = i.pid  
 		WHERE c.id = #{id} 
 		ORDER BY c.id DESC
 	</select>
@@ -72,7 +75,7 @@
 			,a.email AS email
 			,p.price AS price
 			,p.title AS title
-			,(price*c.qty) money
+			,(p.price*c.qty*c.days) money
 			,i.name
 			,i.path
 			,i.url
@@ -83,12 +86,12 @@
 		  ON c.pid = p.id
 	  	JOIN product_img i
 		  ON p.id = i.pid
-		WHERE c.aid = #{aid}  AND orderstatus = 'n'
+		WHERE c.aid = #{aid}  AND c.orderstatus = 'n'
 		ORDER BY c.id DESC
 	
 	</select>
 	<select id="sumMoney" parameterType="cart" resultType="_int">
-		SELECT nvl(sum(p.price*c.qty),0)
+		SELECT nvl(sum(p.price*c.qty*c.days),0)
 		FROM cart c
 		JOIN product p
 		  on c.pid = p.id
