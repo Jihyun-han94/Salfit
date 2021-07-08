@@ -23,4 +23,4 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/main.js" ></script>
 
 <!-- favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/newicon.ico" />

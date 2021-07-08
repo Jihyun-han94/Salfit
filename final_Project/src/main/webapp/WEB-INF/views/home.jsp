@@ -20,7 +20,7 @@
 	<c:url var="product" value="/product" />
 	<c:url var="cart" value="/cart" />
 	<c:url var="about" value="/about_us" />
-	<c:url var="notice" value="/notice" />
+	<c:url var="notice" value="account/notice" />
 	<c:url var="email_write" value="/email/write" />
 	<c:url var="admin_product" value="/admin/product" />
 	<c:url var="admin_order" value="/admin/order/list" />
@@ -48,12 +48,12 @@
 </head>
 <body>
 <header class="cd-auto-hide-header">
-	<div class="logo"><a href="${main }"><img src="./resources/img/log.png" alt="Logo" height="80px"></a>
+	<div class="logo"><a href="${main }"><img src="./resources/img/newlogo.png" alt="Logo" height="80px"></a>
 	<form id="search_form" action="${search }" method="get" style="padding-left: 50px; padding-top: 23px; float:right;">
 		<c:if test="${not empty param.ptype}" >
 			<input type="hidden" name="ptype" value="${param.ptype }">
 		</c:if>
-	    <select name="searchtype" style="width:80px; color: #D3D3D3; font-size:13px; border-radius: 10px; height:30px; border-color: #ffff; text-align: center;">
+	    <select id="searchtype" name="searchtype" style="width:80px; color: #D3D3D3; font-size:13px; border-radius: 10px; height:30px; border-color: #ffff; text-align: center;">
 	        <option>category</option>
 	        <option value="t">제품 명</option>
 	        <option value="c">제품 정보</option>
