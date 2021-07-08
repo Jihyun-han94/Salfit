@@ -5,8 +5,9 @@
 
 <mapper namespace="productMapper">
   <update id="updatebcnt" parameterType="product">
-  	UPDATE product SET bcnt =  WHERE id = #{id}
+  	UPDATE product SET bcnt = bcnt+1  WHERE id = #{id}
   </update>
+  
   <select id="productSearch" parameterType="productsearch" resultType="product">
 	SELECT p.id
          , p.ptype
