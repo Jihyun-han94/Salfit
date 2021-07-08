@@ -20,4 +20,8 @@ public interface OrderService {
 	public List<OrderDetailDTO> selectall(OrderDetailDTO dto) throws Exception;
 	public boolean updatestatus(OrderDTO dto) throws Exception;
 	public OrderDTO findorder(OrderDTO dto) throws Exception; 
+	public boolean updatedel(OrderDTO dto) throws Exception;
+	public boolean updatedel(OrderDetailDTO dto) throws Exception;
+	public boolean holdorder(OrderDTO dto) throws Exception;
+	public boolean holdorder(OrderDetailDTO dto) throws Exception;
 }

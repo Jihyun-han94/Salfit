@@ -103,6 +103,46 @@ public class OrderRepositoryImpl implements OrderRepository {
 		return dto;
 	}
 
+	@Override
+	public boolean updatedel(OrderDTO dto) throws Exception {
+		boolean result = false;
+		int res = sqlSession.update("orderMapper.updatedelordered",dto);
+		if(res ==1) {
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
+	public boolean updatedel(OrderDetailDTO dto) throws Exception {
+		boolean result = false;
+		int res = sqlSession.update("orderMapper.updatedeldetail",dto);
+		if(res ==1) {
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
+	public boolean holdorder(OrderDTO dto) throws Exception {
+		boolean result = false;
+		int res = sqlSession.update("orderMapper.holdorder", dto);
+		if(res ==1) {
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
+	public boolean holdorder(OrderDetailDTO dto) throws Exception {
+		boolean result = false;
+		int res = sqlSession.update("orderMapper.holdorderdetail", dto);
+		if(res ==1) {
+			result = true;
+		}
+		return result;
+	}
+
 
 
 	
