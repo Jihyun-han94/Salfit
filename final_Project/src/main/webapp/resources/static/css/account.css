@@ -258,3 +258,28 @@ body .signcontainer .signcontent .signup-cont {
   font-weight: 700;
   text-decoration: none;
 }
+
+
+
+/* login.jsp */
+#login_body {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+  background-color: #f8f8f8;
+  }
+#login_h1 {
+  font-family: 'Arita-dotum-Medium';
+}
+.login_p {
+	font-size: x-small;
+	text-align: center;
+}
+.btn_ck {
+	font-size: x-small;
+	border: none;
+	background-color: green;
+	color: white;
+	height: 20px;
+}

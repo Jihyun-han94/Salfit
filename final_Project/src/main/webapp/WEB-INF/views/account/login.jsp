@@ -10,20 +10,19 @@
  <c:url var="email_check" value="/ajax/account/email" />
  <c:url var="login" value="/account/login" />
  <c:url var="join" value="/account/join" />
- <style>
- * {
+</head>
+<style>
+#login_body {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-}
-body {
   font-family: 'Lato', sans-serif;
   background-color: #f8f8f8;
   }
-h1 {
+#login_h1 {
   font-family: 'Arita-dotum-Medium';
 }
-p {
+.login_p {
 	font-size: x-small;
 	text-align: center;
 }
@@ -35,7 +34,83 @@ p {
 	height: 20px;
 }
 </style>
-<script>
+<body id="login_body">
+<nav>
+	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
+</nav>
+<div class="cd-main-content sub-nav">
+<section class="signcontainer">
+	<article class="signhalf">
+	     <h1 id="login_h1">Please Login<br>to Continue</h1>
+	     <div class="signtabs">
+	          <span class="tab signin active"><a href="#signin">Sign in</a></span>
+	          <span class="tab signup"><a href="#signup">Sign up</a></span>
+	     </div>
+	     <div class="signcontent">
+	          <div class="signin-cont cont">
+	               <form action="${login}" method="post">
+	                    <input type="email" name="email" id="id_email_lg" class="inpt" required="required" placeholder="Your email">
+	                    <label for="id_email_lg">email</label>
+	                    <input type="password" name="password" id="id_password_lg" class="inpt" required="required" placeholder="Your password">
+	          			<label for="id_password_lg">password</label>
+	               		<span style="color:red; font-size:10px;"><i class="bi bi-emoji-frown"></i>  ${param.error}</span>
+	          			<c:if test="${not empty param.next}" >
+							<input type="hidden" name="next" value="${param.next}">
+						</c:if>
+	                    <div class="submit-wrap">
+	                        <input type="submit" value="Sign in" class="submit mb-4">
+	                    <div class="google_login">
+	                    	<div class="g-signin2" data-width="270" data-height="40" data-longtitle="true" data-onsuccess="onSignIn" data-theme="light"></div>
+	                    </div>
+	                       	<%-- <div class="g-signin2" data-onsuccess="onSignIn"><a href="${google_url}"></a></div> --%>
+	                        <a href="#" class="more">Forgot your password?</a>
+	                    </div>
+	  				</form>
+			  	</div>
+			  	<div class="signup-cont cont">
+	          		<form name="account_form" action="${join }" method="post">
+	  					<p id="email_check_res" class="login_p" style="display: none;"></p>
+						<p id="check_res" class="login_p">Hello Welcome to Salfit !</p>
+	                    <input style="display: inline-block;" id="id_email" type="email" name="email" class="inpt" placeholder="Your email" required>
+						<button class="btn_ck" type="button" onclick="emailCheck();">check</button>
+	                    <input type="text" name="name" id="id_username" class="inpt" required="required" placeholder="Your name">
+	                    <label for="id_username">name</label>
+	                    <input type="password" name="password" id="id_password" class="inpt" required="required" placeholder="Your password">
+	          			<label for="id_password">password</label>
+	          			<input type="number" name="phone" id="id_phnumber" class="inpt" required="required" placeholder="Your phone">
+	                    <label for="id_phnumber">phone</label>
+	                    <div class="submit-wrap">
+	                        <input type="button" onclick="send();" value="Sign up" class="submit">
+	                        <a></a>
+	                    </div>
+	  				</form>
+	      		</div>
+	     </div>
+	</article>
+	<div class="signhalf bg"></div>
+</section>
+</div>
+<br><br><br><br>
+
+<%@ include file="/WEB-INF/views/module/footer.jsp" %>
+</body>
+<script type="text/javascript">
+$('.signtabs .tab').click(function(){
+    if ($(this).hasClass('signin')) {
+        $('.signtabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.signin-cont').show();
+    } 
+    if ($(this).hasClass('signup')) {
+        $('.signtabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.signup-cont').show();
+    }
+});
+
+
 function emailCheck() {
 	var email = document.getElementById("id_email").value;
 	if(email == "" || email == undefined){
@@ -107,81 +182,7 @@ function send() {
 	document.account_form.submit();
 	alert("회원가입이 완료되었습니다.");
 }
-</script>
-</head>
-<body>
-<nav>
-	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
-</nav>
-<div class="cd-main-content sub-nav">
-<section class="signcontainer">
-	<article class="signhalf">
-	     <h1>Please Login<br>to Continue</h1>
-	     <div class="signtabs">
-	          <span class="tab signin active"><a href="#signin">Sign in</a></span>
-	          <span class="tab signup"><a href="#signup">Sign up</a></span>
-	     </div>
-	     <div class="signcontent">
-	          <div class="signin-cont cont">
-	               <form action="${login}" method="post">
-	                    <input type="email" name="email" id="id_email_lg" class="inpt" required="required" placeholder="Your email">
-	                    <label for="id_email_lg">email</label>
-	                    <input type="password" name="password" id="id_password_lg" class="inpt" required="required" placeholder="Your password">
-	          			<label for="id_password_lg">password</label>
-	          			<c:if test="${not empty param.next}" >
-							<input type="hidden" name="next" value="${param.next}">
-						</c:if>
-	                    <div class="submit-wrap">
-	                        <input type="submit" value="Sign in" class="submit mb-4">
-	                    <div class="google_login">
-	                    	<div class="g-signin2" data-width="270" data-height="40" data-longtitle="true" data-onsuccess="onSignIn" data-theme="light"></div>
-	                    </div>
-	                       	<%-- <div class="g-signin2" data-onsuccess="onSignIn"><a href="${google_url}"></a></div> --%>
-	                        <a href="#" class="more">Forgot your password?</a>
-	                    </div>
-	  				</form>
-			  	</div>
-			  	<div class="signup-cont cont">
-	          		<form name="account_form" action="${join }" method="post">
-	  					<p id="email_check_res" style="display: none;"></p>
-						<p id="check_res">Hello Welcome to Salfit !</p>
-	                    <input style="display: inline-block;" id="id_email" type="email" name="email" class="inpt" placeholder="Your email" required>
-						<button class="btn_ck" type="button" onclick="emailCheck();">check</button>
-	                    <input type="text" name="name" id="id_username" class="inpt" required="required" placeholder="Your name">
-	                    <label for="id_username">name</label>
-	                    <input type="password" name="password" id="id_password" class="inpt" required="required" placeholder="Your password">
-	          			<label for="id_password">password</label>
-	          			<input type="number" name="phone" id="id_phnumber" class="inpt" required="required" placeholder="Your phone">
-	                    <label for="id_phnumber">phone</label>
-	                    <div class="submit-wrap">
-	                        <input type="button" onclick="send();" value="Sign up" class="submit">
-	                        <a></a>
-	                    </div>
-	  				</form>
-	      		</div>
-	     </div>
-	</article>
-	<div class="signhalf bg"></div>
-</section>
-</div>
-<br><br><br><br>
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  -->
-<script type="text/javascript">
-$('.signtabs .tab').click(function(){
-    if ($(this).hasClass('signin')) {
-        $('.signtabs .tab').removeClass('active');
-        $(this).addClass('active');
-        $('.cont').hide();
-        $('.signin-cont').show();
-    } 
-    if ($(this).hasClass('signup')) {
-        $('.signtabs .tab').removeClass('active');
-        $(this).addClass('active');
-        $('.cont').hide();
-        $('.signup-cont').show();
-    }
-});
 
 //google_login
 function onSignIn(googleUser) {
@@ -229,9 +230,4 @@ function onSignIn(googleUser) {
   }
   
 </script>
-<!-- 구글 api 사용을 위한 스크립트 -->
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
-<%@ include file="/WEB-INF/views/module/footer.jsp" %>
-</body>
 </html>
