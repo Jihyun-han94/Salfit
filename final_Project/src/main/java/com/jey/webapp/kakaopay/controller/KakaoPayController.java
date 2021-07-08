@@ -20,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.jey.webapp.account.dto.AccountAddressDTO;
 import com.jey.webapp.account.dto.AccountDTO;
+import com.jey.webapp.account.service.AccountService;
 import com.jey.webapp.alert.AlertHandler;
 import com.jey.webapp.cart.dto.CartDTO;
 import com.jey.webapp.cart.service.CartService;
@@ -36,6 +38,8 @@ public class KakaoPayController {
 	private CartService cart;
 	@Autowired	
 	private OrderService order;
+	@Autowired	
+	private AccountService account;
 	@Autowired
 	private AlertHandler alerthandler;
 	
@@ -51,7 +55,11 @@ public class KakaoPayController {
 		int totalMoney = 0;
 		int delfee = 0; //배송비
 		
+		HttpSession session = request.getSession();
+		//계정 정보 확인
+		AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
 		
+		List<AccountAddressDTO> address_arr =account.getList(accountdto.getId());
 		
 	
 		for(int i=0;i<id.length;i++){
@@ -83,6 +91,8 @@ public class KakaoPayController {
 		
 		m.addAttribute("cartlist",cartlist);
 		m.addAttribute("sumMoney", sumMoney);
+		m.addAttribute("address_arr", address_arr);
+		
 		
 		String forward  = "kakaopay/payment";
 		
