@@ -37,7 +37,7 @@
 		<td>${data.address }</td>
 		<td>${data.total }</td>
 		<c:choose>
-			<c:when  test ="${data.status eq 'bpayment' }"> <!-- unpaid로 바꾸기 -->
+			<c:when  test ="${data.status eq 'unpaid' }"> <!-- unpaid로 바꾸기 -->
 			<td>결제하러가기</td> <!--결제 되게 a태그 넣기-->
 			</c:when>
 			
@@ -71,7 +71,7 @@
 		<c:when test ="${data.status eq 'delivered' }">			
 			<td>배송완료</td>
 		</c:when>
-		<c:when  test ="${data.status eq 'bpayment' }"> <!-- unpaid로 바꾸기 -->
+		<c:when  test ="${data.status eq 'unpaid' }"> <!-- unpaid로 바꾸기 -->
 			<td>-</td> <!--결제 되게 a태그 넣기-->
 		</c:when>	
 		<c:otherwise>
