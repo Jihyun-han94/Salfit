@@ -136,6 +136,9 @@ function send() {
 	                       	<%-- <div class="g-signin2" data-onsuccess="onSignIn"><a href="${google_url}"></a></div> --%>
 	                        <a href="#" class="more">Forgot your password?</a>
 	                    </div>
+	                    <div class="google_login">
+	                    	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+	                    </div>
 	  				</form>
 			  	</div>
 			  	<div class="signup-cont cont">
@@ -179,6 +182,52 @@ $('.signtabs .tab').click(function(){
         $('.signup-cont').show();
     }
 });
+
+//google_login
+function onSignIn(googleUser) {
+    // Useful data for your client-side scripts:
+    var profile = googleUser.getBasicProfile();
+    
+    // 백엔드 정보 전송
+    const form = document.createElement('form');
+	form.method = 'post';
+	form.action = '/salfit/account/google_login';
+	
+    const email = document.createElement('input');
+    email.type = 'hidden';
+    email.name = 'email';
+    email.value = profile.getEmail();
+    const profile_img = document.createElement('input');
+    profile_img.type = 'hidden';
+    profile_img.name = 'profile_img';
+    profile_img.value = profile.getImageUrl();
+    const id = document.createElement('input');
+    id.type = 'hidden';
+    id.name = 'password';
+    id.value = profile.getId();
+    console.log("ID: " + profile.getId()); 
+    const name = document.createElement('input');
+    name.type = 'hidden';
+    name.name = 'name';
+    name.value = profile.getName();
+    
+    <c:if test="${not empty param.next}" >
+	 const next = document.createElement('input');
+	 next.type = 'hidden';
+	 next.name = 'next';
+	 next.value = "${param.next}"
+	form.appendChild(next);
+	</c:if>
+    
+    form.appendChild(email);
+    form.appendChild(profile_img);
+    form.appendChild(id);
+    form.appendChild(name);
+	
+	document.body.appendChild(form);
+	form.submit();
+  }
+  
 </script>
 <!-- 구글 api 사용을 위한 스크립트 -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>

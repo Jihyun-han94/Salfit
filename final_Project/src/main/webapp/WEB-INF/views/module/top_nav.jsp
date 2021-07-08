@@ -104,9 +104,11 @@
 			<c:otherwise>	
 				<c:choose>	
 					<c:when test="${sessionScope.logined }">	
+						<c:if test="${sessionScope.atype != 'g'}">
 						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>	
+						</c:if>
 						<li><a href="${cart }">Cart</a></li>	
-						<li><a href="${logout }">Logout</a></li>	
+						<li><a type="button" onclick="signOut();">Logout</a></li>	
 					</c:when>	
 					<c:otherwise>	
 						<li><a href="${login }">Login</a></li>	
@@ -185,5 +187,11 @@
    		neworder_alert.innerText = "new";  	
 }	
 	    		
-    var testDate ="넘겨주는 값";
+	// google_logout
+	function signOut() {
+		if(gapi.auth2 != null) {
+		  	gapi.auth2.getAuthInstance().disconnect();
+		}
+	  	window.location.href = "${logout }"
+	}
 </script>

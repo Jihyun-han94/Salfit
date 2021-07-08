@@ -40,3 +40,8 @@
 <!-- chart -->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- google login -->
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id" content="160834933439-tao649nb9m6941v7r4a52t5q6a3g92uq.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>

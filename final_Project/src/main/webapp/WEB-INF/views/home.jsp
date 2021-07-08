@@ -82,9 +82,11 @@
 			<c:otherwise>
 				<c:choose>
 					<c:when test="${sessionScope.logined }">
-						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>
+						<c:if test="${sessionScope.atype != 'g'}">
+						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>	
+						</c:if>
 						<li><a href="${cart }">Cart</a></li>
-						<li><a href="${logout }">Logout</a></li>
+						<li><a type="button" onclick="signOut();">Logout</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="${login }">Login</a></li>
@@ -215,6 +217,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script>
 	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+	
+	var websocket;	
+   	var neworder_alert = document.getElementById("neworder_alert");	
+   	var neworder_nav = document.getElementById("neworder_nav");	
+	var prev_val = neworder_alert.innerText; 	
+   	neworder_nav.addEventListener("click", function(){	
+	    	neworder_alert.classList.remove('new-order-counter');	
+   	});	
+    websocket = new WebSocket("ws://localhost/salfit/alert");	
+    	
+    websocket.onmessage = function(message) {	
+    	//alert(message.data);	
+    	onMessage(message); 	
+    }	
+    	
+    function onMessage(evt) {	
+    	if(!neworder_alert.classList.contains('new-order-counter')) {	
+    		neworder_alert.classList.add('new-order-counter');	
+	    }	
+    	//var val = prev_val + 1;	
+   		neworder_alert.innerText = "new";  	
+}	
+	    		
+	// google_logout
+	function signOut() {
+		if(gapi.auth2 != null) {
+		  	gapi.auth2.getAuthInstance().disconnect();
+		}
+	  	window.location.href = "${logout }"
+	}
+	
 </script>
 <script src="./resources/js/main.js"></script> <!-- Resource jQuery -->
 

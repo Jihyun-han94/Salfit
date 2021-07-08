@@ -20,8 +20,8 @@ import org.json.simple.JSONObject;
 import com.jey.webapp.account.dto.AccountDTO;
 
 @WebFilter(
-	urlPatterns = {//"/ajax/product/like"
-				//,"/ajax/cart/add"
+	urlPatterns = {"/ajax/product/like"
+				,"/ajax/cart/add"
 //				,"/ajax/cart/changeQty"
 //				,"/ajax/cart/delete"
 //				,"/ajax/cart/buy"
@@ -49,7 +49,7 @@ public class AjaxLoginCheckFilter implements Filter {
 				((HttpServletRequest)request).getContextPath() + "/account/login?next=" + req.getHeader("referer"));
 		if(session.getAttribute("logined") != null) {
 			if((boolean)session.getAttribute("logined")) {
-				if(session.getAttribute("account") != null && ((AccountDTO)session.getAttribute("account")).getAtype().equals("i")) {
+				if(session.getAttribute("account") != null && !((AccountDTO)session.getAttribute("account")).getAtype().equals("a")) {
 					out.flush();
 					chain.doFilter(request, response);
 					out.close();
