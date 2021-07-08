@@ -51,6 +51,8 @@ public class KakaoPayController {
 		int totalMoney = 0;
 		int delfee = 0; //배송비
 		
+		
+		
 	
 		for(int i=0;i<id.length;i++){
 		 cartNum = Integer.parseInt(id[i]);
@@ -148,7 +150,7 @@ public class KakaoPayController {
 		//계정 정보 확인
 		AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
 		
-		System.out.println("orderid디버깅까꿍"+dto.getId());
+	
 		String paymethod = request.getParameter("paymethod");
 		System.out.println(paymethod);
 		

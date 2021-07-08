@@ -83,7 +83,7 @@ th, tr, th, table {
 		<p style="color: gray; padding-top:5px;">* 상품 금액 30000원 이하는 배송비가 추가됩니다.</p>
 	<div style="float:right; padding-bottom: 50px; padding-right:50px;">
 		<label style="border-top: #e1e1e1; padding-bottom:10px;">총 주문 금액 : </label>
-		<label style="border-top: #e1e1e1; padding-top:10px; padding-bottom:13px; font-size: 20px; color: #961533; font-weight:bold;">${totalMoney } 원</label>
+		<label style="border-top: #e1e1e1; padding-top:10px; padding-bottom:13px; font-size: 20px; color: #961533; font-weight:bold;"><input name="total" value="${totalMoney }" hidden>${totalMoney } 원</label>
 	</div>
 	<div style="float:left; padding-top:100px;">
 		<h1 style="margin-bottom: 50px;"><i class="bi bi-caret-right-fill" style="color:#e1e1e1; font-size: 20px;"> </i>배송 정보</h1>
