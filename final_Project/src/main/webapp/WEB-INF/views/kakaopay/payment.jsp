@@ -91,10 +91,13 @@ th, tr, th, table {
 			<input id="receiver" name="receiver" required>
 		<br>
 			<label for="address">주소 : </label>
+			<select name="address" id="address">
 			<c:forEach var="data" items="${requestScope.address_arr }">
-			<input id="address" name="address" value="${data.address }" required>
-
+  				<option>${data.address }</option>
 			</c:forEach>
+  			</select>
+		
+
 		<br>
 			<c:forEach var="data" items="${requestScope.cartlist }">
 				<input id="aid" name="aid" value="${data.aid }" hidden />
