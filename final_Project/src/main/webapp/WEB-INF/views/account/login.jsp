@@ -53,7 +53,9 @@
 	                    <label for="id_email_lg">email</label>
 	                    <input type="password" name="password" id="id_password_lg" class="inpt" required="required" placeholder="Your password">
 	          			<label for="id_password_lg">password</label>
+	          			<c:if test="${not empty param.error}" >
 	               		<span style="color:red; font-size:10px;"><i class="bi bi-emoji-frown"></i>  ${param.error}</span>
+	               		</c:if>
 	          			<c:if test="${not empty param.next}" >
 							<input type="hidden" name="next" value="${param.next}">
 						</c:if>
