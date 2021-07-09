@@ -99,10 +99,10 @@ td {
 				<c:forEach var="data" items="${requestScope.address_arr }">
 	  				<option>${data.address }</option>
 				</c:forEach>
-					<option>주소를 선택해 주세요 </option>
+					<option selected>주소를 선택해 주세요 </option>
 	  				<option value="direct">직접 입력</option>
   			</select>
-					<input type="text" id="dr_address" name="dr_address"/>
+					<input type="text" id="dr_address" name="dr_address" required>
 		
 
 		<br>
