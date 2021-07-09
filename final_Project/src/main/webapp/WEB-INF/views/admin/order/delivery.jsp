@@ -85,6 +85,12 @@
 								<c:when test="${order.getStatus().equals('delivered')}" >
 									<i class="bi bi-person-check-fill text-success" style="font-size: 2rem; padding-left:8rem;"></i>
 								</c:when>
+								<c:when test="${order.getStatus().equals('holding')}" >
+										<i class="bi bi-dash-circle-fill text-warning" style="font-size: 2rem; padding-left:2rem;"></i>
+								</c:when>
+								<c:when test="${order.getStatus().equals('canceled')}" >
+										<i class="bi bi-x-circle-fill text-danger" style="font-size: 2rem; padding-left:4rem;"></i>
+								</c:when>
 								<c:otherwise>
 									<i></i>
 								</c:otherwise>
