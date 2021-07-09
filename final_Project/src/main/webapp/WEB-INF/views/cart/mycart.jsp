@@ -37,6 +37,10 @@ th, tr, th, table {
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
+td {
+	border-right: #ffff;
+	border-left: #ffff;
+}
 </style>
 <body>
 <header style="padding-bottom: 130px;">
