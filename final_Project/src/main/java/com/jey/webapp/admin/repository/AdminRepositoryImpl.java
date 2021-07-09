@@ -54,11 +54,14 @@ public class AdminRepositoryImpl implements AdminRepository {
 		boolean res = false;
 		int rs = sqlSession.update("adminMapper.updateOrder", dto);	
 		if(rs == 1) {
-			if(dto.getStatus().equals("caceled")) {
-				rs = sqlSession.update("adminMapper.updateOrderDetails", dto);	
-				if(rs == 1) {
+			if(dto.getStatus().equals("canceled")) {
+				int dtrs = sqlSession.update("adminMapper.updateOrderDetails", dto);	
+				if(dtrs == 1) {
 					res =  true;
+					System.out.println("here!");
 				} 
+			} else {
+				res = true;
 			}
 		} 
 		return res;

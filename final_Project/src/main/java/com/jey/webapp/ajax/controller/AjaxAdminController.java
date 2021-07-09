@@ -82,9 +82,9 @@ public class AjaxAdminController {
 	@ResponseBody
 	public String confirmCancel(@ModelAttribute AdminOrderDTO dto) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+		System.out.println("status : " +dto.getStatus());
 		boolean res = order.updateStatus(dto);
-		
+		System.out.println("res" + res);
 		JSONObject json = new JSONObject();			
 		if(res) {
 			json.put("res", "true");

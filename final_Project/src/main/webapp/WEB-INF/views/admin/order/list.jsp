@@ -66,7 +66,7 @@
 						        <option value="checked" ${dto.getStatus() == "checked" ? "selected" : "" }>배송전</option>
 						        <option value="shipping" ${dto.getStatus() == "shipping" ? "selected" : "" }>배송중</option>
 						        <option value="delivered" ${dto.getStatus() == "delivered" ? "selected" : "" }>배송완료</option>
-						         <option value="holding" ${dto.getStatus() == "holding" ? "selected" : "" }>취소요청</option>
+						        <option value="holding" ${dto.getStatus() == "holding" ? "selected" : "" }>취소요청</option>
 						        <option value="canceled" ${dto.getStatus() == "canceled" ? "selected" : "" }>취소완료</option>
 						    </select>
 						</form>
@@ -151,7 +151,7 @@
 										<i class="bi bi-dash-circle-fill text-warning" onclick="cancel(this, ${order.getId()}, document.getElementById('status${order.getId()}'));" style="font-size: 2rem; padding-left:2rem;"></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('canceled')}" >
-										<i class="bi bi-x-circle-fill text-danger" style="font-size: 2rem; padding-left:2rem;"></i>
+										<i class="bi bi-x-circle-fill text-danger" style="font-size: 2rem; padding-left:4rem;"></i>
 								</c:when>
 								<c:otherwise>
 										<i class="bi bi-person-check-fill text-dark" style="font-size: 2rem; padding-left:8rem;"></i>
@@ -173,10 +173,10 @@
 									<p>delivered</p>
 								</c:when>
 								<c:when test="${order.getStatus().equals('holding')}" >
-									<p>delivered</p>
+									<p>holding</p>
 								</c:when>
 								<c:when test="${order.getStatus().equals('canceled')}" >
-									<p>delivered</p>
+									<p>cancelled</p>
 								</c:when>
 								<c:otherwise>
 									<p>unpaid</p>
@@ -439,7 +439,7 @@ $(document).ready(function() {
 			success: function (data) {
 					if(data.res == "true") {
 						e.setAttribute("class", "bi bi-x-circle-fill text-danger");
-						e.setAttribute("style", "font-size: 2rem; padding-left:8rem;");
+						e.setAttribute("style", "font-size: 2rem; padding-left:4rem;");
 						status.innerText = "cancelled";
 						
 						// 알림창 
