@@ -111,12 +111,10 @@ public class KakaoPayController {
       int aid = dto.getAid();
       String receiver = order_dto.getReceiver();
       String address = order_dto.getAddress();
-      String dr_address = request.getParameter("dr_address");
-      order_dto.setAddress(dr_address);
+      order_dto.setAddress(address);
       int total = order_dto.getTotal();
       order_dto.setAid(aid);
       
-      System.out.println(dr_address);
 
       int cartNum = 0;
       String[] id = request.getParameterValues("cartid");

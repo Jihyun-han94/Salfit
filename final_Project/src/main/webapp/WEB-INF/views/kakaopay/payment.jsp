@@ -96,13 +96,13 @@ td {
 		<br>
 			<label for="address">주소 : </label>
 			<select name="address" id="address">
+					<option >주소를 선택해 주세요 </option>
 				<c:forEach var="data" items="${requestScope.address_arr }">
 	  				<option>${data.address }</option>
 				</c:forEach>
-					<option selected>주소를 선택해 주세요 </option>
 	  				<option value="direct">직접 입력</option>
   			</select>
-					<input type="text" id="dr_address" name="dr_address" required>
+					<input type="text" id="dr_address" name="address">
 		
 
 		<br>
@@ -127,6 +127,7 @@ $("#address").change(function() {
    //직접입력을 누를 때 나타남
 		if($("#address").val() == "direct") {
 			$("#dr_address").show();
+			$("#dr_address").attr('required', 'required');
 		}  else {
 			$("#dr_address").hide();
 		}
