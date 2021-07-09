@@ -36,7 +36,7 @@
 			,c.orderstatus
 			,p.price AS price
 			,p.title AS title
-			,(price*c.qty) money
+			,(price*c.qty*c.days) money
 			,i.url
 		FROM cart c
 		JOIN account a

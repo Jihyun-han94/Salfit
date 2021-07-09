@@ -23,46 +23,46 @@ import com.jey.webapp.order.service.OrderService;
 @RequestMapping("/ajax/order")
 public class AjaxOrderController {
 
-	@Autowired
-	private OrderService order;
-	
-	
-	/* ordered, order_detail status delivered로 변경*/
-	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
-	@ResponseBody
-	public String updatestatus(@ModelAttribute OrderDTO dto, HttpServletResponse resp) throws Exception {
-		
-		JSONObject json = new JSONObject();			
+   @Autowired
+   private OrderService order;
+   
+   
+   /* ordered, order_detail status delivered로 변경*/
+   @RequestMapping(value = "/update", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
+   @ResponseBody
+   public String updatestatus(@ModelAttribute OrderDTO dto, HttpServletResponse resp) throws Exception {
+      
+      JSONObject json = new JSONObject();         
 
-		//ordered, order_detail status 변경
-		order.updatedel(dto);
-		OrderDetailDTO dto2 = new OrderDetailDTO();
-		dto2.setOid(dto.getId());
-		order.updatedel(dto2);
-		
-		json.put("result", "연결완료");
-			
-		return json.toJSONString();
-	}
-	
-	@RequestMapping(value = "/hold", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
-	@ResponseBody
-	public String holdorder(@ModelAttribute OrderDTO dto, HttpServletResponse resp) throws Exception {
-		
-		JSONObject json = new JSONObject();			
+      //ordered, order_detail status 변경
+      order.updatedel(dto);
+      OrderDetailDTO dto2 = new OrderDetailDTO();
+      dto2.setOid(dto.getId());
+      order.updatedel(dto2);
+      
+      json.put("result", "배송완료 확정되었습니다.");
+         
+      return json.toJSONString();
+   }
+   
+   @RequestMapping(value = "/hold", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
+   @ResponseBody
+   public String holdorder(@ModelAttribute OrderDTO dto, HttpServletResponse resp) throws Exception {
+      
+      JSONObject json = new JSONObject();         
 
-		//ordered, order_detail status holding으로 바꾸기
-		order.holdorder(dto);
-		OrderDetailDTO dto2 = new OrderDetailDTO();
-		dto2.setOid(dto.getId());
-		order.holdorder(dto2);
-		
-		json.put("result", "연결완료");
-			
-		return json.toJSONString();
-	}
-	
-	
-	
-	
+      //ordered, order_detail status holding으로 바꾸기
+      order.holdorder(dto);
+      OrderDetailDTO dto2 = new OrderDetailDTO();
+      dto2.setOid(dto.getId());
+      order.holdorder(dto2);
+      
+      json.put("result", "주문취소 요청 완료했습니다.");
+         
+      return json.toJSONString();
+   }
+   
+   
+   
+   
 }
