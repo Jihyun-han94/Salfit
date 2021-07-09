@@ -35,8 +35,6 @@ public class AjaxProductController {
 	@Autowired
 	private ProductService product;
 	
-	/* 상품 카테고리 선택 후 포커스 이동 */
-	
 	/* 상품 좋아요 */
 	
 	@RequestMapping(value = "/like", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
@@ -87,29 +85,7 @@ public class AjaxProductController {
 	@RequestMapping(value = "/moreProducts", produces = "application/text;charset=UTF-8", method=RequestMethod.GET)
 	@ResponseBody
 	public String searchMoreProducts(@ModelAttribute ProductSearchDTO search, HttpServletResponse resp) throws Exception {
-//		System.out.println(search.getStartIndex()+","+search.getEndIndex());
-//		System.out.println(search.getSearchtype());
-//		search.setSearch("");
-		System.out.println(search.getSearch());
-//		System.out.println(search.getPtype());
-//		System.out.println(search.getOldListCnt());
-		// startIndex ~ endIndex 범위에 해당하는 list 조회 
 		List<ProductDTO> productlist = product.searchOldProductList(search);
-//		List<ProductDTO> productlist = null;
-//		if(search.getPtype() == 0 && search.getSearchtype() == null) {
-//			System.out.println("findall");
-//			productlist = product.findAll(search);
-//		} else if (search.getSearch() == "") {
-//			System.out.println("searchohldlist");
-//			productlist = product.searchOldProductList(search);
-//		} else {
-//			System.out.println("findlist");
-//			productlist = product.findList(search);
-//		}
-//		
-//		for(ProductDTO dto : productlist) {	
-//			System.out.println(dto.getTitle());
-//		}
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(productlist);

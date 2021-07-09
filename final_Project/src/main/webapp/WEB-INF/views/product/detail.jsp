@@ -141,15 +141,6 @@
         			<h3 class="text-end" style="padding-bottom: 30px; font-size: 24px; font-weight: bold;">₩ ${item.getPrice() }</h3>
         		</div>
         	<div class="row row-cols-lg-auto g-3 align-items-left">
-        		<!-- <div>
-        			<label for="alternateS" style="display: inline-block; margin-right: 140px;">
-        				구독 시작일 선택:<input type="hidden" class="datepicker" id="datepickerS"></label>
-       				<label for="alternateE" style="display: inline-block;">
-        				구독 종료일 선택:<input type="hidden" class="datepicker" id="datepickerE"></label>
-        			<p> <input style="margin-right: 30px;" type="text" class="alternate" id="alternateS" size="25" readonly>
-        			~<input type="text" style="margin-left: 30px;" class="alternate" id="alternateE" size="25" readonly></p><br>
-
-        		</div> -->
         		<div class="col-12 mb-5">
         			<div class="row">
         			<span class="col-4" >구독 시작일 선택 : <input type="hidden" class="datepicker" id="datepickerS" style="z-index: 98;"></span>

@@ -40,6 +40,8 @@ import com.jey.webapp.account.dto.AccountAddressDTO;
 import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.account.service.AccountService;
 import com.jey.webapp.product.dto.ProductDTO;
+import com.jey.webapp.product.dto.ProductSearchDTO;
+import com.jey.webapp.product.service.ProductService;
 
 @Controller
 @RequestMapping(value = "/account")
@@ -48,10 +50,7 @@ public class AccountController {
 	@Autowired
 	private AccountService account;
 	@Autowired
-	private GoogleConnectionFactory googleConnectionFactory;
-	@Autowired
-	private OAuth2Parameters googleOAuth2Parameters;
-
+	private ProductService product;
 	
 	/* 회원가입 */
 	
@@ -276,4 +275,31 @@ public class AccountController {
 	public String notice() throws Exception {
 		return "account/notice";
 	}
+	
+	/* 찜목록 */
+	@RequestMapping(value = "/liked", method = RequestMethod.GET)
+	public ModelAndView liked(@ModelAttribute ProductSearchDTO search, AccountDTO account, HttpServletRequest request, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("account/liked");
+		List<ProductDTO> likedProduct = null;
+		List<Integer> liked = new ArrayList<Integer>();
+		
+		if(session.getAttribute("logined") != null && (boolean)session.getAttribute("logined")) {
+			if(session.getAttribute("account") != null) {
+				account = (AccountDTO) session.getAttribute("account");
+
+				search.setAid(account.getId());  
+				likedProduct = product.getAllLikePid(account.getId()); 
+				liked = new ArrayList<Integer>();
+				for(ProductDTO lk : likedProduct) {
+					liked.add(lk.getId());
+				}
+			}
+		}
+		mv.addObject("liked", liked);
+		mv.addObject("likedProduct", likedProduct);
+		return mv;
+	}
+	
+	
 }

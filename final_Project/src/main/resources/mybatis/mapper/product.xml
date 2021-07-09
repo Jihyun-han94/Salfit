@@ -245,9 +245,14 @@
   
   <select id="likedProduct" parameterType="_int" resultType="product">
   	SELECT p.id
+  		,i.url
+  		,p.title
+  		,p.price
   	FROM liked l
   	JOIN product p
   	  ON l.pid = p.id
+  	JOIN product_img i
+  	  ON i.pid = p.id
    WHERE l.aid = #{id}
   </select>
   
