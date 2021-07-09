@@ -75,23 +75,20 @@ function updateInfo() {
 	var name = document.getElementById("id_name").value;
 	var password = document.getElementById("id_password").value;
 	var phone = document.getElementById("id_phnumber").value;
-	
-	document.update_form.submit();
-	
+		
 	if(name == "") {
 		alert("이름을 입력하세요.");
 		return;
 	}
 	if(password == "") {
 		alert("패스워드를 입력하세요.")
-	}/*  else if (${account.getPhone() } == password) {
-		alert("새로운 패스워드로 변경하세요.")
 		return;
-	} */
+	}
 	if(phone == "") {
 		alert("전화번호를 입력하세요.");
 		return;
 	}
+	document.update_form.submit();
 }
 function expire() {
 	$.ajax({

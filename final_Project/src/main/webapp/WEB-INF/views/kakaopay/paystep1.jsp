@@ -22,7 +22,11 @@ window.onload = function iamport(){
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
 	    name : '상품1' , //결제창에서 보여질 이름
+<<<<<<< HEAD
 	    amount : ${ordered.total }, //실제 결제되는 가격
+=======
+	    amount : /* ${ordered.total } */ 100, //실제 결제되는 가격
+>>>>>>> refs/remotes/origin/v0.4.6_김은지
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
 	    buyer_tel : '010-1234-5678',

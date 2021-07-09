@@ -37,6 +37,10 @@ th, tr, th, table {
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
+td {
+	border-right: #ffff;
+	border-left: #ffff;
+}
 </style>
 <body>
 <header style="padding-bottom: 130px;">
@@ -89,7 +93,7 @@ th, tr, th, table {
 		<td>${data.title }</td>
 		<td>${data.price }</td>
 		<td>${data.startdate } ~ ${data.enddate } (${data.days }일간)</td>
-		<td>${data.qty } * ${data.days} = ${data.qty * data.days}</td>
+		<td><%-- ${data.qty } * ${data.days} =  --%>${data.qty * data.days}</td>
 		<td>${data.money }</td>
 		</tr>
 		
