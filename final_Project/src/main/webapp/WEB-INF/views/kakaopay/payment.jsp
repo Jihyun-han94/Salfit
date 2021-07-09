@@ -69,7 +69,7 @@ th, tr, th, table {
 				src="${pageContext.request.contextPath}${data.getUrl()}" 
 				>
 		</a></td>
-		<td>${data.title }</td>
+		<td><input name="cartid" value="${data.id }" type="hidden">${data.title }</td>
 		<td>${data.price }</td>
 		<td>택배</td>
 		<td>${data.startdate } ~ ${data.enddate } (${data.days }일간)</td>
