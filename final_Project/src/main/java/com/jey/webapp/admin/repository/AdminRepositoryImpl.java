@@ -51,12 +51,17 @@ public class AdminRepositoryImpl implements AdminRepository {
 
 	@Override
 	public boolean updateStatus(AdminOrderDTO dto) {
+		boolean res = false;
 		int rs = sqlSession.update("adminMapper.updateOrder", dto);	
 		if(rs == 1) {
-			return true;
-		} else {
-			return false;
-		}
+			if(dto.getStatus().equals("caceled")) {
+				rs = sqlSession.update("adminMapper.updateOrderDetails", dto);	
+				if(rs == 1) {
+					res =  true;
+				} 
+			}
+		} 
+		return res;
 	}
 
 	@Override

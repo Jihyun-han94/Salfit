@@ -23,7 +23,7 @@ ALTER TABLE ordered MODIFY receiver CONSTRAINT ordered_receiver_NN NOT NULL;
 ALTER TABLE ordered MODIFY address CONSTRAINT ordered_address_NN NOT NULL;
 ALTER TABLE ordered MODIFY paytype CONSTRAINT ordered_paytype_NN NOT NULL;
 ALTER TABLE ordered MODIFY total CONSTRAINT ordered_total_NN NOT NULL;
-ALTER TABLE ordered ADD CONSTRAINT ordered_status_CK CHECK(status IN('unpaid', 'paid', 'checked', 'shipping', 'delivered'));
+ALTER TABLE ordered ADD CONSTRAINT ordered_status_CK CHECK(status IN('unpaid','paid', 'checked', 'shipping', 'delivered', 'holding', 'canceled'));
 
 COMMENT ON COLUMN ordered.id IS '주문번호  번호';
 COMMENT ON COLUMN ordered.aid IS '주문자 식별 번호';
@@ -34,7 +34,7 @@ COMMENT ON COLUMN ordered.total IS '총 결제 금액';
 COMMENT ON COLUMN ordered.pdate IS '결제 일시';
 COMMENT ON COLUMN ordered.ddate IS '배송 시작일';
 COMMENT ON COLUMN ordered.edate IS '배송 완료일';
-COMMENT ON COLUMN ordered.status IS '주문 상태 (결제전, 결제완료, 주문확인, 배송중, 배송완료)';
+COMMENT ON COLUMN ordered.status IS '주문 상태 (결제전,결제완료, 주문확인, 배송중, 배송완료, 취소요청, 취소완료)';
 
 CREATE SEQUENCE order_detail_seq START WITH 1 INCREMENT BY 1 NOCACHE;
 CREATE TABLE order_detail(
@@ -107,7 +107,7 @@ INSERT INTO review VALUES(10, 21, 1, ' dddddddd~~~', 2, SYSDATE);
 INSERT INTO review VALUES(15, 22, 1, '맛있는 샐러드~~dddddddd~~~', 4, SYSDATE);
 
 
-ALTER TABLE order_detail DROP CONSTRAINT order_detail_status_CK;
+ALTER TABLE ordered DROP CONSTRAINT ordered_status_CK;
 
 SELECT *
 	  FROM (SELECT ROW_NUMBER() OVER (ORDER BY pdate) NUM

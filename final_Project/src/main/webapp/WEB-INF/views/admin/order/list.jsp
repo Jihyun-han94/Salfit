@@ -66,6 +66,8 @@
 						        <option value="checked" ${dto.getStatus() == "checked" ? "selected" : "" }>배송전</option>
 						        <option value="shipping" ${dto.getStatus() == "shipping" ? "selected" : "" }>배송중</option>
 						        <option value="delivered" ${dto.getStatus() == "delivered" ? "selected" : "" }>배송완료</option>
+						         <option value="holding" ${dto.getStatus() == "holding" ? "selected" : "" }>취소요청</option>
+						        <option value="canceled" ${dto.getStatus() == "canceled" ? "selected" : "" }>취소완료</option>
 						    </select>
 						</form>
 						</c:if>
@@ -140,13 +142,19 @@
 									<i></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('checked')}" >
-										<i class="bi bi-check text-danger" onclick="checked(this, ${order.getId()}, document.getElementById('status${order.getId()}'));"  style="font-size: 2rem;"></i>
+										<i class="bi bi-check text-primary" onclick="checked(this, ${order.getId()}, document.getElementById('status${order.getId()}'));"  style="font-size: 2rem;"></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('shipping')}" >
-										<i class="bi bi-truck text-warning" style="font-size: 2rem; padding-left:4rem;"></i>
+										<i class="bi bi-truck text-success" style="font-size: 2rem; padding-left:4rem;"></i>
+								</c:when>
+								<c:when test="${order.getStatus().equals('holding')}" >
+										<i class="bi bi-dash-circle-fill text-warning" onclick="cancel(this, ${order.getId()}, document.getElementById('status${order.getId()}'));" style="font-size: 2rem; padding-left:2rem;"></i>
+								</c:when>
+								<c:when test="${order.getStatus().equals('canceled')}" >
+										<i class="bi bi-x-circle-fill text-danger" style="font-size: 2rem; padding-left:2rem;"></i>
 								</c:when>
 								<c:otherwise>
-										<i class="bi bi-person-check-fill text-success" style="font-size: 2rem; padding-left:8rem;"></i>
+										<i class="bi bi-person-check-fill text-dark" style="font-size: 2rem; padding-left:8rem;"></i>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -162,6 +170,12 @@
 									<p>shipping</p>
 								</c:when>
 								<c:when test="${order.getStatus().equals('delivered')}" >
+									<p>delivered</p>
+								</c:when>
+								<c:when test="${order.getStatus().equals('holding')}" >
+									<p>delivered</p>
+								</c:when>
+								<c:when test="${order.getStatus().equals('canceled')}" >
 									<p>delivered</p>
 								</c:when>
 								<c:otherwise>
@@ -293,8 +307,6 @@ $(document).ready(function() {
 		//PerPageNum가 바뀌면 링크 이동
 		$perPageSel.on('change',function(){
 			let status = document.getElementById('selectOrderStatus').value;
-			//searchStatus($('#selectOrderStatus'));
-			//pageMarker.makeQuery 사용 못하는 이유: makeQuery는 page만을 매개변수로 받기에 변경된 perPageNum을 반영못함
 			if(status != null || status == "") {
 				window.location.href = "list?status="+status+"&page=1&perPageNum="+$perPageSel.val();
 			} else {
@@ -332,13 +344,8 @@ $(document).ready(function() {
 
 
 	function orderid(id) {
-		/* var key = id;
-		alert(key);
-		eval("var orderId" + key + "=" + key); */
-		
-	     /* var orderId = $(this).data('id'); */
-	     /* $(".modal-header #orderId").val( id ); */
 	     document.getElementById("orderId").value = id;
+	     alert(id);
 	}
 	
 	function zoomin(e, id, icon, status) {
@@ -355,7 +362,7 @@ $(document).ready(function() {
 			},
 			success: function (data) {
 					if(data.res == "true") {
-						icon.setAttribute("class", "bi bi-check text-danger");
+						icon.setAttribute("class", "bi bi-check text-primary");
 						icon.setAttribute("style", "font-size: 2rem;");
 						icon.setAttribute("onclick", "checked(this, "+id+", "+status+");")
 						icon.onclick = function() {checked(this, id, status);};
@@ -395,7 +402,7 @@ $(document).ready(function() {
 			},
 			success: function (data) {
 					if(data.res == "true") {
-						e.setAttribute("class", "bi bi-truck text-warning");
+						e.setAttribute("class", "bi bi-truck text-success");
 						e.setAttribute("style", "font-size: 2rem; padding-left:4rem;");
 						status.innerText = "shipping";
 						
@@ -403,6 +410,42 @@ $(document).ready(function() {
 						
 						let NodeList = "";
 						let newNode = "<a id='qoo"+id+"' data-toggle='popover' data-trigger='hover' data-content='배송중~'></a>";
+						NodeList += newNode;
+						$(NodeList).appendTo(e);
+						
+						$('#qoo'+id).popover('show');
+						$('#qoo'+id).on('shown.bs.popover', function() {
+						    setTimeout(function() {
+						        $('#qoo'+id).popover('hide');
+						    }, 3000);
+						});
+					} 
+			}				
+		});
+		}
+	}
+	
+	function cancel(e, id, status) {
+		if(status.innerText == "holding") {
+		$.ajax({
+			url: "${ajax_order}/cancel",
+			type: "post",
+			async: "false",
+			dataType: "json",
+			data: {
+				id: id,		 
+				status: "canceled"
+			},
+			success: function (data) {
+					if(data.res == "true") {
+						e.setAttribute("class", "bi bi-x-circle-fill text-danger");
+						e.setAttribute("style", "font-size: 2rem; padding-left:8rem;");
+						status.innerText = "cancelled";
+						
+						// 알림창 
+						
+						let NodeList = "";
+						let newNode = "<a id='qoo"+id+"' data-toggle='popover' data-trigger='hover' data-content='취소완료'></a>";
 						NodeList += newNode;
 						$(NodeList).appendTo(e);
 						

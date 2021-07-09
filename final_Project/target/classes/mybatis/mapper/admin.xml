@@ -112,11 +112,16 @@
 	    SELECT order_detail_seq.NEXTVAL AS seq_order_detail FROM dual
 	 </select>
 	 
-	 
+	 <!-- 주문상태 변경  -->
 	 <update id="updateOrder" parameterType="adminorder">
 		UPDATE ordered
 		   SET status = #{status}
 		 WHERE id = #{id}
+	 </update>
+	 <update id="updateOrderDetails" parameterType="adminorder">
+		UPDATE order_detail
+		   SET status = #{status}
+		 WHERE oid = #{id}
 	 </update>
 	 
 	 

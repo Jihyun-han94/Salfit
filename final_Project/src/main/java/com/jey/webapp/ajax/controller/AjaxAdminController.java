@@ -76,5 +76,22 @@ public class AjaxAdminController {
 		return json.toJSONString();
 	}
 	
+	/* 취소완료 */
+	
+	@RequestMapping(value = "/cancel", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
+	@ResponseBody
+	public String confirmCancel(@ModelAttribute AdminOrderDTO dto) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		boolean res = order.updateStatus(dto);
+		
+		JSONObject json = new JSONObject();			
+		if(res) {
+			json.put("res", "true");
+		}
+		
+		return json.toJSONString();
+	}
+	
 	
 }
