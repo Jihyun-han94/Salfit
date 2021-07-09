@@ -179,61 +179,6 @@
 			  		</div>
         		</div>
         	</div>
-        	
-            <%--<div class="row g-3 align-items-center" style="margin-top: -300px; margin-right: 100px;">
-			  <div class="col-sm-3 col-auto">
-                 <div class="input-group input-group-sm mb-3 btn-default">
-				  	<button id="minus" onclick="minus();" class="btn btn-sm border-0" type="button" id="button-addon1">-</button>
-				  	<input id="quantity" type="text" class="form-control border-0 text-center" placeholder="" value="1" aria-label="Example text with button addon" aria-describedby="button-addon1">
-				  	<button id="plus" onclick="plus();" class="btn btn-sm border-0" type="button" id="button-addon">+</button>
-               	</div>
-			  </div>
-			  <div class="col-sm-9">
-			  
-			   <div class="buttons">
-			   <button class="cart-button" type="button" onclick="addToCart(this, ${item.getId()}
-					    , document.getElementById('quantity')
-					    , document.getElementById('datepickerS')
-					    , document.getElementById('datepickerE')
-					    , ${account.getId()}
-					    );" >
-			  		<span class="add-to-cart">Add to cart</span>
-			  		<span class="added">Item added</span>
-			  		<i class="fa fa-shopping-cart"></i>
-			  		<i class="fa fa-square"></i>
-			  	</button> 
-			  </div> --%>
-			  	<%-- <div class="input-group input-group-sm mb-3 btn-success">
-					<button type="button" class="btn btn-block badge-pill" 
-					    onclick="addToCart(this, ${item.getId()}
-					    , document.getElementById('quantity')
-					    , document.getElementById('datepickerS')
-					    , document.getElementById('datepickerE')
-					    , ${account.getId()}
-					    );" ><b>장바구니에 담기</b></button>
-					<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-					   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-					      <div class="modal-content">
-					         <div class="modal-header">
-					            <h5 class="modal-title" id="staticBackdropLabel">상품 담기 성공!</h5>
-					            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					            <span aria-hidden="true">&times;</span>
-					
-					            </button>
-					         </div>
-					      <div class="modal-body">
-					      	${item.getTitle()} 상품을 장바구니에 추가했습니다. 
-					      </div>
-					      <div class="modal-footer">
-					         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">계속 쇼핑하기</button>
-					            <button type="button" onclick="location.href='${cart}'" class="btn btn-outline-dark">내 장바구니로 가기</button>
-					      </div>
-			      		</div>
-			   		</div>
-				</div>
-		  		</div> 
-		  </div>
-		</div>  --%>
        	</div>
    		</div>
    	</div>
@@ -267,6 +212,7 @@
 	function cartClick(){
 	let button =this;
 	button.classList.add('clicked');
+	window.setTimeout(()=>{button.classList.remove('clicked')}, 5000);
 	}
 	});
 	
