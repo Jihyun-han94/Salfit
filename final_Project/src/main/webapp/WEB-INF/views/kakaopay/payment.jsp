@@ -91,15 +91,14 @@ th, tr, th, table {
 			<input id="receiver" name="receiver" required>
 		<br>
 			<label for="address">주소 : </label>
-			<select name="address_select" id="address_select">
+			<select name="address" id="address">
 				<c:forEach var="data" items="${requestScope.address_arr }">
 	  				<option>${data.address }</option>
 				</c:forEach>
-				<c:if test="${sessionScope.atype == 'g'}">
-					<option value="direct">직접 입력</option>
-					<input type="text" id="address" name="address" required>
-				</c:if>
+					<option>주소를 선택해 주세요 </option>
+	  				<option value="direct">직접 입력</option>
   			</select>
+					<input type="text" id="dr_address" name="dr_address"/>
 		
 
 		<br>
@@ -117,13 +116,17 @@ th, tr, th, table {
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>	
 </body>
 <script>
-$('#address_select').change(function(){ $("#address_select option:selected").each(function () {
-	if($(this).val()== ''){ //직접입력일 경우
-		$("#str_email02").val(''); //값 초기화
-		$("#str_email02").attr("disabled",false); //활성화
+$(function(){
+    //직접입력 인풋박스 기존에는 숨어있다가
+$("#dr_address").hide();
+$("#address").change(function() {
+   //직접입력을 누를 때 나타남
+		if($("#address").val() == "direct") {
+			$("#dr_address").show();
+		}  else {
+			$("#dr_address").hide();
 		}
-	});
-	});
-
+	}) 
+});
 </script>
 </html>
