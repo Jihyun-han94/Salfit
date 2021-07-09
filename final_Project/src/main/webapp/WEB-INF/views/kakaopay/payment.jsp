@@ -91,10 +91,14 @@ th, tr, th, table {
 			<input id="receiver" name="receiver" required>
 		<br>
 			<label for="address">주소 : </label>
-			<select name="address" id="address">
-			<c:forEach var="data" items="${requestScope.address_arr }">
-  				<option>${data.address }</option>
-			</c:forEach>
+			<select name="address_select" id="address_select">
+				<c:forEach var="data" items="${requestScope.address_arr }">
+	  				<option>${data.address }</option>
+				</c:forEach>
+				<c:if test="${sessionScope.atype == 'g'}">
+					<option value="direct">직접 입력</option>
+					<input type="text" id="address" name="address" required>
+				</c:if>
   			</select>
 		
 
@@ -107,11 +111,19 @@ th, tr, th, table {
 			<button type="submit" class="buy_btn1">결제</button>
 		</div>
 	</div>
-	
-	
 </form>
 </div>
 </main>
-<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>	
+	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>	
 </body>
+<script>
+$('#address_select').change(function(){ $("#address_select option:selected").each(function () {
+	if($(this).val()== ''){ //직접입력일 경우
+		$("#str_email02").val(''); //값 초기화
+		$("#str_email02").attr("disabled",false); //활성화
+		}
+	});
+	});
+
+</script>
 </html>
