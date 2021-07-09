@@ -13,7 +13,7 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
-function iamport(){
+window.onload = function iamport(){
 	//가맹점 식별코드
 	
 	IMP.init('imp02440277');
@@ -22,7 +22,7 @@ function iamport(){
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
 	    name : '상품1' , //결제창에서 보여질 이름
-	    amount : 100,//${ordered.total }, //실제 결제되는 가격
+	    amount : ${ordered.total }, //실제 결제되는 가격
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
 	    buyer_tel : '010-1234-5678',
@@ -58,21 +58,23 @@ function iamport(){
 <br>
 <br>
 <br>
-<h1>주문서 확인</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 		
-			<table border="1" id="id_cart" name="id_ordered">
-				<th>수령인</th>
-				<th>주소</th>
-				<th>총 금액</th>
-				<tr>
-					<td>${ordered.receiver }</td>
-					<td>${ordered.address }</td>
-					<td>${ordered.total }</td>					
-				</tr>
-			
-		</table>
-		<br>
-<button type="button" onclick="iamport();">결제하기</button>
+		
+
 
 <jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
