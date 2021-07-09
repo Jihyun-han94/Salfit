@@ -10,9 +10,10 @@
 	<c:url var="update" value="/account/update" />	
 	<c:url var="updateView" value="/account/update_view" />	
 	<c:url var="product" value="/product" />	
-	<c:url var="cart" value="/cart" />	
+	<c:url var="cart" value="/cart" />
+	<c:url var="order" value="/order" />
 	<c:url var="about" value="/about_us" />	
-	<c:url var="notice" value="/notice" />	
+	<c:url var="notice" value="/account/notice" />	
 	<c:url var="email_write" value="/email/write" />	
 	<c:url var="admin_product" value="/admin/product" />	
 	<c:url var="admin_order" value="/admin/order/list" />	
@@ -107,7 +108,8 @@
 						<c:if test="${sessionScope.atype != 'g'}">
 						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>	
 						</c:if>
-						<li><a href="${cart }">Cart</a></li>	
+						<li><a href="${cart }">Cart</a></li>
+						<li><a href="${order }">Order</a></li>
 						<li><a type="button" onclick="signOut();">Logout</a></li>	
 					</c:when>	
 					<c:otherwise>	
