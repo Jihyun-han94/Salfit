@@ -61,8 +61,9 @@ td {
 <form>
 <div style="float: left; padding-right:5px;">
 	<table border="1" id="id_cart" name="id_cart" style="text-align:center;">
+		<tr>
 		<th style="height:50px; border-top: solid 5px #e1e1e1; padding-bottom:10px;"><div class="allCheck">
-   		<input type="checkbox" name="allCheck" id="allCheck" /><label for="allCheck">모두 선택</label> 
+   		<input type="checkbox" name="allCheck" id="allCheck" checked="checked"/><label for="allCheck">모두 선택</label> 
   		</div></th>
 		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">이미지</th>
 		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">상품 명</th>
@@ -70,14 +71,15 @@ td {
 		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">구독일 (기간)</th>
 		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">총 주문 수량</th>
 		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">금액</th>
-		
+		</tr>
 		<c:forEach var="data" items="${requestScope.cartlist }">
 		<tr>
 		
 		<td>
 		
 		<div class="checkBox">
-   		<input type="checkbox" name="chBox" class="chBox" data-cartNum="${data.id}" checked="checked" />
+		<!--checked="checked"  -->
+   		<input type="checkbox" name="chBox" class="chBox" data-cartNum="${data.id}"  checked="checked" />
   		
   		</div>
   		
@@ -107,15 +109,15 @@ td {
 	<table border="1" id="id_price" name="id_price" style="text-align:center;">
 		<tr>
 		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">총 상품 금액</th>
-		<td style="border-top: solid 5px #e1e1e1; padding-top:10px; padding-bottom:13px; font-size: 20px; font-weight:bold;">${sumMoney }</td>
+		<td id="id_sumMoney" style="border-top: solid 5px #e1e1e1; padding-top:10px; padding-bottom:13px; font-size: 20px; font-weight:bold;">${sumMoney }</td>
 		</tr>
 		<tr>
 		<th style="border-top: solid 1px #e1e1e1; padding-bottom:10px;">배송비<br><span style="color:gray; font-size: 10px;">* 30000원 이상 주문 시 무료</span></th>
-		<td style="border-top: solid 1px #e1e1e1; padding-bottom:10px; padding-bottom:13px; padding-top:10px; font-size: 20px; font-weight:bold;">${delfee }</td>
+		<td id="id_delfee" style="border-top: solid 1px #e1e1e1; padding-bottom:10px; padding-bottom:13px; padding-top:10px; font-size: 20px; font-weight:bold;">${delfee }</td>
 		</tr>
 		<tr>
 		<th style="border-top: solid 1px #e1e1e1; padding-bottom:10px;">결제 예정 금액</th>
-		<td style="border-top: solid 1px #e1e1e1; padding-bottom:10px; border-bottom: #ffff; padding-bottom:13px; padding-top:10px; font-size: 20px; color:#961533; font-weight:bold;">${totalMoney }</td>
+		<td id="id_totalMoney" style="border-top: solid 1px #e1e1e1; padding-bottom:10px; border-bottom: #ffff; padding-bottom:13px; padding-top:10px; font-size: 20px; color:#961533; font-weight:bold;">${totalMoney }</td>
 		</tr>
 	</table>
 	</div>
@@ -133,20 +135,69 @@ td {
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </footer>
 </body>
+<c:url var="sum" value="/ajax/cart/sum" />
 <script type="text/javascript">
 
-$("#allCheck").click(function(){
-		var chk = $("#allCheck").prop("checked");
-		if(chk) {
-		$(".chBox").prop("checked", true);
-		} else {
-		$(".chBox").prop("checked", false);
-		}
-	});
-	
-$(".chBox").click(function(){
+
+
+$(document).ready(function(){
+
+	$("#allCheck").click(function(){
+			var chk = $("#allCheck").prop("checked");
+			if(chk) {
+				$(".chBox").prop("checked", true);
+				$('#id_sumMoney').text(${sumMoney});
+				$('#id_delfee').text(${delfee});
+				$('#id_totalMoney').text(${totalMoney});	
+			} else {
+				$(".chBox").prop("checked", false);
+				$('#id_sumMoney').text(0);
+				$('#id_delfee').text(0);
+				$('#id_totalMoney').text(0);
+			}
+		});
+		
+	$(".chBox").click(function(){
 		$("#allCheck").prop("checked", false);
-	});
+		});
+	
+    $(".chBox").change(function(){
+        if($(".chBox").is(":checked")){
+           
+            var buy_Arr = new Array();
+
+    		$("input[class='chBox']:checked").each(function(){
+    			buy_Arr.push($(this).attr("data-cartNum"));
+    	
+    		});
+
+    		$.ajax({
+    		url :  "${sum }",
+    		type : "post",
+    		datatype:"json",
+    		data : { chbox : buy_Arr },
+    		success : function(data){
+    			$('#id_sumMoney').text(data.sumMoney); 
+    			$('#id_delfee').text(data.delfee);
+    			$('#id_totalMoney').text(data.totalMoney);
+    			
+    			
+    		}
+    	  	});    
+            
+        }else{
+        	$('#id_sumMoney').text(0); 
+			$('#id_delfee').text(0);
+			$('#id_totalMoney').text(0);
+			
+        }
+            
+        
+    });
+});
+
+		
+
 	
 	
 $(".selectDelete_btn").click(function(){
