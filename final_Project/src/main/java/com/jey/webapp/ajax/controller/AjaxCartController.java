@@ -2,6 +2,7 @@ package com.jey.webapp.ajax.controller;
 
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,6 +108,54 @@ public class AjaxCartController {
 		String jsonStr = mapper.writeValueAsString(list);
 		
 		return jsonStr;
+	
+	}
+	@RequestMapping(value = "/sum", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
+	@ResponseBody	
+	public String sum(@RequestParam(value = "chbox[]") List<String> chArr, @ModelAttribute CartDTO dto, HttpServletRequest request) throws Exception {
+		
+	
+		JSONObject json = new JSONObject();		
+		int cartNum =0;
+		List list = null;
+		List<CartDTO> cartlist = new ArrayList<CartDTO>();
+	    int price =0;
+	    List<Integer> price_arr = new ArrayList<Integer>();
+	    int sumMoney =0;
+	    int totalMoney = 0;
+	    int delfee = 0; //배송비
+	      
+	
+		for(String i : chArr){
+			   cartNum = Integer.parseInt(i);
+		       dto.setId(cartNum);
+		       dto = cart.find(dto);
+		       cartlist.add(dto);
+		       price_arr.add(dto.getMoney());
+		      }
+		      
+		      for(int i : price_arr) {
+		         sumMoney =sumMoney + i;
+		      }
+		      
+		      if(sumMoney >=30000) {
+		         delfee=0;
+		         totalMoney = sumMoney;
+		         json.put("totalMoney", totalMoney);
+		         json.put("delfee",delfee);
+		         
+		      }else {
+		         delfee = 3000;
+		         totalMoney = sumMoney +delfee;
+		         json.put("totalMoney",totalMoney);
+		         json.put("delfee",delfee);
+		      }
+		      
+		      
+		json.put("sumMoney", sumMoney);
+		
+		
+		return json.toJSONString();
 	
 	}
 
