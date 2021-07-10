@@ -105,17 +105,23 @@ public class KakaoPayController {
    
    public String getpayment( @ModelAttribute CartDTO dto,@ModelAttribute OrderDTO order_dto,Model m,HttpServletRequest request) throws Exception {
       String forward="kakaopay/paystep1";
-      
-      
-      
+           
       int aid = dto.getAid();
       String receiver = order_dto.getReceiver();
       String address = order_dto.getAddress();
-      order_dto.setAddress(address);
+     
+      String res ;
+      if(address.contains("direct")) {
+    	 res= address.substring(address.lastIndexOf(",")+1);
+    	 order_dto.setAddress(res);
+      }else {
+    	  String[] array = address.split(",");
+    	  order_dto.setAddress(array[0]);
+      }
+      
       int total = order_dto.getTotal();
       order_dto.setAid(aid);
-      
-
+     
       int cartNum = 0;
       String[] id = request.getParameterValues("cartid");
       for(int i=0;i<id.length;i++){
