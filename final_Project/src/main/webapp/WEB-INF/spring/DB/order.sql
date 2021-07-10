@@ -2,6 +2,8 @@ DROP TABLE order_detail;
 DROP SEQUENCE ordered_seq;
 DROP TABLE ordered;
 DROP SEQUENCE order_detail_seq;
+DROP table review;
+DROP SEQUENCE review_seq;
 
 CREATE SEQUENCE ordered_seq START WITH 1 INCREMENT BY 1 NOCACHE;
 CREATE TABLE ordered(
@@ -76,7 +78,6 @@ CREATE TABLE review(
         rating NUMBER DEFAULT 0,
         cdate DATE DEFAULT SYSDATE
 );
-DROP table review;
 
 ALTER TABLE review ADD CONSTRAINT review_id_PK PRIMARY KEY(id);
 ALTER TABLE review ADD CONSTRAINT review_pid_FK FOREIGN KEY(pid) REFERENCES product(id) ON DELETE CASCADE;
@@ -96,6 +97,7 @@ COMMENT ON COLUMN review.cdate IS '리뷰 작성일';
 --------------------------------------------------------------------------------------------------------
 SELECT * FROM ordered;
 SELECT * FROM order_detail;
+SELECT * FROM REVIEW;
 
 DELETE FROM ordered WHERE id = 2;
 

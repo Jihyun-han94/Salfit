@@ -125,7 +125,7 @@ public class OrderController {
 		boolean result = order.add(dto);
 		System.out.println("add 결과 :"+result);
 	
-		mv.setViewName("redirect:/prduct/detail?id="+dto.getPid());
+		mv.setViewName("redirect:/product/detail?id="+dto.getPid());
 
 		
 		return mv;
