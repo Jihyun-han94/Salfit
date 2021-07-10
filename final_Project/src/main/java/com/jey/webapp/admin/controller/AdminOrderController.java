@@ -59,12 +59,12 @@ public class AdminOrderController {
 			orderlist = order.findListSelected(dto);
 			orderdetaillist = order.findDetailListSelected(dto);
 		}
-		
+		System.out.println(orderdetaillist.get(0).getStatus());
 		
 		PageMaker pageMaker = new PageMaker(cri);
 		int totalCount = order.getTotalCount(cri);
 		pageMaker.setTotalCount(totalCount);
-
+		
 		m.addAttribute("pageMaker", pageMaker);
 		m.addAttribute("orderlist",orderlist);
 		m.addAttribute("orderdetaillist",orderdetaillist);

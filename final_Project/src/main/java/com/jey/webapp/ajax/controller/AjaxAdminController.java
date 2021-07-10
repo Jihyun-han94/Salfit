@@ -53,13 +53,13 @@ public class AjaxAdminController {
 		return json.toJSONString();
 	}
 	
+	/* 디테일 배송중 */
+	
 	@RequestMapping(value = "/delivery", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	@ResponseBody
 	public String checkdelivery(AdminOrderDTO ord, @ModelAttribute AdminOrderDetailDTO dto) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		boolean res = false;
-		
-		System.out.println(dto.getOid() +","+dto.getStatus());
 		
 		ord.setId(dto.getOid());
 		ord.setStatus(dto.getStatus());
@@ -76,7 +76,33 @@ public class AjaxAdminController {
 		return json.toJSONString();
 	}
 	
-	/* 취소완료 */
+	
+	/* 디테일 배송완료 */
+	@RequestMapping(value = "/delivered", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
+	@ResponseBody
+	public String delivered(AdminOrderDTO ord, @ModelAttribute AdminOrderDetailDTO dto) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		boolean res = false;
+		
+		
+		ord.setId(dto.getOid());
+		ord.setStatus(dto.getStatus());
+		
+		res = order.updateDetailStatus(dto); 
+//			 order.updateStatus(ord); 	-> 이부분은 고객이 하는걸로 
+		
+		System.out.println("ddd: " + dto.getOid() +","+dto.getStatus());
+		
+		JSONObject json = new JSONObject();			
+		if(res) {
+			json.put("res", "true");
+		}
+		
+		return json.toJSONString();
+	}
+	
+	
+	/* 주문 취소완료 */
 	
 	@RequestMapping(value = "/cancel", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
 	@ResponseBody

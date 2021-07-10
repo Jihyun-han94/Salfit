@@ -77,16 +77,16 @@
 						<td id="statusicon${order.getId()}">
 							<c:choose>
 								<c:when test="${order.getStatus().equals('paid')}" >
-									<i class="bi bi-check text-danger" onclick="checked(this, ${order.getId()},  ${order.getOid()}, document.getElementById('status${order.getId()}'));"  style="font-size: 2rem;"></i>
+									<i class="bi bi-check text-primary" onclick="checked(this, ${order.getId()},  ${order.getOid()}, document.getElementById('status${order.getId()}'));"  style="font-size: 2rem;"></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('shipping')}" >
-									<i class="bi bi-truck text-warning" style="font-size: 2rem; padding-left:4rem;"></i>
+									<i class="bi bi-truck text-success" onclick="delivered(this, ${order.getId()},${order.getOid()}, document.getElementById('status${order.getId()}'));" style="font-size: 2rem; padding-left:4rem;"></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('delivered')}" >
-									<i class="bi bi-person-check-fill text-success" style="font-size: 2rem; padding-left:8rem;"></i>
+									<i class="bi bi-person-check-fill text-dark" style="font-size: 2rem; padding-left:8rem;"></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('holding')}" >
-										<i class="bi bi-dash-circle-fill text-warning" style="font-size: 2rem; padding-left:2rem;"></i>
+										<i class="bi bi-dash-circle-fill text-warning" style="font-size: 2rem; padding-left:4rem;"></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('canceled')}" >
 										<i class="bi bi-x-circle-fill text-danger" style="font-size: 2rem; padding-left:4rem;"></i>
@@ -165,19 +165,57 @@ $(document).ready(function() {
 			dataType: "json",
 			data: {
 				id: id,
-				oid: id,
+				oid: oid,
 				status: "shipping"
 			},
 			success: function (data) {
 					if(data.res == "true") {
-						e.setAttribute("class", "bi bi-truck text-warning");
+						e.setAttribute("class", "bi bi-truck text-success");
 						e.setAttribute("style", "font-size: 2rem; padding-left:4rem;");
+						e.setAttribute("onclick", "delivered(this, "+id+", "+status+");")
+						e.onclick = function() {delivered(this, id, oid, status);};
+
 						status.innerText = "shipping";
 						
 						// 알림창 
 						
 						let NodeList = "";
 						let newNode = "<a id='qoo"+id+"' data-toggle='popover' data-trigger='hover' data-content='배송중~'></a>";
+						NodeList += newNode;
+						$(NodeList).appendTo(e);
+						
+						$('#qoo'+id).popover('show');
+						$('#qoo'+id).on('shown.bs.popover', function() {
+						    setTimeout(function() {
+						        $('#qoo'+id).popover('hide');
+						    }, 3000);
+						});
+					} 
+			}				
+		});
+	}
+	
+	function delivered(e, id, oid, status) {
+		$.ajax({
+			url: "${ajax_order}/delivered",
+			type: "post",
+			async: "false",
+			dataType: "json",
+			data: {
+				id: id,
+				oid: oid,
+				status: "delivered"
+			},
+			success: function (data) {
+					if(data.res == "true") {
+						e.setAttribute("class", "bi bi-person-check-fill text-dark");
+						e.setAttribute("style", "font-size: 2rem; padding-left:8rem;");
+						status.innerText = "delivered";
+						
+						// 알림창 
+						
+						let NodeList = "";
+						let newNode = "<a id='qoo"+id+"' data-toggle='popover' data-trigger='hover' data-content='배송완료!'></a>";
 						NodeList += newNode;
 						$(NodeList).appendTo(e);
 						

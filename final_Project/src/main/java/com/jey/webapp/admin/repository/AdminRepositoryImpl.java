@@ -58,13 +58,22 @@ public class AdminRepositoryImpl implements AdminRepository {
 				int dtrs = sqlSession.update("adminMapper.updateOrderDetails", dto);	
 				if(dtrs == 1) {
 					res =  true;
-					System.out.println("here!");
 				} 
 			} else {
 				res = true;
 			}
 		} 
 		return res;
+	}
+	
+	@Override
+	public boolean updateDetailStatus(AdminOrderDetailDTO dto) {
+		int rs = sqlSession.update("adminMapper.updateDelivery", dto);	
+		if(rs == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -91,15 +100,6 @@ public class AdminRepositoryImpl implements AdminRepository {
 		return data;
 	}
 
-	@Override
-	public boolean updateDetailStatus(AdminOrderDetailDTO dto) {
-		int rs = sqlSession.update("adminMapper.updateDelivery", dto);	
-		if(rs == 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	@Override
 	public List<AdminOrderDTO> listPage(Criteria cri) {

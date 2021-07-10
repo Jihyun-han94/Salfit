@@ -142,13 +142,13 @@
 									<i></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('checked')}" >
-										<i class="bi bi-check text-primary" onclick="checked(this, ${order.getId()}, document.getElementById('status${order.getId()}'));"  style="font-size: 2rem;"></i>
+										<i class="bi bi-check text-primary"  style="font-size: 2rem;"></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('shipping')}" >
 										<i class="bi bi-truck text-success" style="font-size: 2rem; padding-left:4rem;"></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('holding')}" >
-										<i class="bi bi-dash-circle-fill text-warning" onclick="cancel(this, ${order.getId()}, document.getElementById('status${order.getId()}'));" style="font-size: 2rem; padding-left:2rem;"></i>
+										<i class="bi bi-dash-circle-fill text-warning" onclick="cancel(this, ${order.getId()}, document.getElementById('status${order.getId()}'));" style="font-size: 2rem; padding-left:4rem;"></i>
 								</c:when>
 								<c:when test="${order.getStatus().equals('canceled')}" >
 										<i class="bi bi-x-circle-fill text-danger" style="font-size: 2rem; padding-left:4rem;"></i>
@@ -241,9 +241,10 @@ $(document).ready(function() {
 		const container = document.getElementById('modalbody');
 		container.innerHTML = '<div class="row">'
 							+ '	  <div class="col-1 col-sm-1">번호</div>'
-							+ '   <div class="col-3 col-sm-4">상품명</div>'
-							+ '   <div class="col-3 col-sm-3">주문 수량 / 가격</div>'
+							+ '   <div class="col-3 col-sm-3">상품명</div>'
+							+ '   <div class="col-2 col-sm-2">주문 수량 / 가격</div>'
 							+ '   <div class="col-5 col-sm-4">구독 기간(일수)</div>'
+							+ '   <div class="col-1 col-sm-2">상태</div>'
 							+ '</div><hr>';
 		var orderdetail = []; var i = 0;
    		    <c:forEach items="${orderdetaillist}" var="orderdetail" varStatus="loop">
@@ -260,7 +261,8 @@ $(document).ready(function() {
       					"receiver" : "${orderdetail.getReceiver()}",
       					"phone" : "${orderdetail.getPhone()}",
       					"address" : "${orderdetail.getAddress()}",
-    		        	"id": "${orderdetail.getId()}"
+    		        	"id": "${orderdetail.getId()}",
+    		        	"status": "${orderdetail.getStatus()}"
    		        		}
    		        	)
 	  			}
@@ -270,9 +272,10 @@ $(document).ready(function() {
 			let NodeList = "";
 			let newNode = "<div class='row'>";
 				newNode += "<div id='detailid' class='col-1 col-sm-1'>"+orderdetail[j].id+"</div>";	
-				newNode += "<div class='col-3 col-sm-4'><a id='detailpname' href='/salfit/product/detail?id="+orderdetail[j].id+"' class='tooltip-test' title='Tooltip'>"+orderdetail[j].title+"</a></div>";
-				newNode += "<div id='detailqtyprice' class='col-3 col-sm-3'>"+orderdetail[j].qty + " 개 / " + orderdetail[j].price+" 원</div>";
+				newNode += "<div class='col-3 col-sm-3'><a id='detailpname' href='/salfit/product/detail?id="+orderdetail[j].id+"' class='tooltip-test' title='Tooltip'>"+orderdetail[j].title+"</a></div>";
+				newNode += "<div id='detailqtyprice' class='col-2 col-sm-2'>"+orderdetail[j].qty + " 개 / " + orderdetail[j].price+" 원</div>";
 				newNode += "<div id='detailperiod' class='col-5 col-sm-4'>"+orderdetail[j].period+"</div>";
+				newNode += "<div id='detailstatus' class='col-1 col-sm-2'>"+orderdetail[j].status+"</div>";
 				newNode += "</div>";
 			NodeList += newNode;
 			$(NodeList).appendTo(container);
@@ -364,8 +367,6 @@ $(document).ready(function() {
 					if(data.res == "true") {
 						icon.setAttribute("class", "bi bi-check text-primary");
 						icon.setAttribute("style", "font-size: 2rem;");
-						icon.setAttribute("onclick", "checked(this, "+id+", "+status+");")
-						icon.onclick = function() {checked(this, id, status);};
 						status.innerText = "checked";
 						
 						

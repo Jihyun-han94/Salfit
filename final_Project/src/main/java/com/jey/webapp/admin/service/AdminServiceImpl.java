@@ -23,10 +23,6 @@ public class AdminServiceImpl implements AdminService {
 
 
 
-	@Override
-	public boolean updateStatus(AdminOrderDTO dto) {
-		return dao.updateStatus(dto);
-	}
 	
 	@Override
 	public List<AdminOrderDTO> findList(AdminOrderDTO dto) throws Exception {
@@ -68,6 +64,11 @@ public class AdminServiceImpl implements AdminService {
 		return dao.selectDetailListSelected(dto);
 	}
 
+	@Override
+	public boolean updateStatus(AdminOrderDTO dto) {
+		return dao.updateStatus(dto);
+	}
+	
 	@Override
 	public boolean updateDetailStatus(AdminOrderDetailDTO dto) {
 		return dao.updateDetailStatus(dto);

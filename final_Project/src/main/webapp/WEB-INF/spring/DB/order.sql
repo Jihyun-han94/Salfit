@@ -56,7 +56,7 @@ ALTER TABLE order_detail ADD CONSTRAINT order_detail_oid_FK FOREIGN KEY(oid) REF
 ALTER TABLE order_detail ADD CONSTRAINT order_detail_pid_FK FOREIGN KEY(pid) REFERENCES product(id);
 ALTER TABLE order_detail MODIFY qty CONSTRAINT order_detail_qty_NN NOT NULL;
 ALTER TABLE order_detail MODIFY price CONSTRAINT order_detail_price_NN NOT NULL;
-ALTER TABLE order_detail ADD CONSTRAINT order_detail_status_CK CHECK(status IN('unpaid', 'paid', 'shipping', 'delived', 'holding', 'canceled'));
+ALTER TABLE order_detail ADD CONSTRAINT order_detail_status_CK CHECK(status IN('unpaid', 'paid', 'shipping', 'delivered', 'holding', 'canceled'));
 
 COMMENT ON COLUMN order_detail.id IS '구매목록 구분 식별 번호';
 COMMENT ON COLUMN order_detail.oid IS '주문 번호';
@@ -109,7 +109,7 @@ INSERT INTO review VALUES(10, 21, 1, ' dddddddd~~~', 2, SYSDATE);
 INSERT INTO review VALUES(15, 22, 1, '맛있는 샐러드~~dddddddd~~~', 4, SYSDATE);
 
 
-ALTER TABLE ordered DROP CONSTRAINT ordered_status_CK;
+ALTER TABLE order_detail DROP CONSTRAINT order_detail_status_CK;
 
 SELECT *
 	  FROM (SELECT ROW_NUMBER() OVER (ORDER BY pdate) NUM
