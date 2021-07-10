@@ -13,6 +13,12 @@
 <c:url var="ajax_order" value="/ajax/admin/order" />
 
 </head>
+<style>
+i {
+	cursor: pointer;
+}
+</style>
+
 <body>
 
 	<header>
@@ -141,7 +147,6 @@ $(document).ready(function() {
 	
 		
 });
-
 	function searchStatus(e) {
 		const url = new URL(window.location.href);
 		const urlParams = url.searchParams;
@@ -155,8 +160,6 @@ $(document).ready(function() {
 		}
 		window.location.href = "delivery?" + urlParams;
 	}
-
-
 	function checked(e, id, oid, status) {
 		$.ajax({
 			url: "${ajax_order}/delivery",

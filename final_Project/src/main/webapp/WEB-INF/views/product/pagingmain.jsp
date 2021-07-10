@@ -16,6 +16,11 @@
 	<c:url var="login" value="/account/login" />
 	<c:url var="moreProducts" value="/ajax/product/moreProducts" />
 </head>
+<style>
+.text-muted {
+	cursor: pointer;
+}
+</style>
 <body>
 	<header>
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
