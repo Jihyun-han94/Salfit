@@ -55,13 +55,15 @@ td {
 <div style="float: center; padding-right:5px;">
 <h1 style="margin-bottom: 50px;"><i class="bi bi-caret-right-fill" style="color:#e1e1e1; font-size: 20px;"> </i>주문 내역 확인</h1>
 	<table border="1" id="id_cart" name="id_cart" style="text-align:center;">
-		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">이미지</th>
-		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">상품 명</th>
-		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">가격</th>
-		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">배송 방법</th>
-		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">구독일 (기간)</th>
-		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">총 주문 수량</th>
-		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">금액</th>
+		<tr>
+			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">이미지</th>
+			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">상품 명</th>
+			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">가격</th>
+			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">배송 방법</th>
+			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">구독일 (기간)</th>
+			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">총 주문 수량</th>
+			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">금액</th>
+		</tr>
 		
 		<c:forEach var="data" items="${requestScope.cartlist }">
 		<tr>
@@ -96,20 +98,20 @@ td {
 		<br>
 			<label for="address">주소 : </label>
 			<select name="address" id="address">
-					<option >주소를 선택해 주세요 </option>
-				<c:forEach var="data" items="${requestScope.address_arr }">
-	  				<option>${data.address }</option>
-				</c:forEach>
+					<option>주소를 선택해 주세요 </option>
+					<c:forEach var="data" items="${requestScope.address_arr }">
+		  				<option>${data.address }</option>
+					</c:forEach>
 	  				<option value="direct">직접 입력</option>
   			</select>
-					<input type="text" id="dr_address" name="address">
+					<input type="text" id="dr_address" name="dr_address"/>
 		
 
 		<br>
 			<c:forEach var="data" items="${requestScope.cartlist }">
-				<input id="aid" name="aid" value="${data.aid }" hidden />
+				<input id="aid" name="aid" value="${data.aid }" type="hidden" />
 			</c:forEach>
-			<input id="paytype" name="paytype" value="card" hidden />
+			<input id="paytype" name="paytype" value="card" type="hidden" />
 			<div style="text-align:center; margin-top:50px; margin-left: 400px;">	
 			<button type="submit" class="buy_btn1">결제</button>
 		</div>
@@ -127,7 +129,7 @@ $("#address").change(function() {
    //직접입력을 누를 때 나타남
 		if($("#address").val() == "direct") {
 			$("#dr_address").show();
-			$("#dr_address").attr('required', 'required');
+			/* $("#dr_address").attr('required', 'required'); */
 		}  else {
 			$("#dr_address").hide();
 		}
