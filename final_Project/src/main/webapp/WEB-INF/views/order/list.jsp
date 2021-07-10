@@ -93,7 +93,7 @@
       <td>${data.total }</td>
       <c:choose>
          <c:when  test ="${data.status eq 'unpaid' }"> <!-- unpaid로 바꾸기 -->
-         <td>결제하러가기</td> <!--결제 되게 a태그 넣기-->
+         <td><a href="/salfit/pay/later?id=${data.id }">결제하러가기</a></td> <!--결제 되게 a태그 넣기-->
          </c:when>
          
          <c:when test = "${data.status eq 'paid' }">

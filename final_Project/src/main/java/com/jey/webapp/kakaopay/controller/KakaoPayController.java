@@ -213,5 +213,20 @@ public class KakaoPayController {
       
       return mv;
    }
+   @RequestMapping(value="/later", method = RequestMethod.GET)
+   public ModelAndView paylater(HttpServletRequest request,@ModelAttribute OrderDTO dto) throws Exception {
+	   ModelAndView mv = new ModelAndView();
+	   mv.setViewName("/kakaopay/paystep1");
+
+	   HttpSession session = request.getSession();     
+	   AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
+	   dto.setAid(accountdto.getId());
+	   dto.setPaytype("KG 이니시스");
+	   dto = order.findorder(dto);
+	   
+	   
+	   mv.addObject("ordered", dto);
+    return mv;
+   }
    
 }
