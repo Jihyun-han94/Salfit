@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	
-    pageEncoding="UTF-8"%>	
+    pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<link href="https://fonts.googleapis.com/css?family=David+Libre|Hind:400,700" rel="stylesheet">	
@@ -97,7 +100,16 @@
 		<c:choose>	
 			<c:when test="${sessionScope.atype == 'a' }">	
 				<li><a href="${admin_product }">상품 관리</a></li>	
-				<li id="neworder_nav"><a href="${admin_order }" style="position:relative;">주문 관리<span id="neworder_alert"></span></a></li>	
+				<li id="neworder_nav">
+					<a href="${admin_order }" style="position:relative;">주문 관리
+					<c:if test="${!empty newOrder && newOrder gt 0}">
+						<span id="neworder_alert" class="new-order-counter">${sessionScope.newOrder}</span>
+					</c:if>
+					<c:if test="${empty newOrder || newOrder gt 0}">
+						<span id="neworder_alert"></span>
+					</c:if>
+					</a>
+				</li>	
 				<li><a href="${admin_delivery }">배송 관리</a></li>	
 				<li><a href="${admin_statistics }">통계</a></li>	
 				<li><a href="${logout }">Logout</a></li>	
@@ -170,14 +182,9 @@
 	var websocket;	
    	var neworder_alert = document.getElementById("neworder_alert");	
    	var neworder_nav = document.getElementById("neworder_nav");	
-	var prev_val = neworder_alert.innerText; 	
-   	neworder_nav.addEventListener("click", function(){	
-	    	neworder_alert.classList.remove('new-order-counter');	
-   	});	
     websocket = new WebSocket("ws://localhost/salfit/alert");	
     	
     websocket.onmessage = function(message) {	
-    	//alert(message.data);	
     	onMessage(message); 	
     }	
     	
@@ -185,9 +192,13 @@
     	if(!neworder_alert.classList.contains('new-order-counter')) {	
     		neworder_alert.classList.add('new-order-counter');	
 	    }	
-    	//var val = prev_val + 1;	
-   		neworder_alert.innerText = "new";  	
-}	
+    	if("${newOrder eq 1}") {
+   			neworder_alert.innerText = "new";
+    	} else {
+    		neworder_alert.inneText = "${newOrder}";
+    	}
+   		
+	}	
 	    		
 	// google_logout
 	function signOut() {

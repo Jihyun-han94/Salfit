@@ -41,6 +41,8 @@ public class AdminOrderController {
 	/* 주문확인 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String manageOrder(@ModelAttribute Criteria cri, Model m, @ModelAttribute AdminOrderDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
+		session.setAttribute("newOrder", 0);
+		
 		List<AdminOrderDTO> orderlist = null;
 		List<AdminOrderDetailDTO> orderdetaillist = null;
 		

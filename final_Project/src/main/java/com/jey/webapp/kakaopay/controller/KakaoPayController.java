@@ -1,6 +1,7 @@
 package com.jey.webapp.kakaopay.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -160,16 +161,6 @@ public class KakaoPayController {
          //cart에서 삭제하는 method
          boolean deleteresult = cart.delete(dto);
          
-         
-         // 주문알림 
-         List<WebSocketSession>sList = this.alerthandler.sockList;
-         for(WebSocketSession ws: sList) {
-            String text = "새로운 주문이 들어왔습니다.";
-            TextMessage msg = new TextMessage(text);
-            ws.sendMessage(msg);
-         }
-         
-         
          m.addAttribute("ordered", order_dto);
       
       return forward;
@@ -206,6 +197,22 @@ public class KakaoPayController {
          product.updatebcnt(productdto);
       
       }
+      
+     // 주문알림 
+      int newOrder = 1;
+	  if(session.getAttribute("newOrder") != null && (int)session.getAttribute("newOrder") != 0) {
+		  newOrder += (int)session.getAttribute("newOrder");
+	  }
+	  session.setAttribute("newOrder", newOrder);
+	  
+	  List<WebSocketSession>sList = this.alerthandler.sockList;
+	  for(WebSocketSession ws: sList) {
+    	  
+		  String text = "새로운 주문이 들어왔습니다.";
+		  TextMessage msg = new TextMessage(text);
+		  ws.sendMessage(msg);
+	  }
+      
       m.addAttribute("paymethod", paymethod);
       m.addAttribute("orderDTO", dto);
       m.addAttribute("username", accountdto.getName());
