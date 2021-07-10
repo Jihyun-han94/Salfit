@@ -45,7 +45,8 @@
 	
 	<update id="updatestatus" parameterType="order">
 		UPDATE ordered
-		SET status = 'paid'
+		SET status = 'paid',
+			paytype = #{paytype}
 		WHERE id = #{id} AND aid=#{aid}
 	</update>
 	

@@ -44,7 +44,7 @@ window.onload = function iamport(){
 	        //관리자 주문알림 
 	    } else {
 	    	 var msg = '결제에 실패하였습니다.';
-	         msg += '에러내용 : ' + rsp.error_msg;
+	         /* msg += '에러내용 : ' + rsp.error_msg; */
 	         window.location.href = '/salfit';
 		        
 	    }

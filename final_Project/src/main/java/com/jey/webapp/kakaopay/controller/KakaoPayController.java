@@ -130,7 +130,7 @@ public class KakaoPayController {
       order_dto.setDdate(cart.findDdate(dto));   // 가장 빠른 배송일 
       order_dto.setEdate(cart.findEdate(dto));   // 가장 늦은 배송일
       
-      order_dto.setPaytype("card");
+      order_dto.setPaytype("KG 이니시스");
       boolean result = order.add(order_dto); //ordered table에 insert
       
       //ordered table 셋팅 
@@ -180,8 +180,8 @@ public class KakaoPayController {
       
    
       String paymethod = request.getParameter("paymethod");
-      System.out.println(paymethod);
-      
+      System.out.println("paymethod : "+paymethod);
+      dto.setPaytype(paymethod);
       //ordered table과 order_detail status 바꿔야됨!!
       dto.setAid(accountdto.getId());
       order.updatestatus(dto); //ordered status 'paid'로 변경
