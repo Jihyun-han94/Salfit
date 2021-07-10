@@ -42,6 +42,12 @@ td {
 	border-right: #ffff;
 	border-left: #ffff;
 }
+
+input, .address {
+	width: 300px;
+	border: 1px solid #e7e7e7;
+	font-size: 15px;
+}
 </style>
 </head>
 <body>
@@ -55,16 +61,15 @@ td {
 <div style="float: center; padding-right:5px;">
 <h1 style="margin-bottom: 50px;"><i class="bi bi-caret-right-fill" style="color:#e1e1e1; font-size: 20px;"> </i>주문 내역 확인</h1>
 	<table border="1" id="id_cart" name="id_cart" style="text-align:center;">
-		<tr>
-			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">이미지</th>
-			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">상품 명</th>
-			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">가격</th>
-			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">배송 방법</th>
-			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">구독일 (기간)</th>
-			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">총 주문 수량</th>
-			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">금액</th>
-		</tr>
-		
+	<tr>
+		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">이미지</th>
+		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">상품 명</th>
+		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">가격</th>
+		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">배송 방법</th>
+		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">구독일 (기간)</th>
+		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">총 주문 수량</th>
+		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">금액</th>
+	</tr>
 		<c:forEach var="data" items="${requestScope.cartlist }">
 		<tr>
 		
@@ -89,22 +94,22 @@ td {
 		<p style="color: gray; padding-top:5px;">* 상품 금액 30000원 이하는 배송비가 추가됩니다.</p>
 	<div style="float:right; padding-bottom: 50px; padding-right:50px;">
 		<label style="border-top: #e1e1e1; padding-bottom:10px;">총 주문 금액 : </label>
-		<label style="border-top: #e1e1e1; padding-top:10px; padding-bottom:13px; font-size: 20px; color: #961533; font-weight:bold;"><input name="total" value="${totalMoney }" hidden>${totalMoney } 원</label>
+		<label style="border-top: #e1e1e1; padding-top:10px; padding-bottom:13px; font-size: 20px; color: #961533; font-weight:bold;"><input name="total" value="${totalMoney }" type="hidden">${totalMoney } 원</label>
 	</div>
-	<div style="float:left; padding-top:100px;">
+	<div style="float:left;">
 		<h1 style="margin-bottom: 50px;"><i class="bi bi-caret-right-fill" style="color:#e1e1e1; font-size: 20px;"> </i>배송 정보</h1>
-			<label for="receiver">받으시는 분 : </label>
+			<label for="receiver" style="margin-bottom: 20px; font-size: 15px;">받으시는 분&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 20px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<input id="receiver" name="receiver" required>
 		<br>
-			<label for="address">주소 : </label>
-			<select name="address" id="address">
-					<option>주소를 선택해 주세요 </option>
-					<c:forEach var="data" items="${requestScope.address_arr }">
-		  				<option>${data.address }</option>
-					</c:forEach>
+			<label for="address" style="font-size: 15px;">주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 20px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<select name="address" id="address" class="address">
+					<option >주소를 선택해 주세요</option>
+				<c:forEach var="data" items="${requestScope.address_arr }">
+	  				<option>${data.address }</option>
+				</c:forEach>
 	  				<option value="direct">직접 입력</option>
   			</select>
-					<input type="text" id="dr_address" name="dr_address"/>
+					<input type="text" id="dr_address" name="address">
 		
 
 		<br>
@@ -112,7 +117,7 @@ td {
 				<input id="aid" name="aid" value="${data.aid }" type="hidden" />
 			</c:forEach>
 			<input id="paytype" name="paytype" value="card" type="hidden" />
-			<div style="text-align:center; margin-top:50px; margin-left: 400px;">	
+			<div style="text-align:center; margin-top:80px; margin-left: 690px;">	
 			<button type="submit" class="buy_btn1">결제</button>
 		</div>
 	</div>
@@ -129,7 +134,7 @@ $("#address").change(function() {
    //직접입력을 누를 때 나타남
 		if($("#address").val() == "direct") {
 			$("#dr_address").show();
-			/* $("#dr_address").attr('required', 'required'); */
+			$("#dr_address").attr('required', 'required');
 		}  else {
 			$("#dr_address").hide();
 		}

@@ -8,6 +8,7 @@
 <c:url var="addC" value="/admin/product/ptype/add" />
 <form action="${addC}" method="post" enctype="multipart/form-data">
 <c:url var="all" value="/product" />
+
 <div class="productContainer" style="margin-top: -200px;">
 	<c:if test="${sessionScope.account.getAtype() == 'a' }" >
 		<div class="text-right" style="margin-bottom: 20px;">
@@ -47,18 +48,18 @@
 		        <div class="carousel-item <c:if test='${onerow.index eq 0}'> active </c:if>" >
 		        <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
 			        <c:forEach var="ptype" items="${requestScope.producttypes }" begin="${onerow.index *3 }" end="${onerow.index *3 +2}" varStatus="status">
-			          <div class="col mb-3 ">
+			          <div class="col mb-3 text-center">
 				          <a href="?ptype=${ptype.id }">
 								<img class="rounded card-img-top productImg"
 									src="${pageContext.request.contextPath}${ptype.getImgurl()}">
 							</a>
 							<div class="card-body bg-transparent border-1">
-								<h5 class="card-title card-text">
-									<a href="?ptype=${ptype.id }">${ptype.name }</a>
+								<h5 class="card-title card-text text-center">
+									<a style="font-weight: bold; color:#77A612;" href="?ptype=${ptype.id }">${ptype.name }</a>
 								</h5>
 								<c:if test="${sessionScope.account.getAtype() == 'a' }" >
 									<div class="text-center">
-									<a type="button" href="${deleteC}?id=${ptype.id}">삭제</a>
+									<a style="font-size:12px; color: gray;" type="button" href="${deleteC}?id=${ptype.id}">삭제</a>
 									</div>
 								</c:if>
 							</div>

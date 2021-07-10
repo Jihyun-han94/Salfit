@@ -105,19 +105,23 @@ public class KakaoPayController {
    
    public String getpayment( @ModelAttribute CartDTO dto,@ModelAttribute OrderDTO order_dto,Model m,HttpServletRequest request) throws Exception {
       String forward="kakaopay/paystep1";
-      
-      
-      
+           
       int aid = dto.getAid();
       String receiver = order_dto.getReceiver();
       String address = order_dto.getAddress();
-      String dr_address = request.getParameter("dr_address");
-      order_dto.setAddress(dr_address);
+     
+      String res ;
+      if(address.contains("direct")) {
+        res= address.substring(address.lastIndexOf(",")+1);
+        order_dto.setAddress(res);
+      }else {
+         String[] array = address.split(",");
+         order_dto.setAddress(array[0]);
+      }
+      
       int total = order_dto.getTotal();
       order_dto.setAid(aid);
-      
-      System.out.println(dr_address);
-
+     
       int cartNum = 0;
       String[] id = request.getParameterValues("cartid");
       for(int i=0;i<id.length;i++){
@@ -132,7 +136,7 @@ public class KakaoPayController {
       order_dto.setDdate(cart.findDdate(dto));   // 가장 빠른 배송일 
       order_dto.setEdate(cart.findEdate(dto));   // 가장 늦은 배송일
       
-      order_dto.setPaytype("card");
+      order_dto.setPaytype("KG 이니시스");
       boolean result = order.add(order_dto); //ordered table에 insert
       
       //ordered table 셋팅 
@@ -182,8 +186,8 @@ public class KakaoPayController {
       
    
       String paymethod = request.getParameter("paymethod");
-      System.out.println(paymethod);
-      
+      System.out.println("paymethod : "+paymethod);
+      dto.setPaytype(paymethod);
       //ordered table과 order_detail status 바꿔야됨!!
       dto.setAid(accountdto.getId());
       order.updatestatus(dto); //ordered status 'paid'로 변경

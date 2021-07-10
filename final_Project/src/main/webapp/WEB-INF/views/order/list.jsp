@@ -76,9 +76,23 @@ td {
 }
 
 th {
- border-top: solid 5px #e1e1e1;
- border-bottom: solid 5px #e1e1e1;
- 
+	border-top: solid 5px #e1e1e1;
+	border-bottom: solid 5px #e1e1e1;
+}
+
+ .list_btn {
+	padding: 3px 20px;
+	border: 1px solid #bac600;
+	color: #263238;
+	background: transparent;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+
+ .list_btn:hover {
+  background-color: #bac600;
+  color: #ffffff;
 }
 </style>
 <body>
@@ -88,8 +102,8 @@ th {
 	</header>
 	<main class="cd-main-content sub-nav">
 		<div
-			style="margin: 0 auto; width:69%; text-align: center; font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 15px;">
-			<h1 style="padding-bottom: 20px;">${username } 님의 주문내역</h1>
+			style="margin: 0 auto; width:86%; text-align: center; font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 15px;">
+			<h1 style="padding-bottom: 30px;">${username } 님의 주문 내역  <i class="bi bi-card-checklist" style="color: #77A612"></i></h1>
 
 			<table id="orderedlist" border="1">
 				<tr>
@@ -157,7 +171,7 @@ th {
 								<!--결제 되게 a태그 넣기-->
 							</c:when>
 							<c:otherwise>
-								<td><button id="btn1" name="${data.id }"
+								<td><button class="list_btn" id="btn1" name="${data.id }"
 										onclick="confirmdel(${data.id });">배송확인</button></td>
 							</c:otherwise>
 						</c:choose>
@@ -170,7 +184,7 @@ th {
 								<td>취소완료</td>
 							</c:when>
 							<c:otherwise>
-								<td><button id="btn2" name="${data.id }"
+								<td><button class="list_btn" id="btn2" name="${data.id }"
 										onclick="cancel(${data.id});">취소요청</button></td>
 							</c:otherwise>
 						</c:choose>
