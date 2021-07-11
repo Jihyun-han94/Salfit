@@ -22,7 +22,8 @@
 	<c:url var="admin_order" value="/admin/order/list" />	
 	<c:url var="admin_delivery" value="/admin/order/calendar" />	
 	<c:url var="admin_statistics" value="/admin/order/summary" />
-	<c:url var="search" value="/admin/product" />
+	<c:url var="searcha" value="/admin/product" />
+	<c:url var="searchi" value="/product" />
 	<style>	
 .new-order-counter {	
  position:absolute;	
@@ -76,7 +77,7 @@
 	<header class="cd-auto-hide-header">	
 		<div class="logo">
 		<a href="${main }"><img src="/salfit/resources/img/newlogo.png" alt="Logo" height="80px" style="float: left;"></a>
-				<form id="search_form" action="${search }" method="get" style="padding-left: 50px; padding-top: 25px; float:right;">
+		<form id="search_form" action="${sessionScope.atype == 'a' ? searcha : searchi }" method="get" style="padding-left: 50px; padding-top: 25px; float:right;">
 		<c:if test="${not empty param.ptype}" >
 			<input type="hidden" name="ptype" value="${param.ptype }">
 		</c:if>
