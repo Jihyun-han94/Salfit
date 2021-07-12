@@ -31,6 +31,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.jey.webapp.account.dto.AccountDTO;
 import com.jey.webapp.admin.dto.PtypeDTO;
+import com.jey.webapp.admin.service.AdminService;
 import com.jey.webapp.alert.AlertHandler;
 import com.jey.webapp.order.dto.ReviewDTO;
 import com.jey.webapp.product.dto.ProductDTO;
@@ -45,6 +46,9 @@ public class AdminProductController {
 	
 	@Autowired
 	private ProductService product;
+	
+	@Autowired
+	private AdminService order;
 
 	/* 상품 조회(조회수, 수정, 삭제, 리뷰에 대댓글 버튼 ) */
 	
@@ -278,15 +282,21 @@ public class AdminProductController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deleteProduct(Model m, @ModelAttribute ProductDTO dto) throws Exception {
-		String forward = ""
-;		boolean res = product.remove(dto);
-		if(res) {
-			m.addAttribute("result", "removeOK");
+		String forward = "";
+				
+				
+		if(order.findOrderedProduct(dto)) {
+			m.addAttribute("result", "removeFail");
 			forward = "redirect:/admin/product";
 		} else {
-			forward = "error/default";
+			boolean res = product.remove(dto);
+			if(res) {
+				m.addAttribute("result", "removeOK");
+				forward = "redirect:/admin/product";
+			} else {
+				forward = "error/default";
+			}
 		}
-		
 		return forward;
 	}
 	

@@ -197,3 +197,5 @@ FROM (SELECT
   	ORDER BY "rating" DESC
         ) 
   WHERE ROWNUM BETWEEN 1 AND 5
+  
+  SELECT id FROM order_detail WHERE pid = 63 AND status != ('delivered' || 'canceled');

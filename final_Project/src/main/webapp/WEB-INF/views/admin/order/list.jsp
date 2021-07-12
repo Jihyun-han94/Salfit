@@ -28,7 +28,7 @@
 		<a href="${order}/delivery?startdate=${param.ddate}" class="pull-right mb-5">${param.ddate} 배송 상품 목록 </a>
 		</c:if>
 		<c:if test="${cri.getId() != 0}">
-		<a href="${order}/list" class="pull-right mb-5">전체 주문 보기</a>
+		<a href="${order}/list" class="pull-right mb-5 mr-5 pr-5">전체 주문 보기</a>
 		</c:if>
 		<section class="mb-5 col-10 m-auto">
 			

@@ -131,6 +131,16 @@ public class AdminRepositoryImpl implements AdminRepository {
 		return sqlSession.selectList("adminMapper.ratingTop5");
 	}
 
+	@Override
+	public boolean findOrderedProduct(ProductDTO dto) {
+		List<AdminOrderDetailDTO> result = sqlSession.selectList("adminMapper.orderExist", dto);
+		if(result.size() >= 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 
 	

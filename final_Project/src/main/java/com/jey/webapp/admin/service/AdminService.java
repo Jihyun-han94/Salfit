@@ -29,4 +29,5 @@ public interface AdminService {
 	public int numOfProducts(SummaryDTO summary);
 	public SummaryDTO monthlyOrderSum(SummaryDTO summary);
 	public List<ReviewDTO> toprating();
+	public boolean findOrderedProduct(ProductDTO dto);
 }

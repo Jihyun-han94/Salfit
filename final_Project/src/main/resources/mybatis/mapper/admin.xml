@@ -300,4 +300,8 @@
 	  WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 	
+	<select id="orderExist" resultType="product">
+	SELECT id FROM order_detail WHERE pid = #{id} AND status != ('delivered' || 'canceled')
+	</select>
+	
 </mapper>

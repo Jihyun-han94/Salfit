@@ -28,7 +28,7 @@ i {
 	<a href="${orderurl}/calendar" class="pull-left mb-5 ml-5"><i class="bi bi-arrow-left-circle" style="font-size: 3rem; color: grey;"></i> 달력</a>
 		<h1 class="text-center mb-3">배송 목록</h1>
 		<p class="text-center mb-3">&lt${param.startdate} 배송 상품&gt</p>
-		<a href="${orderurl}/list?ddate=${dto.getStartdate()}" class="pull-right mb-5">${dto.getStartdate()} 날짜 포함 주문 전체 보기</a>
+		<a href="${orderurl}/list?ddate=${dto.getStartdate()}" class="pull-right mb-5 mr-5 pr-5">${dto.getStartdate()} 날짜 포함 주문 전체 보기</a>
 		<section class="col-10 m-auto">
 			<table class="table text-center table-hover border-success align-middle">
 				<thead class="thead table-borderless">

@@ -104,6 +104,11 @@ public class AdminServiceImpl implements AdminService {
 		return dao.toprating();
 	}
 
+	@Override
+	public boolean findOrderedProduct(ProductDTO dto) {
+		return dao.findOrderedProduct(dto);
+	}
+
 
 
 

@@ -29,6 +29,7 @@
 	
 	<div id="registerOK" class="alert alert-info collapse" role="alert">새 상품이 등록되었습니다.</div>	
 	<div id="removeOK" class="alert alert-danger collapse" role="alert">상품 게시글이 삭제되었습니다.</div>
+	<div id="removeFail" class="alert alert-danger collapse" role="alert">해당 상품의 주문이 존재합니다.</div>
 
 	
 	<div>
@@ -165,6 +166,12 @@ $(function(){
 				$('#removeOK').show();
 				setTimeout(function() { 
 				       $('#removeOK').fadeOut(1000); 
+				   }, 5000);
+			}
+			if(result === 'removeFail'){
+				$('#removeFail').show();
+				setTimeout(function() { 
+				       $('#removeFail').fadeOut(1000); 
 				   }, 5000);
 			}
 			if(result === 'addOK'){
