@@ -69,6 +69,13 @@
 
 .productImg {
  	width: 70%; 
+ 	height: 170px;
+  	width: 220px;
+  	object-fit: fill;
+}
+
+.like-heart {
+	cursor: pointer;
 }
 /* 
 .btncustom {

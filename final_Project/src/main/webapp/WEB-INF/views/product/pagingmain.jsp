@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinite Scroll</title>
+    <title>Salfit Products</title>
     <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
     <c:url var="search" value="/admin/product" />
     <c:url var="detail" value="/product/detail" />
@@ -17,13 +17,13 @@
 	<c:url var="moreProducts" value="/ajax/product/moreProducts" />
 </head>
 <style>
-.text-muted {
+.like-heart {
 	cursor: pointer;
 }
 .productImg {
-  height: 170px;
-  width: 220px;
-  object-fit: fill;
+ 	height: 170px;
+  	width: 220px;
+  	object-fit: fill;
 }
 </style>
 <body>
@@ -142,15 +142,15 @@ function addDataToDOM(data) {
 							+'<input type="hidden" name="id" value="'+data[i].id+'" readonly>'
 							+'<input type="hidden" name="aid" value="'+data[i].aid+'" readonly>'
 							+'<a href="${detail}?id='+data[i].id+'">'
-									+'<div class="embed-responsive embed-responsive-4by3">'
-							+'	<img class="rounded card-img-top productImg embed-responsive-item"'
+									+'<div class="embed-responsive ">'
+							+'	<img class="rounded card-img-top productImg"'
 							+'		src="${pageContext.request.contextPath}'+data[i].url+'"></div></a>'
 							+'<div class="card-body bg-transparent border-0">'
 							+'	<h5 class="card-title card-text" style="display: inline-block;">'
 							+'		<a href="${detail}?id='+data[i].id+'">'+data[i].title+'</a>'
 							+'	</h5>'
 							+'	<p class="card-text" style="display: inline-block; padding-left: 10px;">'
-							+'		<small class="text-muted">'
+							+'		<small class="text-muted like-heart">'
 							+ string
 							+'		</small>'
 							+'	</p>'
