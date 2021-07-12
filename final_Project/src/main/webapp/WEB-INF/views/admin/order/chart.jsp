@@ -30,14 +30,14 @@
 		  		<select id="selectedYear" name="selectedYear" class="mt-5" onchange="setYear(this.value);">
 	                <option value="" disabled ${param.selectedYear == null ? 'selected' : '' } >년도 선택</option>
 	            </select>
-				<canvas id="myChart" width="400" height="400" class="mb-5 mt-5"></canvas>
+				<canvas id="myChart" width="400" height="200" class="mb-5 mt-5"></canvas>
 		
 			</div>
 		  	<div class="tab-pane fade mt-5 pt-5" id="nav-top5" role="tabpanel" aria-labelledby="nav-top5-tab">
-		  		<canvas id="myChart2" width="200" height="200" class="w-50  h-50 mb-5 mt-5 pt-5 m-auto"></canvas>
+		  		<canvas id="myChart2" width="100" height="100" class="w-50  h-50 mb-5 mt-5 pt-5 m-auto"></canvas>
 			</div>
 			<div class="tab-pane fade mt-5 pt-5" id="nav-topRating" role="tabpanel" aria-labelledby="nav-topRating-tab">
-		  		<canvas id="myChart3" width="200" height="200" class="w-50  h-50 mb-5 mt-5 pt-5 m-auto"></canvas>
+		  		<canvas id="myChart3" width="100" height="100" class="w-50  h-50 mb-5 mt-5 pt-5 m-auto"></canvas>
 			</div>
 		</div>
 	</section>
