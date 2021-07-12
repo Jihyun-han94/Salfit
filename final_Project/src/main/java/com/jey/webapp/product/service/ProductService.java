@@ -20,19 +20,19 @@ public interface ProductService {
 	public boolean remove(ProductDTO dto) throws Exception;
 	public ProductDTO findId(int id) throws Exception;
 	public List<ProductDTO> findAll(ProductSearchDTO search) throws Exception;
-	public List<ProductTypeDTO> getProductTypes() throws Exception;
 	public List<ProductDTO> findList(ProductSearchDTO search) throws Exception;
-	public List<ReviewDTO> findReviewList(ProductDTO dto) throws Exception;
+	public List<ProductTypeDTO> getProductTypes() throws Exception;
 	public List<ProductRecommendDTO> findSimilarList(ProductDTO dto);
+	public List<ReviewDTO> findReviewList(ProductDTO dto) throws Exception;
 	public List<ReviewDTO> searchOldReviewList(ReviewSearchDTO search);
-	public List<ProductDTO> getAllLikePid(int id);
-	public boolean dislike(LikeDTO like);
-	public boolean like(LikeDTO like);
-	public boolean checkLikeExist(LikeDTO like);
-	public void incview(int id);
 	public List<ProductDTO> searchOldProductList(ProductSearchDTO search);
 	public boolean addPtype(ProductTypeDTO dto);
 	public boolean deletePtype(ProductTypeDTO dto);
+	public boolean like(LikeDTO like);
+	public List<ProductDTO> getAllLikePid(int id);
+	public boolean dislike(LikeDTO like);
+	public boolean checkLikeExist(LikeDTO like);
+	public void incview(int id);
 	public boolean updatebcnt(ProductDTO productdto) throws Exception;
 
 }

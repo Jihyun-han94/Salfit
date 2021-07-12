@@ -8,6 +8,35 @@
   	UPDATE product SET bcnt = bcnt+1  WHERE id = #{id}
   </update>
   
+  <select id="all" parameterType="productsearch" resultType="product">
+  	SELECT p.id
+         , p.ptype
+         , t.name AS tname
+         , p.aid
+         , p.price
+         , p.cdate
+         , p.title
+         , p.contents
+         , i.url AS url 
+         , i.name AS img 
+         , i.path AS imguuid
+         , p.vcnt
+         , p.gcnt
+         , p.active
+      FROM product p
+      JOIN product_type t
+        ON p.ptype = t.id
+      JOIN product_img i
+        ON p.id = i.pid
+      JOIN account a
+        ON p.aid = a.id
+      WHERE 1=1 
+     <if test="aid != 1">
+       AND p.active = 'y' 
+     </if>
+     ORDER BY p.id DESC
+  </select>
+  
   <select id="productSearch" parameterType="productsearch" resultType="product">
 	SELECT p.id
          , p.ptype
@@ -36,6 +65,9 @@
      </if>
      <if test="ptype != 0">
        AND p.ptype = #{ptype}
+     </if>
+     <if test='searchtype == "a" and search != null'>
+       AND (p.title like '%' || #{search} || '%' OR p.contents like '%' || #{search} || '%')
      </if>
      <if test='searchtype == "c" and search != null'>
        AND p.contents like '%' || #{search} || '%'
@@ -100,38 +132,6 @@
   	SELECT id FROM product WHERE id= #{id}
   </select>
   
-  <select id="all" parameterType="productsearch" resultType="product">
-  	SELECT p.id
-         , p.ptype
-         , t.name AS tname
-         , p.aid
-         , p.price
-         , p.cdate
-         , p.title
-         , p.contents
-         , i.url AS url 
-         , i.name AS img 
-         , i.path AS imguuid
-         , p.vcnt
-         , p.gcnt
-         , p.active
-      FROM product p
-      JOIN product_type t
-        ON p.ptype = t.id
-      JOIN product_img i
-        ON p.id = i.pid
-      JOIN account a
-        ON p.aid = a.id
-      WHERE 1=1 
-     <if test="aid != 1">
-       AND p.active = 'y' 
-     </if>
-     ORDER BY p.id DESC
-  </select>
-  
-  
-  
-  
   <select id="similarProduct" parameterType="product" resultType="productrecommend">
   SELECT p.id
          , p.ptype
@@ -194,6 +194,7 @@
      </if> 
   </select>
   
+  <!-- infinite paging -->
    <select id="oldProducts" parameterType="productsearch" resultType="product">
   	SELECT * FROM ( 
 	  	SELECT ROWNUM RNUM
@@ -224,6 +225,9 @@
 	     </if>
 	     <if test="ptype != 0">
 	       AND p.ptype = #{ptype}
+	     </if>
+	     <if test='searchtype == "a" and search != null'>
+	       AND (p.title like '%' || #{search} || '%' OR p.contents like '%' || #{search} || '%')
 	     </if>
 	     <if test='searchtype == "c" and search != null'>
 	       AND p.contents like '%' || #{search} || '%'

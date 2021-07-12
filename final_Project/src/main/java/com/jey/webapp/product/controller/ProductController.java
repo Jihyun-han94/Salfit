@@ -33,9 +33,6 @@ public class ProductController {
 	@Autowired
 	private ProductService product;
 
-	 @Autowired
-	   private AlertHandler alerthandler;
-	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView scroll( @ModelAttribute ProductSearchDTO search, HttpServletRequest request, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -59,12 +56,10 @@ public class ProductController {
 				}
 			}
 		}
-		if(search.getPtype() == 0 && search.getSearchtype() == null) {
-			productlist = product.findAll(search);
-		} else if (search.getSearch() == "") {
-			productlist = product.findAll(search);
-		} else {
+		if(search.getPtype() != 0 && search.getSearchtype() != null) {
 			productlist = product.findList(search);
+		} else {
+			productlist = product.findAll(search);
 		}
 		System.out.println("product size : "+productlist.size());
 		mv.addObject("productlist", productlist);

@@ -64,12 +64,10 @@ public class AdminProductController {
 		// 세션 + 필터로 관리자만 해당 컨트롤에 접속 가능 
 		search.setAid(1);
 		
-		if(search.getPtype() == 0 && search.getSearchtype() == null) {
-			productlist = product.findAll(search);
-		} else if (search.getSearch() == "") {
-			productlist = product.findAll(search);
-		} else {
+		if(search.getPtype() != 0 && search.getSearchtype() != null) {
 			productlist = product.findList(search);
+		} else {
+			productlist = product.findAll(search);
 		}
 		
 		mv.setViewName("admin/product/main");
