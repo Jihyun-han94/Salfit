@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰작성</title>
+<title>Salfit | Review</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <style>

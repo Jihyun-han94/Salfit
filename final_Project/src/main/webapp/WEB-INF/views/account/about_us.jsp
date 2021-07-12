@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Salfit | Notice</title>
+<title>Salfit | About us</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <style>
 .tab_body, html {width:100%;  }
@@ -42,19 +42,15 @@ $(function(){
 <div style="margin: 0 auto;">
   <div class="tab">
     <ul class="tabnav">
-      <li class="tab_li"><a href="#tab01">그린 박스</a></li>
-      <li class="tab_li"><a href="#tab02">문고리 배송</a></li>
-      <li class="tab_li"><a href="#tab03">대량 주문 문의</a></li>
+      <li class="tab_li"><a href="#tab01">Salfit</a></li>
+      <li class="tab_li"><a href="#tab02">About</a></li>
     </ul>
     <div class="tabcontent">
       <div id="tab01">
-      	<img src="${pageContext.request.contextPath}/resources/img/board/notice_1.png">
+      	<img src="${pageContext.request.contextPath}/resources/img/board/about_1.png">
       </div>
       <div id="tab02">
-      	<img src="${pageContext.request.contextPath}/resources/img/board/notice_2.png">
-      </div>
-      <div id="tab03">
-      	<img src="${pageContext.request.contextPath}/resources/img/board/notice_3.png">
+      	<img src="${pageContext.request.contextPath}/resources/img/board/about_2.png">
       </div>
     </div>
   </div>

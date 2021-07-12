@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 상품 상세 정보</title>
+<title>Salfit Admin | 상품 상세</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 
 <c:url var="moreReviews" value="/ajax/product/moreReviews" />

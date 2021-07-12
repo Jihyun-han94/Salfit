@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>찜한 목록</title>
+<title>Salfit | wish list</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <c:url var ="product" value="/product" />
@@ -40,6 +40,13 @@ th, tr, th, table {
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
+td {
+	border-right: #ffff;
+	border-left: #ffff;
+	width: 150px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
 </style>
 <body>
 <header style="padding-bottom: 130px;">
@@ -56,7 +63,11 @@ th, tr, th, table {
 	</div>
 </c:if>
 <c:if test="${not empty requestScope.likedProduct}" >
-<h1 style="text-align:center; font-size: 30px; text-weight:bold; margin-bottom: 80px;">찜한 상품 목록</h1>
+<div style="font-family : 'Kakao', 'sans-serif', 'normal'; font-size:13px;">
+<h1 style="text-align:center; font-size: 30px; text-weight:bold; margin-bottom: 80px;">찜한 상품 목록 <i class="bi bi-bookmark-heart" style="color: #ff7493;"></i></h1>
+<div class="row">
+<div class="col-2"></div>
+<div class="text-center col-8">
 <form>
 <div >
 	<table border="1" id="id_cart" name="id_cart" style="text-align:center;">

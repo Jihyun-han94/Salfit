@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>새 상품 등록</title>
+<title>Salfit Admin | 상품 등록</title>
 
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>

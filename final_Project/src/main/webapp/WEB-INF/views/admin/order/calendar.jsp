@@ -7,7 +7,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>관리자 배송 관리</title>
+<title>Salfit Admin | 배송 관리</title>
 <!-- favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" />
 <jsp:include page="/WEB-INF/views/module/fullcalendar.jsp"></jsp:include>

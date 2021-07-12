@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자용 상품 메인</title>
+<title>Salfit Admin | 상품 메인</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <style>

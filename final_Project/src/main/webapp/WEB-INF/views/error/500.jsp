@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>500 Error!</title>
+<title>Salfit | 500 Error!</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <body>

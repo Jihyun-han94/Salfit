@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 상세 정보</title>
+<title>Salfit | ${item.getTitle() }</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="login" value="/account/login" />
 <c:url var="moreReviews" value="/ajax/product/moreReviews" />

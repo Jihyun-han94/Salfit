@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 페이지</title>
+<title>Salfit | Join</title>
  <%@ include file="/WEB-INF/views/module/css_js.jsp" %>
  <c:url var="email_check" value="/ajax/account/email" />
  <c:url var="login" value="/account/login" />

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 주문 관리</title>
+<title>Salfit Admin | 주문 관리</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="order" value="/admin/order" />
 <c:url var="ajax_order" value="/ajax/admin/order" />

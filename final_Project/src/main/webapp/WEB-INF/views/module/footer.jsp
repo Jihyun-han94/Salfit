@@ -4,12 +4,13 @@
 
 <footer class="footer_total">
 <!-- SNS 정보  -->
+<div style="text-align:center;"><img width="50px" src="${pageContext.request.contextPath}/resources/img/newicon.ico"></div>
 <div class="clearfix">
 	<a href="https://www.instagram.com/" style="padding: 5px 10px; display:inline-block; margin-top: 10px; font-size: 20px; color:#475c01;" target="blank">
 		<i class="bi bi-instagram"></i></a>
-	<a href="https://pf.kakao.com/" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;"target="blank">
+	<a href="https://" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;"target="blank">
 		<i class="bi bi-twitter"></i></a>
-	<a href="https://blog.naver.com/" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;" target="blank">
+	<a href="https://" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;" target="blank">
 		<i class="bi bi-facebook"></i></a>
 	<a href="https://www.youtube.com/" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;" target="blank">
 		<i class="bi bi-youtube"></i></a>

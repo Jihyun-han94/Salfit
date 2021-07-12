@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>통계</title>
+<title>Salfit Admin | 통계</title>
 <!-- favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" />
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>

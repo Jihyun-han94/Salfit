@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문서 확인</title>
+<title>Salfit | 주문서 작성</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <c:url var="buy" value="/pay" />
 <c:url var ="detail" value="/product/detail" />

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 정보</title>
+<title>Salfit | User Info</title>
 <%@ include file="/WEB-INF/views/module/css_js.jsp" %>
 </head>
 <c:url var="expire" value="/ajax/account/expire"	/>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 정보 수정</title>
+<title>Salfit Admin | 상품 정보 수정</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <style>
