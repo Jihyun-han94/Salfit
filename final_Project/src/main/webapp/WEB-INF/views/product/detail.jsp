@@ -332,6 +332,7 @@
 					newNode += "<img src='/salfit/resources"+data[i].profile_img+"' width='30px' style='border-radius:20px; margin-right: 15px;'></strong>";
 					newNode += "<strong class='d-block text-gray-dark text-center'>"+data[i].aname+"</strong>";
 					newNode += "<span class='text-muted ml-auto text-center'>"+data[i].cdate2+"</span>";
+					newNode += "<span class='text-muted ml-auto'>"+data[i].rating+"점</span>";
 					newNode += "</div><span>"+data[i].contents+"</span></div></div>";
 					NodeList += newNode;
 				}

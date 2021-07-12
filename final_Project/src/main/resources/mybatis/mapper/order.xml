@@ -76,7 +76,8 @@
 	<select id ="selectList" parameterType="order" resultType="order" >
 		SELECT *
 		FROM ordered  
-		WHERE aid = #{aid}
+		WHERE aid = #{aid} 
+		ORDER BY id DESC
 	</select>
 	
 	 <insert id="insertordered" parameterType="order">

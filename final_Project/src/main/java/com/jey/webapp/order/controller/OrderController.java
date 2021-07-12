@@ -49,27 +49,30 @@ public class OrderController {
 			mv.addObject("username", username);
 			System.out.println("userid 확인 : "+userid);
 			dto.setAid(userid);
-			List<OrderDTO> orderlist = order.findList(dto);
-			System.out.println("디버깅1"+orderlist.get(0).getAid());
-			System.out.println("디버깅1"+orderlist.get(0).getTotal());
-			System.out.println("pdate :"+orderlist.get(0).getPdate());	
-			mv.addObject("orderlist", orderlist);
-			System.out.println("디버깅2");
-			OrderDetailDTO orderdetail_dto = new OrderDetailDTO();
-			System.out.println("디버깅4");
-			//제품이름 때문에 orderdetail 조회해야함 (ordered.id로) 
-			for(OrderDTO data : orderlist) {
-				orderdetail_dto.setOid(data.getId());
-				System.out.println("디버깅5");
-				List<OrderDetailDTO> orderdetail_arr = order.selectall(orderdetail_dto);
-				System.out.println("디버깅6");
-				mv.addObject("orderdetaillist", orderdetail_arr);
-				
-				System.out.println("디버깅7");
 			
-				System.out.println("디버깅8");
+			try {
+				List<OrderDTO> orderlist = order.findList(dto);
+				mv.addObject("orderlist", orderlist);
+				mv.setViewName("order/list");
+			
+			}catch(Exception e){
+				mv.addObject("result", "주문하신 제품이 없습니다.");	
 			}
-			mv.setViewName("order/list");
+			
+				
+			
+			
+			//OrderDetailDTO orderdetail_dto = new OrderDetailDTO();
+			
+			//제품이름 때문에 orderdetail 조회해야함 (ordered.id로) 
+//			for(OrderDTO data : orderlist) {
+//				orderdetail_dto.setOid(data.getId());
+//				System.out.println("디버깅5");
+//				List<OrderDetailDTO> orderdetail_arr = order.selectall(orderdetail_dto);
+//				System.out.println("디버깅6");
+//				mv.addObject("orderdetaillist", orderdetail_arr);
+//			
+//			}
 			
 		}
 		
