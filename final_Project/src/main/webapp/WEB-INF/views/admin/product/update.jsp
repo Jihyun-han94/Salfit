@@ -19,6 +19,19 @@ i:hover {
 .btn_confirm {
 	margin: 15px;
 }
+.btn_confirm {
+ padding: 5px 25px;
+ border: 1px solid #bac600;
+ color: #263238;
+ background: transparent;
+ -moz-border-radius: 2px;
+ -webkit-border-radius: 2px;
+ border-radius: 2px;
+}
+.btn_confirm:hover {
+  background-color: #bac600;
+  color: #ffffff;
+}
 </style>
 <body>
 	<header>
