@@ -29,7 +29,7 @@
 	<c:url var="admin_statistics" value="/admin/order/summary" />
 	<c:url var="searcha" value="/admin/product" />
 	<c:url var="searchi" value="/product" />
-	
+
 <style>
 .btn_confirm {
  padding: 5px 25px;
@@ -76,20 +76,37 @@
 		<ul id="cd-navigation">
 		<c:choose>
 			<c:when test="${sessionScope.atype == 'a' }">
-				<li><a href="${admin_product }">상품 관리</a></li>
+			<li class="dropdown"><a href="#" id="dropdownMenuLink_a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Page</a>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink_a">
+				    <li class="dropdown-item"><a href="${admin_product }">상품 관리</a></li>
+				    <li class="dropdown-item"><a href="${admin_order }">주문 관리</a></li>
+				    <li class="dropdown-item"><a href="${admin_delivery }">배송 관리</a></li>
+				    <li class="dropdown-item"><a href="${admin_statistics }">통계</a></li>
+			  	</ul>
+			 </li>
+				<%-- <li><a href="${admin_product }">상품 관리</a></li>
 				<li><a href="${admin_order }">주문 관리</a></li>
 				<li><a href="${admin_delivery }">배송 관리</a></li>
-				<li><a href="${admin_statistics }">통계</a></li>
+				<li><a href="${admin_statistics }">통계</a></li> --%>
 				<li><a href="${logout }">Logout</a></li>
 			</c:when>
 			<c:otherwise>
 				<c:choose>
 					<c:when test="${sessionScope.logined }">
-						<c:if test="${sessionScope.atype != 'g'}">
-						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>	
-						</c:if>
-						<li><a href="${cart }">Cart</a></li>
-						<li><a href="${order }">Order</a></li>
+						<%-- <c:if test="${sessionScope.atype != 'g'}">
+						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>
+						</c:if> --%>
+						<li class="dropdown"><a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MyPage</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							    <li class="dropdown-item"><a href="${cart }">Cart</a></li>
+							    <li class="dropdown-item"><a href="${order }">Order</a></li>
+							    <c:if test="${sessionScope.atype != 'g'}">
+							    	<li class="dropdown-item"><a data-toggle="modal" href="#ModalConfirm">Edit MyPage</a></li>
+							    </c:if>
+						  	</ul>
+						 </li>
+						<%-- <li><a href="${cart }">Cart</a></li>
+						<li><a href="${order }">Order</a></li> --%>
 						<li><a type="button" onclick="signOut();">Logout</a></li>
 					</c:when>
 					<c:otherwise>
