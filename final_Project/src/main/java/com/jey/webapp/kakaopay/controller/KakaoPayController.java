@@ -161,7 +161,11 @@ public class KakaoPayController {
          //cart에서 삭제하는 method
          boolean deleteresult = cart.delete(dto);
          
+         orderdetail_dto.setOid(order_dto.getId());
+         List<OrderDetailDTO> detail_arr = order.selectall(orderdetail_dto);
+         
          m.addAttribute("ordered", order_dto);
+         m.addAttribute("detail_arr",detail_arr);
       
       return forward;
    }
