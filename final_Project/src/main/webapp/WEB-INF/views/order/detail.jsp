@@ -27,6 +27,10 @@ td {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
+
+h3, h4, h5 {
+ color: gray;
+}
 </style>
 <body>
 	<header style="padding-bottom: 130px;">
@@ -35,7 +39,8 @@ td {
 	<main class="cd-main-content sub-nav"
 		style="font-family: 'Kakao', 'sans-serif', 'normal'; text-align: center;">
 		<h1 style="padding-bottom: 50px;">주문 상세 정보</h1>
-
+		<h4>리뷰를 작성해 주세요</h4>
+		<h4 style="margin-bottom: 50px;">샐핏러들의 소중한 목소리를 기다립니다. <i class="bi bi-suit-heart-fill" style="color:#F07878;"></i></h4>
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="text-center col-8">
@@ -43,12 +48,12 @@ td {
 				<table border="1"
 					style="text-align: center; font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 13px;">
 					<tr>
-						<th style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">주문번호</th>
-						<th style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">제품 이름</th>
-						<th style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">제품 수량</th>
-						<th style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">제품 가격</th>
-						<th style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">주문 처리 상태</th>
-						<th style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">리뷰</th>
+						<th style="border-top: solid 5px #e1e1e1; border-bottom: solid 5px #e1e1e1; padding-bottom: 10px;">주문번호</th>
+						<th style="border-top: solid 5px #e1e1e1; border-bottom: solid 5px #e1e1e1; padding-bottom: 10px;">제품 이름</th>
+						<th style="border-top: solid 5px #e1e1e1; border-bottom: solid 5px #e1e1e1; padding-bottom: 10px;">제품 수량</th>
+						<th style="border-top: solid 5px #e1e1e1; border-bottom: solid 5px #e1e1e1; padding-bottom: 10px;">제품 가격</th>
+						<th style="border-top: solid 5px #e1e1e1; border-bottom: solid 5px #e1e1e1; padding-bottom: 10px;">주문 처리 상태</th>
+						<th style="border-top: solid 5px #e1e1e1; border-bottom: solid 5px #e1e1e1; padding-bottom: 10px;">리뷰</th>
 					</tr>
 
 					<c:url var="review" value="/order/review/add" />
