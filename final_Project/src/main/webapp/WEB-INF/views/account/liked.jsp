@@ -82,7 +82,7 @@ th, tr, th, table {
 		<td>${data.getPrice() }</td>
 		<td id="td${data.getId() }">
 			<div class="row">
-				<div id="pickBtn${data.getId()}" onclick="openCalendar(${data.getId()}, this);">pick date!</div>
+				<div id="pickBtn${data.getId()}" onclick="openCalendar(${data.getId()}, this);"  style="color:#bac600; padding-left:6rem;">pick date!</div>
 				<div id="hide${data.getId() }" style="display:none;">
 					<div class="row d-flex justify-content-center">
 	       			<span class="col-2 col-auto" >구독 시작일 선택 : <input type="text" class="datepicker" id="datepickerS${data.getId()}" onclick="generateDP(this.id, ${data.getId()}, 'start');" ></span>
@@ -211,7 +211,22 @@ function plus(id) {
 
 /* 장바구니 */
 function addToCart(e, pid, quantity, sd, ed, aid) {
-    var start = $('#datepickerS'+pid).datepicker('getDate');
+    if($('#datepickerS'+pid).datepicker('getDate') == null) {
+    	let NodeList = "";
+		let newNode = "<a id='qoo"+pid+"' data-toggle='popover' data-placement='top' data-trigger='hover' data-content='구독 기간을 선택해주세요.'></a>";
+		NodeList += newNode;
+		$(NodeList).appendTo(e);
+		
+		$('#qoo'+pid).popover('show');
+		$('#qoo'+pid).on('shown.bs.popover', function() {
+		    setTimeout(function() {
+		        $('#qoo'+pid).popover('hide');
+		    }, 3000);
+		});
+    }
+	
+	
+	var start = $('#datepickerS'+pid).datepicker('getDate');
     var end   = $('#datepickerE'+pid).datepicker('getDate');
     var days   = (end - start)/1000/60/60/24 + 1;
 	
@@ -233,7 +248,6 @@ function addToCart(e, pid, quantity, sd, ed, aid) {
 			if(data.result == true) {
 				// 알림창 
 				alert("장바구니에 담았습니다.");
-				// $('#staticBackdrop').modal('show');
 			} else if(data.res == "no_login") {
 				location.href = data.redirect;
 			}
