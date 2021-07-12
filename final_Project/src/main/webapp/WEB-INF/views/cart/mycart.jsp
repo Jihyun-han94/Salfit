@@ -43,6 +43,7 @@ th, tr, table {
 td {
 	border-right: #ffff;
 	border-left: #ffff;
+	width: 150px;
 }
 </style>
 <body>
@@ -50,7 +51,7 @@ td {
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
 	<main class="cd-main-content sub-nav">
-		<div style="margin: 0 auto; width: 87%; font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 13px;">
+		<div style="margin: auto; width: 87%; font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 13px;">
 
 			<c:if test="${empty requestScope.cartlist}">
 				<div style="text-align: center;">
@@ -62,10 +63,12 @@ td {
 						href="${product }">쇼핑하러 가기 <i class="bi bi-hand-index-thumb"></i></a>
 				</div>
 			</c:if>
+		</div>
 			<c:if test="${not empty requestScope.cartlist}">
 				<h1 style="text-align: center; font-size: 30px; text-weight: bold; margin-bottom: 80px;">Shopping Cart</h1>
 				<form>
-					<div style="float: left; padding-right: 5px;">
+				<div class="row" style="font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 13px;">
+					<div class="text-center col-8">
 						<table class="cart_table"  border="1" id="id_cart" name="id_cart" style="text-align: center;">
 							<tr class="cart_tr">
 								<th class="cart_th"  style="height: 50px; border-top: solid 5px #e1e1e1; padding-bottom: 10px;">
@@ -77,8 +80,8 @@ td {
 								<th class="cart_th"  style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">이미지</th>
 								<th class="cart_th"  style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">상품명</th>
 								<th class="cart_th"  style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">가격</th>
-								<th class="cart_th"  style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">구독일 (기간)</th>
-								<th class="cart_th"  style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">총 주문 수량</th>
+								<th class="cart_th"  style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">구독 기간</th>
+								<th class="cart_th"  style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">주문 수량</th>
 								<th class="cart_th"  style="border-top: solid 5px #e1e1e1; padding-bottom: 10px;">금액</th>
 							</tr>
 							<c:forEach var="data" items="${requestScope.cartlist }">
@@ -103,12 +106,13 @@ td {
 								</tr>
 							</c:forEach>
 						</table>
-						<div class="delBtn">
+						<div class="delBtn text-left">
 							<button type="button" class="selectDelete_btn"
-								style="border: none; color: green; background-color: #ffff; padding-left: 50px; padding-top: 30px;">삭제</button>
+								style="border: none; color: #bac600; background-color: #ffff; padding-top: 30px; padding-left: 50px;">삭제</button>
 						</div>
 					</div>
-					<div style="float: right; padding-bottom: 200px;">
+					<div class="col-1"></div>
+					<div class="text-center col-3">
 						<table class="cart_table"  border="1" id="id_price" name="id_price"
 							style="text-align: center;">
 							<tr class="cart_tr">
@@ -125,13 +129,13 @@ td {
 								<td id="id_totalMoney"  style="border-top: solid 1px #e1e1e1; padding-bottom: 10px; border-bottom: #ffff; padding-bottom: 13px; padding-top: 10px; font-size: 20px; color: #961533; font-weight: bold;">${totalMoney }</td>
 							</tr>
 						</table>
-					</div>
-					<div style="text-align: center; padding-left: 900px;">
+					<div style="text-align: center; padding-top: 70px;">
 						<button type="button" class="buy_btn1">선택 상품주문</button>
+					</div>
+					</div>
 					</div>
 				</form>
 			</c:if>
-		</div>
 	</main>
 	<footer>
 		<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>

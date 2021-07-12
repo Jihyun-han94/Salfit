@@ -62,8 +62,8 @@ th, tr, table {
 	border-left: #ffff;
 	border-top: #e1e1e1;
 	border-bottom: #e1e1e1;
-	padding-right: 40px;
-	padding-left: 40px;
+	padding-right: 30px;
+	padding-left: 30px;
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
@@ -73,6 +73,7 @@ td {
 	border-left: #ffff;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	width: 10%;
 }
 
 th {
@@ -94,6 +95,14 @@ th {
   background-color: #bac600;
   color: #ffffff;
 }
+
+.unpaid_a {
+  color: #bac600; 
+}
+
+.unpaid_a:hover {
+  color: #3E5902;
+}
 </style>
 <body>
 
@@ -102,7 +111,7 @@ th {
 	</header>
 	<main class="cd-main-content sub-nav">
 		<div
-			style="margin: 0 auto; width:86%; text-align: center; font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 15px;">
+			style="margin: auto; width:80%; text-align: center; font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 13px;">
 			<h1 style="padding-bottom: 30px;">${username } 님의 주문 내역  <i class="bi bi-card-checklist" style="color: #77A612"></i></h1>
 
 			<table id="orderedlist" border="1">
@@ -124,7 +133,7 @@ th {
 						<c:choose>
 							<c:when test="${data.status eq 'unpaid' }">
 								<!-- unpaid로 바꾸기 -->
-								<td><a href="/salfit/pay/later?id=${data.id }">결제하러가기</a></td>
+								<td><a class="unpaid_a" href="/salfit/pay/later?id=${data.id }">결제하러 가기</a></td>
 								<!--결제 되게 a태그 넣기-->
 							</c:when>
 
