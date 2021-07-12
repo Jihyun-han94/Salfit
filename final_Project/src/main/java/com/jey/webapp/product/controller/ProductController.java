@@ -56,12 +56,12 @@ public class ProductController {
 				}
 			}
 		}
-		if(search.getPtype() != 0 && search.getSearchtype() != null) {
+		if(search.getPtype() != 0 || search.getSearchtype() != null) {
 			productlist = product.findList(search);
 		} else {
 			productlist = product.findAll(search);
 		}
-		System.out.println("product size : "+productlist.size());
+		System.out.println("product size ㅇ: "+productlist.size());
 		mv.addObject("productlist", productlist);
 		mv.addObject("producttypes", product.getProductTypes());
 		mv.addObject("liked", liked);

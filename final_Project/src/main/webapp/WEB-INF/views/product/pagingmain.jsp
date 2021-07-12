@@ -42,14 +42,14 @@
 </div>
 <div class="productContainer" id="container"> 
 	<div class="productIndividual">
+		<div class="loading">
+			<div class="ball"></div>
+			<div class="ball"></div>
+			<div class="ball"></div>
+		</div>
 	</div>
 </div>
 
-<div class="loading">
-	<div class="ball"></div>
-	<div class="ball"></div>
-	<div class="ball"></div>
-</div>
 </div>
 </main>
 <jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
@@ -74,7 +74,7 @@ function infiniteScroll () {
 function showLoading() {
 	loading.classList.add('show');
 	
-	setTimeout(getPost(startIndex), 5000)
+	setTimeout(getPost(startIndex), 3000);
 }
 async function getPost(index) {
 	let _endIndex = index+searchStep-1;
