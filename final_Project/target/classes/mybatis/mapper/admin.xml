@@ -96,10 +96,11 @@
 	
 	<!-- 인기상품 top5  -->
 	<select id="top5products" resultType="product">
-	SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY bcnt) NUM,
-				 p.*
+	SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY bcnt DESC) NUM,
+				 p.title,
+				 p.bcnt
 			FROM product p
-			 ORDER BY bcnt
+			 ORDER BY bcnt DESC
 	        ) 
 	  WHERE NUM BETWEEN 1 AND 5
 	</select>

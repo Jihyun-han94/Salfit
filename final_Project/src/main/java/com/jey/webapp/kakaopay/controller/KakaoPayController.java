@@ -157,12 +157,18 @@ public class KakaoPayController {
          
          //order_detail table 셋팅
          result = order.addDetail(orderdetail_dto);
+         
+         
+         //결제 완료시 product bcnt 1 증가
+         ProductDTO productdto = new ProductDTO();
+            productdto.setId(data.getPid());
+            product.updatebcnt(productdto);
       }
          //cart에서 삭제하는 method
          boolean deleteresult = cart.delete(dto);
          
          m.addAttribute("ordered", order_dto);
-      
+         
       return forward;
    }
    

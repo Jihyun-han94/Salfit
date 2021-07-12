@@ -118,3 +118,12 @@ SELECT ROWNUM RNUM
      
 SELECT * FROM liked;
 DELETE FROM liked WHERE pid = 20 AND aid = 2;
+
+
+SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY bcnt DESC) NUM,
+				 p.title,
+				 p.bcnt
+			FROM product p
+			 ORDER BY bcnt DESC
+	        ) 
+	  WHERE NUM BETWEEN 1 AND 5

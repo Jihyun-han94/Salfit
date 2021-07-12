@@ -18,7 +18,7 @@
  		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
 	</header><br><br><br><br><br><br><br><br>
 	<section class="mb-5 col-10 m-auto">
-		<nav>
+		<nav class="mb-5">
 		  <div class="nav nav-tabs" id="nav-tab" role="tablist">
 		    <a class="nav-link active" id="nav-monthly-tab" data-toggle="tab" href="#nav-monthly" role="tab" aria-controls="nav-monthly" aria-selected="true">월 매출액/ 판매수</a>
 		    <a class="nav-link" id="nav-top5-tab" data-toggle="tab" href="#nav-top5" role="tab" aria-controls="nav-top5" aria-selected="false">인기 상품 top5 (실구매 기준)</a>
@@ -33,11 +33,11 @@
 				<canvas id="myChart" width="400" height="400" class="mb-5 mt-5"></canvas>
 		
 			</div>
-		  	<div class="tab-pane fade mt-5" id="nav-top5" role="tabpanel" aria-labelledby="nav-top5-tab">
-		  		<canvas id="myChart2" width="200" height="200" class="w-50  h-50 mb-5 mt-5 m-auto"></canvas>
+		  	<div class="tab-pane fade mt-5 pt-5" id="nav-top5" role="tabpanel" aria-labelledby="nav-top5-tab">
+		  		<canvas id="myChart2" width="200" height="200" class="w-50  h-50 mb-5 mt-5 pt-5 m-auto"></canvas>
 			</div>
-			<div class="tab-pane fade mt-5" id="nav-topRating" role="tabpanel" aria-labelledby="nav-topRating-tab">
-		  		<canvas id="myChart3" width="200" height="200" class="w-50  h-50 mb-5 mt-5 m-auto"></canvas>
+			<div class="tab-pane fade mt-5 pt-5" id="nav-topRating" role="tabpanel" aria-labelledby="nav-topRating-tab">
+		  		<canvas id="myChart3" width="200" height="200" class="w-50  h-50 mb-5 mt-5 pt-5 m-auto"></canvas>
 			</div>
 		</div>
 	</section>
@@ -163,7 +163,7 @@ var myChart = new Chart(ctx, {
             legend: {
                 labels: {
                     font: {
-                        size: 20
+                        size: 16
                     }
                 }
             }
@@ -214,7 +214,7 @@ var myChart2 = new Chart(ctx2, {
             legend: {
                 labels: {
                     font: {
-                        size: 20
+                        size: 16
                     }
                 }
             }
@@ -261,7 +261,7 @@ var myChart3 = new Chart(ctx3, {
             legend: {
                 labels: {
                     font: {
-                        size: 20
+                        size: 16
                     }
                 }
             }
