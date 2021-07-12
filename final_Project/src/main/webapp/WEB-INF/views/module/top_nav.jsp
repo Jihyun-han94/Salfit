@@ -87,7 +87,7 @@
 	        <option value="c" ${param.searchtype == 'c' ? 'selected' : ''}>제품 정보</option>
 	    </select>
 		<input type="text" name="search" class="text-center text-muted" value="${!empty param.search ? param.search : ''}" style="width: 230px; height:23px; border-radius: 20px; border:1px solid #D3D3D3;">
-		<button type="submit" class="btn_search" style="margin-left:-12px;"><i class="bi bi-search" style="color: #D3D3D3; font-size:7px; margin-left:-12px;"></i></button>
+		<button type="submit" class="btn_search mr-5" style="position:absolute; margin-left:-12px;"><i class="bi bi-search" style="color: #D3D3D3; font-size:7px; margin-left:-12px;"></i></button>
 	</form>
 			</div>
 		<nav class="cd-primary-nav">	

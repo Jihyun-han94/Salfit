@@ -17,6 +17,7 @@
 .btn_search {
 	border: none;
 	background-color: transparent;
+	position: absolute;
 }
 
 .bi bi-search {
