@@ -58,7 +58,7 @@
 const container = document.getElementById('container');
 const loading = document.querySelector('.loading');
 var oldListCnt = "${oldListCnt}";
-/* alert("oldlistcnt: "+oldListCnt); */
+
 var startIndex = 1;	// 인덱스 초기값
 var searchStep = 4;	// 4개씩 로딩
 getPost(startIndex);
@@ -66,7 +66,7 @@ window.addEventListener('scroll', infiniteScroll);
 function infiniteScroll () {
 	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 	
-		if(clientHeight + scrollTop >= scrollHeight - 5) {
+		if(clientHeight + scrollTop >= scrollHeight - 70) {
 			startIndex += searchStep;
 			showLoading();
 		}
@@ -74,7 +74,7 @@ function infiniteScroll () {
 function showLoading() {
 	loading.classList.add('show');
 	
-	setTimeout(getPost(startIndex), 3000)
+	setTimeout(getPost(startIndex), 5000)
 }
 async function getPost(index) {
 	let _endIndex = index+searchStep-1;
@@ -118,9 +118,9 @@ async function getPost(index) {
 		   }
 	});
 }
-function getRandomNr() {
+/* function getRandomNr() {
 	return Math.floor(Math.random() * 100) + 1;
-}
+} */
 function addDataToDOM(data) {
 	const postrow = document.createElement('div');
 	postrow.classList.add('row', 'row-cols-xs-1', 'row-cols-sm-2', 'row-cols-md-3', 'row-cols-lg-4');
