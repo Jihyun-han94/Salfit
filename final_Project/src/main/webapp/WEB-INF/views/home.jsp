@@ -20,6 +20,7 @@
 	<c:url var="product" value="/product" />
 	<c:url var="cart" value="/cart" />
 	<c:url var="order" value="/order" />
+	<c:url var="wishlist" value="/account/liked" />
 	<c:url var="about" value="/about_us" />
 	<c:url var="notice" value="account/notice" />
 	<c:url var="email_write" value="/email/write" />
@@ -100,6 +101,7 @@
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 							    <li class="dropdown-item"><a href="${cart }">Cart</a></li>
 							    <li class="dropdown-item"><a href="${order }">Order</a></li>
+							    <li class="dropdown-item"><a href="${wishlist }">WishList</a></li>
 							    <c:if test="${sessionScope.atype != 'g'}">
 							    	<li class="dropdown-item"><a data-toggle="modal" href="#ModalConfirm">Edit MyPage</a></li>
 							    </c:if>

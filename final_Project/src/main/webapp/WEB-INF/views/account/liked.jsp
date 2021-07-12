@@ -40,6 +40,13 @@ th, tr, th, table {
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
+td {
+	border-right: #ffff;
+	border-left: #ffff;
+	width: 150px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
 </style>
 <body>
 <header style="padding-bottom: 130px;">
@@ -47,18 +54,21 @@ th, tr, th, table {
 </header>
 <main class="cd-main-content sub-nav">
 <div style="margin: 0 auto; width:87%; font-family : 'Kakao', 'sans-serif', 'normal'; font-size:13px;">
-
-<c:if test="${empty requestScope.likedProduct}" >
-	<div style="text-align:center;">
-		<i class="bi bi-cart-x" style="text-align:center; font-size: 250px; color: #e7e7e7;"></i>
-		<h2 style="text-align:center; padding-bottom: 20px;">찜한 상품이 없습니다.</h2>
-		<a class="a_hover" style="padding-bottom: 20px; color:#bac600;" href="${product}">쇼핑하러 가기 <i class="bi bi-hand-index-thumb"></i></a>
-	</div>
-</c:if>
+	<c:if test="${empty requestScope.likedProduct}" >
+		<div style="text-align:center;">
+			<i class="bi bi-cart-x" style="text-align:center; font-size: 250px; color: #e7e7e7;"></i>
+			<h2 style="text-align:center; padding-bottom: 20px;">찜한 상품이 없습니다</h2>
+			<a class="a_hover" style="padding-bottom: 20px; color:#bac600;" href="${product}">쇼핑하러 가기 <i class="bi bi-hand-index-thumb"></i></a>
+		</div>
+	</c:if>
+</div>
 <c:if test="${not empty requestScope.likedProduct}" >
-<h1 style="text-align:center; font-size: 30px; text-weight:bold; margin-bottom: 80px;">찜한 상품 목록</h1>
+<div style="font-family : 'Kakao', 'sans-serif', 'normal'; font-size:13px;">
+<h1 style="text-align:center; font-size: 30px; text-weight:bold; margin-bottom: 80px;">찜한 상품 목록 <i class="bi bi-bookmark-heart" style="color: #ff7493;"></i></h1>
+<div class="row">
+<div class="col-2"></div>
+<div class="text-center col-8">
 <form>
-<div >
 	<table border="1" id="id_cart" name="id_cart" style="text-align:center;">
 		<tr>
 			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">이미지</th>
@@ -81,9 +91,10 @@ th, tr, th, table {
 		<td>${data.getTitle() }</td>
 		<td>${data.getPrice() }</td>
 		<td id="td${data.getId() }">
-			<div class="row">
-				<div id="pickBtn${data.getId()}" onclick="openCalendar(${data.getId()}, this);">pick date!</div>
+			
+				<div id="pickBtn${data.getId()}" onclick="openCalendar(${data.getId()}, this);"><i class="bi bi-calendar-plus-fill" style="cursor: pointer; color:#77A612;"></i></div>
 				<div id="hide${data.getId() }" style="display:none;">
+				
 					<div class="row d-flex justify-content-center">
 	       			<span class="col-2 col-auto" >구독 시작일 선택 : <input type="text" class="datepicker" id="datepickerS${data.getId()}" onclick="generateDP(this.id, ${data.getId()}, 'start');" ></span>
 	       			<span class="col-1">~</span>
@@ -98,7 +109,7 @@ th, tr, th, table {
 					</div>
 					</div>
 				</div>
-   			</div>
+   			
 		</td>
 		<td>
 			<button class="cart-button" type="button" onclick="addToCart(this, ${data.getId()}
@@ -119,11 +130,12 @@ th, tr, th, table {
 		
 		</c:forEach>
 	</table>
-	</div>
-	
 </form>
-</c:if>
+	</div>
+	<div class="col-2"></div>
 </div>
+</div>
+</c:if>
 </main>
 
 	
@@ -131,6 +143,7 @@ th, tr, th, table {
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </footer>
 </body>
+
 <script type="text/javascript">
 /* 찜한상품 삭제 */
 function likedDel(pid, e, aid) {
