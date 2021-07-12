@@ -31,6 +31,10 @@
 	<c:url var="searchi" value="/product" />
 	
 <style>
+*:focus  {
+    outline: none!important; 
+    outline-width: 0;
+}
 .btn_confirm {
  padding: 5px 25px;
  border: 1px solid #bac600;

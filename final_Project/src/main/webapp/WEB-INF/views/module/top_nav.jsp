@@ -25,6 +25,10 @@
 	<c:url var="searcha" value="/admin/product" />
 	<c:url var="searchi" value="/product" />
 	<style>	
+*:focus  {
+    outline: none!important; 
+    outline-width: 0;
+}
 .new-order-counter {	
  position:absolute;	
  top: -7px;	
