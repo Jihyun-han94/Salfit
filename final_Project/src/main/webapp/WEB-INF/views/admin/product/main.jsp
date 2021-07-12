@@ -9,6 +9,13 @@
 <title>관리자용 상품 메인</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
+<style>
+.productImg {
+  height: 150px;
+  width: 200px;
+  object-fit: fill;
+}
+</style>
 <body>
 <nav>
 	<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>

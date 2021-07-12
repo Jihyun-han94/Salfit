@@ -63,8 +63,20 @@
     box-sizing: border-box;
     border: 1px solid #e0e0e0;
 }
+.submit_btn {
+	padding: 5px 25px;
+	border: 1px solid #bac600;
+	color: #263238;
+	background: transparent;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+.submit_btn:hover {
+	background-color: #bac600;
+	color: #ffffff;
+}
 </style>
-<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 
 <script>
 //별점 마킹 모듈 프로토타입으로 생성
@@ -98,22 +110,19 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 
 <body>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<header style="padding-bottom: 180px;">
+	<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
+</header>
 
-<div class="wrap">
+<div class="wrap" style="text-align: center; font-family: 'Kakao', 'sans-serif', 'normal';">
 	<c:url var="review" value="/order/review/add" />
     <form name="reviewform" class="reviewform" method="post" action="${review }">
         <input type="hidden" name="rate" id="rate" value="0"/>
-        <h1 class="title_star">상품은 만족하셨나요?</h1>
+        <h1 class="title_star" style="margin-bottom: 25px; font-size: 40px;">상품은 만족하셨나요?</h1>
+        <h3 style="color: gray;">상품에 대해 솔직한 후기를 남겨주세요.</h3>
+        <h3 style="color: gray;">샐핏의 발전에 큰 도움이 됩니다!</h3>
  
-        <div class="review_rating">
+        <div class="review_rating" style="margin-bottom: 20px;">
             <div class="warning_msg">별점을 선택해 주세요.</div>
             <div class="rating">
                 <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
@@ -131,11 +140,11 @@ document.addEventListener('DOMContentLoaded', function(){
         </div>
         <div class="review_contents">
             <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-            <textarea rows="10" class="review_textarea" name="contents"></textarea>
+            <textarea rows="5" cols="1" class="review_textarea" name="contents" style="border: solid 1px #e1e1e1;"></textarea>
         </div>
         	<input value=${orderdetail.getPid() } name="pid" hidden>   
-        <div class="cmd">
-            <button type="submit" name="save" id="save" >등록</button>
+        <div class="cmd" style="padding-top: 30px;">
+            <button class="submit_btn" type="submit" name="save" id="save" >등록</button>
         </div>
     </form>
 </div>

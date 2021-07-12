@@ -20,6 +20,11 @@
 .text-muted {
 	cursor: pointer;
 }
+.productImg {
+  height: 170px;
+  width: 220px;
+  object-fit: fill;
+}
 </style>
 <body>
 	<header>
