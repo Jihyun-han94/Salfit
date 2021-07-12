@@ -17,9 +17,9 @@
 <main style="font-family: 'Kakao', 'sans-serif', 'normal';">
 <div style="margin: 0 auto;">
 	<br><br><br><br><br><br><br><br><br>
-	<div id="addOK" class="alert alert-info collapse" role="alert">새 카테고리가 등록되었습니다.</div>	
-	<div id="addFail" class="alert alert-danger collapse" role="alert">카테고리 등록 실패</div>
-	<div id="deleteOK" class="alert alert-danger collapse" role="alert">해당 카테고리가 삭제되었습니다.</div>
+	<div id="addOK" class="alert alert-info collapse text-center" role="alert">새 카테고리가 등록되었습니다.</div>	
+	<div id="addFail" class="alert alert-danger collapse text-center" role="alert">카테고리 등록 실패</div>
+	<div id="deleteOK" class="alert alert-danger collapse text-center" role="alert">해당 카테고리가 삭제되었습니다.</div>
 	<div>
 		<jsp:include page="/WEB-INF/views/product/categories.jsp" flush="false" >
 			<jsp:param name="producttypes" value="${producttypes}" />
@@ -27,9 +27,9 @@
 	</div>
 	
 	
-	<div id="registerOK" class="alert alert-info collapse" role="alert">새 상품이 등록되었습니다.</div>	
-	<div id="removeOK" class="alert alert-danger collapse" role="alert">상품 게시글이 삭제되었습니다.</div>
-	<div id="removeFail" class="alert alert-danger collapse" role="alert">해당 상품의 주문이 존재합니다.</div>
+	<div id="registerOK" class="alert alert-info collapse text-center" role="alert">새 상품이 등록되었습니다.</div>	
+	<div id="removeOK" class="alert alert-danger collapse text-center" role="alert">상품 게시글이 삭제되었습니다.</div>
+	<div id="removeFail" class="alert alert-danger collapse text-center" role="alert">해당 상품에 미완료 주문건이 존재합니다.</div>
 
 	
 	<div>

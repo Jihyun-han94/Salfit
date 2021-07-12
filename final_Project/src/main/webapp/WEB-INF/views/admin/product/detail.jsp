@@ -17,7 +17,7 @@
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
 	
-	<div id="updateOK" class="alert alert-success collapse" role="alert">상품 정보를 수정했습니다.</div>
+	<div id="updateOK" class="alert alert-success collapse text-center" role="alert">상품 정보를 수정했습니다.</div>
  	<div id="bodyContainer1">
       <div class="row my-10 mx-5 "> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
          <div class="col-1">
