@@ -20,25 +20,25 @@
 	</header><br><br><br><br><br><br><br><br>
 	<div class="bodyContainer">
 	<c:if test="${!empty param.ddate}">
-		<a href="${order}/calendar" class="pull-left mb-5 ml-5"><i class="bi bi-arrow-left-circle" style="font-size: 3rem; color: grey;"></i> 달력</a>
+		<a href="${order}/calendar" class="pull-left mb-5 ml-5"><i class="bi bi-arrow-left-circle align-middle" style="font-size: 3rem; color: #bac600;"></i> 달력</a>
 	</c:if>
 		<h1 class="text-center mb-3">주문 내역</h1>
 		<p class="text-center mb-3"><c:if test="${!empty param.ddate}">&lt${param.ddate} 배송 상품 포함&gt</c:if> </p>
+		<section class="mb-5 col-10 m-auto">
 		<c:if test="${!empty param.ddate}">
-		<a href="${order}/delivery?startdate=${param.ddate}" class="pull-right mb-5">${param.ddate} 배송 상품 목록 </a>
+		<a href="${order}/delivery?startdate=${param.ddate}" class="pull-right mb-5">${param.ddate} <span style="color:#bac600 ;">당일 배송 상품 목록</span> </a>
 		</c:if>
 		<c:if test="${cri.getId() != 0}">
-		<a href="${order}/list" class="pull-right mb-5 mr-5 pr-5">전체 주문 보기</a>
+		<a href="${order}/list" class="pull-right mb-5" style="color:#bac600 ;">전체 주문 보기</a>
 		</c:if>
-		<section class="mb-5 col-10 m-auto">
 			
 			<c:if test="${cri.getId() == 0 && empty param.ddate}">
 			<div class="row">
 				<div class="col-md-1 mb-5 ml-auto">	
 					<select class="form-control align-middle" id="perPageSel">
-				  		<option value="10">10개씩 표시</option>
-				  		<option value="15">15개씩 표시</option>
-				  		<option value="20">20개씩 표시</option>
+				  		<option value="10">10개씩</option>
+				  		<option value="15">15개씩</option>
+				  		<option value="20">20개씩</option>
 					</select>
 				</div>
 			</div>
