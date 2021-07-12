@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Salfit | Notice</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <style>
 .tab_body, html {width:100%;  }

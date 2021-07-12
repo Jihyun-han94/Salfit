@@ -20,3 +20,6 @@
 <script src='/salfit/resources/static/fullcalendar/main.js'></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/common.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/main.js" ></script>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/newicon.ico" />

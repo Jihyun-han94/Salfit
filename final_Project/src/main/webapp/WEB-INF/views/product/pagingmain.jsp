@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salfit Products</title>
+    <title>Salfit | Products</title>
     <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
     <c:url var="search" value="/admin/product" />
     <c:url var="detail" value="/product/detail" />

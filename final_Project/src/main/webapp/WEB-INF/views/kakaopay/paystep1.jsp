@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>paystep1</title>
+<title>Salfit | pay</title>
 </head>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 <!-- jQuery -->

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Salfit | Order Detail</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 
 </head>

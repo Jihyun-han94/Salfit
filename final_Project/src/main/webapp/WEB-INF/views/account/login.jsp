@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 페이지</title>
+<title>Salfit | Login</title>
  <%@ include file="/WEB-INF/views/module/css_js.jsp" %>
  <c:url var="email_check" value="/ajax/account/email" />
  <c:url var="login" value="/account/login" />
