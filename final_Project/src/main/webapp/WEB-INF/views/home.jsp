@@ -21,8 +21,8 @@
 	<c:url var="cart" value="/cart" />
 	<c:url var="order" value="/order" />
 	<c:url var="wishlist" value="/account/liked" />
-	<c:url var="about" value="/account/about_us" />
-	<c:url var="notice" value="account/notice" />
+	<c:url var="about" value="/about_us" />
+	<c:url var="notice" value="/notice" />
 	<c:url var="email_write" value="/email/write" />
 	<c:url var="admin_product" value="/admin/product" />
 	<c:url var="admin_order" value="/admin/order/list" />

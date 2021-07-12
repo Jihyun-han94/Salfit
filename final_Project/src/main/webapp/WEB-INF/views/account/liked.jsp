@@ -17,6 +17,10 @@
 <c:url var="cart" value="/cart" />
 <c:url var="ajax_cart" value="/ajax/cart" />
 <style>
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
 .buy_btn1 {
  padding: 5px 25px;
  border: 1px solid #bac600;
@@ -41,11 +45,11 @@ th, tr, th, table {
 	padding-top: 20px;
 }
 td {
-	border-right: #ffff;
-	border-left: #ffff;
-	width: 150px;
-	padding-top: 20px;
-	padding-bottom: 20px;
+    border-right: #ffff;
+    border-left: #ffff;
+    width: 150px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 </style>
 <body>
@@ -63,14 +67,10 @@ td {
 	</div>
 </c:if>
 <c:if test="${not empty requestScope.likedProduct}" >
-<div style="font-family : 'Kakao', 'sans-serif', 'normal'; font-size:13px;">
 <h1 style="text-align:center; font-size: 30px; text-weight:bold; margin-bottom: 80px;">찜한 상품 목록 <i class="bi bi-bookmark-heart" style="color: #ff7493;"></i></h1>
-<div class="row">
-<div class="col-2"></div>
-<div class="text-center col-8">
 <form>
 <div >
-	<table border="1" id="id_cart" name="id_cart" style="text-align:center;">
+	<table border="1" id="id_cart" name="id_cart" style="text-align:center;" class="center">
 		<tr>
 			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">이미지</th>
 			<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">상품 명</th>
@@ -93,12 +93,12 @@ td {
 		<td>${data.getPrice() }</td>
 		<td id="td${data.getId() }">
 			<div class="row">
-				<div id="pickBtn${data.getId()}" onclick="openCalendar(${data.getId()}, this);"  style="color:#bac600; padding-left:6rem;">pick date!</div>
+				<div id="pickBtn${data.getId()}" onclick="openCalendar(${data.getId()}, this);"  style="color:#bac600; padding-left:6rem;">Click! <i class="bi bi-calendar-plus-fill" style="cursor: pointer; color:#77A612;"></i></div>
 				<div id="hide${data.getId() }" style="display:none;">
 					<div class="row d-flex justify-content-center">
-	       			<span class="col-2 col-auto" >구독 시작일 선택 : <input type="text" class="datepicker" id="datepickerS${data.getId()}" onclick="generateDP(this.id, ${data.getId()}, 'start');" ></span>
+	       			<span class="col-3 col-auto" >구독 시작일 선택 : <input type="text" class="datepicker" id="datepickerS${data.getId()}" onclick="generateDP(this.id, ${data.getId()}, 'start');" ></span>
 	       			<span class="col-1">~</span>
-	       			<span class="col-2" >구독 종료일 선택 : <input type="text" class="datepicker" id="datepickerE${data.getId()}" onclick="generateDP(this.id, ${data.getId()}, 'end');" ></span>
+	       			<span class="col-3" >구독 종료일 선택 : <input type="text" class="datepicker" id="datepickerE${data.getId()}" onclick="generateDP(this.id, ${data.getId()}, 'end');" ></span>
 					<span class="col-1"></span>
 					<div class="col-2" style="">
 		            	<div class="input-group  mb-3 btn-default">
@@ -164,19 +164,12 @@ function likedDel(pid, e, aid) {
 		}		
 	});
 } 
-
-
 /* 날짜 생성 */
-
 function openCalendar(id, obj) {
-	$('#hide'+id).attr('style', "display:inline;");
-
+	$('#hide'+id).attr('style', "display:inline;width:70rem;");
 	$('#pickBtn'+id).attr('style', "display:none;");
 	generateDP('datepickerS'+id, id, 'start'); 
 }
-
-
-
 	function generateDP(id, pid, type) {
 		if($('#'+id).val() == "")  {
 			
@@ -205,9 +198,7 @@ function openCalendar(id, obj) {
 		    $('#datepickerE'+pid).datepicker("option", "minDate", $("#datepickerS"+pid).val());
 		}
 	}
-
 //장바구니 수량 조정 
-
 function minus(id) {
 	var qty = document.getElementById('quantity'+id);
    	if(parseInt(qty.value) > 1) {
@@ -218,8 +209,6 @@ function plus(id) {
 	var qty = document.getElementById('quantity'+id);
 	qty.value = parseInt(qty.value) + 1;
 }
-
-
 /* 장바구니 */
 function addToCart(e, pid, quantity, sd, ed, aid) {
     if($('#datepickerS'+pid).datepicker('getDate') == null) {
@@ -258,15 +247,12 @@ function addToCart(e, pid, quantity, sd, ed, aid) {
 		success: function (data) {
 			if(data.result == true) {
 				// 알림창 
-				alert("장바구니에 담았습니다.");
+				alert("상품을 장바구니에 담았습니다."); 
 			} else if(data.res == "no_login") {
 				location.href = data.redirect;
 			}
 		}				
 	});
 }
-
-
-
 </script>
 </html>

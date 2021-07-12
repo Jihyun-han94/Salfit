@@ -39,4 +39,16 @@ public class HomeController {
 		return "home";
 	}
 	
+	/* notice */
+	@RequestMapping(value = "/notice", method = RequestMethod.GET)
+	public String notice() throws Exception {
+		return "main/notice";
+	}
+	
+	/* about us */
+	@RequestMapping(value = "/about_us", method = RequestMethod.GET)
+	public String about_us() throws Exception {
+		return "main/about_us";
+	}
+	
 }

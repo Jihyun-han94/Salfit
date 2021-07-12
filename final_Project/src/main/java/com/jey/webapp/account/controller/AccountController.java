@@ -270,17 +270,6 @@ public class AccountController {
 		return "redirect:/";
 	}
 	
-	/* notice */
-	@RequestMapping(value = "/notice", method = RequestMethod.GET)
-	public String notice() throws Exception {
-		return "account/notice";
-	}
-	
-	/* about us */
-	@RequestMapping(value = "/about_us", method = RequestMethod.GET)
-	public String about_us() throws Exception {
-		return "account/about_us";
-	}
 	
 	/* 찜목록 */
 	@RequestMapping(value = "/liked", method = RequestMethod.GET)
