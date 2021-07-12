@@ -12,17 +12,17 @@
 <br>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script>
+<script text="text/javascript">
 window.onload = function iamport(){
-	//가맹점 식별코드
+	var title = '${detail_arr.get(0).getTitle() }';
 	
 	IMP.init('imp02440277');
 	IMP.request_pay({
 	    pg : 'html5_inicis',
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '상품1' , //결제창에서 보여질 이름
-	    amount : 100,//${ordered.total }, //실제 결제되는 가격
+	    name : title , //결제창에서 보여질 이름
+	    amount : ${ordered.total }, //실제 결제되는 가격
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
 	    buyer_tel : '010-1234-5678',
