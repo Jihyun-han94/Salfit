@@ -19,6 +19,7 @@
           var btnElement = document.getElementsByName(id)[0];
          
          btnElement.innerText = '배송완료';
+         btnElement.setAttribute("disabled", "disabled");
          
          var id = id //order.id
          
@@ -41,6 +42,7 @@
       if(confirm_val){
          var btnElement2 = document.getElementsByName(id2)[0];
          btnElement2.innerText = '취소요청중';
+         btnElement2.setAttribute("disabled", "disabled");
       
          var id2 = id2; //order.id
          
@@ -96,7 +98,6 @@ th {
 }
 </style>
 <body>
-
 	<header style="padding-bottom: 130px;">
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
@@ -104,7 +105,6 @@ th {
 		<div
 			style="margin: 0 auto; width:86%; text-align: center; font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 15px;">
 			<h1 style="padding-bottom: 30px;">${username } 님의 주문 내역  <i class="bi bi-card-checklist" style="color: #77A612"></i></h1>
-
 			<table id="orderedlist" border="1">
 				<tr>
 					<th>날짜</th>
