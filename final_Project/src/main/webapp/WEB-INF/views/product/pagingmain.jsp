@@ -118,9 +118,7 @@ async function getPost(index) {
 		   }
 	});
 }
-/* function getRandomNr() {
-	return Math.floor(Math.random() * 100) + 1;
-} */
+
 function addDataToDOM(data) {
 	const postrow = document.createElement('div');
 	postrow.classList.add('row', 'row-cols-xs-1', 'row-cols-sm-2', 'row-cols-md-3', 'row-cols-lg-4');
