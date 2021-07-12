@@ -74,7 +74,7 @@ function infiniteScroll () {
 function showLoading() {
 	loading.classList.add('show');
 	
-	setTimeout(getPost(startIndex), 1000)
+	setTimeout(getPost(startIndex), 3000)
 }
 async function getPost(index) {
 	let _endIndex = index+searchStep-1;

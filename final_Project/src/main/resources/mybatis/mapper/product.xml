@@ -243,7 +243,7 @@
      </if>
      <if test="endIndex gt oldListCnt">
        <!-- AND RNUM <![CDATA[>]]> ${startIndex} AND RNUM <![CDATA[<]]>= ${startIndex + endIndex - oldListCnt} -->  
-       AND RNUM BETWEEN ${startIndex} AND ${startIndex + endIndex - 1 - oldListCnt}
+       AND RNUM BETWEEN ${startIndex} AND ${oldListCnt}
      </if> 
   </select>
   
@@ -289,23 +289,6 @@
 		DELETE FROM product WHERE id = #{id}
 	</delete>
 	
-	
-
- <!--  <select id="plusGcnt" resultType="like">
-  	SELECT gcnt FROM product
-  	 WHERE id = #{pid}
-  </select>
-  
-  <select id="badcount" resultType="product">
-  	SELECT bcnt FROM board
-  	 WHERE id = #{id}
-  </select>
-  <update id="incview">
-  	UPDATE board
-  	   SET vcnt = vcnt + 1
-  	 WHERE id = #{id}
-  </update> -->
-
   <select id="findlike" parameterType="like" resultType="like">
   	SELECT ROWNUM RNUM
   	FROM liked
