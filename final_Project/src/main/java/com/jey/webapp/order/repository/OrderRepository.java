@@ -25,4 +25,5 @@ public interface OrderRepository {
 	public boolean holdorder(OrderDetailDTO dto) throws Exception;
 	public boolean deleteorder(OrderDTO dto) throws Exception;
 	public boolean deleteorderdetail(OrderDetailDTO dto2) throws Exception;
+	public OrderDTO selectedate(OrderDTO dto) throws Exception;
 }

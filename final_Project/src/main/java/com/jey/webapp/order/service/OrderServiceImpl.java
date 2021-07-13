@@ -114,6 +114,12 @@ public class OrderServiceImpl implements OrderService {
 		return dao.deleteorderdetail(dto2);
 	}
 
+	@Override
+	public OrderDTO selectedate(OrderDTO dto) throws Exception{
+	
+		return dao.selectedate(dto);
+	}
+
 
 
 }

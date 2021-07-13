@@ -158,6 +158,12 @@ public class OrderRepositoryImpl implements OrderRepository {
 		return result;
 	}
 
+	@Override
+	public OrderDTO selectedate(OrderDTO dto) throws Exception {
+		
+		return sqlSession.selectOne("orderMapper.selectedate", dto);
+	}
+
 
 
 	

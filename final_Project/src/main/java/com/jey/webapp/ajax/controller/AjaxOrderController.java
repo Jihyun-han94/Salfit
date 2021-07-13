@@ -1,6 +1,8 @@
 package com.jey.webapp.ajax.controller;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,14 +36,32 @@ public class AjaxOrderController {
    public String updatestatus(@ModelAttribute OrderDTO dto, HttpServletResponse resp) throws Exception {
       
       JSONObject json = new JSONObject();         
-
-      //ordered, order_detail status 변경
-      order.updatedel(dto);
-      OrderDetailDTO dto2 = new OrderDetailDTO();
-      dto2.setOid(dto.getId());
-      order.updatedel(dto2);
+     
       
-      json.put("result", "배송완료 확정되었습니다.");
+      dto = order.selectedate(dto);
+      String edate = dto.getEdate();
+      String[] array = edate.split("-");
+      String edate2 = array[0]+array[1]+array[2];
+      int edate_int = Integer.parseInt(edate2);
+      
+      String pattern = "yyyyMMdd";
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+      String date = simpleDateFormat.format(new Date());
+      System.out.println(date);
+      int today = Integer.parseInt(date);
+      
+      if(today>=edate_int) {
+    	  order.updatedel(dto);
+    	  OrderDetailDTO dto2 = new OrderDetailDTO();
+    	  dto2.setOid(dto.getId());
+    	  order.updatedel(dto2);
+    	 
+    	  json.put("result", "배송완료 확정되었습니다.");    	  
+      }else {
+    	  json.put("result", "배송완료 후 확정해주세요");
+      }
+      
+  
          
       return json.toJSONString();
    }
@@ -51,14 +71,33 @@ public class AjaxOrderController {
    public String holdorder(@ModelAttribute OrderDTO dto, HttpServletResponse resp) throws Exception {
       
       JSONObject json = new JSONObject();         
-
-      //ordered, order_detail status holding으로 바꾸기
-      order.holdorder(dto);
-      OrderDetailDTO dto2 = new OrderDetailDTO();
-      dto2.setOid(dto.getId());
-      order.holdorder(dto2);
       
-      json.put("result", "주문취소 요청 완료했습니다.");
+      dto = order.selectedate(dto);
+      String ddate = dto.getDdate();
+      String[] array = ddate.split("-");
+      String ddate2 = array[0]+array[1]+array[2];
+      int ddate_int = Integer.parseInt(ddate2);
+      
+      String pattern = "yyyyMMdd";
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+      String date = simpleDateFormat.format(new Date());
+      System.out.println(date);
+      int today = Integer.parseInt(date);
+      //ordered, order_detail status holding으로 바꾸기
+      if(today<ddate_int) {
+    	  order.holdorder(dto);
+    	  OrderDetailDTO dto2 = new OrderDetailDTO();
+    	  dto2.setOid(dto.getId());
+    	  order.holdorder(dto2);
+    	  json.put("result", "주문취소 요청 완료했습니다.");
+    	  json.put("res", "취소 요청 중");
+    	  
+      }else {
+    	  json.put("result", "주문취소는 불가합니다.");
+    	  json.put("res", "취소불가");
+      }
+      
+      
          
       return json.toJSONString();
    }
