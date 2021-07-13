@@ -16,20 +16,71 @@
 	<c:url var="login" value="/account/login" />
 	<c:url var="moreProducts" value="/ajax/product/moreProducts" />
 </head>
+<style>
+.like-heart {
+	cursor: pointer;
+}
+.productImg {
+ 	height: 170px;
+  	width: 220px;
+  	object-fit: fill;
+}
+.container-card {
+	width:240px;
+	height:240px;
+	background-color: #F7F5F5;
+	display: table-cell;
+  	vertical-align: middle;
+}
+hr {
+	width: 40%;
+	display: inline-block;
+}
+.hr_style {
+	text-align:center;
+	padding-top: 60px;
+}
+.hr_style > button {
+	text-align:center;
+	padding : 12px;
+	padding-right: 30px;
+	padding-left: 30px;
+	background-color: #ffff;
+	border : solid 1px #e1e1e1;
+	cursor: default;
+	font-weight: bold;
+}
+.hr_style > p {
+	padding-top: 60px;
+	color: gray;
+}
+
+.carousel-control-prev-icon {
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+</style>
 <body>
-	<header>
+	<header style="margin-bottom:200px;">
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
-	<br><br><br><br><br><br><br><br><br>
 <main style="font-family: 'Kakao', 'sans-serif', 'normal';">
-<div style="margin: 0 auto;">
+<div style="margin: 0 auto; padding-top: 220px;">
 
-<br><br><br><br><br><br><br><br><br>
 <div>
 	<jsp:include page="/WEB-INF/views/product/categories.jsp" flush="false" >
 		<jsp:param name="producttypes" value="${producttypes}" />
 	</jsp:include>
 </div>
+<div class="hr_style">
+	<hr><button>P r o d u c t s</button><hr>
+	<p>Salfit은 최고의 재료를 엄선하여 매일 신선하게 준비합니다. 안심하고 드시기 바랍니다.<br>Salfit carefully selects the best ingredients for you and prepares them fresh every day.<br>Please eat with confidence.</p>
+	
+</div>
+
 <div class="productContainer" id="container"> 
 	<div class="productIndividual">
 		<div class="loading">
@@ -67,7 +118,7 @@ function showLoading() {
 	setTimeout(getPost(startIndex), 3000);
 }
 async function getPost(index) {
-	let _endIndex = await index+searchStep-1;
+	let _endIndex = index+searchStep-1;
 	var ptype = 0;
 	var search = "";
 	var searchtype = document.getElementById('searchtype').value; 
@@ -77,7 +128,7 @@ async function getPost(index) {
 	if(${!empty param.search}) {
 		search = "${param.search}";
 	}
-	
+	await
 	$.ajax({
 		url: "${moreProducts}",
 		type: "get",
@@ -130,11 +181,12 @@ function addDataToDOM(data) {
 							+'<input type="hidden" name="id" value="'+data[i].id+'" readonly>'
 							+'<input type="hidden" name="aid" value="'+data[i].aid+'" readonly>'
 							+'<a href="${detail}?id='+data[i].id+'">'
-									+'<div class="embed-responsive ">'
+									+'<div class="container-card">'
+									+'<div class="embed-responsive">'
 							+'	<img class="rounded card-img-top productImg"'
-							+'		src="${pageContext.request.contextPath}'+data[i].url+'"></div></a>'
+							+'		src="${pageContext.request.contextPath}'+data[i].url+'"></div></div></a>'
 							+'<div class="card-body bg-transparent border-0">'
-							+'	<h5 class="card-title card-text" style="display: inline-block;">'
+							+'	<h5 class="card-title card-text text-left" style="display: inline-block;">'
 							+'		<a href="${detail}?id='+data[i].id+'">'+data[i].title+'</a>'
 							+'	</h5>'
 							+'	<p class="card-text" style="display: inline-block; padding-left: 10px;">'
@@ -144,7 +196,7 @@ function addDataToDOM(data) {
 							+'	</p>'
 							+'</div>'
 							+'<div class="card-footer bg-transparent border-0">' 
-							+'	<p class="card-text">'
+							+'	<p class="card-text font-weight-bold">'
 							+'		₩ '+data[i].price
 							+'	</p>'
 							+'</div>'

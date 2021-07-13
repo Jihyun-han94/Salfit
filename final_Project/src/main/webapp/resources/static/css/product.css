@@ -87,3 +87,66 @@
 } */
 
 
+<<<<<<< HEAD
+=======
+/* detail.jsp */
+
+ #bodyContainer1 {
+	height: 70rem;
+}
+#bodyContainer2 {
+	height: 30rem;
+}
+#bodyContainer3 {
+	height: 40rem;
+}
+ 
+
+.btn-default {
+  font-family: Raleway-SemiBold;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  line-height: 16px;
+  border: 2px solid #FFF;
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+  color: #FFF;
+}
+
+.btn-default:hover {
+  color: rgba(108, 88, 179, 0.75);
+}
+
+.productQty {
+	font-size: 1.8rem;
+}
+
+
+.btn-success {
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  letter-spacing: 1px;
+  border-radius: 40px;
+  transition: all 0.3s ease 0s;
+  color: #FFF;
+  background: rgb(103, 192, 103, 0.75);
+  border: 2px solid rgb(103, 192, 103, 0.75);
+}
+
+.btn-success:hover {
+  color: rgba(103, 192, 103, 0.75);
+  background: transparent;
+  border: 2px solid rgba(103, 192, 103, 0.75);
+}
+
+.recommend-image {
+  width: 50%;
+  border-radius: 100%;
+  
+}
+
+.carousel-control-prev { left: -16rem; }
+.carousel-control-next { right: -16rem; }
+
+>>>>>>> refs/remotes/origin/v0.5.0_김은지
