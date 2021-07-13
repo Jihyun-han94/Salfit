@@ -92,6 +92,18 @@ public class AccountServiceImpl implements AccountService {
 		return dao.getListAddress(aid);
 	}
 
+	@Override
+	public boolean deleteAddress(AccountAddressDTO dto) throws Exception {
+	
+		return dao.deleteAddress(dto);
+	}
+
+	@Override
+	public boolean deletenewAddress(AccountAddressDTO dto) throws Exception {
+		
+		return dao.deletenewAddress(dto);
+	}
+
 
 }
 

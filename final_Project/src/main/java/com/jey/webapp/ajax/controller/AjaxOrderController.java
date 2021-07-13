@@ -68,7 +68,7 @@ public class AjaxOrderController {
    public String deleteorder(@ModelAttribute OrderDTO dto, HttpServletResponse resp,HttpServletRequest request) throws Exception {
       
       JSONObject json = new JSONObject();         
-      System.out.println("까아아아꿍"+dto.getId());
+      
       //ordered, order_detail 에서 주문 삭제 
       OrderDetailDTO dto2 = new OrderDetailDTO();      
       dto2.setOid(dto.getId());

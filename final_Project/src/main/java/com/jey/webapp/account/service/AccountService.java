@@ -18,4 +18,6 @@ public interface AccountService {
 	public boolean addAddress(int aid, String address) throws Exception;
 	public boolean removeAddress(AccountAddressDTO ad_dto) throws Exception;
 	public List<AccountAddressDTO> getList(int aid) throws Exception;
+	public boolean deleteAddress(AccountAddressDTO dto) throws Exception;
+	public boolean deletenewAddress(AccountAddressDTO dto) throws Exception;
 }

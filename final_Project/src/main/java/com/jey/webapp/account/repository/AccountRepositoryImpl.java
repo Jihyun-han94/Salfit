@@ -111,4 +111,14 @@ public class AccountRepositoryImpl implements AccountRepository {
 		return sqlSession.selectList("accountMapper.selectAddress", aid);
 	}
 
+	@Override
+	public boolean deletenewAddress(AccountAddressDTO dto) throws Exception {
+		boolean result = false;
+		int res = sqlSession.delete("accountMapper.deletenewAddress", dto);
+		if(res == 1) {
+			result = true;
+		}
+		return result;
+	}
+
 }

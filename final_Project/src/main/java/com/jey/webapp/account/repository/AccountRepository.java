@@ -19,4 +19,5 @@ public interface AccountRepository {
 	public boolean insertAddress(Map m) throws Exception;
 	public boolean deleteAddress(AccountAddressDTO ad_dto) throws Exception;
 	public List<AccountAddressDTO> getListAddress(int aid) throws Exception;
+	public boolean deletenewAddress(AccountAddressDTO dto) throws Exception;
 }

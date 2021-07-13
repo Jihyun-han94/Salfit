@@ -1,9 +1,17 @@
 package com.jey.webapp.account.dto;
 
 public class AccountAddressDTO {
-	private int ano;
+	private int id; //주소 삭제를 위해 추가
+	private int ano;	
 	private int aid;
 	private String address;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public int getAno() {
 		return ano;
