@@ -71,7 +71,7 @@
 			</c:forEach>
 	      </div>
 	      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-	        <span class="carousel-control-prev-icon"></span>
+	        <span class="carousel-control-prev-icon" style="color:red;"></span>
 	      </a>
 	      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
 	        <span class="carousel-control-next-icon"></span>
