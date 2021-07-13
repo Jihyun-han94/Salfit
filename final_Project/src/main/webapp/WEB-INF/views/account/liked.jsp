@@ -21,19 +21,7 @@
   margin-left: auto;
   margin-right: auto;
 }
-.buy_btn1 {
- padding: 5px 25px;
- border: 1px solid #bac600;
- color: #263238;
- background: transparent;
- -moz-border-radius: 2px;
- -webkit-border-radius: 2px;
- border-radius: 2px;
-}
-.buy_btn1:hover {
-  background-color: #bac600;
-  color: #ffffff;
-}
+
 th, tr, th, table {
 	border-right: #ffff;
 	border-left: #ffff;
@@ -118,7 +106,7 @@ td {
 							    , document.getElementById('datepickerE${data.getId()}')
 							    , ${account.getId()}
 							    );"  style="border:none; color:green; background-color:#ffff;" >
-		 		<i class="fa fa-shopping-cart" style="font-size: 2rem; color: #93A603;"></i>
+		 		<i class="bi bi-cart3" style="font-size: 2rem; color: #93A603;"></i>
 	 		</button>
 		</td>
 		<td>

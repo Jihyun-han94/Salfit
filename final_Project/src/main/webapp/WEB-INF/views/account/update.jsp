@@ -169,7 +169,7 @@ input {
 <nav>
 	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
 </nav>
-<div class="body_class">
+<div class="body_class  mb-5 pb-5">
 	<div class="body_class_item">
 	<form action="${add }" method="post" enctype="multipart/form-data">
 		<h1 class="first_class" style="margin-bottom: 20px;">나의 정보</h1>

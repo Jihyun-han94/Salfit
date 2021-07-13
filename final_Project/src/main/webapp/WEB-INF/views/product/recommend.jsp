@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <div class="container text-center">
- 	<div class="recommenddiv mb-5 pt-5" style="">
+ 	<div class="recommenddiv mb-5 pt-3" style="">
  	<span class="recommendline"></span>
 	  <span class="recommenddot"></span>
 	  <span class="recommendtitle">
@@ -42,12 +42,10 @@
 			</c:forEach>
 	      </div>
 	      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-	       <!--  <span class="carousel-control-prev-icon"></span> -->
 	       <i class="fas fa-chevron-left" aria-hidden="true"></i>
 	      </a>
 	      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-	        <!-- <span class="carousel-control-next-icon"></span> -->
-	        <i class="fas fa-chevron-right carousel-control-next-icon"></i>
+	        <i class="fas fa-chevron-right"></i>
 	        
 	      </a>
 	    </div>

@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="stylesheet" href="/salfit/resources/static/css/common.css">
-<link rel="stylesheet" href="/salfit/resources/static/css/product.css">
-<link rel="stylesheet" href="/salfit/resources/static/css/main.css"> Resource style
+<link rel="stylesheet" href="/salfit/resources/static/css/product_detail.css?ver=11">
+<link rel="stylesheet" href="/salfit/resources/static/css/main.css"> 
 <link rel="stylesheet" href="/salfit/resources/static/css/total.css">
 <!-- <link rel="stylesheet" href="/salfit/resources/static/css/footer.css"> -->
 <link rel="stylesheet" href="/salfit/resources/static/css/top_nav.css"> 

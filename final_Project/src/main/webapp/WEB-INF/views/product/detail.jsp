@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Salfit | ${item.getTitle() }</title>
-<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/module/detail.jsp"></jsp:include>
 <c:url var="login" value="/account/login" />
 <c:url var="moreReviews" value="/ajax/product/moreReviews" />
 <c:url var="cart" value="/cart" />
@@ -99,8 +99,26 @@
 			<jsp:param name="reviews" value="${reviews}" />
 		</jsp:include>
 	</div>
-	<footer>	
-		<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
+	<footer class="footer_total_detail">	
+		<!-- SNS 정보  -->
+		<div style="text-align:center;"><img width="50px" src="${pageContext.request.contextPath}/resources/img/newicon.ico"></div>
+		<div class="clearfix">
+			<a href="https://www.instagram.com/" style="padding: 5px 10px; display:inline-block; margin-top: 10px; font-size: 20px; color:#475c01;" target="blank">
+				<i class="bi bi-instagram"></i></a>
+			<a href="https://" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;"target="blank">
+				<i class="bi bi-twitter"></i></a>
+			<a href="https://" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;" target="blank">
+				<i class="bi bi-facebook"></i></a>
+			<a href="https://www.youtube.com/" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;" target="blank">
+				<i class="bi bi-youtube"></i></a>
+		</div>
+		
+		<!-- 쇼핑몰 운영자 정보  -->
+		<div class="copy-link">
+			<span class="footer_span">법인명(상호) : Salfit </span> | <span class="footer_span">대표자(성명) : 김은지, 최예림, 한지현 </span> | <span class="footer_span">사업자 등록번호 안내 : 123-12-12345</span> <br>
+			<span class="footer_span">전화 : 02.123.4567</span> | <span class="footer_span">팩스 : 02.890.1234</span> | <span class="footer_span">주소 : 서울특별시 강남구 역삼동 823-25</span><br>
+			<span class="footer_span">Contact <strong><a href="eungeeee1002@gmail.com"></a></strong> for more information.<a href="/salfit/">[Shop admin]</a></span>
+		</div>
 	</footer>
 </body>
 <script>
@@ -194,6 +212,8 @@
 
 
 	/* 리뷰 */
+	const bodyContainer3 = document.getElementById('bodyContainer3');
+	const container = document.getElementById('reviewContainer');
 	
 	var oldListCnt = "${oldListCnt}";
 
@@ -226,6 +246,7 @@
 					let node = "<div class='col-12 text-center'><p>댓글이 존재하지 않습니다.</p></div>";
 					NodeList += node; 
 				}
+				$(NodeList).appendTo(container).slideDown();
 				for(i = 0; i < data.length; i++){
 					// rating
 					let rating ="";
@@ -242,8 +263,6 @@
 					} */
 					
 					
-					const bodyContainer3 = document.getElementById('bodyContainer3');
-					const container = document.getElementById('reviewContainer');
 					const postElement = document.createElement('div');
 					postElement.classList.add('review-post');
 					postElement.innerHTML = 
