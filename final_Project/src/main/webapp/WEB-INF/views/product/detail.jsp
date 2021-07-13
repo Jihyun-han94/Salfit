@@ -14,108 +14,10 @@
 <c:url var="cart" value="/cart" />
 <c:url var="ajax_cart" value="/ajax/cart" />
 </head>
-<style>
-.buttons {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center
-}
-
-.cart-button {
-    position: relative;
-    outline: 0;
-    background-color: #bac600;
-    color: #fff;
-    border: none;
-    height: 48px;
-    width: 200px;
-    padding: 10px;
-    border-radius: 10px;
-    line-height: 0px;
-    overflow: hidden;
-    cursor: pointer
-}
-
-.cart-button:focus {
-    outline: none !important
-}
-
-.cart-button .fa-shopping-cart {
-    position: absolute;
-    z-index: 2;
-    top: 50%;
-    left: -20%;
-    font-size: 1.8em;
-    transform: translate(-50%, -50%)
-}
-
-.cart-button .fa-square {
-    position: absolute;
-    z-index: 1;
-    top: -20%;
-    left: 53%;
-    font-size: 0.8em;
-    transform: translate(-50%, -50%)
-}
-
-.cart-button span {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    color: #fff;
-    transform: translate(-50%, -50%)
-}
-
-.cart-button span.added {
-    opacity: 0
-}
-
-.cart-button.clicked .fa-shopping-cart {
-    animation: cart 2s ease-in forwards
-}
-
-.cart-button.clicked .fa-square {
-    animation: box 2s ease-in forwards
-}
-
-.cart-button.clicked span.add-to-cart {
-    animation: addcart 2s ease-in forwards
-}
-
-.cart-button.clicked span.added {
-    animation: added 2s ease-in forwards
-}
-
-@keyframes cart {
-    0% {left: -10%}
-    40%,60% {left: 50%}
-    100% {left: 110%}
-}
-
-@keyframes box {
-    0%,40% {top: -20%}
-    60% {top: 36%; left: 53%}
-    100% {top: 40%; left: 112%}
-}
-
-@keyframes addcart {
-    0%, 30% {opacity: 1}
-    30%,100% {opacity: 0}
-}
-
-@keyframes added {
-    0%, 80% {opacity: 0}
-    100% {opacity: 1}
-}
-</style>
 <body>
 	<header>
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
-	<br><br><br><br><br><br><br><br><br><br>
  	<div id="bodyContainer1">
       <div class="row my-10 mx-5 "> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
       	<div class="col-1"></div>
@@ -123,7 +25,11 @@
  			<img class="rounded" width="500px" height="400px"
 					src="${pageContext.request.contextPath}${item.getUrl()}">       
          </div>
-         <div class="col-1"></div>
+         <div class="col-1">
+         	<div class="outer">
+			  <div class="inner"></div>
+			</div>
+		</div>
          <!-- 오른쪽 : 수량 & 장바구니에 담기  -->
          <div class="col-5" style="">
         	<div class="row g-2 align-items-left">
@@ -132,18 +38,17 @@
         		</div>
         	</div>
         	<div>
-               <!-- <h3 style="font-weight: bolder; padding-bottom: 15px;">상품 설명</h3> -->
                <p class="font-weight-light" style="padding-bottom: 15px;">
                ${fn:replace(item.getContents(), newline, "<br>") }
                </p>
             </div>
-            <div class="col-6 text-end">
-        			<h3 class="text-end" style="padding-bottom: 30px; font-size: 24px; font-weight: bold;">₩ ${item.getPrice() }</h3>
+            <div class="col-6 pt-5">
+        			<h3 class="" style="padding-bottom: 30px; color:#bac600; font-size: 24px; font-weight: bold;"> ₩ ${item.getPrice() }</h3>
         		</div>
         	<div class="row row-cols-lg-auto g-3 align-items-left">
         		<div class="col-12 mb-5">
         			<div class="row">
-        			<span class="col-4" >구독 시작일 선택 : <input type="hidden" class="datepicker" id="datepickerS" style="z-index: 98;"></span>
+        			<span class="col-4">구독 시작일 선택 : <input type="hidden" class="datepicker" id="datepickerS" style="z-index: 98;"></span>
         			<span class="col-1"></span>
         			<span class="col-4" >구독 종료일 선택 : <input type="hidden" class="datepicker" id="datepickerE" style="z-index: 99;"></span>
         			</div>
@@ -192,11 +97,6 @@
 		<jsp:include page="/WEB-INF/views/product/reviews.jsp" flush="false" >
 			<jsp:param name="item" value="${item}" />
 			<jsp:param name="reviews" value="${reviews}" />
-		</jsp:include>
-	</div>
-   	<div id="loginModal">
-		<jsp:include page="/WEB-INF/views/module/login_modal.jsp" flush="false" >
-			<jsp:param name="item" value="${item}" />
 		</jsp:include>
 	</div>
 	<footer>	
@@ -327,17 +227,38 @@
 					NodeList += node; 
 				}
 				for(i = 0; i < data.length; i++){
-					let newNode = "<div style='display: none;' class='card form-group col-sm-12 mx-auto p-0' onClick='window.open('"+data[i].id+"')>";
-					newNode += "<div class='card-body pt-3'><div class='row px-3 mb-2'>";
-					newNode += "<img src='/salfit/resources"+data[i].profile_img+"' width='30px' style='border-radius:20px; margin-right: 15px;'></strong>";
-					newNode += "<strong class='d-block text-gray-dark text-center'>"+data[i].aname+"</strong>";
-					newNode += "<span class='text-muted ml-auto text-center'>"+data[i].cdate2+"</span>";
-					newNode += "<span class='text-muted ml-auto'>"+data[i].rating+"점</span>";
-					newNode += "</div><span>"+data[i].contents+"</span></div></div>";
-					NodeList += newNode;
+					// rating
+					let rating ="";
+					switch(data[i].rating) {
+					case 1 : rating ="<i class='star'></i>"; break;
+					case 2 : rating ="<i class='star'></i><i class='star'></i>";break;
+					case 3 : rating ="<i class='star'></i><i class='star'></i><i class='star'></i>";break;
+					case 4 : rating ="<i class='star'></i><i class='star'></i><i class='star'></i><i class='star'></i>";break;
+					case 5 : rating ="<i class='star'></i><i class='star'></i><i class='star'></i><i class='star'></i><i class='star'></i>";break;
+					} 
+					
+					/* for(var i = 1; i <= data[i].rating; i++) {
+						rating +="<i class='star'></i>";
+					} */
+					
+					
+					const bodyContainer3 = document.getElementById('bodyContainer3');
+					const container = document.getElementById('reviewContainer');
+					const postElement = document.createElement('div');
+					postElement.classList.add('review-post');
+					postElement.innerHTML = 
+						 '<div class="user-info">'
+						+'	<img src="/salfit/resources'+data[i].profile_img+'" />'
+						+'	<span>'+data[i].aname+'</span>'
+						+'<h2 class="title">'+rating+'</h2>'
+						+'</div>'
+						+'<p class="text">'+data[i].contents+'</p>'
+						+'	<span class="text-right text-muted">'+data[i].cdate2+'</span>'
+					;
+					container.appendChild(postElement);
+					
 				}
-				$(NodeList).appendTo($("#oldList")).slideDown();
-				
+				$("#reviewContainer").slideDown();
 				// 더보기 버튼 삭제
 				if(_endIndex >= oldListCnt){
 					$('#searchMoreNotify').remove();

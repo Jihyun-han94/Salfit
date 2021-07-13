@@ -16,16 +16,6 @@
 	<c:url var="login" value="/account/login" />
 	<c:url var="moreProducts" value="/ajax/product/moreProducts" />
 </head>
-<style>
-.like-heart {
-	cursor: pointer;
-}
-.productImg {
- 	height: 170px;
-  	width: 220px;
-  	object-fit: fill;
-}
-</style>
 <body>
 	<header>
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
@@ -77,7 +67,7 @@ function showLoading() {
 	setTimeout(getPost(startIndex), 3000);
 }
 async function getPost(index) {
-	let _endIndex = index+searchStep-1;
+	let _endIndex = await index+searchStep-1;
 	var ptype = 0;
 	var search = "";
 	var searchtype = document.getElementById('searchtype').value; 
@@ -87,7 +77,7 @@ async function getPost(index) {
 	if(${!empty param.search}) {
 		search = "${param.search}";
 	}
-	await
+	
 	$.ajax({
 		url: "${moreProducts}",
 		type: "get",

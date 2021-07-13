@@ -7,13 +7,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 <link rel="icon" href="${pageContext.request.contextPath}/resources/static/css/favicon.ico">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <!-- <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet"> -->
 <link rel="stylesheet" href="/salfit/resources/static/css/common.css">
 <link rel="stylesheet" href="/salfit/resources/static/css/admin.css">
 <link rel="stylesheet" href="/salfit/resources/static/css/cart.css">
-<link rel="stylesheet" href="/salfit/resources/static/css/order.css">
-<link rel="stylesheet" href="/salfit/resources/static/css/product.css">
+<link rel="stylesheet" href="/salfit/resources/static/css/order.css?ver=1">
+<link rel="stylesheet" href="/salfit/resources/static/css/product.css?ver=10">
 <link rel="stylesheet" href="/salfit/resources/static/css/main.css"> <!-- Resource style -->
 <link rel="stylesheet" href="/salfit/resources/static/css/total.css">
 <link rel="stylesheet" href="/salfit/resources/static/css/account.css">
