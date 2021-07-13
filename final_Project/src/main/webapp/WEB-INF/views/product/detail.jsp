@@ -22,7 +22,7 @@
       <div class="row my-10 mx-5 "> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
       	<div class="col-1"></div>
          <div class="col-5 text-center" style="background-color:#FBFBFB;">
- 			<img class="rounded" width="500px" height="400px"  
+ 			<img class="rounded"  width="500px" height="500px" style="object-fit: contain;"
 					src="${pageContext.request.contextPath}${item.getUrl()}">       
          </div>
          <div class="col-1">
