@@ -33,11 +33,11 @@
 				<canvas id="myChart" width="400" height="170" class="mb-5 mt-5"></canvas>
 		
 			</div>
-		  	<div class="tab-pane fade mt-5 pt-5" id="nav-top5" role="tabpanel" aria-labelledby="nav-top5-tab">
-		  		<canvas id="myChart2" width="100" height="100" class="w-50 mb-5 mt-5 pt-5 m-auto"></canvas>
+		  	<div class="tab-pane fade mt-5 pt-5 text-center" style="width:80%; margin:auto;" id="nav-top5" role="tabpanel" aria-labelledby="nav-top5-tab">
+		  		<canvas id="myChart2" width="80" height="100" class="w-50 mb-5 mt-5 pt-5 m-auto"></canvas>
 			</div>
-			<div class="tab-pane fade mt-5 pt-5" id="nav-topRating" role="tabpanel" aria-labelledby="nav-topRating-tab">
-		  		<canvas id="myChart3" width="100" height="100" class="w-50 mb-5 mt-5 pt-5 m-auto"></canvas>
+			<div class="tab-pane fade mt-5 pt-5 text-center" style="width:80%; margin:auto;" id="nav-topRating" role="tabpanel" aria-labelledby="nav-topRating-tab">
+		  		<canvas id="myChart3" width="80" height="100" class="w-50 mb-5 mt-5 pt-5 m-auto"></canvas>
 			</div>
 		</div>
 	</section>
