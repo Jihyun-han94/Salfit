@@ -91,7 +91,7 @@ public class AdminProductController {
 			// 리뷰갯수 추가 
 			List<ReviewDTO> reviews = product.findReviewList(item);
 			
-			mv.addObject("newline", "\n\r");
+			mv.addObject("newline", "\n");
 			mv.addObject("item", item);
 			mv.addObject("oldListCnt", reviews.size());
 		

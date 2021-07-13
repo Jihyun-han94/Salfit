@@ -7,92 +7,180 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Salfit Admin | 상품 상세</title>
-<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
-
+<title>Salfit | ${item.getTitle() }</title>
+<jsp:include page="/WEB-INF/views/module/detail.jsp"></jsp:include>
+<c:url var="login" value="/account/login" />
 <c:url var="moreReviews" value="/ajax/product/moreReviews" />
+<c:url var="cart" value="/cart" />
+<c:url var="ajax_cart" value="/ajax/cart" />
 </head>
 <body>
-	<header style="padding-bottom:200px;">
+	<header>
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
-	
-	<div id="updateOK" class="alert alert-success collapse text-center" role="alert">상품 정보를 수정했습니다.</div>
  	<div id="bodyContainer1">
       <div class="row my-10 mx-5 "> <!-- row(하나의 행)의 my(margin을 y축방향으로) 5만큼 준것 -->
-         <div class="col-1">
-        	<%--  <h1 style="padding-bottom: 50px;">
-	            ${fn:replace(item.getTitle(), newline, "<br>") }
-            </h1> --%>
-            
-         </div>
-         
-         <div class="col-4">
+      	<div class="col-1"></div>
+         <div class="col-5">
  			<img class="rounded" width="500px" height="400px"
 					src="${pageContext.request.contextPath}${item.getUrl()}">       
          </div>
-         <div class="col-1"></div>
-         <!-- 오른쪽 : 수정  -->
-         <div class="col-4">
-        	<div class="row g-3 align-items-center">
-        		<div class="col-lg col-auto">
-        			<h1 class="text-center">${item.getTitle() }</h1>
+         <div class="col-1">
+         	<div class="outer">
+			  <div class="inner"></div>
+			</div>
+		</div>
+         <!-- 오른쪽 : 수량 & 장바구니에 담기  -->
+         <div class="col-5" style="">
+        	<div class="row g-2 align-items-left">
+        		<div class="col-lg">
+        			<h1 class="text-end" style="padding-bottom: 20px;">${item.getTitle() }</h1>
         		</div>
+        	</div>
         	<div>
-            	<c:url var="update" value="/admin/product/update" />
+               <p class="font-weight-light" style="padding-bottom: 15px;">
+               ${fn:replace(item.getContents(), newline, "<br>") }
+               </p>
+            </div>
+            <div class="col-6 pt-5">
+        			<h3 class="" style="padding-bottom: 30px; color:#677502; font-size: 24px; font-weight: bold;"> ₩ ${item.getPrice() }</h3>
+        		</div>
+        		<c:url var="update" value="/admin/product/update" />
 	            <form action="${update}?id=${item.getId()}" method="GET">
 					<input type="hidden" name="id" value="${item.getId()}" readonly>
 					<button class="btn btn-light btn-block badge-pill" style="margin-top:30px;" type="submit">
 						<i class="bi bi-pencil"></i>상품 정보 수정하기</button>
 				</form>
-				<br>
-            </div>
-        	</div>
-        	<div style="padding-left:90px;">
-               <h3 style="font-weight: bolder; padding-bottom: 15px; padding-top: 30px;">등록된 상품 설명</h3>
-               <p class="font-weight-light" style="padding-bottom: 15px;">
-               ${fn:replace(item.getContents(), newline, "<br>") }
-               </p>
-            </div>
-            <div class="row g-3 align-items-center">
-			</div>
        	</div>
-		</div>
+   		</div>
    	</div>
-    <div id="bodyContainer3" style="padding-top:90px;">
-		<jsp:include page="/WEB-INF/views/admin/product/reviews.jsp" flush="false" >
+	<div id="bodyContainer2" >
+		<jsp:include page="/WEB-INF/views/product/recommend.jsp" flush="false" >
+			<jsp:param name="item" value="${item}" />
+			<jsp:param name="recommend" value="${recommend}" />
+		</jsp:include>
+	</div>
+    <div id="bodyContainer3" >
+		<jsp:include page="/WEB-INF/views/product/reviews.jsp" flush="false" >
 			<jsp:param name="item" value="${item}" />
 			<jsp:param name="reviews" value="${reviews}" />
 		</jsp:include>
 	</div>
-   	
-	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
-</body>
-<script type="text/javascript">
-$(function(){
-	//등록, 삭제 후 문구 처리
-	
-	function getSearchParams(k){
-		 var p={};
-		 location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){p[k]=v});
-		 return k?p[k]:p;
-		}
-	var result = getSearchParams("result");
-	if(result != null) {
+	<footer class="footer_total_detail">	
+		<!-- SNS 정보  -->
+		<div style="text-align:center;"><img width="50px" src="${pageContext.request.contextPath}/resources/img/newicon.ico"></div>
+		<div class="clearfix">
+			<a href="https://www.instagram.com/" style="padding: 5px 10px; display:inline-block; margin-top: 10px; font-size: 20px; color:#475c01;" target="blank">
+				<i class="bi bi-instagram"></i></a>
+			<a href="https://" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;"target="blank">
+				<i class="bi bi-twitter"></i></a>
+			<a href="https://" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;" target="blank">
+				<i class="bi bi-facebook"></i></a>
+			<a href="https://www.youtube.com/" style="padding: 5px 10px; display:inline-block; font-size: 20px; color:#475c01;" target="blank">
+				<i class="bi bi-youtube"></i></a>
+		</div>
 		
-		$(function(){
-			if(result === 'updateOK'){
-				$('#updateOK').show();
-				setTimeout(function() { 
-				       $('#updateOK').fadeOut(1000); 
-				   }, 5000);
-			}
-		})
+		<!-- 쇼핑몰 운영자 정보  -->
+		<div class="copy-link">
+			<span class="footer_span">법인명(상호) : Salfit </span> | <span class="footer_span">대표자(성명) : 김은지, 최예림, 한지현 </span> | <span class="footer_span">사업자 등록번호 안내 : 123-12-12345</span> <br>
+			<span class="footer_span">전화 : 02.123.4567</span> | <span class="footer_span">팩스 : 02.890.1234</span> | <span class="footer_span">주소 : 서울특별시 강남구 역삼동 823-25</span><br>
+			<span class="footer_span">Contact <strong><a href="eungeeee1002@gmail.com"></a></strong> for more information.<a href="/salfit/">[Shop admin]</a></span>
+		</div>
+	</footer>
+</body>
+<script>
+	document.addEventListener("DOMContentLoaded", function(event) {
+	const cartButtons = document.querySelectorAll('.cart-button');
+	cartButtons.forEach(button => {
+	button.addEventListener('click',cartClick);
+	});
+	function cartClick(){
+	let button =this;
+	button.classList.add('clicked');
+	window.setTimeout(()=>{button.classList.remove('clicked')}, 5000);
 	}
-})
+	});
 	
-	
+	/* 날짜선택 */
+	$( function() {
+		$( "#datepickerS" ).datepicker({
+		      altField: "#alternateS",
+		      altFormat: "yy 년 MM d 일, DD",
+		      showOn: "button",
+		      buttonImage: "/salfit/resources/upload/product/calendar.png",
+		      buttonImageOnly: true,
+		      buttonText: "구독기간"
+		      
+		    });
+		$( "#datepickerE" ).datepicker({
+		      altField: "#alternateE",
+		      altFormat: "yy 년 MM d 일, DD",
+		      showOn: "button",
+		      buttonImage: "/salfit/resources/upload/product/calendar.png",
+		      buttonImageOnly: true,
+		      buttonText: "구독기간"
+		    });
+		$.datepicker.regional['kr'] = {
+			    closeText: '닫기', 
+			    currentText: '오늘', 
+			    monthNames: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], 
+			    monthNamesShort: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], 
+			    dayNames: ['월요일','화요일','수요일','목요일','금요일','토요일','일요일'], 
+			    dayNamesMin: ['월','화','수','목','금','토','일'], 
+			    dateFormat: 'yy-mm-dd',
+			    minDate: 1, maxDate: "+2M +1D"
+			};
+
+		$.datepicker.setDefaults($.datepicker.regional['kr']);
+		$('.datepicker').datepicker('setDate', '+1D');
+		
+	    $('#datepickerS').datepicker("option", "onClose", function ( selectedDate ) {
+	        $("#datepickerE").datepicker( "option", "minDate", selectedDate );
+	    });
+
+	    $('#datepickerE').datepicker("option", "minDate", $("#datepickerS").val());
+	    $('#datepickerE').datepicker("option", "onClose", function ( selectedDate ) {
+	        $("#datepickerS").datepicker( "option", "maxDate", selectedDate );
+	    });
+		
+  	} );
+
+	/* 장바구니 */
+	function addToCart(e, pid, quantity, sd, ed, aid) {
+	    var start = $('#datepickerS').datepicker('getDate');
+	    var end   = $('#datepickerE').datepicker('getDate');
+	    var days   = (end - start)/1000/60/60/24 + 1;
+		
+		let qty =  quantity.value;
+		$.ajax({
+			url: "${ajax_cart}/add",
+			type: "post",
+			async: "false",
+			dataType: "json",
+			data: {
+				aid: aid,	
+				pid: pid,
+				qty: qty,
+				startdate: sd.value,
+				enddate: ed.value,
+				days: days
+			},
+			success: function (data) {
+				if(data.result == true) {
+					// 알림창 
+					 $('#staticBackdrop').modal('show');
+				} else if(data.res == "no_login") {
+					/* $('#loginModal').modal('show'); */
+					location.href = data.redirect;
+				}
+			}				
+		});
+	}
+
+
 	/* 리뷰 */
+	const bodyContainer3 = document.getElementById('bodyContainer3');
+	const container = document.getElementById('reviewContainer');
 	
 	var oldListCnt = "${oldListCnt}";
 
@@ -125,16 +213,38 @@ $(function(){
 					let node = "<div class='col-12 text-center'><p>댓글이 존재하지 않습니다.</p></div>";
 					NodeList += node; 
 				}
+				$(NodeList).appendTo(container).slideDown();
 				for(i = 0; i < data.length; i++){
-					let newNode = "<div style='display: none;' class='card form-group col-sm-12 mx-auto p-0' onClick='window.open('"+data[i].id+"')>";
-					newNode += "<div class='card-body pt-3'><div class='row px-3 mb-2'>";
-					newNode += "<strong class='d-block text-gray-dark'>"+data[i].aname+"</strong>";
-					newNode += "<span class='text-muted ml-auto'>"+data[i].cdate2+"</span>";
-					newNode += "</div><span>"+data[i].contents+"</span></div></div>";
-					NodeList += newNode;
+					// rating
+					let rating ="";
+					switch(data[i].rating) {
+					case 1 : rating ="<i class='star'></i>"; break;
+					case 2 : rating ="<i class='star'></i><i class='star'></i>";break;
+					case 3 : rating ="<i class='star'></i><i class='star'></i><i class='star'></i>";break;
+					case 4 : rating ="<i class='star'></i><i class='star'></i><i class='star'></i><i class='star'></i>";break;
+					case 5 : rating ="<i class='star'></i><i class='star'></i><i class='star'></i><i class='star'></i><i class='star'></i>";break;
+					} 
+					
+					/* for(var i = 1; i <= data[i].rating; i++) {
+						rating +="<i class='star'></i>";
+					} */
+					
+					
+					const postElement = document.createElement('div');
+					postElement.classList.add('review-post');
+					postElement.innerHTML = 
+						 '<div class="user-info">'
+						+'	<img src="/salfit/resources'+data[i].profile_img+'" />'
+						+'	<span>'+data[i].aname+'</span>'
+						+'<h2 class="title">'+rating+'</h2>'
+						+'</div>'
+						+'<p class="text">'+data[i].contents+'</p>'
+						+'	<span class="text-right text-muted">'+data[i].cdate2+'</span>'
+					;
+					container.appendChild(postElement);
+					
 				}
-				$(NodeList).appendTo($("#oldList")).slideDown();
-				
+				$("#reviewContainer").slideDown();
 				// 더보기 버튼 삭제
 				if(_endIndex >= oldListCnt){
 					$('#searchMoreNotify').remove();
@@ -143,5 +253,16 @@ $(function(){
 		});
 	}
 	
+	// 장바구니 수량 조정 
+    var qty = document.getElementById('quantity');
+
+    function minus() {
+	   	if(parseInt(qty.value) > 1) {
+    		qty.value = parseInt(qty.value) - 1;
+	   	}
+    }
+    function plus() {
+    	qty.value = parseInt(qty.value) + 1;
+    }
 </script>
 </html>

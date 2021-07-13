@@ -28,7 +28,7 @@
 .container-card {
 	width:240px;
 	height:240px;
-	background-color: #F7F5F5;
+	background-color: #FBFBFB;
 	display: table-cell;
   	vertical-align: middle;
 }
