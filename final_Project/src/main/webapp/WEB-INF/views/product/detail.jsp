@@ -43,14 +43,14 @@
                </p>
             </div>
             <div class="col-6 pt-5">
-        			<h3 class="" style="padding-bottom: 30px; color:#bac600; font-size: 24px; font-weight: bold;"> ₩ ${item.getPrice() }</h3>
+        			<h3 class="" style="padding-bottom: 30px; color:#677502; font-size: 24px; font-weight: bold;"> ₩ ${item.getPrice() }</h3>
         		</div>
         	<div class="row row-cols-lg-auto g-3 align-items-left">
         		<div class="col-12 mb-5">
         			<div class="row">
-        			<span class="col-4">구독 시작일 선택 : <input type="hidden" class="datepicker" id="datepickerS" style="z-index: 98;"></span>
+        			<span class="col-4 ml-4">구독 시작일 : <input type="hidden" class="datepicker" id="datepickerS" style="z-index: 98;"></span>
         			<span class="col-1"></span>
-        			<span class="col-4" >구독 종료일 선택 : <input type="hidden" class="datepicker" id="datepickerE" style="z-index: 99;"></span>
+        			<span class="col-4 ml-4" >구독 종료일 : <input type="hidden" class="datepicker" id="datepickerE" style="z-index: 99;"></span>
         			</div>
         			<div class="row mt-4">
         			<span class="col-4"> <input type="text" class="alternate" id="alternateS" size="22" readonly></span>

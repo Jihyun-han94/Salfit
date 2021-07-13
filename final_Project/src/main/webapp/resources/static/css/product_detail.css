@@ -1,8 +1,5 @@
 @charset "UTF-8";
 
-
-
-
 /* detail.jsp */
 
 *:focus  {
@@ -168,7 +165,7 @@
 	padding-top: 4rem;
 }
 #bodyContainer3 {
-	background-color:#FBFBFB;
+	background-color:#F7F5F5;
 	padding: 15rem 0 7rem;
 	height: 100%;
 }
@@ -193,8 +190,20 @@
 .productQty {
 	font-size: 1.8rem;
 	background-color:transparent;
+	color: #bac600;
 }
 
+.productQty:hover {
+	font-size: 1.8rem;
+	background-color:transparent;
+	color: #777e00;
+}
+
+.alternate {
+	background-color:transparent;
+	border: none;
+  border-bottom: 1px solid #bac600;
+}
 
 .btn-success {
   font-family: Raleway-SemiBold;
