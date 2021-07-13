@@ -14,6 +14,7 @@ public class OrderDTO {
 	private String edate;
 	private String status;
 	private String title;
+	
 	public int getId() {
 		return id;
 	}

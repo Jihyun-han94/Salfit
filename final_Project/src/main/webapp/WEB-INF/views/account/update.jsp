@@ -12,8 +12,34 @@
 <c:url var="view_address" value="/ajax/account/address/view"	/>
 <c:url var="add_address" value="/ajax/account/address/add"	/>
 <c:url var="delete_address" value="/ajax/account/address/delete"	/>
+<c:url var="delete_address_new" value="/ajax/account/address/delete/new"	/>
 
 <script type="text/javascript">
+
+function delAddress(id){
+	
+    var confirm_val = confirm("해당 주소를 삭제하시겠습니까?");
+    
+    if(confirm_val){
+		      
+		var id = id;
+  		var element = document.getElementsByClassName(id)[0];
+  		element.innerText ="삭제된 주소입니다."
+
+          $.ajax({
+           url :  "${delete_address }",
+           type : "post",
+           datatype:"json",
+           data : {id : id},
+           success : function(data){
+           alert(data.result);
+           
+           }
+          });
+    }
+	
+}
+
 var checkRePass = function(){
     let oPwd = document.getElementById("id_password").value;
     let cPwd = document.getElementById("id_password_check").value;
@@ -55,11 +81,14 @@ function getAddressList(address) {
 	//no.innerText = " " + (document.getElementById("address_list").getElementsByTagName("span").length/3+1);
 	
 	content.innerText = address;
+	content.className= address;
 	delete_btn.innerText = "삭제";
 	delete_btn.type = "button";
 	delete_btn.style = "color:red;"
 	delete_btn.className = "input-file-button"
-	delete_btn.onclick = function() {deleteAddress()};
+	delete_btn.onclick = function() {
+		this.onclick=null;
+		deleteAddress(address)};
 	
 	item.append(lbl);
 	item.append(no);
@@ -68,9 +97,28 @@ function getAddressList(address) {
 	
 	document.getElementById("address_list").append(item);
 }
-function deleteAddress() {
+function deleteAddress(address){
 	
+	  var confirm_val = confirm("해당 주소를 삭제하시겠습니까?");
+	  var element = document.getElementsByClassName(address)[0];
+		element.innerText ="삭제된 주소입니다."
+		
+	    if(confirm_val){
+			      
+			var address = address;
+
+	          $.ajax({
+	           url :  "${delete_address_new }",
+	           type : "post",
+	           datatype:"json",
+	           data : {address : address},
+	           success : function(data){
+	           alert(data.result);
+	           }
+	          });
+	    }
 }
+
 function updateInfo() {
 	var name = document.getElementById("id_name").value;
 	var password = document.getElementById("id_password").value;
@@ -220,11 +268,11 @@ input {
 		</form>
 		<div id="address_list" style="margin-bottom: 50px; margin-left: 150px;">
 			<c:forEach var="addressList" items="${addressList }">
-			<div>
+			<div >
 				<span>주소 목록&nbsp;&nbsp;</span>
 				<span>${addressList.getAno() }&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				<span>${addressList.getAddress() }&nbsp;&nbsp;</span>
-				<button type="button" class="input-file-button" onclick="delAddress(this, ${addressList.getAno() })">삭제</button>
+				<span class="${addressList.getId() }">${addressList.getAddress() }&nbsp;&nbsp;</span>
+				<button type="button" class="input-file-button" onclick="delAddress(${addressList.getId() }); this.onclick= null;"  >삭제</button>
 			</div>
 			</c:forEach>
 		</div>

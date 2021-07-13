@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +12,34 @@
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <c:url var="hold" value="/ajax/order/hold" />
+<c:url var="delete" value="/ajax/order/delete" />
 <c:url var="update" value="/ajax/order/update" />
 <c:url var="detail" value="/order/detail" />
 <script type="text/javascript">
+function cancel2(id3){
+    
+    var confirm_val = confirm("해당 상품을 구매를 삭제하시겠습니까?");
+    
+    if(confirm_val){
+       var btnElement3 = document.getElementsByName(id3)[0];
+       btnElement3.innerText = '삭제요청중';
+       btnElement3.setAttribute("disabled", "disabled");
+    
+       var id3 = id3; //order.id
+       
+          $.ajax({
+           url :  "${delete }",
+           type : "post",
+           datatype:"json",
+           data : {id : id3},
+           success : function(data){
+           alert(data.result);
+           location.href = data.redirect;
+           }
+          });
+    }
+}
+
  function confirmdel(id) {
     var confirm_val = confirm("배송완료 확정하시겠습니까?");
       
@@ -40,9 +68,8 @@
       var confirm_val = confirm("해당 상품을 구매를 취소하시겠습니까?");
       
       if(confirm_val){
-         var btnElement2 = document.getElementsByName(id2)[0];
-         btnElement2.innerText = '취소요청중';
-         btnElement2.setAttribute("disabled", "disabled");
+         var btnElement2 = document.getElementsByName(id2)[1];
+     
       
          var id2 = id2; //order.id
          
@@ -52,7 +79,9 @@
              datatype:"json",
              data : {id : id2},
              success : function(data){
-             alert(data.result);
+	           alert(data.result);
+	           btnElement2.setAttribute("disabled", "disabled");
+	           btnElement2.innerText=data.res;
              }
             });
       }   
@@ -124,7 +153,9 @@ h3, h4, h5 {
 					<th>배송확인</th>
 					<th>취소요청</th>
 				</tr>
+				
 				<c:forEach var="data" items="${requestScope.orderlist }">
+			
 					<tr>
 						<td><a href="${detail }?id=${data.id }">${data.pdate }</a></td>
 						<td>${data.receiver }</td>
@@ -162,8 +193,8 @@ h3, h4, h5 {
 							</c:when>
 
 						</c:choose>
-
-						<c:choose>
+						
+							<c:choose>
 							<c:when test="${data.status eq 'delivered' }">
 								<td style="color: #84CF8C;">배송 완료</td>
 							</c:when>
@@ -179,18 +210,26 @@ h3, h4, h5 {
 								<td>-</td>
 								<!--결제 되게 a태그 넣기-->
 							</c:when>
+							
 							<c:otherwise>
 								<td><button class="list_btn" id="btn1" name="${data.id }"
 										onclick="confirmdel(${data.id });">배송 확인</button></td>
 							</c:otherwise>
 						</c:choose>
-
+				
 						<c:choose>
+							<c:when test="${data.status  eq 'delivered'}" >
+								<td style="color:#F06464;"></td>
+							</c:when>
 							<c:when test="${data.status eq 'holding' }">
 								<td style="color:#F06464;">취소 요청 중</td>
 							</c:when>
 							<c:when test="${data.status eq 'canceled' }">
 								<td style="color:#F06E6E;">취소 완료</td>
+							</c:when>
+							<c:when test="${data.status eq 'unpaid' }">
+								<td><button class="list_btn" id="btn3" name="${data.id }" style="color:#FA8072;"
+										onclick="cancel2(${data.id});">삭제 요청</button></td>
 							</c:when>
 							<c:otherwise>
 								<td><button class="list_btn" id="btn2" name="${data.id }" style="color:#FA8072;"

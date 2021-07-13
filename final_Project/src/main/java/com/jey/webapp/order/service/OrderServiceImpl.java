@@ -102,6 +102,24 @@ public class OrderServiceImpl implements OrderService {
 		return dao.holdorder(dto);
 	}
 
+	@Override
+	public boolean deleteorder(OrderDTO dto) throws Exception {
+		
+		return dao.deleteorder(dto);
+	}
+
+	@Override
+	public boolean deleteorderdetail(OrderDetailDTO dto2) throws Exception {
+		
+		return dao.deleteorderdetail(dto2);
+	}
+
+	@Override
+	public OrderDTO selectedate(OrderDTO dto) throws Exception{
+	
+		return dao.selectedate(dto);
+	}
+
 
 
 }

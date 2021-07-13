@@ -165,6 +165,8 @@ public class AccountController {
 	@RequestMapping(value = "/update_view", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView modify(HttpServletRequest req, HttpSession session,
 			Model m, AccountAddressDTO addressDTO) throws Exception {
+		
+		
 		ModelAndView mv = new ModelAndView("account/update");
 		session = req.getSession();
 		AccountDTO dto = (AccountDTO) session.getAttribute("account");
@@ -190,7 +192,10 @@ public class AccountController {
 		System.out.println("aid : " + addressDTO.getAid());
 		System.out.println("나와라!! : " + account.getList(addressDTO.getAid()));
 		System.out.println(((AccountDTO) session.getAttribute("account")).getEmail());
+	
 		return mv;
+		
+		
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)

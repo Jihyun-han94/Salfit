@@ -54,7 +54,8 @@
 	
 	<!-- 주소 조회 -->
 	<select id="selectAddress" parameterType="address" resultType="address">
-      SELECT b.aid
+      SELECT b.id AS id 
+      	  ,b.aid
           , ROWNUM AS ano
           , b.address
       FROM account a
@@ -70,8 +71,12 @@
 	</insert>
 	
 	<!-- 주소 삭제 -->
-	<delete id="deleteAddress">
+	<delete id="deleteAddress" parameterType="address">
 		DELETE FROM deliver_address
-		WHERE aid = #{aid}
+		WHERE id = #{id}
+	</delete>
+	<delete id="deletenewAddress" parameterType="address">
+		DELETE FROM deliver_address
+		WHERE address = #{address}
 	</delete>
 </mapper>

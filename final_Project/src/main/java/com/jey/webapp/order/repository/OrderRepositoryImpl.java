@@ -138,6 +138,32 @@ public class OrderRepositoryImpl implements OrderRepository {
 		return result;
 	}
 
+	@Override
+	public boolean deleteorder(OrderDTO dto) throws Exception {
+		boolean result = false;
+		int res = sqlSession.delete("orderMapper.deleteorder", dto);
+		if(res ==1) {
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
+	public boolean deleteorderdetail(OrderDetailDTO dto2) throws Exception {
+		boolean result = false;
+		int res = sqlSession.delete("orderMapper.deletedetail", dto2);
+		if(res ==1) {
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
+	public OrderDTO selectedate(OrderDTO dto) throws Exception {
+		
+		return sqlSession.selectOne("orderMapper.selectedate", dto);
+	}
+
 
 
 	

@@ -64,7 +64,7 @@ h3, h4, h5 {
 							<td>${data.qty }</td>
 							<td>${data.price }</td>
 							<td>${data.status }</td>
-							<td><c:if test="${data.status ne 'unpaid'}">
+							<td><c:if test="${data.status eq 'delivered'}">
 									<a href="${review }?pid=${data.pid }"><i
 										class="bi bi-chat-right-text-fill" style="color: #77A612;"></i></a>
 								</c:if></td>
