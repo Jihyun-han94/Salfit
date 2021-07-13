@@ -2,6 +2,7 @@ package com.jey.webapp.ajax.controller;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
@@ -62,7 +63,22 @@ public class AjaxOrderController {
       return json.toJSONString();
    }
    
-   
+   @RequestMapping(value = "/delete", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
+   @ResponseBody
+   public String deleteorder(@ModelAttribute OrderDTO dto, HttpServletResponse resp,HttpServletRequest request) throws Exception {
+      
+      JSONObject json = new JSONObject();         
+      System.out.println("까아아아꿍"+dto.getId());
+      //ordered, order_detail 에서 주문 삭제 
+      OrderDetailDTO dto2 = new OrderDetailDTO();      
+      dto2.setOid(dto.getId());
+      order.deleteorderdetail(dto2);
+      order.deleteorder(dto);
+      json.put("result", "주문이 삭제되었습니다.");
+      json.put("redirect", request.getContextPath() + "/order");
+         
+      return json.toJSONString();
+   }
    
    
 }

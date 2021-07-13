@@ -9,9 +9,34 @@
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <c:url var="hold" value="/ajax/order/hold" />
+<c:url var="delete" value="/ajax/order/delete" />
 <c:url var="update" value="/ajax/order/update" />
 <c:url var="detail" value="/order/detail" />
 <script type="text/javascript">
+function cancel2(id3){
+    
+    var confirm_val = confirm("해당 상품을 구매를 삭제하시겠습니까?");
+    
+    if(confirm_val){
+       var btnElement3 = document.getElementsByName(id3)[0];
+       btnElement3.innerText = '삭제요청중';
+       btnElement3.setAttribute("disabled", "disabled");
+    
+       var id3 = id3; //order.id
+       
+          $.ajax({
+           url :  "${delete }",
+           type : "post",
+           datatype:"json",
+           data : {id : id3},
+           success : function(data){
+           alert(data.result);
+           location.href = data.redirect;
+           }
+          });
+    }
+}
+
  function confirmdel(id) {
     var confirm_val = confirm("배송완료 확정하시겠습니까?");
       
@@ -191,6 +216,10 @@ h3, h4, h5 {
 							</c:when>
 							<c:when test="${data.status eq 'canceled' }">
 								<td style="color:#F06E6E;">취소 완료</td>
+							</c:when>
+							<c:when test="${data.status eq 'unpaid' }">
+								<td><button class="list_btn" id="btn3" name="${data.id }" style="color:#FA8072;"
+										onclick="cancel2(${data.id});">삭제 요청</button></td>
 							</c:when>
 							<c:otherwise>
 								<td><button class="list_btn" id="btn2" name="${data.id }" style="color:#FA8072;"
