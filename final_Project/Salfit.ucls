@@ -1,6 +1,793 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true">  
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.jey.webapp.alert.AlertHandler" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/alert/AlertHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="173" width="354" x="11312" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.jey.webapp.ajax.controller.AjaxOrderController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/ajax/controller/AjaxOrderController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="137" width="410" x="13006" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.jey.webapp.HomeController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/HomeController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="155" width="278" x="36" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.jey.webapp.ajax.controller.AjaxProductController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/ajax/controller/AjaxProductController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="137" width="401" x="8053" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.jey.webapp.admin.dto.AdminOrderDetailDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/dto/AdminOrderDetailDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="785" width="174" x="354" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.jey.webapp.order.dto.OrderDetailDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/order/dto/OrderDetailDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="677" width="156" x="568" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.jey.webapp.cart.dto.CartDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/cart/dto/CartDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="893" width="164" x="764" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.jey.webapp.ajax.controller.AjaxAdminController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/ajax/controller/AjaxAdminController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="355" x="9444" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.jey.webapp.product.repository.ProductRepositoryImpl" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/repository/ProductRepositoryImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="443" width="358" x="6683" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.jey.webapp.product.dto.ProductFileDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/dto/ProductFileDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="353" width="139" x="968" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.jey.webapp.product.service.ProductServiceImpl" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/service/ProductServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="425" width="356" x="7657" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.jey.webapp.admin.controller.AdminOrderController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/controller/AdminOrderController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="173" width="581" x="9839" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.jey.webapp.order.dto.ReviewDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/order/dto/ReviewDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="623" width="167" x="1147" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.jey.webapp.admin.repository.AdminRepositoryImpl" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/repository/AdminRepositoryImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="335" width="392" x="10880" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.jey.webapp.admin.dto.PageMaker" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/dto/PageMaker.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="497" width="175" x="2912" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.jey.webapp.product.dto.ProductRecommendDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/dto/ProductRecommendDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="623" width="191" x="1354" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.jey.webapp.product.dto.ReviewSearchDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/dto/ReviewSearchDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="299" width="149" x="1585" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="18" language="java" name="com.jey.webapp.product.service.ProductService" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/service/ProductService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="407" width="356" x="8494" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="19" language="java" name="com.jey.webapp.admin.dto.AdminOrderDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/dto/AdminOrderDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="839" width="161" x="1774" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="20" language="java" name="com.jey.webapp.product.repository.ProductRepository" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/repository/ProductRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="407" width="358" x="7413" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="21" language="java" name="com.jey.webapp.account.repository.AccountRepository" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/account/repository/AccountRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="245" width="292" x="5640" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="22" language="java" name="com.jey.webapp.ajax.controller.AjaxAccountController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/ajax/controller/AjaxAccountController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="505" x="6138" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.jey.webapp.filter.LoginCheckFilter" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/filter/LoginCheckFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="137" width="338" x="1975" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.jey.webapp.filter.CharacterEncodingFilter" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/filter/CharacterEncodingFilter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="137" width="338" x="2353" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="com.jey.webapp.admin.dto.PtypeDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/dto/PtypeDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="245" width="141" x="2731" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="com.jey.webapp.account.service.AccountServiceImpl" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/account/service/AccountServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="281" width="292" x="5806" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="com.jey.webapp.product.controller.ProductController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/controller/ProductController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="426" x="8494" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.jey.webapp.account.controller.AccountController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/account/controller/AccountController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="281" width="536" x="7081" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.jey.webapp.cart.service.CartServiceImpl" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/cart/service/CartServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="317" width="224" x="12016" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.jey.webapp.account.repository.AccountRepositoryImpl" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/account/repository/AccountRepositoryImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="281" width="292" x="5474" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.jey.webapp.product.dto.LikeDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/dto/LikeDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="407" width="145" x="3127" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.jey.webapp.account.dto.AccountAddressDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/account/dto/AccountAddressDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="299" width="166" x="3312" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="33" language="java" name="com.jey.webapp.cart.service.CartService" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/cart/service/CartService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="299" width="224" x="12087" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="34" language="java" name="com.jey.webapp.product.dto.ProductTypeDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/dto/ProductTypeDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="245" width="141" x="3518" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="35" language="java" name="com.jey.webapp.admin.service.AdminService" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/service/AdminService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="299" width="380" x="9675" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="36" language="java" name="com.jey.webapp.cart.repository.CartRepositoryImpl" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/cart/repository/CartRepositoryImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="317" width="222" x="11754" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="com.jey.webapp.pay.controller.PayController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/pay/controller/PayController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="402" x="11312" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="com.jey.webapp.cart.controller.CartController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/cart/controller/CartController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="299" x="12280" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="com.jey.webapp.order.repository.OrderRepositoryImpl" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/order/repository/OrderRepositoryImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="407" width="287" x="14133" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="com.jey.webapp.filter.AdminCheckFilter" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/filter/AdminCheckFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="137" width="338" x="3699" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="com.jey.webapp.product.dto.ProductDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/dto/ProductDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1037" width="155" x="4077" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="42" language="java" name="com.jey.webapp.cart.repository.CartRepository" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/cart/repository/CartRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="281" width="222" x="11825" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="43" language="java" name="com.jey.webapp.filter.AjaxLoginCheckFilter" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/filter/AjaxLoginCheckFilter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="137" width="338" x="4272" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="com.jey.webapp.product.dto.ProductSearchDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/product/dto/ProductSearchDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="461" width="168" x="4650" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="com.jey.webapp.order.controller.OrderController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/order/controller/OrderController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="310" x="13456" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="com.jey.webapp.admin.controller.AdminProductController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/controller/AdminProductController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="245" width="444" x="8960" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="com.jey.webapp.ajax.controller.AjaxCartController" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/ajax/controller/AjaxCartController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="347" x="12619" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="48" language="java" name="com.jey.webapp.order.repository.OrderRepository" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/order/repository/OrderRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="371" width="287" x="13969" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="49" language="java" name="com.jey.webapp.admin.service.AdminServiceImpl" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/service/AdminServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="317" width="380" x="10460" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="com.jey.webapp.admin.dto.SummaryDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/dto/SummaryDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="299" width="174" x="4858" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="51" language="java" name="com.jey.webapp.order.service.OrderService" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/order/service/OrderService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="371" width="287" x="13006" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="52" language="java" name="com.jey.webapp.admin.repository.AdminRepository" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/repository/AdminRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="299" width="392" x="10670" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="53" language="java" name="com.jey.webapp.account.service.AccountService" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/account/service/AccountService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="263" width="292" x="7081" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="54" language="java" name="com.jey.webapp.order.dto.OrderDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/order/dto/OrderDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="677" width="155" x="5072" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="com.jey.webapp.account.dto.AccountDTO" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/account/dto/AccountDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="695" width="167" x="5267" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="com.jey.webapp.admin.dto.Criteria" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/admin/dto/Criteria.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="407" width="161" x="2912" y="871"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="com.jey.webapp.order.service.OrderServiceImpl" project="final_Project" 
+    file="/final_Project/src/main/java/com/jey/webapp/order/service/OrderServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="389" width="287" x="13806" y="-206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="58">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="52"/>  
+  </realization>  
+  <association id="59">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="60" name="product"/>      
+      <multiplicity id="61" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="62">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="63">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="64" name="cart"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="66">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="67" name="order"/>      
+      <multiplicity id="68" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="69">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="70" name="dao"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="72">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="73" name="cri"/>      
+      <multiplicity id="74" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="75">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="76" name="dao"/>      
+      <multiplicity id="77" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="79" name="order"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="51" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="81">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="82" name="order"/>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="51" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="84">    
+    <end type="SOURCE" refId="57"/>    
+    <end type="TARGET" refId="51"/>  
+  </realization>  
+  <association id="85">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="86" name="product"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="57" navigable="false">      
+      <attribute id="89" name="dao"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="92" name="alerthandler"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="95" name="cart"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="97">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="35"/>  
+  </realization>  
+  <association id="98">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="99" name="product"/>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="101">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="53"/>  
+  </realization>  
+  <realization id="102">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="33"/>  
+  </realization>  
+  <association id="103">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="104" name="order"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="107" name="product"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="110" name="dao"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="113" name="cart"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="49" navigable="false">      
+      <attribute id="116" name="dao"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="52" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="119" name="account"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="121">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="48"/>  
+  </realization>  
+  <association id="122">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="123" name="order"/>      
+      <multiplicity id="124" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="51" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="125">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="126" name="account"/>      
+      <multiplicity id="127" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="129" name="order"/>      
+      <multiplicity id="130" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="132" name="product"/>      
+      <multiplicity id="133" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="134">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="135" name="account"/>      
+      <multiplicity id="136" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="137">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="138">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <realization id="139">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="42"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
