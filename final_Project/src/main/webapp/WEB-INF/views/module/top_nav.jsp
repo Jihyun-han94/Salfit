@@ -216,7 +216,7 @@
 	var websocket;	
    	var neworder_alert = document.getElementById("neworder_alert");	
    	var neworder_nav = document.getElementById("neworder_nav");	
-    websocket = new WebSocket("ws://localhost/${pageContext.request.contextPath}/alert");	
+    websocket = new WebSocket("ws://localhost${pageContext.request.contextPath}/alert");	
     	
     websocket.onmessage = function(message) {	
     	onMessage(message); 	
