@@ -31,4 +31,9 @@
 ## Use Case
 ![ERD-Page-1 (1)](https://user-images.githubusercontent.com/62541678/125651237-03f4b3ef-7683-4e77-b4fb-536be1e35488.png)
 
+## Class Diagram
+main_cd.gif![main_cd](https://user-images.githubusercontent.com/62541678/125652910-c8c0429e-4f50-4dd0-a121-2a8a5436c1fc.gif)
+account_cd.gif![account_cd](https://user-images.githubusercontent.com/62541678/125652918-ceb145b7-de6e-4770-bf35-8ad1c615f486.gif)
+order_cd.gif![order_cd](https://user-images.githubusercontent.com/62541678/125652930-547e671d-5502-4fab-9a2e-58c1e99582c8.gif)
+admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/125652944-52d642da-736f-438f-b58a-f6f32431a8d2.gif)
 
