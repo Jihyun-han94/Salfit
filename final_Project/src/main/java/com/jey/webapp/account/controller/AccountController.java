@@ -140,7 +140,6 @@ public class AccountController {
 		HttpSession session = request.getSession();
 		// session.setMaxInactiveInterval(60*60);
 		
-		System.out.println(dto.getId());
 		session.setAttribute("account", dto);
 		session.setAttribute("logined", true);
 		session.setAttribute("atype", dto.getAtype());
@@ -156,7 +155,6 @@ public class AccountController {
 	public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		System.out.println("로그아웃 되었습니다.");
 		return "redirect:/";
 	}
 	
@@ -172,11 +170,9 @@ public class AccountController {
 		AccountDTO dto = (AccountDTO) session.getAttribute("account");
 		String pass = req.getParameter("password");
 		dto.setPassword(pass);
-		System.out.println(dto.getId() + dto.getEmail());
 		
 		dto = account.login(dto);
 		if(dto.getId() == -1) {
-			System.out.println("실패");
 			mv.setViewName("redirect:/");
 			return mv;
 		}
@@ -189,13 +185,8 @@ public class AccountController {
 		// 주소 목록 띄우기
 		List<AccountAddressDTO> addressList = account.getList(addressDTO.getAid());
 		mv.addObject("addressList", addressList);
-		System.out.println("aid : " + addressDTO.getAid());
-		System.out.println("나와라!! : " + account.getList(addressDTO.getAid()));
-		System.out.println(((AccountDTO) session.getAttribute("account")).getEmail());
 	
 		return mv;
-		
-		
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -207,7 +198,6 @@ public class AccountController {
 		dto.setName(name);
 		dto.setPassword(password);
 		dto.setPhone(phone);
-		System.out.println(dto.getName() + dto.getPassword() + dto.getPhone());
 		m.addAttribute("account", account.updateProfile(dto));
 		return "redirect:/";
 	}
@@ -216,26 +206,21 @@ public class AccountController {
 	@RequestMapping(value = "/profile_update", method = RequestMethod.POST)
 	public String profile_modify(@RequestParam MultipartFile file,
 			HttpServletRequest req, Model m, HttpSession session, AccountAddressDTO addressDTO) throws Exception {
-		System.out.println("메소드 시작!");
 		// 1. 사용자가 업로드한 이미지를 추출한다. --> file 자체로 추출 함 (하나기 때문)
 		
 		// 2. 추출한 이미지를 특정 경로(설정)에 이미지파일로 저장한다.
 		String origin_name = file.getOriginalFilename();
 		String root = req.getServletContext().getRealPath("/");
 //		FileUpload fileupload = new FileUpload(root, "/resources/file/");
-		System.out.println("root : " + root);
 		File save_path = new File(root, "/resources/file/");
-		System.out.println("save_path" + save_path.toPath());
 		if(!save_path.exists()) {
 			Files.createDirectories(save_path.toPath());
 		} file.transferTo(new File(save_path + "/" + origin_name));
 		// 3. 저장된 이미지를 불러온다.
 		File f = new File(root = (save_path + "/" + origin_name));
-		System.out.println("불러오는 이미지의 경로 : " + f.toPath());
 		BufferedImage src_img = ImageIO.read(f);
 		// 4. 불러온 이미지의 크기를 조정한다.
 		BufferedImage thumbnail = Scalr.resize(src_img, Scalr.Mode.FIT_EXACT, 200, 200);
-		System.out.println(thumbnail);
 		// 5. 조정된 이미지를 저장한다.
 		String thumbnail_name = "thumb_" + f.getName();
 		File tf = new File(save_path + "/" + thumbnail_name);
@@ -243,16 +228,13 @@ public class AccountController {
 		String thumbnail_path = "/file/" + thumbnail_name;
 		// 6. 이미지 저장된 경로를 DB에 저장한다.
 		AccountDTO dto = (AccountDTO) session.getAttribute("account");
-		System.out.println("썸네일저장 전");
 		dto.setProfile_img(thumbnail_path);
-		System.out.println("이미지 경로 db 저장 실행 전");
 		account.saveImage(dto);
 		m.addAttribute("account", dto);
 		int userid = dto.getId();
 		addressDTO.setAid(userid);
 		List<AccountAddressDTO> addressList = account.getList(addressDTO.getAid());
 		m.addAttribute("addressList", addressList);
-		System.out.println("이미지 경로 db 저장 실행 후");
 		return "account/update";
 	}
 	
@@ -263,10 +245,8 @@ public class AccountController {
 		// String sessionPass = accountDTO.getPassword();
 		String dtoPass = dto.getPassword();
 		String pass = req.getParameter("password");
-		System.out.println(dtoPass);
 		if(!(dtoPass.equals(pass))) {
 			m.addAttribute("error", "회원탈퇴 실패");
-			System.out.println("회원탈퇴 실패");
 			return "redirect:/account/update_view";
 		}
 		account.signout(dto);

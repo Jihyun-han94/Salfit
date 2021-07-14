@@ -16,17 +16,17 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	AccountRepository dao ;
-	
-	@Override
-	public AccountDTO accountDetail(AccountDTO dto) throws Exception {
-		AccountDTO data = dao.select(dto);
-		return data;
-	}
-
-	@Override
-	public List<AccountDTO> accountList() throws Exception {
-		return dao.selectList();
-	}
+// 문제 없으면 삭제해도 됨 - 은지	
+//	@Override
+//	public AccountDTO accountDetail(AccountDTO dto) throws Exception {
+//		AccountDTO data = dao.select(dto);
+//		return data;
+//	}
+//
+//	@Override
+//	public List<AccountDTO> accountList() throws Exception {
+//		return dao.selectList();
+//	}
 	
 	@Override
 	public boolean join(AccountDTO dto) throws Exception {

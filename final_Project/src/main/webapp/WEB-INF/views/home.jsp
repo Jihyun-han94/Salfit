@@ -252,7 +252,7 @@
    	neworder_nav.addEventListener("click", function(){	
 	    	neworder_alert.classList.remove('new-order-counter');	
    	});	
-    websocket = new WebSocket("ws://localhost/salfit/alert");	
+    websocket = new WebSocket("ws://localhost${pageContext.request.contextPath}/alert");	
     	
     websocket.onmessage = function(message) {	
     	//alert(message.data);	

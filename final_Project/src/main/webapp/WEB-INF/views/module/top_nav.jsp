@@ -81,7 +81,7 @@
 </style>	
 	<header class="cd-auto-hide-header">	
 		<div class="logo">
-		<a href="${main }"><img src="/salfit/resources/img/newlogo.png" alt="Logo" height="80px" style="float: left;"></a>
+		<a href="${main }"><img src="${pageContext.request.contextPath}/resources/img/newlogo.png" alt="Logo" height="80px" style="float: left;"></a>
 		<form id="search_form" action="${sessionScope.atype == 'a' ? searcha : searchi }" method="get" style="padding-left: 50px; padding-top: 25px; float:right;">
 		<c:if test="${not empty param.ptype}" >
 			<input type="hidden" name="ptype" value="${param.ptype }">
@@ -216,7 +216,7 @@
 	var websocket;	
    	var neworder_alert = document.getElementById("neworder_alert");	
    	var neworder_nav = document.getElementById("neworder_nav");	
-    websocket = new WebSocket("ws://localhost/salfit/alert");	
+    websocket = new WebSocket("ws://localhost${pageContext.request.contextPath}/alert");	
     	
     websocket.onmessage = function(message) {	
     	onMessage(message); 	

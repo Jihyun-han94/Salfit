@@ -7,8 +7,9 @@ import com.jey.webapp.account.dto.AccountDTO;
 
 
 public interface AccountService {
-	public AccountDTO accountDetail(AccountDTO dto) throws Exception;
-	public List<AccountDTO> accountList() throws Exception;
+// 문제 없으면 삭제해도 됨 - 은지
+//	public AccountDTO accountDetail(AccountDTO dto) throws Exception;
+//	public List<AccountDTO> accountList() throws Exception;
 	public boolean checkEmail(String nickname);
 	public boolean join(AccountDTO dto) throws Exception;
 	public AccountDTO login(AccountDTO dto) throws Exception;
