@@ -29,5 +29,6 @@
 ![Site_Map](https://user-images.githubusercontent.com/62541678/125650645-60394786-9976-40c8-81ee-cac8e456d8fa.png)
 
 ## Use Case
-![UseCase](https://user-images.githubusercontent.com/62541678/125651158-eb2c7751-948e-4d48-9e3f-142915fd6137.png)
+![ERD-Page-1 (1)](https://user-images.githubusercontent.com/62541678/125651237-03f4b3ef-7683-4e77-b4fb-536be1e35488.png)
+
 
