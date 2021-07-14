@@ -1,4 +1,4 @@
-package com.jey.webapp.kakaopay.controller;
+package com.jey.webapp.pay.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ import com.jey.webapp.product.service.ProductService;
 
 @Controller
 @RequestMapping(value="/pay")
-public class KakaoPayController {
+public class PayController {
    
    @Autowired
    private CartService cart;
@@ -98,14 +98,14 @@ public class KakaoPayController {
       m.addAttribute("address_arr", address_arr);
       
       
-      String forward  = "kakaopay/payment";
+      String forward  = "pay/payment";
       
       return forward;
    }
    @RequestMapping(value="", method = RequestMethod.POST )
    
    public String getpayment( @ModelAttribute CartDTO dto,@ModelAttribute OrderDTO order_dto,Model m,HttpServletRequest request) throws Exception {
-      String forward="kakaopay/paystep1";
+      String forward="pay/paystep1";
            
       int aid = dto.getAid();
       String receiver = order_dto.getReceiver();
@@ -216,14 +216,14 @@ public class KakaoPayController {
       m.addAttribute("paymethod", paymethod);
       m.addAttribute("orderDTO", dto);
       m.addAttribute("username", accountdto.getName());
-      mv.setViewName("/kakaopay/paystep2");
+      mv.setViewName("/pay/paystep2");
       
       return mv;
    }
    @RequestMapping(value="/later", method = RequestMethod.GET)
    public ModelAndView paylater(HttpServletRequest request,@ModelAttribute OrderDTO dto) throws Exception {
 	   ModelAndView mv = new ModelAndView();
-	   mv.setViewName("/kakaopay/paystep1");
+	   mv.setViewName("/pay/paystep1");
 
 	   HttpSession session = request.getSession();     
 	   AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
