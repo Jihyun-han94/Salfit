@@ -36,6 +36,7 @@ p {
 }
 </style>
 <script>
+
 function emailCheck() {
 	var email = document.getElementById("id_email").value;
 	if(email == "" || email == undefined){
@@ -159,6 +160,23 @@ function send() {
 </section>
 </main>
 <br><br><br><br>
+<script type="text/javascript">
+$('.signtabs .tab').click(function(){
+    if ($(this).hasClass('signup')) {
+        $('.signtabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.signin-cont').show();
+    }
+    if ($(this).hasClass('signin')) {
+        $('.signtabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.signup-cont').show();
+    } 
+});
+</script>
 <%@ include file="/WEB-INF/views/module/footer.jsp" %>
 </body>
+
 </html>
