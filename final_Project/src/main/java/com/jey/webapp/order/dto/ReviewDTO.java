@@ -21,7 +21,6 @@ public class ReviewDTO {
 		return profile_img;
 	}
 	public void setProfile_img(String profile_img) {
-		System.out.println("경로 확인!!"+profile_img);
 		this.profile_img = profile_img;
 	}
 

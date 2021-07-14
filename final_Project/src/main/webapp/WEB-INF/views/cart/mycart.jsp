@@ -10,7 +10,6 @@
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
 <c:url var="delete" value="/ajax/cart/delete" />
-<c:url var="buy" value="/ajax/cart/buy" />
 <c:url var="detail" value="/product/detail" />
 <c:url var="product" value="/product" />
 <style>

@@ -21,17 +21,17 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public boolean add(OrderDTO dto) throws Exception {
-		System.out.println("serviceimpl까지 왓음");
+		
 		return dao.insert(dto);
 	}
 
 	@Override
 	public boolean addDetail(OrderDetailDTO dto) throws Exception {
-		System.out.println("orderdetail service까지 왔음");
+		
 		return dao.insert(dto);
 	}
 
-	@Override //결제 후 status 변경
+	@Override 
 	public boolean update(OrderDetailDTO dto) throws Exception {
 		
 		return dao.update(dto);
@@ -39,29 +39,34 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public OrderDetailDTO findId(int id) throws Exception {
+		
 		return null;
 	}
 
 	@Override
 	public List<OrderDTO> findList(OrderDTO dto) throws Exception {
+		
 		List<OrderDTO> orderlist = dao.selectList(dto);
 		return orderlist;
 	}
 
-	@Override //결제 후 status 변경
+	@Override 
 	public boolean add(ReviewDTO dto) throws Exception {
+		
 		boolean result = dao.insert(dto);
 		return result;
 	}
 
 	@Override
 	public OrderDTO selectone(OrderDTO dto) throws Exception{
+		
 		dto = dao.selectone(dto);
 		return dto;
 	}
 
 	@Override
 	public List<OrderDetailDTO> selectall(OrderDetailDTO dto) throws Exception {
+		
 		List<OrderDetailDTO> list = dao.selectall(dto);
 		return list;
 	}
@@ -74,6 +79,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public OrderDTO findorder(OrderDTO dto) throws Exception {
+		
 		dto = dao.findorder(dto);
 		return dto;
 	}

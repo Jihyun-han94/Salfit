@@ -73,7 +73,6 @@ public class AjaxAccountController {
 	   public String deleteAddress(@ModelAttribute AccountAddressDTO dto, HttpServletResponse resp,HttpServletRequest request) throws Exception {
 	      
 	      JSONObject json = new JSONObject();         
-	      System.out.println("id 확인!"+dto.getId());
 	      // deliver_address에서 data 삭제 
 	      account.deleteAddress(dto);
 	      json.put("result", "주소가 삭제되었습니다.");
@@ -86,20 +85,17 @@ public class AjaxAccountController {
 	   public String deletenewAddress(@ModelAttribute AccountAddressDTO dto, HttpServletResponse resp,HttpServletRequest request) throws Exception {
 	      
 	      JSONObject json = new JSONObject();         
-	      System.out.println("address 확인!"+dto.getAddress());
+
 	      // deliver_address에서 data 삭제 
 	      account.deletenewAddress(dto);
-	      
-	      //주소 조회
+	      	      
 	      HttpSession session = request.getSession();
-	      //계정 정보 확인
 	      AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
 	      dto.setAid(accountdto.getId());
-	      List<AccountAddressDTO> address_arr =  account.getList(dto.getAid());
-	      
+
 	      json.put("result", "주소가 삭제되었습니다.");
 	      json.put("redirect", request.getContextPath() + "/account/update_view");
-	      //json.put("address_arr", address_arr);
+	   
 	      return json.toJSONString();
 	   }
 	

@@ -41,9 +41,6 @@ public class CartServiceImpl implements CartService {
 		return cartlist;
 	}
 	
-	
-
-
 	@Override
 	public boolean removeall(CartDTO dto) throws Exception {
 	
@@ -59,7 +56,6 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public int findPrice(CartDTO dto) throws Exception {
 		int price = dao.findPrice(dto);
-		System.out.println("디버깅"+price);
 		return price;
 	}
 
@@ -83,7 +79,6 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public boolean delete(CartDTO dto) throws Exception{
-		
 		return dao.deletey(dto);
 	}
 

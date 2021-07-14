@@ -38,17 +38,7 @@ public class CartController {
 		HttpSession session = request.getSession();
 		AccountDTO accountDTO = (AccountDTO) session.getAttribute("account");
 		int userid = accountDTO.getId();
-		System.out.println("userid 확인 :" + userid);
 		
-//		if(accountDTO == null) {
-//			forward = "redirect:/account/login";
-//		}else {
-//			forward = "cart/mycart";
-//			dto.setAid(userid);
-//			List<CartDTO> cartlist = cart.findAll(dto);
-//			m.addAttribute("cartlist",cartlist);			
-//		}
-//	
 		dto.setAid(userid);
 		List<CartDTO> cartlist = cart.findAll(dto);
 		
@@ -72,7 +62,6 @@ public class CartController {
 		System.out.println("sumMoney :" +sumMoney);
 		m.addAttribute("cartlist",cartlist);
 		m.addAttribute("sumMoney",sumMoney);
-		//m.addAttribute("totalMoney", totalMoney);
 		
 		return "cart/mycart";
 	}	
