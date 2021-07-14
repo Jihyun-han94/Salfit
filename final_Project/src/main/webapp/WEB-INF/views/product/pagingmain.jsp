@@ -62,6 +62,9 @@ hr {
 .carousel-control-next-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
 }
+.card {
+	text-align: center;
+}
 </style>
 <body>
 	<header style="margin-bottom:200px;">
@@ -177,7 +180,7 @@ function addDataToDOM(data) {
 		+'					'+data[i].gcnt+'</a>';
 	}
 	
-	postElement.innerHTML = '<div class="card border-0 text-center">'
+	postElement.innerHTML = '<div class="card border-0 justify-content-center align-items-center">'
 							+'<input type="hidden" name="id" value="'+data[i].id+'" readonly>'
 							+'<input type="hidden" name="aid" value="'+data[i].aid+'" readonly>'
 							+'<a href="${detail}?id='+data[i].id+'">'
@@ -185,8 +188,8 @@ function addDataToDOM(data) {
 									+'<div class="embed-responsive">'
 							+'	<img class="rounded card-img-top productImg"'
 							+'		src="${pageContext.request.contextPath}'+data[i].url+'"></div></div></a>'
-							+'<div class="card-body bg-transparent border-0">'
-							+'	<h5 class="card-title card-text text-left" style="display: inline-block;">'
+							+'<div class="card-body bg-transparent border-0 text-center">'
+							+'	<h5 class="card-title card-text" style="display: inline-block;">'
 							+'		<a href="${detail}?id='+data[i].id+'">'+data[i].title+'</a>'
 							+'	</h5>'
 							+'	<p class="card-text" style="display: inline-block; padding-left: 10px;">'
