@@ -68,9 +68,8 @@ public class AjaxProductController {
 	@ResponseBody
 	public String searchMoreNotify(@ModelAttribute ReviewSearchDTO search, HttpServletResponse resp) throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd, a hh:mm:ss");
-		// startIndex ~ endIndex 범위에 해당하는 list 조회 
 		List<ReviewDTO> addList = product.searchOldReviewList(search);
-		for(ReviewDTO dto : addList) {	// 날짜 포맷 변경
+		for(ReviewDTO dto : addList) {	
 			dto.setCdate2(sdf.format(dto.getCdate()));
 		}
 		ObjectMapper mapper = new ObjectMapper();
@@ -92,6 +91,4 @@ public class AjaxProductController {
 		return jsonStr;
 		
 	}
-	
-	
 }

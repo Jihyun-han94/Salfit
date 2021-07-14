@@ -32,7 +32,6 @@ public class AdminCheckFilter implements Filter {
 		HttpServletResponse resp = (HttpServletResponse)response;
 		HttpSession session = req.getSession();
 		
-		
 		if(session.getAttribute("logined") != null && (boolean)session.getAttribute("logined")) {
 			if(session.getAttribute("account") != null && ((AccountDTO)session.getAttribute("account")).getAtype().equals("a")) {
 				chain.doFilter(request, response);

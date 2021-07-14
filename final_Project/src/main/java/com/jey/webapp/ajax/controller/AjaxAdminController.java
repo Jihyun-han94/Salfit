@@ -84,20 +84,16 @@ public class AjaxAdminController {
 		ModelAndView mv = new ModelAndView();
 		boolean res = false;
 		
-		
 		ord.setId(dto.getOid());
 		ord.setStatus(dto.getStatus());
 		
 		res = order.updateDetailStatus(dto); 
 //			 order.updateStatus(ord); 	-> 이부분은 고객이 하는걸로 
 		
-		System.out.println("ddd: " + dto.getOid() +","+dto.getStatus());
-		
 		JSONObject json = new JSONObject();			
 		if(res) {
 			json.put("res", "true");
 		}
-		
 		return json.toJSONString();
 	}
 	
@@ -108,14 +104,11 @@ public class AjaxAdminController {
 	@ResponseBody
 	public String confirmCancel(@ModelAttribute AdminOrderDTO dto) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("status : " +dto.getStatus());
 		boolean res = order.updateStatus(dto);
-		System.out.println("res" + res);
 		JSONObject json = new JSONObject();			
 		if(res) {
 			json.put("res", "true");
 		}
-		
 		return json.toJSONString();
 	}
 	

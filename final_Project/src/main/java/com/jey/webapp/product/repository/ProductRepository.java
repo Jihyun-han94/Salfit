@@ -28,10 +28,10 @@ public interface ProductRepository {
 	public List<ProductDTO> findOldProductList(ProductSearchDTO search);
 	public boolean addPtype(ProductTypeDTO dto);
 	public boolean deletePtype(ProductTypeDTO dto);
-	public boolean addLike(LikeDTO like);
 	public List<ProductDTO> selectAllLike(int id);
-	public boolean removeLike(LikeDTO like);
 	public boolean findLike(LikeDTO like);
+	public boolean addLike(LikeDTO like);
+	public boolean removeLike(LikeDTO like);
 	public void updateView(int id);
 	public boolean updatebcnt(ProductDTO productdto);
 }

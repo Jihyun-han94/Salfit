@@ -22,19 +22,15 @@ public class AlertHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		// 웹소켓 연결이 완료되었을 때 자동으로 동작.
 		sockList.add(session);
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		// 웹소켓을 통해 메시지 전송이 되었을 때 자동으로 동작
-
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		// 웹소켓 연결이 종료되었을 때 자동으로 동작.
 		sockList.remove(session);
 	}
 }

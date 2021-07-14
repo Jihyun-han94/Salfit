@@ -41,9 +41,8 @@ public class LoginCheckFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 		HttpSession session = req.getSession();
-//		resp.sendRedirect(req.getContextPath() + "/account/login");
 		if(session.getAttribute("logined") != null && (boolean)session.getAttribute("logined")) {
-			if(session.getAttribute("account") != null  && ((AccountDTO)session.getAttribute("account")).getAtype().equals("i")) {
+			if(session.getAttribute("account") != null  && (((AccountDTO)session.getAttribute("account")).getAtype().equals("i") || ((AccountDTO)session.getAttribute("account")).getAtype().equals("g"))) {
 				chain.doFilter(request, response);
 			} else if(session.getAttribute("account") != null  && ((AccountDTO)session.getAttribute("account")).getAtype().equals("a")) {
 				resp.sendRedirect(req.getContextPath() + "/");
@@ -54,8 +53,6 @@ public class LoginCheckFilter implements Filter {
 		} else {
 			resp.sendRedirect(req.getContextPath() + "/account/login?next=" + req.getHeader("referer"));
 		}
-
-		
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

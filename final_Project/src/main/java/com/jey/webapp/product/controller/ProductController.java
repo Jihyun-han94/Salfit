@@ -61,7 +61,6 @@ public class ProductController {
 		} else {
 			productlist = product.findAll(search);
 		}
-		System.out.println("product size ㅇ: "+productlist.size());
 		mv.addObject("productlist", productlist);
 		mv.addObject("producttypes", product.getProductTypes());
 		mv.addObject("liked", liked);

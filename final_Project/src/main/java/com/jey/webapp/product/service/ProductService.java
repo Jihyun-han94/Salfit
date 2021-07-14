@@ -28,8 +28,8 @@ public interface ProductService {
 	public List<ProductDTO> searchOldProductList(ProductSearchDTO search);
 	public boolean addPtype(ProductTypeDTO dto);
 	public boolean deletePtype(ProductTypeDTO dto);
-	public boolean like(LikeDTO like);
 	public List<ProductDTO> getAllLikePid(int id);
+	public boolean like(LikeDTO like);
 	public boolean dislike(LikeDTO like);
 	public boolean checkLikeExist(LikeDTO like);
 	public void incview(int id);
