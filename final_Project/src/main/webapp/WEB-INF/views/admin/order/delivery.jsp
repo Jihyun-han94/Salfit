@@ -44,7 +44,7 @@ i {
 						<th scope="col" class="align-middle">상태 체크</th>
 						<th scope="col" class="align-middle">
 						<form id="select_status_form" action="${orderurl}/delivery" method="get">
-							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" >
+							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" class="form-control col-8 m-auto text-center" style="text-align-last:center; ">
 						        <option value="" ${dto.getStatus() == null ? "selected" : "" }>전체</option>
 						        <option value="paid" ${dto.getStatus() == "paid" ? "selected" : "" }>배송전</option>
 						        <option value="shipping" ${dto.getStatus() == "shipping" ? "selected" : "" }>배송중</option>
