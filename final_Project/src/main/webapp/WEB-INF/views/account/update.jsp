@@ -266,7 +266,7 @@ input {
 			<label for="address">주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 28px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<input id="id_address" type="text" name="address">  <button class="input-file-button" type="button" onclick="addressSend();">추가</button>
 		</form>
-		<div id="address_list" style="margin-bottom: 50px; margin-left: 150px;">
+		<div id="address_list" style="margin-bottom: 50px; margin-left: 180px;">
 			<c:forEach var="addressList" items="${addressList }">
 			<div >
 				<span>주소 목록&nbsp;&nbsp;</span>
