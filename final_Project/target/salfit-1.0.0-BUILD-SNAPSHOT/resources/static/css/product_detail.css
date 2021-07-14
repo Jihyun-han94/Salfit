@@ -1,0 +1,472 @@
+@charset "UTF-8";
+
+/* detail.jsp */
+
+*:focus  {
+    outline: none!important; 
+    outline-width: 0;
+}
+
+.buttons {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.cart-button {
+    position: relative;
+    outline: 0;
+    background-color: #bac600;
+    color: #fff;
+    border: none;
+    height: 48px;
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    line-height: 0px;
+    overflow: hidden;
+    cursor: pointer
+}
+
+.cart-button:focus {
+    outline: none !important
+}
+
+.cart-button .fa-shopping-cart {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: -20%;
+    font-size: 1.8em;
+    transform: translate(-50%, -50%)
+}
+
+.cart-button .fa-square {
+    position: absolute;
+    z-index: 1;
+    top: -20%;
+    left: 53%;
+    font-size: 0.8em;
+    transform: translate(-50%, -50%)
+}
+
+.cart-button span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: #fff;
+    transform: translate(-50%, -50%)
+}
+
+.cart-button span.added {
+    opacity: 0
+}
+
+.cart-button.clicked .fa-shopping-cart {
+    animation: cart 2s ease-in forwards
+}
+
+.cart-button.clicked .fa-square {
+    animation: box 2s ease-in forwards
+}
+
+.cart-button.clicked span.add-to-cart {
+    animation: addcart 2s ease-in forwards
+}
+
+.cart-button.clicked span.added {
+    animation: added 2s ease-in forwards
+}
+
+@keyframes cart {
+    0% {left: -10%}
+    40%,60% {left: 50%}
+    100% {left: 110%}
+}
+
+@keyframes box {
+    0%,40% {top: -20%}
+    60% {top: 36%; left: 53%}
+    100% {top: 40%; left: 112%}
+}
+
+@keyframes addcart {
+    0%, 30% {opacity: 1}
+    30%,100% {opacity: 0}
+}
+
+@keyframes added {
+    0%, 80% {opacity: 0}
+    100% {opacity: 1}
+}
+
+.outer {
+  width: 1px;
+  height: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+.inner {
+  position: absolute;
+  width:100%;
+  height: 100%;
+  background:  #D3D3D3;
+  transform: translate(-80%, -35%);
+}
+
+.sectionlineouter {
+	/* position: absolute; */
+	width: 100%;
+	text-align: center;
+}
+
+.sectionline {
+    border-top: 1px solid #677502;
+	width: 90%;
+	text-align: center;
+	vertical-align: middle;
+	position: relative;
+    display: inline-block;
+}
+
+.sectionline:before {
+	content: "";
+	width: 12px;
+	height: 12px;
+	border-radius: 100%;
+	position: absolute;
+	top: -7px;
+    background: #fff;
+    left:0;
+    right:0;
+    margin:0 auto;
+    border: 1px solid #677502;
+}
+
+ #bodyContainer1 {
+ 	margin-top: 13rem;
+ 	padding-top: 10rem;
+	height: 85rem;
+	/* background-color:#FBFBFB; */
+}
+#bodyContainer2 {
+	color: #384001;
+	height: 40rem;
+	/* background-color:#FBFBFB; */
+	/* background-color:#d0d62b; */
+	/* background-color:rgba(208, 214, 43, 0.4); */
+	/* background-color:#F1F2C2; */
+	/* background-color:#D9D6B0; */
+	/* background-color:#f0f870; */
+	padding-top: 4rem;
+}
+#bodyContainer3 {
+	background-color:#F7F5F5;
+	padding: 15rem 0 7rem;
+	height: 100%;
+}
+ 
+
+.btn-default {
+  font-family: Raleway-SemiBold;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  line-height: 16px;
+  border: 2px solid #FFF;
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+  color: #FFF;
+}
+
+.btn-default:hover {
+  color: rgba(108, 88, 179, 0.75);
+}
+
+.productQty {
+	font-size: 1.8rem;
+	background-color:transparent;
+	color: #bac600;
+}
+
+.productQty:hover {
+	font-size: 1.8rem;
+	background-color:transparent;
+	color: #777e00;
+}
+
+.alternate {
+	background-color:transparent;
+	border: none;
+  border-bottom: 1px solid #bac600;
+}
+
+.btn-success {
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  letter-spacing: 1px;
+  border-radius: 40px;
+  transition: all 0.3s ease 0s;
+  color: #FFF;
+  background: rgb(103, 192, 103, 0.75);
+  border: 2px solid rgb(103, 192, 103, 0.75);
+}
+
+.btn-success:hover {
+  color: rgba(103, 192, 103, 0.75);
+  background: transparent;
+  border: 2px solid rgba(103, 192, 103, 0.75);
+}
+
+/* recommend */
+
+
+.recommenddiv {
+  width: 100%;
+  /* display: flex; */
+  align-items: center;
+}
+.recommendtitle {
+  font-family: 'Calligraffitti', cursive;
+  font-size: 3rem;
+  text-align:center;
+  font-size: 30px;
+  width: 20%;
+}
+.recommendline {
+  display: inline-block;
+  width: 35%;
+  height: 1px;
+  background-color: #677502;
+}
+.recommenddot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #677502;
+  border-radius: 50%;
+  margin: 0 10px;
+  align-items: center;
+}
+
+
+
+.recommend-image {
+  height: 150px;
+  width: 150px;
+  object-fit: fill;
+  border-radius: 100%;
+  
+}
+
+.carousel-control-prev {
+	left: -130px;
+    border-bottom: 0;
+    font-size: 40px;
+    color: #D9D6B0;
+}
+.carousel-control-prev:focus {
+	left: -130px;
+    border-bottom: 0;
+    font-size: 40px;
+    color: #D9D6B0;
+}
+.carousel-control-prev:hover {
+	left: -130px;
+    border-bottom: 0;
+    font-size: 40px;
+    color: #D6D979;
+}
+.carousel-control-next { 
+	right: -130px;
+    border-bottom: 0;
+    font-size: 40px;
+    color: #D9D6B0;
+}
+.carousel-control-next:focus { 
+	right: -130px;
+    border-bottom: 0;
+    font-size: 40px;
+    color: #D9D6B0;
+}
+.carousel-control-next:hover {
+	right: -130px;
+    border-bottom: 0;
+    font-size: 40px;
+    color: #D6D979;
+}
+
+/* reviews */
+
+
+.reviewdiv {
+  width: 100%;
+  /* display: flex; */
+  align-items: center;
+}
+.reviewtitle {
+  font-family: 'Calligraffitti', cursive;
+  font-size: 3rem;
+  text-align:center;
+  font-size: 30px;
+  width: 20%;
+}
+.reviewline {
+  display: inline-block;
+  width: 35%;
+  height: 1px;
+  background-color: #4c4c4c;
+}
+.reviewdot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #4c4c4c;
+  border-radius: 50%;
+  margin: 0 10px;
+  align-items: center;
+}
+
+
+.reviewContainer {
+	margin: 0 auto;
+	max-width: 1000px;
+}
+
+.review-post {
+	background-color: #fff;
+    box-shadow: 0px 1px 2px rgba(50, 50, 50, .1), 
+		0px 2px 4px rgba(60, 60, 60, 0.1);
+	border-radius: 4px;
+	padding: 40px;
+	margin: 5rem 0;
+	height: 25rem;
+	width: 100%;
+	overflow: auto;
+	
+}
+
+.title {
+	margin: 0;
+}
+
+.text {
+	color: #555;
+	margin: 20px 0;
+}
+
+.user-info {
+	display: flex;
+	align-items: center;
+}
+
+.user-info img {
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+}
+
+.user-info span {
+	font-size: 16px;
+	margin: auto 10px;
+}
+
+#searchMoreNotify {
+	width: 200px;
+}
+.buton-line2 {
+    position: relative;
+    padding: 2px 0;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: #84CF8C;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    width: 200px;
+    height: 55px;
+    transition: all 0.5s ease;
+}
+.buton-line2:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0px;
+      height: 2px;
+      background-color: #398860;
+      transition: all 0.5s ease;
+}
+.buton-line2:hover{
+    color:#398860;
+}
+.buton-line2:hover:after {
+    width: 100%;
+}
+
+
+.star {
+  position: relative;
+  
+  display: inline-block;
+  width: 0;
+  height: 0;
+  
+  margin-left: .9em;
+  margin-right: .9em;
+  margin-bottom: 1.2em;
+  
+  border-right:  .3em solid transparent;
+  border-bottom: .7em  solid #FC0;
+  border-left:   .3em solid transparent;
+
+  /* Controlls the size of the stars. */
+  font-size: 14px;
+}  
+  .star:before, .star:after {
+    content: '';
+    
+    display: block;
+    width: 0;
+    height: 0;
+    
+    position: absolute;
+    top: .6em;
+    left: -1em;
+  
+    border-right:  1em solid transparent;
+    border-bottom: .7em  solid #FC0;
+    border-left:   1em solid transparent;
+  
+    transform: rotate(-35deg);
+  }
+  
+  .star:after {  
+    transform: rotate(35deg);
+  }
+
+
+/* footer.jsp */
+.footer_total_detail {
+	width: 100%;
+	height: 230px;
+	background-color: #eae9e8;
+	color: #475c01;
+	text-align: center;
+	font-size: 15px;
+	font-family: 'Kakao', 'sans-serif', 'normal';
+	padding-top: 30px;
+	padding-bottom: 100px;
+}
+.clearfix {
+	margin-bottom: 15px;
+}
+
+.footer_span {
+	padding: 20px;
+	padding-top: 15px;
+}  

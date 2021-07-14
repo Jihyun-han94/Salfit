@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="accountMapper">
+	<!-- 문제 없으면 삭제해도 됨 - 은지 -->
+	<!-- <select id="selectAccount" parameterType="account" resultType="account">
+		SELECT * FROM account WHERE id = #{id}
+	</select> -->
+	
+	<!-- 계정 로그인 확인 -->
+	<select id="checkLogin" parameterType="account" resultType="account">
+		SELECT * FROM account WHERE email = #{email} AND password = #{password}
+	</select>
+	
+	<!-- 이메일 중복 확인 -->
+	<select id="checkEmail" parameterType="String" resultType="_int">
+		SELECT count(*) as cnt FROM account WHERE email = #{email}
+	</select>
+	
+	<!-- 회원가입(계정 추가) -->
+	<insert id="insertAccount" parameterType="account">
+		INSERT INTO account(id, email, password, name, phone) VALUES(account_seq.NEXTVAL, #{email}, #{password}, #{name}, #{phone})
+	</insert>
+	
+	<!-- 로그인 날짜를 오늘 날짜로 수정 -->
+	<update id="loginDate" >
+		UPDATE account SET logindate = SYSDATE WHERE id = #{id}
+	</update>
+	
+	<!-- 계정 정보 수정 -->
+	<update id="updateAccount" parameterType="account">
+		UPDATE account
+			SET name = #{name}
+			  , password = #{password}
+			  , phone = #{phone}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 프로필 이미지 저장/수정 -->
+	<update id="saveImageAccount" parameterType="account">
+		UPDATE account
+			SET profile_img = #{profile_img}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="expireAccount">
+		DELETE FROM account
+		WHERE id = #{id}
+		  AND password = #{password}
+	</delete>
+	
+	<!-- 주소 조회 -->
+	<select id="selectAddress" parameterType="address" resultType="address">
+      SELECT b.id AS id 
+      	  ,b.aid
+          , ROWNUM AS ano
+          , b.address
+      FROM account a
+      JOIN deliver_address b
+        ON a.id = b.aid
+      WHERE a.id = #{aid}
+   </select>
+	
+	<!-- 주소 추가 -->
+	<insert id="insertAddress" parameterType="HashMap">
+		INSERT INTO deliver_address
+		VALUES (address_seq.NEXTVAL, #{aid},  #{address})
+	</insert>
+	
+	<!-- 주소 삭제 -->
+	<delete id="deleteAddress" parameterType="address">
+		DELETE FROM deliver_address
+		WHERE id = #{id}
+	</delete>
+	<delete id="deletenewAddress" parameterType="address">
+		DELETE FROM deliver_address
+		WHERE address = #{address}
+	</delete>
+</mapper>
