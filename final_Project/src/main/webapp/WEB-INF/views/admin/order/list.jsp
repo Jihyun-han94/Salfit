@@ -18,7 +18,7 @@
 	<header>
  		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
 	</header><br><br><br><br><br><br><br><br>
-	<div class="bodyContainer">
+	<div class="adminlistbody">
 	<c:if test="${!empty param.ddate}">
 		<a href="${order}/calendar" class="pull-left mb-5 ml-5"><i class="bi bi-arrow-left-circle align-middle" style="font-size: 3rem; color: #bac600;"></i> 달력</a>
 	</c:if>

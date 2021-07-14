@@ -24,7 +24,7 @@ i {
 	<header>
  		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
 	</header><br><br><br><br><br><br><br><br>
-	<div class="bodyContainer">
+	<div class="adminlistbody">
 	<a href="${orderurl}/calendar" class="pull-left mb-5 ml-5"><i class="bi bi-arrow-left-circle align-middle" style="font-size: 3rem; color:#bac600 ;"></i> 달력</a>
 		<h1 class="text-center mb-3">배송 목록</h1>
 		<p class="text-center mb-3">&lt${param.startdate} 배송 상품&gt</p>
