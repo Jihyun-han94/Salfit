@@ -8,8 +8,9 @@ import com.jey.webapp.account.dto.AccountDTO;
 
 
 public interface AccountRepository {
-	public AccountDTO select(AccountDTO dto) throws Exception;
-	public List<AccountDTO> selectList() throws Exception;
+// 문제 없으면 삭제해도 됨 - 은지
+//	public AccountDTO select(AccountDTO dto) throws Exception;
+//	public List<AccountDTO> selectList() throws Exception;
 	public int usedEmail(String email);
 	public boolean insert(AccountDTO dto) throws Exception;
 	public AccountDTO login(AccountDTO dto) throws Exception;

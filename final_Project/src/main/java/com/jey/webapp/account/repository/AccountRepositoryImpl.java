@@ -19,16 +19,16 @@ public class AccountRepositoryImpl implements AccountRepository {
 	
 	@Autowired
 	SqlSession sqlSession;
-
-	@Override
-	public AccountDTO select(AccountDTO dto) throws Exception {
-		return sqlSession.selectOne("accountMapper.selectAccount", dto);
-	}
-
-	@Override
-	public List<AccountDTO> selectList() throws Exception {
-		return sqlSession.selectList("accountMapper.selectAll");
-	}
+// 문제 없으면 삭제해도 됨 - 은지
+//	@Override
+//	public AccountDTO select(AccountDTO dto) throws Exception {
+//		return sqlSession.selectOne("accountMapper.selectAccount", dto);
+//	}
+//
+//	@Override
+//	public List<AccountDTO> selectList() throws Exception {
+//		return sqlSession.selectList("accountMapper.selectAll");
+//	}
 	
 	@Override
 	public boolean insert(AccountDTO dto) {

@@ -262,6 +262,17 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://localhost/manager/text</url>
+                    <username>maven_deploy</username>
+                    <password>maven_deploy</password>
+                    <path>/</path>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
