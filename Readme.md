@@ -22,4 +22,4 @@
 - 한지현 : 장바구니, 결제, 내역 조회, 상품 리뷰 
 
 ## Site Map
-Site_Map![Site_Map](https://user-images.githubusercontent.com/62541678/125650466-86af5782-a4e6-4a22-aeb4-e74dfb368da4.png)
+[Site_Map](https://user-images.githubusercontent.com/62541678/125650466-86af5782-a4e6-4a22-aeb4-e74dfb368da4.png)
