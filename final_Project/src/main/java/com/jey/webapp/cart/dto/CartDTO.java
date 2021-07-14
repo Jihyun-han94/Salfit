@@ -4,7 +4,7 @@ public class CartDTO {
 	private int id;
 	private int aid;
 	private int pid;
-	private int qty; // 수량
+	private int qty; 
 	private String orderstate;
 	private int price; 
 	private String email;

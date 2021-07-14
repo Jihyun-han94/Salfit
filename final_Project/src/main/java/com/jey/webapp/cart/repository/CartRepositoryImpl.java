@@ -14,18 +14,16 @@ public class CartRepositoryImpl implements CartRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
+
 	
-	
-	//cart.id로 조회
 	@Override 
 	public CartDTO select(CartDTO dto) throws Exception {
-		
 		CartDTO  cart = sqlSession.selectOne("cartMapper.select",dto);
 		return cart;
 	}
 
 
-	@Override //cart.aid를 통해 장바구니 조회 
+	@Override 
 	public List<CartDTO> selectList(CartDTO dto) throws Exception {
 		
 		 List<CartDTO> cartlist= sqlSession.selectList("cartMapper.selectAll", dto);

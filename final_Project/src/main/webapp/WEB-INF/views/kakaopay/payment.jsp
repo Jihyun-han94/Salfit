@@ -128,11 +128,9 @@ input, .address {
 </body>
 <script>
 $(function(){
-    //직접입력 인풋박스 기존에는 숨어있다가
 $("#dr_address").hide();
 $("#address").change(function() {
-   //직접입력을 누를 때 나타남
-		if($("#address").val() == "direct") {
+   		if($("#address").val() == "direct") {
 			$("#dr_address").show();
 			$("#dr_address").attr('required', 'required');
 		}  else {

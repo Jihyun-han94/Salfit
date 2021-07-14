@@ -176,21 +176,17 @@ public class KakaoPayController {
       ModelAndView mv = new ModelAndView();
 
       HttpSession session = request.getSession();
-      //계정 정보 확인
       AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
       
-   
       String paymethod = request.getParameter("paymethod");
-      System.out.println("paymethod : "+paymethod);
       dto.setPaytype(paymethod);
-      //ordered table과 order_detail status 바꿔야됨!!
+   
       dto.setAid(accountdto.getId());
-      order.updatestatus(dto); //ordered status 'paid'로 변경
+      order.updatestatus(dto); 
       OrderDetailDTO detailDTO = new OrderDetailDTO();
       detailDTO.setOid(dto.getId());
-      order.update(detailDTO); // order_detail status 'paid'로 변경
+      order.update(detailDTO); 
       
-      // 결제 정보 Model m 으로 paystep2.jsp 에 전달하기!!
       dto = order.findorder(dto);
       
       ProductDTO productdto = new ProductDTO();

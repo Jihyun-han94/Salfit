@@ -34,15 +34,13 @@ public class OrderController {
 	public ModelAndView list(@ModelAttribute OrderDTO dto,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		//계정 정보 확인
 		AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
-		session.setMaxInactiveInterval(60*60); //세션 한시간 만료
+		session.setMaxInactiveInterval(60*60);
 		
 		if(accountdto ==null ) {
 			mv.setViewName("account/login");
 			
 		}else {
-			//account.id로 ordered table 조회 (주문내역 전체)
 			int userid = accountdto.getId();
 			String username = accountdto.getName();
 			System.out.println("username 확인!!"+ username);
@@ -58,21 +56,6 @@ public class OrderController {
 			}catch(Exception e){
 				mv.addObject("result", "주문하신 제품이 없습니다.");	
 			}
-			
-				
-			
-			
-			//OrderDetailDTO orderdetail_dto = new OrderDetailDTO();
-			
-			//제품이름 때문에 orderdetail 조회해야함 (ordered.id로) 
-//			for(OrderDTO data : orderlist) {
-//				orderdetail_dto.setOid(data.getId());
-//				System.out.println("디버깅5");
-//				List<OrderDetailDTO> orderdetail_arr = order.selectall(orderdetail_dto);
-//				System.out.println("디버깅6");
-//				mv.addObject("orderdetaillist", orderdetail_arr);
-//			
-//			}
 			
 		}
 		
@@ -102,8 +85,6 @@ public class OrderController {
 	@RequestMapping(value = "/review/add", method = RequestMethod.GET)
 	public ModelAndView add(@ModelAttribute OrderDetailDTO dto) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
-		
 		mv.setViewName("order/addreview");
 		mv.addObject("orderdetail", dto);
 		
@@ -119,18 +100,11 @@ public class OrderController {
 		dto.setAid(userid);
 		
 	    String [] rCheck = request.getParameterValues("rating");
-	    dto.setRating(rCheck.length);
-	    System.out.println("dto 점수 확인 : "+dto.getRating());
-		System.out.println("pid 확인"+dto.getPid());
-		System.out.println("contents 확인"+dto.getContents());
-		System.out.println("aid 확인"+dto.getAid());
-		
+	    dto.setRating(rCheck.length);	
 		boolean result = order.add(dto);
-		System.out.println("add 결과 :"+result);
 	
 		mv.setViewName("redirect:/product/detail?id="+dto.getPid());
-
-		
+	
 		return mv;
 	}
 	
