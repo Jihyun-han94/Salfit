@@ -188,7 +188,7 @@ function addDataToDOM(data) {
 									+'<div class="embed-responsive">'
 							+'	<img class="rounded card-img-top productImg"'
 							+'		src="${pageContext.request.contextPath}'+data[i].url+'"></div></div></a>'
-							+'<div class="card-body bg-transparent border-0 text-center">'
+							+'<div class="card-body bg-transparent border-0">'
 							+'	<h5 class="card-title card-text" style="display: inline-block;">'
 							+'		<a href="${detail}?id='+data[i].id+'">'+data[i].title+'</a>'
 							+'	</h5>'
@@ -199,7 +199,7 @@ function addDataToDOM(data) {
 							+'	</p>'
 							+'</div>'
 							+'<div class="card-footer bg-transparent border-0">' 
-							+'	<p class="card-text font-weight-bold">'
+							+'	<p class="card-text font-weight-bold" style="color:#77A612;">'
 							+'		₩ '+data[i].price
 							+'	</p>'
 							+'</div>'
