@@ -20,6 +20,12 @@ public class AdminRepositoryImpl implements AdminRepository {
 	@Autowired
 	private SqlSession sqlSession;
 
+	@Override
+	public List<AdminOrderDTO> listPage(Criteria cri) {
+		return sqlSession.selectList("adminMapper.listPage", cri);
+	}
+	
+	
 	
 	@Override
 	public List<AdminOrderDTO> selectList(AdminOrderDTO dto) throws Exception {
@@ -27,12 +33,6 @@ public class AdminRepositoryImpl implements AdminRepository {
 		return data;
 	}
 
-	@Override
-	public List<AdminOrderDetailDTO> selectDetailList(AdminOrderDTO dto) {
-		List<AdminOrderDetailDTO> data = sqlSession.selectList("adminMapper.orderdetaillist");
-		return data;
-	}
-	
 	@Override
 	public List<AdminOrderDTO> selectListSelected(AdminOrderDTO dto) {
 		List<AdminOrderDTO> data = sqlSession.selectList("adminMapper.orderlistsel", dto);
@@ -43,11 +43,16 @@ public class AdminRepositoryImpl implements AdminRepository {
 	}
 
 	@Override
-	public List<AdminOrderDetailDTO> selectDetailListSelected(AdminOrderDTO dto) {
-		List<AdminOrderDetailDTO> data = sqlSession.selectList("adminMapper.orderdetaillistsel", dto);
+	public List<AdminOrderDetailDTO> selectDetailList(AdminOrderDTO dto) {
+		List<AdminOrderDetailDTO> data = sqlSession.selectList("adminMapper.orderdetaillist");
 		return data;
 	}
 	
+	@Override
+	public List<AdminOrderDetailDTO> selectDetailList(AdminOrderDetailDTO dto) {
+		List<AdminOrderDetailDTO> data = sqlSession.selectList("adminMapper.deliverdetaillist", dto);
+		return data;
+	}
 
 	@Override
 	public boolean updateStatus(AdminOrderDTO dto) {
@@ -76,35 +81,6 @@ public class AdminRepositoryImpl implements AdminRepository {
 		}
 	}
 
-	@Override
-	public List<AdminOrderDTO> selectList(AdminOrderDetailDTO dto) {
-		List<AdminOrderDTO> data = sqlSession.selectList("adminMapper.deliverlist");
-		return data;
-	}
-
-	@Override
-	public List<AdminOrderDetailDTO> selectDetailList(AdminOrderDetailDTO dto) {
-		List<AdminOrderDetailDTO> data = sqlSession.selectList("adminMapper.deliverdetaillist");
-		return data;
-	}
-
-	@Override
-	public List<AdminOrderDTO> selectListSelected(AdminOrderDetailDTO dto) {
-		List<AdminOrderDTO> data = sqlSession.selectList("adminMapper.deliverlistsel", dto);
-		return data;
-	}
-
-	@Override
-	public List<AdminOrderDetailDTO> selectDetailListSelected(AdminOrderDetailDTO dto) {
-		List<AdminOrderDetailDTO> data = sqlSession.selectList("adminMapper.deliverdetaillistsel", dto);
-		return data;
-	}
-
-
-	@Override
-	public List<AdminOrderDTO> listPage(Criteria cri) {
-		return sqlSession.selectList("adminMapper.listPage", cri);
-	}
 
 	@Override
 	public int getTotalCount(Criteria cri) {

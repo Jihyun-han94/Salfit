@@ -50,19 +50,18 @@ public class AdminProductController {
 	@Autowired
 	private AdminService order;
 
-	/* 상품 조회(조회수, 수정, 삭제, 리뷰에 대댓글 버튼 ) */
+	/* 상품 조회(조회수, 수정, 삭제) */
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView list(@ModelAttribute ProductSearchDTO search, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
-		session.getAttribute("account");
+		AccountDTO account = (AccountDTO) session.getAttribute("account");
 		
 		ModelAndView mv = new ModelAndView();
 		
 		List<ProductDTO> productlist = null;
 		
-		// 세션 + 필터로 관리자만 해당 컨트롤에 접속 가능 
-		search.setAid(1);
+		search.setAid(account.getId());
 		
 		if(search.getPtype() != 0 || search.getSearchtype() != null) {
 			productlist = product.findList(search);
@@ -82,9 +81,6 @@ public class AdminProductController {
 	public ModelAndView detail(HttpServletRequest request, @ModelAttribute ProductDTO item) throws Exception {
 		ModelAndView mv = new ModelAndView("product/detail");
 		
-		HttpSession session = request.getSession();
-		
-		
 		item = product.findId(item.getId());
 		
 		if(item.getId() != -1 ) {
@@ -99,9 +95,7 @@ public class AdminProductController {
 		} else {
 			mv.setViewName("/error/noitem");
 		}
-		
 		return mv;
-		
 	}
 	
 	/* 상품 등록 */
@@ -131,25 +125,14 @@ public class AdminProductController {
 				UUID uuid = UUID.randomUUID();
 				
 				origin_name = file.getOriginalFilename();
-//				origin_name = StringUtils.cleanPath(new String(file.getOriginalFilename().getBytes("ISO-8859-1"), StandardCharsets.UTF_8));
-//				origin_name = URLEncoder.encode(file.getOriginalFilename(), "euc-kr");
 				change_name = uuid.toString() + "_" + origin_name;
 				file_ext = FilenameUtils.getExtension(file.getOriginalFilename());
 				
-				
-				System.out.println("원본 파일명 : " + origin_name);
-				System.out.println("변경된 파일명 : " + change_name);
-				System.out.println("확장자 : " + file_ext);
-				System.out.println("파일 크기(바이트) : " + file.getSize());
-
 				if(permit_ext.contains(file_ext)) {
-//					String root_path = req.getServletContext().getRealPath("/");
 					File save_path = new File(req.getServletContext().getRealPath("/") + "/resources/upload/product/");
-					System.out.println(save_path);
 					if(!save_path.exists()) {
 						Files.createDirectories(save_path.toPath());
 					}
-//							file.transferTo(new File(save_path + "/" + origin_name));
 					File path = new File(save_path + "/" + change_name);
 					file.transferTo(path);
 					dto.setImg(origin_name);
@@ -214,32 +197,20 @@ public class AdminProductController {
 				UUID uuid = UUID.randomUUID();
 				
 				origin_name = file.getOriginalFilename();
-//				origin_name = StringUtils.cleanPath(new String(file.getOriginalFilename().getBytes("ISO-8859-1"), StandardCharsets.UTF_8));
-//				origin_name = new String(file.getOriginalFilename().getBytes("8859_1"),"utf-8");
 
-				System.out.println("origin name : " + origin_name);
 				change_name = uuid.toString() + "_" + origin_name;
 				file_ext = FilenameUtils.getExtension(file.getOriginalFilename());
 				
-				System.out.println("원본 파일명 : " + origin_name);
-				System.out.println("변경된 파일명 : " + change_name);
-				System.out.println("확장자 : " + file_ext);
-				System.out.println("파일 크기(바이트) : " + file.getSize());
-
 				if(permit_ext.contains(file_ext)) {
-//					String root_path = req.getServletContext().getRealPath("/");
 					File save_path = new File(req.getServletContext().getRealPath("/") + "/resources/upload/product/");
-					System.out.println(save_path);
 					if(!save_path.exists()) {
 						Files.createDirectories(save_path.toPath());
 					}
-//							file.transferTo(new File(save_path + "/" + origin_name));
 					File path = new File(save_path + "/" + change_name);
 					file.transferTo(path);
 					dto.setImg(origin_name);
 					dto.setImguuid(change_name);
 					dto.setUrl("/resources/upload/product/" + change_name);
-					System.out.println(path);
 				} else {
 					System.out.println("해당 확장자는 업로드 할 수 없습니다.");
 					mv.setViewName("error/default"); 
@@ -281,7 +252,6 @@ public class AdminProductController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deleteProduct(Model m, @ModelAttribute ProductDTO dto) throws Exception {
 		String forward = "";
-				
 				
 		if(order.findOrderedProduct(dto)) {
 			m.addAttribute("result", "removeFail");

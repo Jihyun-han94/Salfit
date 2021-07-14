@@ -46,22 +46,12 @@ public class AdminOrderController {
 		List<AdminOrderDTO> orderlist = null;
 		List<AdminOrderDetailDTO> orderdetaillist = null;
 		
-		System.out.println(cri.getPage() +","+ cri.getPerPageNum() +","+ cri.getId());
-		
-		
-		if (dto.getDdate() == null || dto.getDdate() == "") {
-			if (dto.getStatus() == null || dto.getStatus() == "") {
-				orderlist = order.listPage(cri);
-				orderdetaillist = order.findDetailList(dto);
-			} else {
-				orderlist = order.findListSelected(dto);
-				orderdetaillist = order.findDetailListSelected(dto);
-			}
+		if ((dto.getDdate() == null || dto.getDdate() == "") && (dto.getStatus() == null || dto.getStatus() == "")) {
+			orderlist = order.listPage(cri);
 		} else {
 			orderlist = order.findListSelected(dto);
-			orderdetaillist = order.findDetailListSelected(dto);
 		}
-		System.out.println(orderdetaillist.get(0).getStatus());
+		orderdetaillist = order.findDetailList(dto);
 		
 		PageMaker pageMaker = new PageMaker(cri);
 		int totalCount = order.getTotalCount(cri);
@@ -104,26 +94,13 @@ public class AdminOrderController {
 	
 	/* 당일 배송 관리 */
 	@RequestMapping(value = "/delivery", method = RequestMethod.GET)
-	public String manageDelivery(Model m, @ModelAttribute AdminOrderDetailDTO dto, HttpServletRequest request, HttpSession session) throws Exception {
+	public String manageDelivery(Model m, @ModelAttribute AdminOrderDetailDTO dto, AdminOrderDTO odto, HttpServletRequest request, HttpSession session) throws Exception {
 		
 		List<AdminOrderDTO> orderlist = null;
 		List<AdminOrderDetailDTO> orderdetaillist = null;
-		System.out.println("startdate : "+dto.getStartdate());
-		System.out.println("status : "+dto.getStatus());
 		
-		if (dto.getStartdate() == null || dto.getStartdate() == "") {
-			if (dto.getStatus() == null || dto.getStatus() == "") {
-				orderlist = order.findList(dto);
-				orderdetaillist = order.findDetailList(dto);
-			} else {
-				orderlist = order.findListSelected(dto);
-				orderdetaillist = order.findDetailListSelected(dto);
-			}
-		} else {
-			orderlist = order.findListSelected(dto);
-			orderdetaillist = order.findDetailListSelected(dto);
-		}
-		
+		orderlist = order.findList(odto);
+		orderdetaillist = order.findDetailList(dto);
 		
 		m.addAttribute("orderlist",orderlist);
 		m.addAttribute("orderdetaillist",orderdetaillist);

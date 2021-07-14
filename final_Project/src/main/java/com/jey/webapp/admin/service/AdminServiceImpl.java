@@ -21,47 +21,29 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminRepository dao;
 
-
-
 	
 	@Override
 	public List<AdminOrderDTO> findList(AdminOrderDTO dto) throws Exception {
 		return dao.selectList(dto);
 	}
-
 	@Override
-	public List<AdminOrderDetailDTO> findDetailList(AdminOrderDTO dto) {
-		return dao.selectDetailList(dto);
+	public List<AdminOrderDTO> listPage(Criteria cri) throws Exception {
+		return dao.listPage(cri);
 	}
 
 	@Override
 	public List<AdminOrderDTO> findListSelected(AdminOrderDTO dto) {
 		return dao.selectListSelected(dto);
 	}
-
+	
 	@Override
-	public List<AdminOrderDetailDTO> findDetailListSelected(AdminOrderDTO dto) {
-		return dao.selectDetailListSelected(dto);
-	}
-
-	@Override
-	public List<AdminOrderDTO> findList(AdminOrderDetailDTO dto) {
-		return dao.selectList(dto);
+	public List<AdminOrderDetailDTO> findDetailList(AdminOrderDTO dto) {
+		return dao.selectDetailList(dto);
 	}
 
 	@Override
 	public List<AdminOrderDetailDTO> findDetailList(AdminOrderDetailDTO dto) {
 		return dao.selectDetailList(dto);
-	}
-
-	@Override
-	public List<AdminOrderDTO> findListSelected(AdminOrderDetailDTO dto) {
-		return dao.selectListSelected(dto);
-	}
-
-	@Override
-	public List<AdminOrderDetailDTO> findDetailListSelected(AdminOrderDetailDTO dto) {
-		return dao.selectDetailListSelected(dto);
 	}
 
 	@Override
@@ -74,10 +56,6 @@ public class AdminServiceImpl implements AdminService {
 		return dao.updateDetailStatus(dto);
 	}
 
-	@Override
-	public List<AdminOrderDTO> listPage(Criteria cri) throws Exception {
-		return dao.listPage(cri);
-	}
 
 	@Override
 	public int getTotalCount(Criteria cri) throws Exception {

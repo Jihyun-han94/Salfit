@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="adminMapper">
+	<!-- 주문번호 조회 -->
 	<select id="orderlist" parameterType="adminorder" resultType="adminorder">
 	SELECT o.id,
 			o.aid,
@@ -20,36 +21,14 @@
 		JOIN account a
 		  ON a.id = o.aid
 		 WHERE 1=1
-	 <if test='id != "" and id != null'>
+	 <if test='id != "" and id != null and id != 0'>
 		 AND o.id = #{id}
 	 </if>
 		 AND o.status != 'unpaid'
 		ORDER BY o.id DESC
 	</select>
 	
-	<select id="orderdetaillist" parameterType="adminorder" resultType="adminorderdetail">
-	SELECT d.id,
-			d.oid,
-			d.pid,
-			p.title AS pname,
-			d.qty,
-			p.price,
-			d.startdate,
-			d.enddate,
-			d.days,
-			o.receiver,
-			o.address,
-			d.status
-		FROM order_detail d
-		JOIN product p
-		  ON p.id = d.pid
-		JOIN ordered o
-		  ON o.id = d.oid
-		   WHERE 1=1
-		 AND o.status != 'unpaid'
-		ORDER BY d.id
-	</select>
-	
+	<!-- 상태선택, 날짜선택 -->
 	<select id="orderlistsel" parameterType="adminorder" resultType="adminorder">
 	 SELECT *
 	  FROM (SELECT ROW_NUMBER() OVER (ORDER BY pdate DESC, o.id DESC) NUM
@@ -71,7 +50,7 @@
 	  WHERE NUM BETWEEN (#{pageStart}+1) AND (#{pageStart} + #{perPageNum} )
 	</select>
 	
-	<select id="orderdetaillistsel" parameterType="adminorder" resultType="adminorderdetail">
+	<select id="orderdetaillist" parameterType="adminorder" resultType="adminorderdetail">
 	SELECT d.id,
 			d.oid,
 			d.pid,
@@ -90,9 +69,77 @@
 		JOIN ordered o
 		  ON o.id = d.oid
 		   WHERE 1=1
-		 AND o.status != 'unpaid'	
+		<if test='status != "" and status != null'>
+			 AND d.status = #{status}
+		 </if>
+		 <if test="startdate != null">
+			 AND TO_DATE(#{startdate}, 'YYYY-MM-DD') BETWEEN TO_DATE(d.startdate, 'YYYY-MM-DD') AND (TO_DATE(d.enddate, 'YYYY-MM-DD'))
+		 </if>
+		  AND o.status != 'unpaid'
 		ORDER BY d.id
 	</select>
+	
+	<!-- 페이지네이션 -->	 
+	 <select id="listPage" resultType="adminorder">
+	 SELECT *
+	  FROM (SELECT ROW_NUMBER() OVER (ORDER BY pdate DESC, o.id DESC) NUM
+	         , o.*
+	         , a.phone
+	          FROM ordered o
+	          JOIN account a
+			  ON a.id = o.aid
+			WHERE 1=1
+			 <if test='id != "" and id != null'>
+				 AND o.id = #{id}
+			 </if>
+			 <if test='ddate != "" and ddate != null'>
+				 AND o.ddate = #{ddate}
+			 </if>
+			  AND o.status != 'unpaid'
+	         ORDER BY pdate DESC, o.id DESC
+	        ) 
+	  WHERE NUM BETWEEN (#{pageStart}+1) AND (#{pageStart} + #{perPageNum})
+	</select>
+	
+	<select id="gettotalcount" resultType="_int">
+		SELECT count(o.id)
+		FROM ordered o
+		WHERE o.id &gt; 0
+		<if test='status != "" and status != null'>
+			AND o.status = #{status}
+		</if>
+		 AND o.status != 'unpaid'
+	</select>
+	
+	<!-- 당일배송 상품검색 -->
+	<select id="deliverdetaillist" parameterType="adminorderdetail" resultType="adminorderdetail">
+	SELECT d.id,
+			d.oid,
+			d.pid,
+			p.title AS pname,
+			d.qty,
+			p.price,
+			d.startdate,
+			d.enddate,
+			d.days,
+			o.receiver,
+			o.address,
+			d.status
+		FROM order_detail d
+		JOIN product p
+		  ON p.id = d.pid
+		JOIN ordered o
+		  ON o.id = d.oid
+		   WHERE 1=1
+		<if test='status != "" and status != null'>
+			 AND d.status = #{status}
+		 </if>
+		 <if test="startdate != null">
+			 AND TO_DATE(#{startdate}, 'YYYY-MM-DD') BETWEEN TO_DATE(d.startdate, 'YYYY-MM-DD') AND (TO_DATE(d.enddate, 'YYYY-MM-DD'))
+		 </if>
+		  AND o.status != 'unpaid'
+		ORDER BY d.id
+	</select> 
 	
 	<!-- 인기상품 top5  -->
 	<select id="top5products" resultType="product">
@@ -125,147 +172,13 @@
 		 WHERE oid = #{id}
 	 </update>
 	 
-	 
-	 
-	<select id="deliverlist" parameterType="adminorder" resultType="adminorder">
-	SELECT o.id,
-			o.aid,
-			o.receiver,
-			a.phone,
-			o.address,
-			o.paytype,
-			o.total,
-			o.pdate,
-			o.ddate,
-			o.edate,
-			o.status
-		FROM ordered o
-		JOIN account a
-		  ON a.id = o.aid
-		 WHERE 1=1
-		 AND o.status != 'unpaid'
-		ORDER BY o.id DESC
-	</select>
-	
-	<select id="deliverdetaillist" parameterType="adminorder" resultType="adminorderdetail">
-	SELECT d.id,
-			d.oid,
-			d.pid,
-			p.title AS pname,
-			d.qty,
-			p.price,
-			d.startdate,
-			d.enddate,
-			d.days,
-			o.receiver,
-			o.address,
-			d.status
-		FROM order_detail d
-		JOIN product p
-		  ON p.id = d.pid
-		JOIN ordered o
-		  ON o.id = d.oid
-		   WHERE 1=1
-		 AND o.status != 'unpaid'
-		  	
-		ORDER BY d.id
-	</select>
-	
-	<select id="deliverlistsel" parameterType="adminorder" resultType="adminorder">
-	SELECT o.id,
-			o.aid,
-			o.receiver,
-			a.phone,
-			o.address,
-			o.paytype,
-			o.total,
-			o.pdate,
-			o.ddate,
-			o.edate,
-			o.status
-		FROM ordered o
-		JOIN account a
-		  ON a.id = o.aid
-		 WHERE 1=1
-		 AND o.status != 'unpaid'
-		ORDER BY o.id DESC
-	</select>
-	
-	<!-- 당일배송 상품검색 -->
-	<select id="deliverdetaillistsel" parameterType="adminorder" resultType="adminorderdetail">
-	SELECT d.id,
-			d.oid,
-			d.pid,
-			p.title AS pname,
-			d.qty,
-			p.price,
-			d.startdate,
-			d.enddate,
-			d.days,
-			o.receiver,
-			o.address,
-			d.status
-		FROM order_detail d
-		JOIN product p
-		  ON p.id = d.pid
-		JOIN ordered o
-		  ON o.id = d.oid
-		   WHERE 1=1
-		<if test='status != "" and status != null'>
-			 AND d.status = #{status}
-		 </if>
-		 <if test="startdate != null">
-			 AND TO_DATE(#{startdate}, 'YYYY-MM-DD') BETWEEN TO_DATE(d.startdate, 'YYYY-MM-DD') AND (TO_DATE(d.enddate, 'YYYY-MM-DD'))
-		 </if>
-		  AND o.status != 'unpaid'
-		ORDER BY d.id
-	</select>
-	
-	
 	<!-- 배송중,배송완료 -->
 	 <update id="updateDelivery" parameterType="adminorderdetail">
 		UPDATE order_detail
 		   SET status = #{status}
 		 WHERE id = #{id}
 	 </update>
-	 
-	 
-	 
-	 
-	 <select id="listPage" resultType="adminorder">
-	 SELECT *
-	  FROM (SELECT ROW_NUMBER() OVER (ORDER BY pdate DESC, o.id DESC) NUM
-	         , o.*
-	         , a.phone
-	          FROM ordered o
-	          JOIN account a
-			  ON a.id = o.aid
-			WHERE 1=1
-			 <if test='id != "" and id != null'>
-				 AND o.id = #{id}
-			 </if>
-			 <if test='ddate != "" and ddate != null'>
-				 AND o.ddate = #{ddate}
-			 </if>
-			  AND o.status != 'unpaid'
-	         ORDER BY pdate DESC, o.id DESC
-	        ) 
-	  WHERE NUM BETWEEN (#{pageStart}+1) AND (#{pageStart} + #{perPageNum})
-	</select>
-	
-	<select id="gettotalcount" resultType="_int">
-		SELECT count(o.id)
-		FROM ordered o
-		WHERE o.id &gt; 0
-		<if test='status != "" and status != null'>
-			AND o.status = #{status}
-		</if>
-		 AND o.status != 'unpaid'
-	</select>
-	
-	
-	
-	
+
 	<!-- summary -->
 	<select id="numOfProducts" resultType="_int">
 		SELECT NVL(sum(qty), 0) AS numOfProducts
@@ -284,7 +197,6 @@
 	  	 AND status != 'unpaid'
 	</select>
 	
-	
 	<!-- 평점 top5  -->
 	<select id="ratingTop5" resultType="review">
 	SELECT * 
@@ -300,6 +212,7 @@
 	  WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 	
+	<!-- 상품 삭제시 주문있는지 확인 -->
 	<select id="orderExist" resultType="product">
 	SELECT id FROM order_detail WHERE pid = #{id} AND status != ('delivered' || 'canceled')
 	</select>
