@@ -9,6 +9,7 @@
 <title>Salfit | My Cart</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
+<c:url var="buy" value="/ajax/cart/buy" />
 <c:url var="delete" value="/ajax/cart/delete" />
 <c:url var="detail" value="/product/detail" />
 <c:url var="product" value="/product" />
@@ -258,7 +259,7 @@ $(".buy_btn1").click(function(){
 			datatype:"json",
 			data : { chbox : buy_Arr },
 			success : function(data){
-				location.href = "<%=request.getContextPath()%>/pay?id=" + str;
+				location.href = "${pageContext.request.contextPath}/pay?id=" + str;
 				}
 			});
 
