@@ -108,7 +108,7 @@
 	        FROM ORDERED
 	        ORDER BY ROWNUM DESC
 		)
-		WHERE ROWNUM = 1 AND aid = #{aid} AND pdate = to_char(sysdate, 'yyyymmdd')
+		WHERE ROWNUM = 1 AND aid = #{aid} AND pdate = to_char(sysdate, 'yyyy-mm-dd')
 	</select>	
 	
 	<insert id="insertorderdetail" parameterType="orderdetail">
