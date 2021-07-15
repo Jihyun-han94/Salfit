@@ -44,7 +44,7 @@ i:hover {
 	<h1 style="text-align:center; margin-bottom: 30px;">상품 등록</h1>
 	<form action="${add}" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="aid" value="1">
-		<div style="text-align:center;">
+		<div class="col-8" style="text-align:left; margin:0 auto;">
 			<label for="id_title">제목<span style="padding: 30px; color: #e7e7e7;">|</span></label>
 			<input id="id_title" type="text" name="title" style="width: 400px;" required>
 		</div>
@@ -56,7 +56,7 @@ i:hover {
 				<input type="file" style="display: none;" id="id_file" name="file" accept=“image/*” onchange="PreviewImage();">
 			</label>
 		</div>
-		<div style="margin-left:45px;">
+		<div class="col-8" style="text-align:left; margin:0 auto;">
 			<label for="id_ptype">상품 종류<span style="padding: 30px; color: #e7e7e7;">|</span></label>
 			<select id="id_ptype" name="ptype" style="width: 150px;">
 				<c:forEach var="data" items="${requestScope.producttypes}">
@@ -64,15 +64,15 @@ i:hover {
 				</c:forEach>
 			</select>
 		</div>
-		<div style="margin-left:45px;">
+		<div class="col-8" style="text-align:left; margin:0 auto;">
 			<label for="id_price">가격<span style="padding-left: 60px; padding-right: 30px; color: #e7e7e7;">|</span></label>
 			<input id="id_price" type="number" name="price">
 		</div>
-		<div style="margin-left:45px;">
+		<div class="col-8" style="text-align:left; margin:0 auto;">
 			<label for="id_contents">내용<span style="padding: 60px; color: #e7e7e7;">|</span></label>
 			<textarea id="id_contents" name="contents" cols="75" rows="10" style="text-align: center;"></textarea>
 		</div>
-		<div style="margin-left:45px;">
+		<div class="col-8" style="text-align:left; margin:0 auto;">
 			<label for="id_active">공개 여부<span style="padding: 30px; color: #e7e7e7;">|</span></label>
 			<input id="id_active" type="checkbox" name="active" checked>
 		</div>
