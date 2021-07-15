@@ -15,7 +15,6 @@
 <c:url var="delete_address_new" value="/ajax/account/address/delete/new"	/>
 
 <script type="text/javascript">
-
 function delAddress(id){
 	
     var confirm_val = confirm("해당 주소를 삭제하시겠습니까?");
@@ -25,7 +24,6 @@ function delAddress(id){
 		var id = id;
   		var element = document.getElementsByClassName(id)[0];
   		element.innerText ="삭제된 주소입니다."
-
           $.ajax({
            url :  "${delete_address }",
            type : "post",
@@ -39,7 +37,6 @@ function delAddress(id){
     }
 	
 }
-
 var checkRePass = function(){
     let oPwd = document.getElementById("id_password").value;
     let cPwd = document.getElementById("id_password_check").value;
@@ -106,7 +103,6 @@ function deleteAddress(address){
 	    if(confirm_val){
 			      
 			var address = address;
-
 	          $.ajax({
 	           url :  "${delete_address_new }",
 	           type : "post",
@@ -118,7 +114,6 @@ function deleteAddress(address){
 	          });
 	    }
 }
-
 function updateInfo() {
 	var name = document.getElementById("id_name").value;
 	var password = document.getElementById("id_password").value;
