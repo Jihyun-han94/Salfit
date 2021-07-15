@@ -89,6 +89,7 @@ public class AjaxCartController {
 		return json.toJSONString();
 	}
 	
+
 	@RequestMapping(value = "/buy", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
 	@ResponseBody	
 	public String buy(@RequestParam(value = "chbox[]") List<String> chArr, @ModelAttribute CartDTO dto, HttpServletRequest request, Model m) throws Exception {
@@ -109,7 +110,6 @@ public class AjaxCartController {
 		return jsonStr;
 	
 	}
-
 	@RequestMapping(value = "/sum", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
 	@ResponseBody	
 	public String sum(@RequestParam(value = "chbox[]") List<String> chArr, @ModelAttribute CartDTO dto, HttpServletRequest request) throws Exception {

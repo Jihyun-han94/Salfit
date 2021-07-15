@@ -42,7 +42,6 @@ td {
 	border-right: #ffff;
 	border-left: #ffff;
 }
-
 input, .address {
 	width: 300px;
 	border: 1px solid #e7e7e7;
