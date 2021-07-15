@@ -59,7 +59,7 @@ input, .address {
 <form action="${buy }" method="post">
 <div style="float: center; padding-right:5px;">
 <h1 style="margin-bottom: 50px;"><i class="bi bi-caret-right-fill" style="color:#e1e1e1; font-size: 20px;"> </i>주문 내역 확인</h1>
-	<table border="1" id="id_cart" name="id_cart" style="text-align:center;">
+	<table border="1" id="id_cart" name="id_cart" style="text-align:center; width: 100%;">
 	<tr>
 		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">이미지</th>
 		<th style="border-top: solid 5px #e1e1e1; padding-bottom:10px;">상품 명</th>
@@ -89,13 +89,15 @@ input, .address {
 		
 		</c:forEach>
 	</table>
-		<p style="color: gray; padding-top:5px;">* 상품 금액 30000원 이하는 배송비가 추가됩니다.</p>
-	<div style="padding-bottom: 50px; margin-left: 600px;">
-		<label style="border-top: #e1e1e1; padding-bottom:10px;">총 주문 금액 : </label>
-		<label style="border-top: #e1e1e1; padding-top:10px; padding-bottom:13px; font-size: 20px; color: #961533; font-weight:bold;"><input name="total" value="${totalMoney }" type="hidden">${totalMoney } 원</label>
+		<p style="color: gray; padding-top:5px; padding-bottom: 3%;">* 상품 금액 30000원 이하는 배송비가 추가됩니다.</p>
 	</div>
+	<div style="float: right;">	
+		<div style="width: 100%; text-align: right;">
+			<label style="border-top: #e1e1e1;">총 주문 금액 : </label>
+			<label style="border-top: #e1e1e1; padding-top:10px; font-size: 25px; color: #961533; font-weight:bold;"><input name="total" value="${totalMoney }" type="hidden">${totalMoney } 원</label>
+		</div>
 	</div>
-	<div style="float:left;">
+	<div style="float:left; padding-top: 50px;">
 		<h1 style="margin-bottom: 50px;"><i class="bi bi-caret-right-fill" style="color:#e1e1e1; font-size: 20px;"> </i>배송 정보</h1>
 			<label for="receiver" style="margin-bottom: 20px; font-size: 15px;">받으시는 분&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e0e0e0; font-size: 20px;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<input id="receiver" name="receiver" required>
