@@ -31,7 +31,7 @@ public class AjaxCartController {
 	private CartService cart;
 	
 	
-
+//commit
 	/* 장바구니에 상품 담기 */
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
@@ -110,6 +110,26 @@ public class AjaxCartController {
 	
 	}
 
+	@RequestMapping(value = "/buy", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
+	@ResponseBody	
+	public String buy(@RequestParam(value = "chbox[]") List<String> chArr, @ModelAttribute CartDTO dto, HttpServletRequest request, Model m) throws Exception {
+		
+	
+		JSONObject json = new JSONObject();		
+		int cartNum =0;
+		List list = null;		
+		for(String i : chArr) {   
+				
+			   cartNum = Integer.parseInt(i);
+			   dto.setId(cartNum);
+			   list = cart.findAll(dto); // 사려고 하는 리스트 
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = mapper.writeValueAsString(list);
+		
+		return jsonStr;
+	
+	}
 	@RequestMapping(value = "/sum", method = RequestMethod.POST, produces = "application/json; charset=utf-8" )
 	@ResponseBody	
 	public String sum(@RequestParam(value = "chbox[]") List<String> chArr, @ModelAttribute CartDTO dto, HttpServletRequest request) throws Exception {

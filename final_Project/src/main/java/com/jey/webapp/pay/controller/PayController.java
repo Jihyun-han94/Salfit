@@ -33,6 +33,7 @@ import com.jey.webapp.order.service.OrderService;
 import com.jey.webapp.product.dto.ProductDTO;
 import com.jey.webapp.product.service.ProductService;
 
+//commit
 @Controller
 @RequestMapping(value="/pay")
 public class PayController {
@@ -58,15 +59,12 @@ public class PayController {
       List<Integer> price_arr = new ArrayList<Integer>();
       int sumMoney =0;
       int totalMoney = 0;
-      int delfee = 0; //배송비
+      int delfee = 0; 
       
       HttpSession session = request.getSession();
-      //계정 정보 확인
       AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
-      
       List<AccountAddressDTO> address_arr =account.getList(accountdto.getId());
       
-   
       for(int i=0;i<id.length;i++){
        cartNum = Integer.parseInt(id[i]);
        dto.setId(cartNum);
@@ -133,12 +131,12 @@ public class PayController {
       }
       
        
-      List<CartDTO>cartlist = cart.yfindAll(dto); //장바구니에 담은 제품만 조회
-      order_dto.setDdate(cart.findDdate(dto));   // 가장 빠른 배송일 
-      order_dto.setEdate(cart.findEdate(dto));   // 가장 늦은 배송일
+      List<CartDTO>cartlist = cart.yfindAll(dto); 
+      order_dto.setDdate(cart.findDdate(dto));  
+      order_dto.setEdate(cart.findEdate(dto));  
       
       order_dto.setPaytype("KG 이니시스");
-      boolean result = order.add(order_dto); //ordered table에 insert
+      boolean result = order.add(order_dto); 
       
       //ordered table 셋팅 
       order_dto = order.selectone(order_dto);
@@ -155,10 +153,9 @@ public class PayController {
          orderdetail_dto.setEnddate(data.getEnddate());
          orderdetail_dto.setDays(data.getDays());
          
-         //order_detail table 셋팅
          result = order.addDetail(orderdetail_dto);
       }
-         //cart에서 삭제하는 method
+   
          boolean deleteresult = cart.delete(dto);
          
          orderdetail_dto.setOid(order_dto.getId());
@@ -178,9 +175,10 @@ public class PayController {
       HttpSession session = request.getSession();
       AccountDTO accountdto = (AccountDTO) session.getAttribute("account");
       
+  
       String paymethod = request.getParameter("paymethod");
+      System.out.println("paymethod : "+paymethod);
       dto.setPaytype(paymethod);
-   
       dto.setAid(accountdto.getId());
       order.updatestatus(dto); 
       OrderDetailDTO detailDTO = new OrderDetailDTO();
@@ -190,7 +188,6 @@ public class PayController {
       dto = order.findorder(dto);
       
       ProductDTO productdto = new ProductDTO();
-      //결제 완료시 product bcnt 1 증가
       List<OrderDetailDTO> detail_arr = order.selectall(detailDTO);
       for(OrderDetailDTO data:detail_arr) {
          productdto.setId(data.getPid());
@@ -198,7 +195,6 @@ public class PayController {
       
       }
       
-     // 주문알림 
       int newOrder = 1;
 	  if(session.getAttribute("newOrder") != null && (int)session.getAttribute("newOrder") != 0) {
 		  newOrder += (int)session.getAttribute("newOrder");
@@ -230,8 +226,10 @@ public class PayController {
 	   dto.setAid(accountdto.getId());
 	   dto.setPaytype("KG 이니시스");
 	   dto = order.findorder(dto);
-	   
-	   
+	   OrderDetailDTO orderdetail_dto = new OrderDetailDTO();
+	   orderdetail_dto.setOid(dto.getId());
+	   List<OrderDetailDTO> detail_arr = order.selectall(orderdetail_dto);
+	   mv.addObject("detail_arr",detail_arr);
 	   mv.addObject("ordered", dto);
     return mv;
    }
