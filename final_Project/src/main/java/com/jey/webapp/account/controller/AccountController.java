@@ -127,7 +127,7 @@ public class AccountController {
 		
 		if(!res) {
 			// 회원가입
-		dto.setPhone("0");
+		dto.setPhone("000-0000-0000");
 		dto.setAtype("g");
 			account.join(dto);
 		}
