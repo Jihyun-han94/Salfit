@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="orderMapper">
+	<select id="selectedate" parameterType="order" resultType="order">
+		SELECT * 
+		FROM ordered
+		WHERE id=#{id}
+	
+	</select>
+	<delete id="deletedetail" parameterType="orderdetail">
+		DELETE
+		FROM order_detail
+		WHERE oid = #{oid}
+	</delete>
+	<delete id="deleteorder" parameterType="order">
+		DELETE 
+		FROM ordered
+		WHERE id = #{id}
+	</delete>
+	
+	<update id = "holdorder" parameterType = "order">
+		UPDATE ordered
+		SET status = 'holding'
+		WHERE id = #{id} 
+	</update>
+	
+	<update id = "holdorderdetail" parameterType = "orderdetail">
+		UPDATE order_detail
+		SET status = 'holding'
+		WHERE oid = #{oid} 
+	</update>
+	
+
+	<update id = "updatedelordered" parameterType = "order">
+		UPDATE ordered
+		SET status = 'delivered'
+		WHERE id = #{id} 
+	</update>
+	
+	<update id = "updatedeldetail" parameterType = "orderdetail">
+		UPDATE order_detail
+		SET status = 'delivered'
+		WHERE oid = #{oid} 
+	</update>
+
+
+	<select id ="findorder" parameterType="order" resultType="order">
+		SELECT * 
+		FROM ordered
+		WHERE id=#{id}
+	</select>
+	
+	<update id = "update" parameterType = "orderdetail">
+		UPDATE order_detail
+		SET status = 'paid'
+		WHERE oid = #{oid} 
+	</update>
+	
+	<update id="updatestatus" parameterType="order">
+		UPDATE ordered
+		SET status = 'paid',
+			paytype = #{paytype}
+		WHERE id = #{id} AND aid=#{aid}
+	</update>
+	
+	<insert id="insertReview" parameterType="review">
+    	INSERT INTO review (id,pid,aid,contents,rating)
+           VALUES (review_seq.NEXTVAL,#{pid},#{aid},#{contents},#{rating})
+    </insert>
+    
+	<select id="selectall" parameterType="orderdetail" resultType="orderdetail">
+		SELECT  d.id
+	        	,d.oid 
+	        	,d.pid 
+	        	,d.qty 
+	        	,d.price 
+	        	,d.status
+	        	,d.startdate
+	        	,d.enddate
+	        	,d.days
+	        	,d.status
+	        	,p.title
+		FROM order_detail d  
+		JOIN product p
+		ON d.pid = p.id
+		WHERE d.oid = #{oid} 
+	</select>
+	
+	<select id ="selectList" parameterType="order" resultType="order" >
+		SELECT *
+		FROM ordered  
+		WHERE aid = #{aid} 
+		ORDER BY id DESC
+	</select>
+	
+	 <insert id="insertordered" parameterType="order">
+	  	INSERT INTO ordered(id, aid, receiver, address, paytype, total, pdate, ddate, edate)
+	  	     VALUES(ordered_seq.NEXTVAL, #{aid}, #{receiver}, #{address}, #{paytype}, #{total}, to_char(sysdate, 'yyyy-mm-dd'), #{ddate}, #{edate})
+	 </insert> 
+	
+	<select id="selectone" parameterType="order" resultType="order">
+		SELECT *
+		FROM (
+	        SELECT*
+	        FROM ORDERED
+	        ORDER BY ROWNUM DESC
+		)
+		WHERE ROWNUM = 1 AND aid = #{aid} AND pdate = to_char(sysdate, 'yyyy-mm-dd')
+	</select>	
+	
+	<insert id="insertorderdetail" parameterType="orderdetail">
+		INSERT INTO ORDER_DETAIL (id,oid,pid,qty,price,startdate,enddate,days)
+		VALUES (order_detail_seq.NEXTVAL, #{oid},#{pid},#{qty},#{price},#{startdate},#{enddate},#{days})
+	</insert>
+	
+</mapper>
