@@ -59,7 +59,7 @@
 								</h5>
 								<c:if test="${sessionScope.account.getAtype() == 'a' }" >
 									<div class="text-center">
-									<a style="font-size:12px; color: orange;" type="button" href="${deleteC}?id=${ptype.id}">삭제</a>
+									<i class="bi bi-trash" style="font-size:12px; color: red;"></i><a style="font-size:12px; color: red;" type="button" href="${deleteC}?id=${ptype.id}">삭제</a>
 									</div>
 								</c:if>
 							</div>

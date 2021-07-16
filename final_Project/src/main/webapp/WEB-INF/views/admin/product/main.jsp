@@ -70,7 +70,10 @@
 								<div class="card-body bg-transparent border-0">
 									<p class="card-text">
 									<c:if test="${item.getActive() == 'y'}" >
-										<i class="bi bi-check-circle-fill" style="color:#E2A5AC; font-size: 13px;">공개된 상품</i>
+										<i class="bi bi-check-circle-fill" style="color:#E25; font-size: 13px;">공개 상품</i>
+									</c:if>
+									<c:if test="${item.getActive() == 'n'}" >
+										<i class="bi bi-check-circle-fill" style="color:#AAE; font-size: 13px;">비공개 상품</i>
 									</c:if>
 										<small class="text-muted">
 											<i class="bi bi-eye-fill" style="color:#6f9eaf; padding-left: 10px;"></i> ${item.getVcnt()}
