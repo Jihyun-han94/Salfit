@@ -93,7 +93,7 @@
 				<li><a href="${admin_order }">주문 관리</a></li>
 				<li><a href="${admin_delivery }">배송 관리</a></li>
 				<li><a href="${admin_statistics }">통계</a></li> --%>
-				<li><a href="${logout }">Logout</a></li>
+				<li><a type="button" onclick="signOut();">Logout</a></li>
 			</c:when>
 			<c:otherwise>
 				<c:choose>

@@ -46,7 +46,7 @@ i:hover {
 		<input type="hidden" name="aid" value="1">
 		<div class="col-8" style="text-align:left; margin:0 auto;">
 			<label for="id_title">제목<span style="padding: 30px; color: #e7e7e7;">|</span></label>
-			<input id="id_title" type="text" name="title" style="width: 400px;" required>
+			<input id="id_title" type="text" name="title" style="width: 350px;" required>
 		</div>
 		<div style="text-align:center; margin-bottom: 30px;">
 			<!-- <label for="id_file">썸네일 이미지</label><br> -->
@@ -70,7 +70,7 @@ i:hover {
 		</div>
 		<div class="col-8" style="text-align:left; margin:0 auto;">
 			<label for="id_contents">내용<span style="padding: 60px; color: #e7e7e7;">|</span></label>
-			<textarea id="id_contents" name="contents" cols="75" rows="10" style="text-align: center;"></textarea>
+			<textarea id="id_contents" name="contents" cols="75" rows="10" style="text-align: left;" required></textarea>
 		</div>
 		<div class="col-8" style="text-align:left; margin:0 auto;">
 			<label for="id_active">공개 여부<span style="padding: 30px; color: #e7e7e7;">|</span></label>

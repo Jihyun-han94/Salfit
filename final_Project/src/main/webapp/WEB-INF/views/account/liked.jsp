@@ -84,9 +84,9 @@ td {
 				<div id="pickBtn${data.getId()}" onclick="openCalendar(${data.getId()}, this);"  style="color:#bac600; padding-left:6rem;">Click! <i class="bi bi-calendar-plus-fill" style="cursor: pointer; color:#77A612;"></i></div>
 				<div id="hide${data.getId() }" style="display:none;">
 					<div class="row d-flex justify-content-center">
-	       			<span class="col-3 col-auto" >구독 시작일 선택 : <input type="text" class="datepicker" id="datepickerS${data.getId()}" onclick="generateDP(this.id, ${data.getId()}, 'start');" ></span>
+	       			<span class="col-3 col-auto" >구독 시작일 선택 : <input type="text" class="datepicker text-center" id="datepickerS${data.getId()}" onclick="generateDP(this.id, ${data.getId()}, 'start');" ></span>
 	       			<span class="col-1">~</span>
-	       			<span class="col-3" >구독 종료일 선택 : <input type="text" class="datepicker" id="datepickerE${data.getId()}" onclick="generateDP(this.id, ${data.getId()}, 'end');" ></span>
+	       			<span class="col-3" >구독 종료일 선택 : <input type="text" class="datepicker text-center" id="datepickerE${data.getId()}" onclick="generateDP(this.id, ${data.getId()}, 'end');" ></span>
 					<span class="col-1"></span>
 					<div class="col-2" style="">
 		            	<div class="input-group  mb-3 btn-default">
@@ -145,7 +145,7 @@ function likedDel(pid, e, aid) {
 		},
 		success: function (data) {
 			if(data.res == true) {
-				e.closest('tr').innerHTML = "<td colspan='5' style='color:red; text-align:center;'>삭제된 상품입니다.</td>";
+				e.closest('tr').innerHTML = "<td colspan='6' style='color:red; text-align:center;'>삭제된 상품입니다.</td>";
 			} else if(data.res == "no_login") {
 				location.href = data.redirect; 
 			}

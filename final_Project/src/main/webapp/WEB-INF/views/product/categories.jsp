@@ -59,7 +59,7 @@
 								</h5>
 								<c:if test="${sessionScope.account.getAtype() == 'a' }" >
 									<div class="text-center">
-									<a style="font-size:12px; color: gray;" type="button" href="${deleteC}?id=${ptype.id}">삭제</a>
+									<a style="font-size:12px; color: orange;" type="button" href="${deleteC}?id=${ptype.id}">삭제</a>
 									</div>
 								</c:if>
 							</div>
@@ -71,7 +71,7 @@
 			</c:forEach>
 	      </div>
 	      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-	        <span class="carousel-control-prev-icon" style="color:red;"></span>
+	        <span class="carousel-control-prev-icon"></span>
 	      </a>
 	      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
 	        <span class="carousel-control-next-icon"></span>
@@ -99,7 +99,7 @@
       <h2 style="margin-bottom: 10px; color: #475c01;">카테고리 추가</h2>
       <div class="modal-body">
           <div class="form-group row d-flex justify-content-center">
-            <input type="text" style="width: 200px; margin-bottom: 10px;" class="form-control" id="category-name" name="name" placeholder="카테고리 명을 입력해 주세요.">
+            <input type="text" style="width: 200px; margin-bottom: 10px;" class="form-control" id="category-name" name="name" placeholder="카테고리 명을 입력해 주세요." required>
             </div>
           <div class="form-group row d-flex justify-content-center">
             <input type="file" class="form-control" style="width: 200px; margin-bottom: 15px; border:none;" id="file" name="file" accept=“image/*” onchange="PreviewImage();">

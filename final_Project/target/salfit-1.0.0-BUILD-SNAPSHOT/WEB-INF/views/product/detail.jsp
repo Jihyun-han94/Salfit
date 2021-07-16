@@ -163,21 +163,18 @@
 			    dateFormat: 'yy-mm-dd',
 			    minDate: 1, maxDate: "+2M +1D"
 			};
-
 		$.datepicker.setDefaults($.datepicker.regional['kr']);
 		$('.datepicker').datepicker('setDate', '+1D');
 		
 	    $('#datepickerS').datepicker("option", "onClose", function ( selectedDate ) {
 	        $("#datepickerE").datepicker( "option", "minDate", selectedDate );
 	    });
-
 	    $('#datepickerE').datepicker("option", "minDate", $("#datepickerS").val());
 	    $('#datepickerE').datepicker("option", "onClose", function ( selectedDate ) {
 	        $("#datepickerS").datepicker( "option", "maxDate", selectedDate );
 	    });
 		
   	} );
-
 	/* 장바구니 */
 	function addToCart(e, pid, quantity, sd, ed, aid) {
 	    var start = $('#datepickerS').datepicker('getDate');
@@ -209,14 +206,11 @@
 			}				
 		});
 	}
-
-
 	/* 리뷰 */
 	const bodyContainer3 = document.getElementById('bodyContainer3');
 	const container = document.getElementById('reviewContainer');
 	
 	var oldListCnt = "${oldListCnt}";
-
 	var startIndex = 1;	// 인덱스 초기값
 	var searchStep = 3;	// 3개씩 로딩
 		
@@ -265,9 +259,12 @@
 					
 					const postElement = document.createElement('div');
 					postElement.classList.add('review-post');
-					postElement.innerHTML = 
+					var imgsrc = "/salfit/resources"+data[i].profile_img;
+					if(imgsrc=="/salfit/resourcesnull"){
+						imgsrc = "/salfit/resources/img/icon.png";
+						postElement.innerHTML = 
 						 '<div class="user-info">'
-						+'	<img src="/salfit/resources'+data[i].profile_img+'" />'
+						+'	<img src= "'+imgsrc+'" />'
 						+'	<span>'+data[i].aname+'</span>'
 						+'<h2 class="title">'+rating+'</h2>'
 						+'</div>'
@@ -276,6 +273,18 @@
 					;
 					container.appendChild(postElement);
 					
+					}else{
+						postElement.innerHTML = 
+							 '<div class="user-info">'
+							+'	<img src= "'+imgsrc+'" />'
+							+'	<span>'+data[i].aname+'</span>'
+							+'<h2 class="title">'+rating+'</h2>'
+							+'</div>'
+							+'<p class="text">'+data[i].contents+'</p>'
+							+'	<span class="text-right text-muted">'+data[i].cdate2+'</span>'
+						;
+						container.appendChild(postElement);
+					}
 				}
 				$("#reviewContainer").slideDown();
 				// 더보기 버튼 삭제
@@ -288,7 +297,6 @@
 	
 	// 장바구니 수량 조정 
     var qty = document.getElementById('quantity');
-
     function minus() {
 	   	if(parseInt(qty.value) > 1) {
     		qty.value = parseInt(qty.value) - 1;

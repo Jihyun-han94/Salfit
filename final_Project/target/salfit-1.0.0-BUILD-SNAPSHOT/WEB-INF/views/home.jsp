@@ -10,7 +10,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=David+Libre|Hind:400,700" rel="stylesheet">
 
-	<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/module/main.jsp"></jsp:include>
 	<c:url var="main" value="/" />
 	<c:url var="join" value="/account/join" />
 	<c:url var="login" value="/account/login" />
@@ -93,7 +93,7 @@
 				<li><a href="${admin_order }">주문 관리</a></li>
 				<li><a href="${admin_delivery }">배송 관리</a></li>
 				<li><a href="${admin_statistics }">통계</a></li> --%>
-				<li><a href="${logout }">Logout</a></li>
+				<li><a type="button" onclick="signOut();">Logout</a></li>
 			</c:when>
 			<c:otherwise>
 				<c:choose>
