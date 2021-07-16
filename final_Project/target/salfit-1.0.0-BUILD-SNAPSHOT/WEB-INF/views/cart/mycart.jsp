@@ -212,7 +212,6 @@ $(".selectDelete_btn").click(function(){
     	datatype:"json",
     	data : { chbox : checkArr },
     	success : function(data){
-    	alert(data.result);
      	location.href = data.redirect;
     	}
    	});
