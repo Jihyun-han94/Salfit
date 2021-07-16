@@ -58,7 +58,7 @@ public class AjaxOrderController {
     	 
     	  json.put("result", "배송완료 확정되었습니다.");    	  
       }else {
-    	  json.put("result", "배송완료 후 확정해주세요");
+    	  json.put("result", "마지막 구독 종료일에 배송 확정 가능합니다.");
       }
       
   
