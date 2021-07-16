@@ -157,9 +157,9 @@ async function getPost(index) {
 			if(_endIndex >= oldListCnt){
 				window.removeEventListener('scroll', infiniteScroll);	
 			}
-		}, error:function(request,status,error){
+		}/* , error:function(request,status,error){
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		   }
+		   } */
 	});
 }
 
