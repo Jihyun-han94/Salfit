@@ -15,6 +15,7 @@
 <c:url var="delete" value="/ajax/order/delete" />
 <c:url var="update" value="/ajax/order/update" />
 <c:url var="detail" value="/order/detail" />
+<c:url var ="product" value="/product" />
 <script type="text/javascript">
 function cancel2(id3){
     
@@ -136,8 +137,16 @@ h3, h4, h5 {
 		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 	</header>
 	<main class="cd-main-content sub-nav">
-		<div
-			style="margin: auto; width:80%; text-align: center; font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 13px;">
+		<div style="margin: auto; width:80%; text-align: center; font-family: 'Kakao', 'sans-serif', 'normal'; font-size: 13px;">
+			<c:if test="${empty requestScope.orderlist }" >
+				<div style="text-align:center;">
+					<i class="bi bi-cart-x" style="text-align:center; font-size: 250px; color: #e7e7e7;"></i>
+					<h2 style="text-align:center; padding-bottom: 20px;">주문 내역이 없습니다.</h2>
+					<a class="a_hover" style="padding-bottom: 20px; color:#bac600;" href="${product}">쇼핑하러 가기 <i class="bi bi-hand-index-thumb"></i></a>
+				</div>
+			</c:if>
+			<c:if test="${not empty requestScope.orderlist }" >
+			
 			<h1 style="padding-bottom: 30px; font-size:30px;">${username } 님의 주문 내역  <i class="bi bi-card-checklist" style="color: #77A612"></i></h1>
 			<h3 style="margin-bottom: 20px;">주문해 주셔서 감사합니다 !</h3>
 			<h4>해당 상품은 <span style="color: #F08080;">결제일 기준 익일 배송</span>됩니다.</h4>
@@ -240,6 +249,7 @@ h3, h4, h5 {
 				</c:forEach>
 
 			</table>
+			</c:if>
 		</div>
 	</main>
 	<footer>

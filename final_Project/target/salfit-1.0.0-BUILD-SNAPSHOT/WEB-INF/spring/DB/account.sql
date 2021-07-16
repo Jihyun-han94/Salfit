@@ -1,7 +1,7 @@
-DROP SEQUENCE account_seq;
 DROP TABLE account;
-DROP SEQUENCE address_seq;
 DROP TABLE deliver_address;
+DROP SEQUENCE address_seq;
+DROP SEQUENCE account_seq;
 
 CREATE SEQUENCE account_seq START WITH 1 INCREMENT BY 1 NOCACHE;
 CREATE TABLE account(
@@ -67,8 +67,8 @@ SELECT * FROM account;
 SELECT * FROM DELIVER_ADDRESS;
 
 ALTER TABLE account RENAME COLUMN type TO atype;
-
-INSERT INTO account VALUES(1, 'admin@admin.com', 'admin', '관리자', 01012345678, 'a', SYSDATE, SYSDATE, NULL, NULL);
+SELECT account_seq.NEXTVAL FROM dual;
+INSERT INTO account VALUES(1, 'admin@admin.com', 'admin', '관리자', 01012345678, NULL, 'a', SYSDATE, SYSDATE, NULL);
 
 		SELECT a.email
 			 , a.name
