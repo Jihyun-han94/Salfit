@@ -1,5 +1,12 @@
+DROP TABLE liked;
+DROP TABLE product_img;
+DROP TABLE product;
 DROP TABLE product_type;
 DROP SEQUENCE liked_seq;
+DROP SEQUENCE ptype_seq;
+DROP SEQUENCE product_seq;
+DROP SEQUENCE product_img_seq;
+
 
 CREATE SEQUENCE ptype_seq START WITH 1 INCREMENT BY 1 NOCACHE;
 CREATE TABLE product_type(
