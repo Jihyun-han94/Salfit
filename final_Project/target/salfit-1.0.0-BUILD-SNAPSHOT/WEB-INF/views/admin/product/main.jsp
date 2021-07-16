@@ -20,13 +20,13 @@
 <nav>
 	<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include>
 </nav>
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>
 <main style="font-family: 'Kakao', 'sans-serif', 'normal';">
-<div style="margin: 0 auto;">
-	<br><br><br><br><br><br><br><br><br>
 	<div id="addOK" class="alert alert-info collapse text-center" role="alert">새 카테고리가 등록되었습니다.</div>	
 	<div id="addFail" class="alert alert-danger collapse text-center" role="alert">카테고리 등록 실패</div>
 	<div id="deleteOK" class="alert alert-danger collapse text-center" role="alert">해당 카테고리가 삭제되었습니다.</div>
+<div style="margin: 250px auto;">
+	
 	<div>
 		<jsp:include page="/WEB-INF/views/product/categories.jsp" flush="false" >
 			<jsp:param name="producttypes" value="${producttypes}" />

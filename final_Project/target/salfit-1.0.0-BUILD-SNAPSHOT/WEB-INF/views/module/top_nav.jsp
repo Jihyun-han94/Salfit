@@ -150,7 +150,7 @@
 							    <li class="dropdown-item"><a href="${order }">Order</a></li>
 							    <li class="dropdown-item"><a href="${wishlist }">WishList</a></li>
 							    <c:if test="${sessionScope.atype != 'g'}">
-							    	<li class="dropdown-item"><a data-toggle="modal" href="#ModalConfirm">Edit MyPage</a></li>
+							    	<li class="dropdown-item"><a data-toggle="modal" href="#ModalConfirm">Profile</a></li>
 							    </c:if>
 						  	</ul>
 						 </li>
@@ -216,7 +216,7 @@
 	var websocket;	
    	var neworder_alert = document.getElementById("neworder_alert");	
    	var neworder_nav = document.getElementById("neworder_nav");	
-    websocket = new WebSocket("ws://localhost/${pageContext.request.contextPath}/alert");	
+    websocket = new WebSocket("ws://localhost${pageContext.request.contextPath}/alert");	
     	
     websocket.onmessage = function(message) {	
     	onMessage(message); 	

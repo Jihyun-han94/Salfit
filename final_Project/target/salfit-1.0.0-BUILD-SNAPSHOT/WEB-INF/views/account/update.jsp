@@ -15,7 +15,6 @@
 <c:url var="delete_address_new" value="/ajax/account/address/delete/new"	/>
 
 <script type="text/javascript">
-
 function delAddress(id){
 	
     var confirm_val = confirm("해당 주소를 삭제하시겠습니까?");
@@ -25,7 +24,6 @@ function delAddress(id){
 		var id = id;
   		var element = document.getElementsByClassName(id)[0];
   		element.innerText ="삭제된 주소입니다."
-
           $.ajax({
            url :  "${delete_address }",
            type : "post",
@@ -39,7 +37,6 @@ function delAddress(id){
     }
 	
 }
-
 var checkRePass = function(){
     let oPwd = document.getElementById("id_password").value;
     let cPwd = document.getElementById("id_password_check").value;
@@ -106,7 +103,6 @@ function deleteAddress(address){
 	    if(confirm_val){
 			      
 			var address = address;
-
 	          $.ajax({
 	           url :  "${delete_address_new }",
 	           type : "post",
@@ -118,7 +114,6 @@ function deleteAddress(address){
 	          });
 	    }
 }
-
 function updateInfo() {
 	var name = document.getElementById("id_name").value;
 	var password = document.getElementById("id_password").value;
@@ -197,7 +192,7 @@ function expire() {
   background-color: #bac600;
 }
 input {
-	width: 450px;
+	width: 60%;
 	border: 1px solid #e7e7e7;
 }
 .inputstyle .addressstyle {
@@ -217,14 +212,17 @@ input {
 <nav>
 	<%@ include file="/WEB-INF/views/module/top_nav.jsp" %>
 </nav>
-<div class="body_class  mb-5 pb-5">
+<div class="row">
+<div class="col-1"></div>
+<div class="col-10 body_class mb-5 pb-5">
 	<div class="body_class_item">
 	<form action="${add }" method="post" enctype="multipart/form-data">
 		<h1 class="first_class" style="margin-bottom: 20px;">나의 정보</h1>
 		<p>고객님께서 가입하신 <span style="color: green;">Salfit</span> 회원 정보입니다.</p>
 		<p style="margin-bottom: 50px;">안전한 배송 안내를 위하여 핸드폰 번호와 주소를 필히 확인 부탁드립니다.</p>
 		
-		<h1>필수 회원 정보</h1><hr><br>
+		<h1>필수 회원 정보</h1><hr style="padding-bottom: 50px;">
+		<div class="text-center">
 			<c:if test="${sessionScope.account.profile_img == null }">
 				<img src="${img }">
 			</c:if>
@@ -236,6 +234,7 @@ input {
 				<input type="file" id="id_file" name="file" style="display: none;">  
 				<button type="submit" class="input-file-button">저장</button>	
 			</div>
+		</div>
 		</form>
 
 	<form class="inputstyle" action="${update }" name="update_form" method="POST">
@@ -283,6 +282,8 @@ input {
 			<button class="btn_confirm" data-toggle="modal" id="btn_exp" data-target="#ModalExpire">탈퇴</button>
 		</div>
 	</div>
+</div>
+<div class="col-1"></div>
 </div>
 
 <div class="modal fade" id="ModalExpire" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

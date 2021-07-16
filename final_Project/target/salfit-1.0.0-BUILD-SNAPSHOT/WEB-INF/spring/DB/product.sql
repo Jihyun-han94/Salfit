@@ -126,4 +126,25 @@ SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY bcnt DESC) NUM,
 			FROM product p
 			 ORDER BY bcnt DESC
 	        ) 
-	  WHERE NUM BETWEEN 1 AND 5
+	  WHERE NUM BETWEEN 1 AND 5;
+	  
+	  
+	  
+	  
+SELECT p.id
+         , p.ptype
+         , p.title
+         , p.price
+         , i.url AS url 
+         , i.name AS img 
+         , i.path AS imguuid
+         , p.active
+      FROM product p
+      JOIN product_type t
+        ON p.ptype = t.id
+      JOIN product_img i
+        ON p.id = i.pid
+      WHERE p.ptype = 3 
+       AND p.active = 'y' 
+       AND p.id != 14
+     ORDER BY p.gcnt DESC

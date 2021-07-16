@@ -143,7 +143,7 @@ h3, h4, h5 {
 			<h4>해당 상품은 <span style="color: #F08080;">결제일 기준 익일 배송</span>됩니다.</h4>
 			<h4 style="margin-bottom: 50px;">구독일 아침, 문고리를 확인 해 주세요.</h4>
 			<h5 style="text-align:left;"> * 주문 내역의 구매하신 날짜를 클릭하시면 주문 상세 정보를 확인하실 수 있습니다.</h5>
-			<table id="orderedlist" border="1">
+			<table id="orderedlist" border="1" style="width: 100%;">
 				<tr>
 					<th>날짜<br>(상세 주문)</th>
 					<th>수령인</th>

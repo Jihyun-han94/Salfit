@@ -27,7 +27,7 @@
 		</nav>
 		<div class="tab-content" id="nav-tabContent">
 		  	<div class="tab-pane fade show active" id="nav-monthly" role="tabpanel" aria-labelledby="nav-monthly-tab">
-		  		<select id="selectedYear" name="selectedYear" class="mt-5" onchange="setYear(this.value);">
+		  		<select id="selectedYear" name="selectedYear" class="mt-5 form-control col-1" onchange="setYear(this.value);">
 	                <option value="" disabled ${param.selectedYear == null ? 'selected' : '' } >년도 선택</option>
 	            </select>
 				<canvas id="myChart" width="400" height="170" class="mb-5 mt-5"></canvas>

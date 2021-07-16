@@ -44,7 +44,7 @@
 	      <div class="carousel-inner">
 	        <c:set var="size" value="${fn:length(producttypes)}" />
 	        <c:forEach var="i" begin="0" end="${(size-1) / 3}" step="1" varStatus="onerow"> 
-	        <c:if test="${not empty requestScope.producttypes[onrow.index+3]}">
+	        <c:if test="${not empty requestScope.producttypes[onrow.index+1]}">
 		        <div class="carousel-item <c:if test='${onerow.index eq 0}'> active </c:if>" >
 		        <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
 			        <c:forEach var="ptype" items="${requestScope.producttypes }" begin="${onerow.index *3 }" end="${onerow.index *3 +2}" varStatus="status">

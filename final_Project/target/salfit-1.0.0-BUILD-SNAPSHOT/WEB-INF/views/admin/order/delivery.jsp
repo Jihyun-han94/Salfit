@@ -24,7 +24,7 @@ i {
 	<header>
  		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
 	</header><br><br><br><br><br><br><br><br>
-	<div class="bodyContainer">
+	<div class="adminlistbody">
 	<a href="${orderurl}/calendar" class="pull-left mb-5 ml-5"><i class="bi bi-arrow-left-circle align-middle" style="font-size: 3rem; color:#bac600 ;"></i> 달력</a>
 		<h1 class="text-center mb-3">배송 목록</h1>
 		<p class="text-center mb-3">&lt${param.startdate} 배송 상품&gt</p>
@@ -44,7 +44,7 @@ i {
 						<th scope="col" class="align-middle">상태 체크</th>
 						<th scope="col" class="align-middle">
 						<form id="select_status_form" action="${orderurl}/delivery" method="get">
-							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" >
+							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" class="form-control col-8 m-auto text-center" style="text-align-last:center; ">
 						        <option value="" ${dto.getStatus() == null ? "selected" : "" }>전체</option>
 						        <option value="paid" ${dto.getStatus() == "paid" ? "selected" : "" }>배송전</option>
 						        <option value="shipping" ${dto.getStatus() == "shipping" ? "selected" : "" }>배송중</option>

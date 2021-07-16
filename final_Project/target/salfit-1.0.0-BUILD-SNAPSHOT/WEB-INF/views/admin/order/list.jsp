@@ -18,7 +18,7 @@
 	<header>
  		<jsp:include page="/WEB-INF/views/module/top_nav.jsp"></jsp:include> 
 	</header><br><br><br><br><br><br><br><br>
-	<div class="bodyContainer">
+	<div class="adminlistbody">
 	<c:if test="${!empty param.ddate}">
 		<a href="${order}/calendar" class="pull-left mb-5 ml-5"><i class="bi bi-arrow-left-circle align-middle" style="font-size: 3rem; color: #bac600;"></i> 달력</a>
 	</c:if>
@@ -35,7 +35,7 @@
 			<c:if test="${cri.getId() == 0 && empty param.ddate}">
 			<div class="row">
 				<div class="col-md-1 mb-5 ml-auto">	
-					<select class="form-control align-middle" id="perPageSel">
+					<select class="form-control align-middle" id="perPageSel" style="text-align-last:center; ">
 				  		<option value="10">10개씩</option>
 				  		<option value="15">15개씩</option>
 				  		<option value="20">20개씩</option>
@@ -60,7 +60,7 @@
 						<th scope="col" class="align-middle">
 						<c:if test="${cri.getId() == 0 && empty param.ddate}">
 						<form id="select_status_form" action="${order}/list" method="get">
-							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" >
+							<select id="selectOrderStatus" onchange="searchStatus(this)" name="status" class="form-control col-9 m-auto text-center" style="text-align-last:center; ">
 						        <option value="" ${dto.getStatus() == null ? "selected" : "" }>전체</option>
 						        <option value="paid" ${dto.getStatus() == "paid" ? "selected" : "" }>미확인</option>
 						        <option value="checked" ${dto.getStatus() == "checked" ? "selected" : "" }>배송전</option>

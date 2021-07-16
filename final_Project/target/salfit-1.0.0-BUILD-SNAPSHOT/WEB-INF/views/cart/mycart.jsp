@@ -9,6 +9,7 @@
 <title>Salfit | My Cart</title>
 <jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
 </head>
+<c:url var="buy" value="/ajax/cart/buy" />
 <c:url var="delete" value="/ajax/cart/delete" />
 <c:url var="buy" value="/ajax/cart/buy" />
 <c:url var="detail" value="/product/detail" />
@@ -23,12 +24,10 @@
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 }
-
 .buy_btn1:hover {
 	background-color: #bac600;
 	color: #ffffff;
 }
-
 th, tr, table {
 	border-right: #ffff;
 	border-left: #ffff;
@@ -39,7 +38,6 @@ th, tr, table {
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
-
 td {
 	border-right: #ffff;
 	border-left: #ffff;
@@ -143,11 +141,7 @@ td {
 </body>
 <c:url var="sum" value="/ajax/cart/sum" />
 <script type="text/javascript">
-
-
-
 $(document).ready(function(){
-
 	$("#allCheck").click(function(){
 			var chk = $("#allCheck").prop("checked");
 			if(chk) {
@@ -171,12 +165,10 @@ $(document).ready(function(){
         if($(".chBox").is(":checked")){
            
             var buy_Arr = new Array();
-
     		$("input[class='chBox']:checked").each(function(){
     			buy_Arr.push($(this).attr("data-cartNum"));
     	
     		});
-
     		$.ajax({
     		url :  "${sum }",
     		type : "post",
@@ -201,9 +193,7 @@ $(document).ready(function(){
         
     });
 });
-
 		
-
 	
 	
 $(".selectDelete_btn").click(function(){
@@ -228,13 +218,10 @@ $(".selectDelete_btn").click(function(){
    	});
   	} 
  	});
-
 $(".buy_btn1").click(function(){
 		var confirm_val = confirm("해당 상품을 구매하시겠습니까?");
-
 		if(confirm_val) {
 			var buy_Arr = new Array();
-
 	 		$("input[class='chBox']:checked").each(function(){
 			buy_Arr.push($(this).attr("data-cartNum"));
 			
@@ -252,19 +239,16 @@ $(".buy_btn1").click(function(){
 	 			alert("제품을 선택해주세요!");
 	 		}
 	
-
 			$.ajax({
 			url :  "${buy }",
 			type : "post",
 			datatype:"json",
 			data : { chbox : buy_Arr },
 			success : function(data){
-				location.href = "<%=request.getContextPath()%>/pay?id=" + str;
+				location.href = "${pageContext.request.contextPath}/pay?id=" + str;
 				}
 			});
-
 		}
-
 	});
 </script>
 </html>

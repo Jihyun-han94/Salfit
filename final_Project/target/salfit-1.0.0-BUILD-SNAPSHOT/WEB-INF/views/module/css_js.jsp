@@ -10,15 +10,15 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <!-- <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet"> -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/common.css?ver=10">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/admin.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/cart.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/order.css?ver=1">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/product.css?ver=10">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/order.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/product.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/main.css"> <!-- Resource style -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/total.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/account.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/footer.css?ver=1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/footer.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/top_nav.css">
 <!-- favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/newicon.ico" />
