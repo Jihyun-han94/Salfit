@@ -10,7 +10,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=David+Libre|Hind:400,700" rel="stylesheet">
 
-	<jsp:include page="/WEB-INF/views/module/css_js.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/module/main.jsp"></jsp:include>
 	<c:url var="main" value="/" />
 	<c:url var="join" value="/account/join" />
 	<c:url var="login" value="/account/login" />
