@@ -79,49 +79,36 @@
 			</span>
 		</a> <!-- .nav-trigger -->
 		<ul id="cd-navigation">
-		<c:choose>
-			<c:when test="${sessionScope.atype == 'a' }">
-			<li class="dropdown"><a href="#" id="dropdownMenuLink_a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Page</a>
-				<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink_a">
-				    <li class="dropdown-item"><a href="${admin_product }">상품 관리</a></li>
-				    <li class="dropdown-item"><a href="${admin_order }">주문 관리</a></li>
-				    <li class="dropdown-item"><a href="${admin_delivery }">배송 관리</a></li>
-				    <li class="dropdown-item"><a href="${admin_statistics }">통계</a></li>
-			  	</ul>
-			 </li>
-				<%-- <li><a href="${admin_product }">상품 관리</a></li>
-				<li><a href="${admin_order }">주문 관리</a></li>
-				<li><a href="${admin_delivery }">배송 관리</a></li>
-				<li><a href="${admin_statistics }">통계</a></li> --%>
-				<li><a type="button" onclick="signOut();">Logout</a></li>
-			</c:when>
-			<c:otherwise>
-				<c:choose>
-					<c:when test="${sessionScope.logined }">
-						<%-- <c:if test="${sessionScope.atype != 'g'}">
-						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>
-						</c:if> --%>
-						<li class="dropdown"><a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MyPage</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							    <li class="dropdown-item"><a href="${cart }">Cart</a></li>
-							    <li class="dropdown-item"><a href="${order }">Order</a></li>
-							    <li class="dropdown-item"><a href="${wishlist }">WishList</a></li>
-							    <c:if test="${sessionScope.atype != 'g'}">
-							    	<li class="dropdown-item"><a data-toggle="modal" href="#ModalConfirm">Profile</a></li>
-							    </c:if>
-						  	</ul>
-						 </li>
-						<%-- <li><a href="${cart }">Cart</a></li>
-						<li><a href="${order }">Order</a></li> --%>
-						<li><a type="button" onclick="signOut();">Logout</a></li>
-					</c:when>
-					<c:otherwise>
-						<li><a href="${login }">Login</a></li>
-						<li><a href="${join }">Join</a></li>
-					</c:otherwise>
-				</c:choose>
-			</c:otherwise>
-		</c:choose>
+			<c:choose>
+				<c:when test="${sessionScope.logined && sessionScope.atype == 'a' }">
+				<li class="dropdown"><a href="#" id="dropdownMenuLink_a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Page</a>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink_a">
+					    <li class="dropdown-item"><a href="${admin_product }">상품 관리</a></li>
+					    <li class="dropdown-item"><a href="${admin_order }">주문 관리</a></li>
+					    <li class="dropdown-item"><a href="${admin_delivery }">배송 관리</a></li>
+					    <li class="dropdown-item"><a href="${admin_statistics }">통계</a></li>
+				  	</ul>
+				 </li>
+					<li><a type="button" onclick="signOut();">Logout</a></li>
+				</c:when>
+				<c:when test="${sessionScope.logined && (sessionScope.atype == 'i' || sessionScope.atype == 'g')}">
+					<li class="dropdown"><a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MyPage</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						    <li class="dropdown-item"><a href="${cart }">Cart</a></li>
+						    <li class="dropdown-item"><a href="${order }">Order</a></li>
+						    <li class="dropdown-item"><a href="${wishlist }">WishList</a></li>
+						    <c:if test="${sessionScope.atype != 'g'}">
+						    	<li class="dropdown-item"><a data-toggle="modal" href="#ModalConfirm">Profile</a></li>
+						    </c:if>
+					  	</ul>
+					 </li>
+					<li><a type="button" onclick="signOut();">Logout</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${login }">Login</a></li>
+					<li><a href="${join }">Join</a></li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</nav> <!-- .cd-primary-nav -->
 </header> <!-- .cd-auto-hide-header -->
@@ -252,7 +239,7 @@
    	neworder_nav.addEventListener("click", function(){	
 	    	neworder_alert.classList.remove('new-order-counter');	
    	});	
-    websocket = new WebSocket("ws://localhost${pageContext.request.contextPath}/alert");	
+    websocket = new WebSocket("ws://salfit.shop${pageContext.request.contextPath}/alert");	
     	
     websocket.onmessage = function(message) {	
     	//alert(message.data);	
@@ -272,7 +259,7 @@
 		if(gapi.auth2 != null) {
 		  	gapi.auth2.getAuthInstance().disconnect();
 		}
-	  	window.location.href = "${logout }"
+	  	window.location.href = "${logout }";
 	}
 	
 </script>

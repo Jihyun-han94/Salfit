@@ -103,68 +103,36 @@
 				</span>	
 			</a> <!-- .nav-trigger -->	
 		<ul id="cd-navigation">	
-		<c:choose>	
-			<c:when test="${sessionScope.atype == 'a' }">
+		<c:choose>
+				<c:when test="${sessionScope.logined && sessionScope.atype == 'a' }">
 				<li class="dropdown"><a href="#" id="dropdownMenuLink_a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Page</a>
-				<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink_a">
-				    <li class="dropdown-item"><a href="${admin_product }">상품 관리</a></li>
-				    <li id="neworder_nav" class="dropdown-item">
-				    	<a href="${admin_order }" style="position:relative;">주문 관리
-							<c:if test="${!empty newOrder && newOrder gt 0}">
-								<span id="neworder_alert" class="new-order-counter">${sessionScope.newOrder}</span>
-							</c:if>
-							<c:if test="${empty newOrder || newOrder gt 0}">
-								<span id="neworder_alert"></span>
-							</c:if>
-							</a>
-					</li>
-				    <li class="dropdown-item"><a href="${admin_delivery }">배송 관리</a></li>
-				    <li class="dropdown-item"><a href="${admin_statistics }">통계</a></li>
-			  	</ul>
-			 </li>
-			<%-- 
-				<li><a href="${admin_product }">상품 관리</a></li>	
-				<li id="neworder_nav">
-					<a href="${admin_order }" style="position:relative;">주문 관리
-					<c:if test="${!empty newOrder && newOrder gt 0}">
-						<span id="neworder_alert" class="new-order-counter">${sessionScope.newOrder}</span>
-					</c:if>
-					<c:if test="${empty newOrder || newOrder gt 0}">
-						<span id="neworder_alert"></span>
-					</c:if>
-					</a>
-				</li>	
-				<li><a href="${admin_delivery }">배송 관리</a></li>	
-				<li><a href="${admin_statistics }">통계</a></li>	 --%>
-				<li><a href="${logout }">Logout</a></li>	
-			</c:when>	
-			<c:otherwise>	
-				<c:choose>	
-					<c:when test="${sessionScope.logined }">	
-						<%-- <c:if test="${sessionScope.atype != 'g'}">
-						<li><a data-toggle="modal" href="#ModalConfirm">MyPage</a></li>	
-						</c:if> --%>
-						<li class="dropdown"><a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MyPage</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							    <li class="dropdown-item"><a href="${cart }">Cart</a></li>
-							    <li class="dropdown-item"><a href="${order }">Order</a></li>
-							    <li class="dropdown-item"><a href="${wishlist }">WishList</a></li>
-							    <c:if test="${sessionScope.atype != 'g'}">
-							    	<li class="dropdown-item"><a data-toggle="modal" href="#ModalConfirm">Profile</a></li>
-							    </c:if>
-						  	</ul>
-						 </li>
-						<%-- <li><a href="${cart }">Cart</a></li>
-						<li><a href="${order }">Order</a></li> --%>
-						<li><a type="button" onclick="signOut();">Logout</a></li>	
-					</c:when>	
-					<c:otherwise>	
-						<li><a href="${login }">Login</a></li>	
-						<li><a href="${join }">Join</a></li>	
-					</c:otherwise>	
-				</c:choose>	
-			</c:otherwise>	
-		</c:choose>	
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink_a">
+					    <li class="dropdown-item"><a href="${admin_product }">상품 관리</a></li>
+					    <li class="dropdown-item"><a href="${admin_order }">주문 관리</a></li>
+					    <li class="dropdown-item"><a href="${admin_delivery }">배송 관리</a></li>
+					    <li class="dropdown-item"><a href="${admin_statistics }">통계</a></li>
+				  	</ul>
+				 </li>
+					<li><a type="button" onclick="signOut();">Logout</a></li>
+				</c:when>
+				<c:when test="${sessionScope.logined && (sessionScope.atype == 'i' || sessionScope.atype == 'g')}">
+					<li class="dropdown"><a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MyPage</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						    <li class="dropdown-item"><a href="${cart }">Cart</a></li>
+						    <li class="dropdown-item"><a href="${order }">Order</a></li>
+						    <li class="dropdown-item"><a href="${wishlist }">WishList</a></li>
+						    <c:if test="${sessionScope.atype != 'g'}">
+						    	<li class="dropdown-item"><a data-toggle="modal" href="#ModalConfirm">Profile</a></li>
+						    </c:if>
+					  	</ul>
+					 </li>
+					<li><a type="button" onclick="signOut();">Logout</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${login }">Login</a></li>
+					<li><a href="${join }">Join</a></li>
+				</c:otherwise>
+			</c:choose>
 		</ul>	
 		</nav> <!-- .cd-primary-nav -->	
 	<nav class="cd-secondary-nav">	
@@ -239,6 +207,6 @@
 		if(gapi.auth2 != null) {
 		  	gapi.auth2.getAuthInstance().disconnect();
 		}
-	  	window.location.href = "${logout }"
+	  	window.location.href = "${logout }";
 	}
 </script>

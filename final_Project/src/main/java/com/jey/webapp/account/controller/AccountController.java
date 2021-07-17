@@ -74,7 +74,11 @@ public class AccountController {
 	/* 로그인 */
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String googleLogin(HttpServletRequest request, Model m, HttpSession session) {
+	public String googleLogin(HttpServletRequest request, Model m) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("logined") != null) { 
+			session.invalidate();
+		}
 		return "account/login";
 	}
 	
@@ -89,15 +93,16 @@ public class AccountController {
 		dto = account.login(dto);
 		if(dto != null && dto.getId() > 0) {
 			HttpSession session = request.getSession();
-			// session.setMaxInactiveInterval(60*60);
+			//session.setMaxInactiveInterval(60*60);
 			
 			session.setAttribute("account", dto);
 			session.setAttribute("logined", true);
+			System.out.println(dto.getAtype());
 			session.setAttribute("atype", dto.getAtype());
 			m.addAttribute("dto",dto);
 
 			if(dto.getAtype().equals("a")) {
-				forward = "redirect:/admin/product";
+				forward = "redirect:/";
 			} else {
 					forward = "redirect:"+next;
 			}
