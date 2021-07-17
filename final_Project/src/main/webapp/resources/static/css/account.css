@@ -20,7 +20,7 @@ body .signcontainer .signhalf {
   padding: 58px 40px 0;
 }
 body .signcontainer .signhalf.bg {
-  background-image: url("/salfit/resources/img/sign.png");
+  background-image: url("/resources/img/sign.png");
   background-size: 400px;
   background-repeat: no-repeat;
 }
