@@ -117,7 +117,7 @@
 		<div class="copy-link">
 			<span class="footer_span">법인명(상호) : Salfit </span> | <span class="footer_span">대표자(성명) : 김은지, 최예림, 한지현 </span> | <span class="footer_span">사업자 등록번호 안내 : 123-12-12345</span> <br>
 			<span class="footer_span">전화 : 02.123.4567</span> | <span class="footer_span">팩스 : 02.890.1234</span> | <span class="footer_span">주소 : 서울특별시 강남구 역삼동 823-25</span><br>
-			<span class="footer_span">Contact <strong><a href="eungeeee1002@gmail.com"></a></strong> for more information.<a href="/salfit/">[Shop admin]</a></span>
+			<span class="footer_span">Contact <strong><a href="eungeeee1002@gmail.com"></a></strong> for more information.<a href="${pageContext.request.contextPath}/">[Shop admin]</a></span>
 		</div>
 	</footer>
 </body>
@@ -140,7 +140,7 @@
 		      altField: "#alternateS",
 		      altFormat: "yy 년 MM d 일, DD",
 		      showOn: "button",
-		      buttonImage: "/salfit/resources/upload/product/calendar.png",
+		      buttonImage: "${pageContext.request.contextPath}/resources/upload/product/calendar.png",
 		      buttonImageOnly: true,
 		      buttonText: "구독기간"
 		      
@@ -149,7 +149,7 @@
 		      altField: "#alternateE",
 		      altFormat: "yy 년 MM d 일, DD",
 		      showOn: "button",
-		      buttonImage: "/salfit/resources/upload/product/calendar.png",
+		      buttonImage: "${pageContext.request.contextPath}/resources/upload/product/calendar.png",
 		      buttonImageOnly: true,
 		      buttonText: "구독기간"
 		    });
@@ -259,9 +259,9 @@
 					
 					const postElement = document.createElement('div');
 					postElement.classList.add('review-post');
-					var imgsrc = "/salfit/resources"+data[i].profile_img;
-					if(imgsrc=="/salfit/resourcesnull"){
-						imgsrc = "/salfit/resources/img/icon.png";
+					var imgsrc = "${pageContext.request.contextPath}/resources"+data[i].profile_img;
+					if(imgsrc=="${pageContext.request.contextPath}/resourcesnull"){
+						imgsrc = "${pageContext.request.contextPath}/resources/img/icon.png";
 						postElement.innerHTML = 
 						 '<div class="user-info">'
 						+'	<img src= "'+imgsrc+'" />'
