@@ -194,7 +194,7 @@ function onSignIn(googleUser) {
     // 백엔드 정보 전송
     const form = document.createElement('form');
 	form.method = 'post';
-	form.action = '/salfit/account/google_login';
+	form.action = '${pageContext.request.contextPath}/account/google_login';
 	
     const email = document.createElement('input');
     email.type = 'hidden';
