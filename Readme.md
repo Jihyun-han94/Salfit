@@ -62,6 +62,7 @@ admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/12565
 - 장바구니에 담긴 제품은 30,000원이상 구매시 배송비 무료로 계산 
 - 선택 상품 주문을 클릭하면 주문서 작성 페이지로 이동
 
+
 ### 주문서 작성
 ![image](https://user-images.githubusercontent.com/77036739/126758239-8739c6b5-e255-481a-bd8f-6a388beb0386.png)
 
@@ -71,12 +72,14 @@ admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/12565
 - 주소 선택 시 마이페이지의 주소와 연동 되며, 직접 입력하여 작성 가능 
 - 결제 버튼을 누르면 KG 이니시스 결제창으로 이동
 
+
 ### 결제
 ![image](https://user-images.githubusercontent.com/77036739/126758366-8ac011ff-84ab-4899-a2af-ac93c6a8180b.png)
 
 **화면설명: 사용자가 구매한 제품의 비용을 결제하는 페이지.**
 - I am port lib를 사용하여 결제 기능 구현, KG 이니시스 결제 대행사를 이용하여 다양한 수단으로 결제가 가능하다. 
 - I am port site : https://www.iamport.kr/?gclid=Cj0KCQjw0emHBhC1ARIsAL1QGNcXl5cMbh8aTlZ7vyuIRnqOU8rnpn7jPST7ju029YKCty0DPxNPK_YaAtcUEALw_wcB
+
 
 ### 주문내역 조회 , 주문 상세 조회
 ![image](https://user-images.githubusercontent.com/77036739/126757747-4bd8b651-cbd5-49fa-a01e-4c5097caefaa.png)
@@ -89,6 +92,7 @@ admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/12565
 - 주문을 완료하였지만, 결제를 완료하지 못한 경우 삭제 요청 버튼을 누르면 주문 삭제 가능 
 - 주문과 결제 모두 완료한 경우 취소 요청 버튼을 누르면 주문 취소 가능 (단, 첫 배송시작일 하루 전까지 취소 요청 이 가능) 
 - 주문건의 날짜를 클릭하면 주문건에 대한 주문 상세 정보 확인이 가능 (구매한 제품 내역, 주문처리상태, 리뷰작성)
+
 
 ### 리뷰작성
 ![image](https://user-images.githubusercontent.com/77036739/126758552-a7d5aa1a-ee88-40e0-915c-86bfb371a317.png)
