@@ -37,3 +37,20 @@ account_cd.gif![account_cd](https://user-images.githubusercontent.com/62541678/1
 order_cd.gif![order_cd](https://user-images.githubusercontent.com/62541678/125652930-547e671d-5502-4fab-9a2e-58c1e99582c8.gif)
 admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/125652944-52d642da-736f-438f-b58a-f6f32431a8d2.gif)
 
+## Develope Environments
+- OS : Window10 , Mac OS X
+- DB : Oracle 11g
+- Language : Java
+- Framework : Spring, MyBatis, JDBC
+- Software : Bootstrap 4.6.0, VSCode
+- WAS : Tomcat 9.0.44
+- IDE : Eclipse 2020-12(4.18.0)
+- SCM Tool : GIT
+- Distribution : Maven
+
+## 구현 기능 
+(직접 맡은 구현 기능만 설명)
+
+#장바구니
+![image](https://user-images.githubusercontent.com/77036739/126757254-5fcf8337-0d87-458f-881f-7082a72cee68.png)
+화면설명: 제품을 장바구니에 담고, 구매할 상품을 선택하여 주문할 수 있는 페이지.
