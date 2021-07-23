@@ -51,6 +51,6 @@ admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/12565
 ## 구현 기능 
 (직접 맡은 구현 기능만 설명)
 
-#장바구니
+###장바구니
 ![image](https://user-images.githubusercontent.com/77036739/126757254-5fcf8337-0d87-458f-881f-7082a72cee68.png)
 화면설명: 제품을 장바구니에 담고, 구매할 상품을 선택하여 주문할 수 있는 페이지.
