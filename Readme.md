@@ -54,7 +54,7 @@ admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/12565
 ### 장바구니
 ![image](https://user-images.githubusercontent.com/77036739/126757514-c568d59c-61db-419a-90e1-4c57e868557d.png)
 
-*화면설명: 제품을 장바구니에 담고, 구매할 상품을 선택하여 주문할 수 있는 페이지.*
+**화면설명: 제품을 장바구니에 담고, 구매할 상품을 선택하여 주문할 수 있는 페이지.**
 - 상품 상세보기에서 Add to cart를 클릭하면 장바구니에 담기 가능 
 - 삭제 버튼 클릭시 선택한 제품이 장바구니에서 삭제 가능 
 - 모두 선택 박스를 클릭시 장바구니에 담긴 모든 제품이 선택 가능 
@@ -65,7 +65,7 @@ admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/12565
 ### 주문서 작성
 ![image](https://user-images.githubusercontent.com/77036739/126758239-8739c6b5-e255-481a-bd8f-6a388beb0386.png)
 
-*화면설명: 사용자가 구매할 제품을 목록을 확인하고, 배송정보를 입력하는 페이지*
+**화면설명: 사용자가 구매할 제품을 목록을 확인하고, 배송정보를 입력하는 페이지**
 - 고객이 선택한 주문 내역을 확인 가능 
 - 배송 정보에 받으시는 분, 주소를 선택 가능 
 - 주소 선택 시 마이페이지의 주소와 연동 되며, 직접 입력하여 작성 가능 
@@ -74,7 +74,7 @@ admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/12565
 ### 결제
 ![image](https://user-images.githubusercontent.com/77036739/126758366-8ac011ff-84ab-4899-a2af-ac93c6a8180b.png)
 
-*화면설명: 사용자가 구매한 제품의 비용을 결제하는 페이지.*
+**화면설명: 사용자가 구매한 제품의 비용을 결제하는 페이지.**
 - I am port lib를 사용하여 결제 기능 구현, KG 이니시스 결제 대행사를 이용하여 다양한 수단으로 결제가 가능하다. 
 - I am port site : https://www.iamport.kr/?gclid=Cj0KCQjw0emHBhC1ARIsAL1QGNcXl5cMbh8aTlZ7vyuIRnqOU8rnpn7jPST7ju029YKCty0DPxNPK_YaAtcUEALw_wcB
 
@@ -82,7 +82,7 @@ admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/12565
 ![image](https://user-images.githubusercontent.com/77036739/126757747-4bd8b651-cbd5-49fa-a01e-4c5097caefaa.png)
 ![image](https://user-images.githubusercontent.com/77036739/126757758-42cb4fe6-fdad-4352-9c90-aff5e0e2f016.png)
 
-*화면설명: 사용자의 주문 내역을 확인할 수 있는 페이지.*
+**화면설명: 사용자의 주문 내역을 확인할 수 있는 페이지.**
 - MY page 탭에서 order버튼을 클릭하면 최근날짜별로 나열된 주문내역 확인 가능
 - 주문 상태를 확인할 수 있으며, 미결제 주문건은 결제하러가기 버튼을 클릭하면 결제 가능
 - 결제 완료된 건은 배송확인 버튼을 클릭하면 배송완료 확정 (단, 주문의 마지막 배송일부터 배송완료 버튼 클릭 가 능) 
@@ -93,7 +93,7 @@ admin_cd.gif![admin_cd](https://user-images.githubusercontent.com/62541678/12565
 ### 리뷰작성
 ![image](https://user-images.githubusercontent.com/77036739/126758552-a7d5aa1a-ee88-40e0-915c-86bfb371a317.png)
 
-*화면설명: 사용자가 구매한 제품의 리뷰를 작성하는 페이지*
+**화면설명: 사용자가 구매한 제품의 리뷰를 작성하는 페이지**
 - 주문 상세 정보 확인 페이지에서, 배송완료 된 제품은 리 뷰 작성란의 버튼을 누르면 리뷰 작성이 가능 
 - 리뷰 작성에서 별점으로 평점 매기기 가능 
 - 리뷰를 작성 버튼을 누르면, 제품 상세페이지로 연결되며 작성된 리뷰 확인 가능 (프로필 사진, 별점 연동)
